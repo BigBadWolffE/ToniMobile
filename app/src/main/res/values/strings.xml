@@ -1,0 +1,231 @@
+<resources>
+    <string name="app_name">TONI</string>
+    <string name="iya">IYA</string>
+    <string name="tidak">TIDAK</string>
+
+    <!-- Menu Bottom Nav-->
+    <string name="pos_dashboard">POS DASHBOARD</string>
+    <string name="daftar_barang">DAFTAR BARANG</string>
+    <string name="laporan">LAPORAN</string>
+    <string name="transaksi">TRANSAKSI</string>
+
+    <!-- Login Layout -->
+    <string name="toko_tutup"><h2>TOKO TUTUP</h2></string>
+    <string name="toko_tutup_low">Toko Tutup</string>
+    <string name="toko_buka">TOKO BUKA</string>
+    <string name="toko_buka_low">Toko Buka</string>
+    <string name="buka_toko_cap">BUKA TOKO</string>
+    <string name="buka_toko_low">Buka Toko</string>
+    <string name="tutup_toko">TUTUP TOKO</string>
+    <string name="tutup_toko_low">Tutup Toko</string>
+    <string name="waktu_tutup">Toko ditutup pada:</string>
+    <string name="waktu_buka">Toko dibuka pada:</string>
+    <string name="nama">Nama</string>
+    <string name="password">Password</string>
+    <string name="lupa_pw">LUPA PASSWORD?</string>
+    <string name="lupa_nama">LUPA USERNAME TOKO?</string>
+    <string name="ket_lupa_1">Silahkan hubungi admin di </string>
+    <string name="ket_lupa_2"><b>0812xxxxxxxx</b></string>
+    <string name="ket_lupa_pw"> untuk mengetahui password Toko Anda</string>
+    <string name="ket_lupa_nama"> untuk mengetahui username Toko Anda</string>
+
+    <!-- Tambah Pelanggan-->
+    <string name="tambah_data_pelanggan">MASUKKAN DATA PELANGGAN</string>
+    <string name="nama_pelanggan">NAMA PELANGGAN</string>
+    <string name="nama_pelanggan_low">Nama Pelanggan</string>
+    <string name="no_telp_pelanggan">NOMOR PELANGGAN</string>
+    <string name="no_telp_pelanggan_low">Nomor Telepon</string>
+    <string name="tambah_pelanggan">TAMBAH PELANGGAN</string>
+    <string name="cari_pelanggan">Cari nama pelanggan</string>
+
+    <!-- Transaksi Menu POS DASHBOARD-->
+    <string name="cari_barang">Cari barang</string>
+    <string name="kategori">Kategori</string>
+    <string name="pilih_pelanggan">PILIH PELANGGAN</string>
+    <string name="blm_ada_barang">BELUM ADA BARANG</string>
+    <string name="ket_blm_ada_barang">Tambahkan barang setelah memilih nama pelanggan</string>
+    <string name="total_kapital">TOTAL</string>
+    <string name="total_lowcast">Total</string>
+    <string name="rp">Rp.</string>
+    <string name="bayar">BAYAR</string>
+    <string name="bayar_low">Bayar</string>
+    <string name="konfirmasi_bayar">Konfirmasi Pembayaran</string>
+    <string name="hutang">HUTANG</string>
+    <string name="hutang_low">Hutang</string>
+    <string name="tambah_ke_transaksi">TAMBAHKAN KE TRANSAKSI</string>
+    <string name="tambah_ke_transaksi_low">Tambahkan Ke Transaksi</string>
+    <string name="kembalian">KEMBALIAN</string>
+    <string name="kembalian_low">Kembalian</string>
+    <string name="cetak_struk">CETAK STRUK</string>
+    <string name="cetak_struk_low">Cetak Struk Low</string>
+    <string name="harga_titik_dua">Harga:</string>
+    <string name="pembelian_berhasil">PEMBELIAN BERHASIL</string>
+    <string name="pembelian_berhasil_low">Pembelian Berhasil</string>
+    <string name="pembelian_baru">PEMBELIAN BARU</string>
+    <string name="pembelian_baru_low">Pembelian Baru</string>
+
+    <!-- Nomor -->
+    <string name="no">NO</string>
+    <string name="no_low">No</string>
+    <string name="no_titik">NO.</string>
+    <string name="no_titik_low">No.</string>
+    <string name="satu">1</string>
+    <string name="dua">2</string>
+    <string name="tiga">3</string>
+    <string name="empat">4</string>
+    <string name="lima">5</string>
+    <string name="enam">6</string>
+    <string name="tujuh">7</string>
+    <string name="delapan">8</string>
+    <string name="sembilan">9</string>
+    <string name="nol_satu">0</string>
+    <string name="nol_dua">00</string>
+    <string name="nol_tiga">000</string>
+    <string name="tambah">+</string>
+
+    <!-- Menu Daftar Barang-->
+    <string name="barang">BARANG</string>
+    <string name="barang_low">Barang</string>
+    <string name="produsen">PRODUSEN</string>
+    <string name="produsen_low">Produsen</string>
+    <string name="status_stok">STATUS STOK</string>
+    <string name="status_stok_low">Status Stok</string>
+    <string name="semua">Semua</string>
+    <string name="nama_barang">NAMA BARANG</string>
+    <string name="nama_barang_low">Nama Barang</string>
+    <string name="satuan">SATUAN</string>
+    <string name="satuan_low">Satuan</string>
+    <string name="stok">STOK</string>
+    <string name="stok_low">Stok</string>
+    <string name="harga">HARGA</string>
+    <string name="harga_low">Harga</string>
+    <string name="harga_rp">HARGA (RP)</string>
+    <string name="ket_barang">Memiliki Kadar P205 minimal 28% dan kadar air maksimal 1,59%. Berwarna kuning abu-abu, berbentuk tepung dan dikemas dalam karung plastik kapasitas 50kg. Berguna untuk memacu pertumbuhan akar, mempercepat pembentukan bunga dan masaknya buah dan biji, serta meningkatkan komponen hasil panen tanaman biji-bijian.</string>
+
+    <!-- Status Stok -->
+    <string name="tersedia">TERSEDIA</string>
+    <string name="tersedia_low">Tersedia</string>
+    <string name="persediaan_isi">PERSEDIAAN ISI</string>
+    <string name="persediaan_isi_low">Persediaan Isi</string>
+    <string name="kosong">KOSONG</string>
+    <string name="kosong_low">Kosong</string>
+    <string name="masukkan_stok">Masukkan penambahan Stok</string>
+    <string name="stok_saat_ini">Stok saat ini:</string>
+    <string name="perbarui_harga">Perbarui Harga</string>
+    <string name="harga_disarankan">Harga yang disarankan:</string>
+
+    <!-- Laporan -->
+    <string name="laporan_low">Laporan</string>
+    <string name="hari_ini">HARI INI</string>
+    <string name="hari_ini_low">Hari ini</string>
+    <string name="tiga_hari">3 HARI</string>
+    <string name="tiga_hari_low">3 Hari</string>
+    <string name="satu_minggu">1 MINGGU</string>
+    <string name="satu_minggu_low">1 Minggu</string>
+    <string name="satu_bulan">1 BULAN</string>
+    <string name="satu_bulan_low">1 Bulan</string>
+    <string name="total_transaksi">TOTAL TRANSAKSI</string>
+    <string name="total_transaksi_low">Total Transaksi</string>
+    <string name="jml_frekuensi_transaksi">JUMLAH FREKUENSI TRANSAKSI</string>
+    <string name="jml_frekuensi_transaksi_low">Jumlah Frekuensi Transaksi</string>
+    <string name="rata_total_transaksi">RATA-RATA TOTAL PER TRANSAKSI</string>
+    <string name="rata_total_transaksi_low">Rata-rata total per transaksi</string>
+    <string name="produk_terlaris">PRODUK PALING LARIS</string>
+    <string name="produk_terlaris_low">Produk Paling Laris</string>
+    <string name="terjual">TERJUAL</string>
+    <string name="terjual_low">Terjual</string>
+    <string name="pembeli_terbanyak">PEMBELI TERBANYAK</string>
+    <string name="pembeli_terbanyak_low">Pembeli terbanyak</string>
+    <string name="frekuensi">FREKUENSI</string>
+    <string name="frekuensi_low">Frekuensi</string>
+    <string name="total_beli">TOTAL PEMBELIAN</string>
+    <string name="total_beli_low">Total Pembelian</string>
+
+    <!-- Menu Transaksi -->
+    <string name="transaksi_low">Transaksi</string>
+    <string name="tanggal_transaksi">TANGGAL TRANSAKSI</string>
+    <string name="tanggal_transaksi_low">Tanggal Transaksi</string>
+    <string name="belum_ada_barang">BELUM ADA BARANG</string>
+    <string name="ket_blm_ada_transaksi">Pilih transaksi yang ingin dilihat</string>
+    <string name="cetak_ulang_struk">Cetak Ulang Struk</string>
+    <string name="waktu">WAKTU</string>
+    <string name="waktu_low">Waktu</string>
+    <string name="pelanggan">PELANGGAN</string>
+    <string name="pelanggan_low">Pelanggan</string>
+    <string name="qty">QTY</string>
+    <string name="no_transaksi">No transaksi:</string>
+
+    <!-- Profil Toko -->
+    <string name="nama_pemilik_toko">PEMILIK TOKO</string>
+    <string name="nama_pemilik_toko_low">Pemilik Toko</string>
+    <string name="alamat">ALAMAT</string>
+    <string name="alamat_low">Alamat</string>
+
+
+    <string-array name="kategori">
+        <item>Kategori</item>
+        <item>Buah-buahan</item>
+        <item>Sayur-sayuran</item>
+        <item>Obat-obatan</item>
+        <item>Pupuk</item>
+        <item>Vitamin</item>
+        <item>Peralatan</item>
+        <item>Lain-lain.</item>
+    </string-array>
+
+    <string-array name="produsen">
+        <item>Semua</item>
+        <item>PT. Agrotama Tunas</item>
+        <item>PT. Bayer Indonesia</item>
+        <item>PT. Pupuk Sriwidjaja</item>
+        <item>PT. Hextar Fertilizer</item>
+        <item>PT. Biotis Agrindo</item>
+        <item>PT. Samudera Utama</item>
+        <item>PT. Nufarm Utama</item>
+        <item>Lain-lain.</item>
+    </string-array>
+
+    <string-array name="status_stok">
+        <item>Semua</item>
+        <item>Tersedia</item>
+        <item>Mulai Habis</item>
+        <item>Habis</item>
+    </string-array>
+
+    <string-array name="transaksi_fragment">
+        <item>transaksi</item>
+        <item>laporan</item>
+    </string-array>
+
+    <string-array name="transaksi_pelanggan_fragment">
+        <item>Pelanggan</item>
+        <item>Waktu</item>
+    </string-array>
+
+    <string-array name="laporan_fragment">
+        <item>laporan</item>
+        <item>transaksi</item>
+    </string-array>
+    <string-array name="dropdownInfoToko">
+        <item>Informasi Toko</item>
+        <item>Logout</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lupa_sandi">LUPA SANDI?</string>
+    <string name="masuk">MASUK</string>
+    <string name="todo">TODO</string>
+    <string name="contoh_tokotani">contoh: tokotani</string>
+    <string name="contoh_tokotani2019">contoh: tokotani2019</string>
+    <string name="masukkan_username_toko">Masukkan username toko</string>
+    <string name="masukkan_password_toko">Masukkan password toko</string>
+    <string name="forget_pass">Silahkan hubungi admin di <b>0812xxxxxxxx</b>\n untuk mengetahui password Toko Anda</string>
+    <string name="forget_user">Silahkan hubungi admin di <b>0812xxxxxxxx</b>\n untuk mengetahui username Toko Anda</string>
+    <string name="coba_lagi">COBA LAGI</string>
+    <string name="lupa_username">LUPA USERNAME?</string>
+    <string name="anda_terdaftar_sebagai">Anda terdaftar sebagai:</string>
+    <string name="strips">-</string>
+    <string name="anggap_aja_ini_splash_screen_karena_desainnya_belum_ada">Anggap aja ini Splash Screen. Karena Desainnya belum ada.</string>
+    <!--<string name="ket_lupa_nama"> untuk mengetahui username Toko Anda</string>-->
+</resources>

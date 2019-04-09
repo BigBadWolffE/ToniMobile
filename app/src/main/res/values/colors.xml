@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#398689</color>
+    <color name="colorPrimaryDark">#0F3032</color>
+    <color name="colorAccent">#F7931D</color>
+
+    <color name="colorThemeGreenDark">#0F3032</color>
+    <color name="colorThemeGreen">#398689</color>
+    <color name="colorThemeOrange">#F7931D</color>
+    <color name="colorThemeCream">#F9F8F0</color>
+    <color name="colorThemeWhite">#F9F9F9</color>
+    <color name="colorThemeGrey">#979797</color>
+    <color name="colorThemeGreyDark">#707070</color>
+
+    <color name="colorButtonDisabled">#9b9b9b</color>
+    <color name="colorBtnDeActived">#FFCC8E</color>
+
+
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
+
+    <color name="overlayBackground">#7F333639</color>
+    <color name="overlayActionBar">#0E0D0E</color>
+
+    <color name="status_tersedia">#B8E986</color>
+    <color name="status_persediaan_isi">#FDCB6E</color>
+    <color name="status_kosong">#FF7675</color>
+</resources>

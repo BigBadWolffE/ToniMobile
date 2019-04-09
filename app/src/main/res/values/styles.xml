@@ -1,0 +1,52 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!-- Text Style Bold-->
+    <style name="TextButtonWhiteBold">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextHeaderGreenBold">
+        <item name="android:textSize">40sp</item>
+        <item name="android:textColor">@color/colorThemeGreen</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Text Style Default-->
+    <style name="TextDefaultBlack">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+    <style name="TextDefaultWhite">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+    <style name="TextDefaultGrey">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorThemeGrey</item>
+    </style>
+    <style name="TextDefaultGreenDark">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorThemeGreenDark</item>
+    </style>
+
+
+    <!-- Dialog Show -->
+    <style name="DialogAnimateSlide">
+        <item name="android:windowEnterAnimation">@anim/animate_slide_up</item>
+        <item name="android:windowExitAnimation">@anim/animate_slide_down</item>
+    </style>
+
+
+</resources>
