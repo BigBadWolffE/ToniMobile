@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import co.crowde.toni.R;
+import co.crowde.toni.controller.main.CallCenter;
 import co.crowde.toni.view.main.TypefaceTheme;
 
 public class ForgetPassword{
@@ -50,6 +51,13 @@ public class ForgetPassword{
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+            }
+        });
+
+        tvForgetPassDesc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CallCenter.showDial(activity);
             }
         });
 

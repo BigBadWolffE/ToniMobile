@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import co.crowde.toni.R;
+import co.crowde.toni.controller.main.CloseSoftKeyboard;
 import co.crowde.toni.controller.network.LoginRequest;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.view.main.TypefaceTheme;
@@ -90,6 +91,7 @@ public class Login extends AppCompatActivity {
         });
 
         setShopClosedTime(Login.this);
+        hideKeyboard(Login.this);
 
     }
 
@@ -166,12 +168,28 @@ public class Login extends AppCompatActivity {
     };
 
     public static void setShopClosedTime(Activity activity){
-//        Log.e("CLOSED TIME", SavePref.readClosedTime(activity));
         if(SavePref.readClosedTime(activity)==null){
             tvClosedTime.setText(activity.getResources().getString(R.string.strips));
         } else {
             tvClosedTime.setText(SavePref.readClosedTime(activity));
         }
+    }
+
+    public static void hideKeyboard(final Activity activity){
+        et_username.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                CloseSoftKeyboard.hideSoftKeyboard(v, activity);
+            }
+        });
+
+        et_password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                CloseSoftKeyboard.hideSoftKeyboard(v, activity);
+            }
+        });
+
     }
 
     @Override

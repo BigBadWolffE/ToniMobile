@@ -100,6 +100,8 @@ public class LoginRequest {
                                     ForgetPassword.showForgetPass(activity);
                                 } else if(message.equals("Username anda salah!")){
                                     ForgetUsername.showForgetUser(activity);
+                                } else {
+                                    Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
                                 }
                             }
 

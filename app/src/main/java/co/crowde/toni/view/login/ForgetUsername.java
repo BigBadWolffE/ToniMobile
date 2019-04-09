@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import co.crowde.toni.R;
+import co.crowde.toni.controller.main.CallCenter;
 import co.crowde.toni.view.main.TypefaceTheme;
 
 public class ForgetUsername{
@@ -19,7 +20,7 @@ public class ForgetUsername{
             tvBtnBack;
     public static CardView cvBtnBack;
 
-    public static void showForgetUser(Activity activity) {
+    public static void showForgetUser(final Activity activity) {
         final LayoutInflater inflater = LayoutInflater.from(activity);
         final View dialogView = inflater.inflate(
                 R.layout.activity_forget_username, null);
@@ -47,6 +48,13 @@ public class ForgetUsername{
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+            }
+        });
+
+        tvForgetUserDesc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CallCenter.showDial(activity);
             }
         });
 
