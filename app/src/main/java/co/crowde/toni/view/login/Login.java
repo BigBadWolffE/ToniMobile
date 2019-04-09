@@ -73,7 +73,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(et_username.getText().toString().equals("admin")){
-                    Toast.makeText(Login.this, "Access denied!", Toast.LENGTH_SHORT).show();
+                    ForgetUsername.showForgetUser(Login.this);
                 } else {
                     LoginRequest.postLogin(Login.this);
                 }
