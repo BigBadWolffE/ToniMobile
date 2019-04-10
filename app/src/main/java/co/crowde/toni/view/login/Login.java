@@ -40,6 +40,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
         //Get Id View
         tvLoginHeader = findViewById(R.id.tvLoginHeader);
         tvClosedLabel = findViewById(R.id.tvClosedHeader);
