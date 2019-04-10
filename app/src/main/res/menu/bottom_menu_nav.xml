@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_dashboard"
+        android:icon="@drawable/kunci_lupa_sandi"
+        android:title="@string/pos_dashboard_low"/>
+    <item android:id="@+id/menu_inventory"
+        android:icon="@drawable/kunci_lupa_sandi"
+        android:title="@string/daftar_barang_low"/>
+    <item android:id="@+id/menu_report"
+        android:icon="@drawable/kunci_lupa_sandi"
+        android:title="@string/laporan_low"/>
+    <item android:id="@+id/menu_customer"
+        android:icon="@drawable/kunci_lupa_sandi"
+        android:title="@string/pelanggan_low"/>
+
+</menu>
