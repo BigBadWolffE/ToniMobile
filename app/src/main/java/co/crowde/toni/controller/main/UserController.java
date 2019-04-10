@@ -8,18 +8,18 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 import co.crowde.toni.controller.network.UserRequest;
+import co.crowde.toni.helper.DateTimeFormater;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.ShopModel;
 import co.crowde.toni.view.login.Login;
 import co.crowde.toni.view.login.LoginSuccess;
 
 public class UserController {
-    public static String currentDateOpen, currentDateClosed;
-
 
     public static void showLoginOwner(Activity activity){
         UserRequest.getShopDetail(activity);
@@ -52,25 +52,12 @@ public class UserController {
 
     }
 
-    public static void getCurrentDateOpen() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm | EEE, dd MMMM yyyy", Locale.UK);
-        Date currentTime = new Date();
-        currentDateOpen = dateFormat.format(currentTime);
-    }
-
-    public static void getCurrentDateClosed(Activity activity) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm | EEE, dd MMMM yyyy", Locale.UK);
-        Date currentTime = new Date();
-        currentDateClosed = dateFormat.format(currentTime);
-        SavePref.saveClosedTime(activity, currentDateClosed);
-    }
-
     public static void closedShop(Activity activity){
         SavePref.saveShopId(activity, null);
         SavePref.saveToken(activity, null);
         SavePref.saveUserDetail(activity, null);
 
-        getCurrentDateClosed(activity);
+        DateTimeFormater.getCurrentDateClosed(activity);
 
         Toast.makeText(activity, "Toko Sudah ditutup.", Toast.LENGTH_SHORT).show();
 

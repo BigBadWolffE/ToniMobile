@@ -227,5 +227,7 @@
     <string name="anda_terdaftar_sebagai">Anda terdaftar sebagai:</string>
     <string name="strips">-</string>
     <string name="anggap_aja_ini_splash_screen_karena_desainnya_belum_ada">Anggap aja ini Splash Screen. Karena Desainnya belum ada.</string>
+    <string name="pos_dashboard_low">Pos Dashboard</string>
+    <string name="daftar_barang_low">Daftar Barang</string>
     <!--<string name="ket_lupa_nama"> untuk mengetahui username Toko Anda</string>-->
 </resources>

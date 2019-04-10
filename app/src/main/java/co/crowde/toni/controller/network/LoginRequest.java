@@ -96,12 +96,16 @@ public class LoginRequest {
                                 activity.finish();
 
                             } else {
-                                if(message.equals("Password anda salah!")){
-                                    ForgetPassword.showForgetPass(activity);
-                                } else if(message.equals("Username anda salah!")){
-                                    ForgetUsername.showForgetUser(activity);
-                                } else {
-                                    Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+                                switch (message) {
+                                    case "Password anda salah!":
+                                        ForgetPassword.showForgetPass(activity);
+                                        break;
+                                    case "Username anda salah!":
+                                        ForgetUsername.showForgetUser(activity);
+                                        break;
+                                    default:
+                                        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+                                        break;
                                 }
                             }
 

@@ -22,9 +22,11 @@ import java.util.Locale;
 import co.crowde.toni.R;
 import co.crowde.toni.controller.main.UserController;
 import co.crowde.toni.controller.network.UserRequest;
+import co.crowde.toni.helper.DateTimeFormater;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.ShopModel;
 import co.crowde.toni.model.UserModel;
+import co.crowde.toni.view.main.MainActivity;
 import co.crowde.toni.view.main.TypefaceTheme;
 
 public class LoginSuccess extends AppCompatActivity {
@@ -78,17 +80,26 @@ public class LoginSuccess extends AppCompatActivity {
             }
         });
 
+        cvBtnOpen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openShop = new Intent(LoginSuccess.this, MainActivity.class);
+                startActivity(openShop);
+                finish();
+            }
+        });
+
     }
 
     public static void setOwnerName(Activity activity, String user){
-        UserController.getCurrentDateOpen();
+        DateTimeFormater.getCurrentDateOpen();
 
         //Parsing to model
         ShopModel shopModel = new Gson().fromJson(user, ShopModel.class);
 
         //Set to View
 
-        tvOpenTime.setText(UserController.currentDateOpen);
+        tvOpenTime.setText(DateTimeFormater.currentDateOpen);
         tvOwnerName.setText(
                 shopModel.getOwnerName()+" - "+shopModel.getShopName());
 

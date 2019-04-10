@@ -2,16 +2,13 @@ package co.crowde.toni.view.login;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
 import co.crowde.toni.R;
-import co.crowde.toni.controller.main.CallCenter;
+import co.crowde.toni.helper.CallCenter;
 import co.crowde.toni.view.main.TypefaceTheme;
 
 public class ForgetUsername{
@@ -44,6 +41,7 @@ public class ForgetUsername{
 
         tvBtnBack.setTypeface(TypefaceTheme.montserratBold);
 
+        Login.btnLogin.setEnabled(true);
         cvBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

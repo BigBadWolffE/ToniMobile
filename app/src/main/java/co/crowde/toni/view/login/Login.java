@@ -73,6 +73,7 @@ public class Login extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btnLogin.setEnabled(false);
                 if(et_username.getText().toString().equals("admin")){
                     ForgetUsername.showForgetUser(Login.this);
                 } else {
@@ -86,7 +87,7 @@ public class Login extends AppCompatActivity {
         tvForgetPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ForgetPassword.showForgetPass(Login.this);
+                ForgetPassword.forgetPassword(Login.this);
             }
         });
 
