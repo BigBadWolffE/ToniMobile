@@ -18,9 +18,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Date;
+
 import co.crowde.toni.R;
 import co.crowde.toni.controller.main.CloseSoftKeyboard;
 import co.crowde.toni.controller.network.LoginRequest;
+import co.crowde.toni.helper.DateTimeFormater;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.view.main.TypefaceTheme;
 
@@ -36,7 +39,6 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
 
         //Get Id View
         tvLoginHeader = findViewById(R.id.tvLoginHeader);
