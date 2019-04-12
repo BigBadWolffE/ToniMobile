@@ -55,4 +55,28 @@ public class SavePref {
         SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
         return sharedPref.getString("closedTime", null);
     }
+
+    //OpenTime
+    public static void saveOpenTime(Activity activity, String openTime) {
+        SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("openTime", openTime);
+        editor.commit();
+    }
+    public static String readOpenTime(Activity activity) {
+        SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
+        return sharedPref.getString("openTime", null);
+    }
+
+    //isOpenShop
+    public static void saveOpenShop(Activity activity, int isOpen) {
+        SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("isOpen", isOpen);
+        editor.commit();
+    }
+    public static int readOpenShop(Activity activity) {
+        SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
+        return sharedPref.getInt("isOpen", 0);
+    }
 }

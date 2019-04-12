@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/menu_dashboard"
-        android:icon="@drawable/kunci_lupa_sandi"
-        android:title="@string/pos_dashboard_low"/>
+        android:icon="@drawable/ic_store_black_24dp"
+        android:title="@string/kasir"/>
     <item android:id="@+id/menu_inventory"
-        android:icon="@drawable/kunci_lupa_sandi"
-        android:title="@string/daftar_barang_low"/>
+        android:icon="@drawable/ic_shopping_basket_black_24dp"
+        android:title="@string/produk"/>
     <item android:id="@+id/menu_report"
-        android:icon="@drawable/kunci_lupa_sandi"
+        android:icon="@drawable/ic_equalizer_black_24dp"
         android:title="@string/laporan_low"/>
     <item android:id="@+id/menu_customer"
-        android:icon="@drawable/kunci_lupa_sandi"
+        android:icon="@drawable/ic_group_black_24dp"
         android:title="@string/pelanggan_low"/>
 
 </menu>

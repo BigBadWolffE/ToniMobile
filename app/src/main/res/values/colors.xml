@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#398689</color>
-    <color name="colorPrimaryDark">#0F3032</color>
+    <color name="colorPrimaryDark">#707070</color>
     <color name="colorAccent">#F7931D</color>
 
     <color name="colorThemeGreenDark">#0F3032</color>
@@ -10,10 +10,15 @@
     <color name="colorThemeCream">#F9F8F0</color>
     <color name="colorThemeWhite">#F9F9F9</color>
     <color name="colorThemeGrey">#979797</color>
+    <color name="colorThemeGreyLight">#E8E8E8</color>
     <color name="colorThemeGreyDark">#707070</color>
 
     <color name="colorButtonDisabled">#9b9b9b</color>
     <color name="colorBtnDeActived">#FFCC8E</color>
+
+    <color name="TextColorDefault">#52575C</color>
+    <color name="EdittextLogin">#FAFAFA</color>
+
 
 
     <color name="colorWhite">#FFFFFF</color>

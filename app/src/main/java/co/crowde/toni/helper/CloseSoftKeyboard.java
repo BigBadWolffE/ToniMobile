@@ -1,4 +1,4 @@
-package co.crowde.toni.controller.main;
+package co.crowde.toni.helper;
 
 import android.app.Activity;
 import android.view.View;

@@ -220,8 +220,8 @@
     <string name="contoh_tokotani2019">contoh: tokotani2019</string>
     <string name="masukkan_username_toko">Masukkan username toko</string>
     <string name="masukkan_password_toko">Masukkan password toko</string>
-    <string name="forget_pass">Silahkan hubungi admin di <b>0822-1316-1296</b>\n untuk mengetahui password Toko Anda</string>
-    <string name="forget_user">Silahkan hubungi admin di <b>0822-1316-1296</b>\n untuk mengetahui username Toko Anda</string>
+    <string name="forget_pass">Silahkan hubungi admin kami di <b>(021) 8765432</b>\n untuk mengetahui password Toko Anda</string>
+    <string name="forget_user">Silahkan hubungi admin kami di <b>(021) 8765432</b>\n untuk mengetahui username Toko Anda</string>
     <string name="coba_lagi">COBA LAGI</string>
     <string name="lupa_username">LUPA USERNAME?</string>
     <string name="anda_terdaftar_sebagai">Anda terdaftar sebagai:</string>
@@ -229,5 +229,12 @@
     <string name="anggap_aja_ini_splash_screen_karena_desainnya_belum_ada">Anggap aja ini Splash Screen. Karena Desainnya belum ada.</string>
     <string name="pos_dashboard_low">Pos Dashboard</string>
     <string name="daftar_barang_low">Daftar Barang</string>
+    <string name="kata_sandi">Kata Sandi</string>
+    <string name="lupa_kata_sandi">Lupa kata sandi?</string>
+    <string name="lupa_kata_sandi_capt">LUPA KATA SANDI?</string>
+    <string name="lupa_nama_pengguna">LUPA NAMA PENGGUNA?</string>
+    <string name="buka_mesin_kasir">BUKA MESIN KASIR</string>
+    <string name="produk">Produk</string>
+    <string name="kasir">Kasir</string>
     <!--<string name="ket_lupa_nama"> untuk mengetahui username Toko Anda</string>-->
 </resources>

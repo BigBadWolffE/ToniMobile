@@ -27,6 +27,8 @@ public class API {
     public static final String GetAllSuppliers = Supplier+Count;
 
     public static final String GetShopDetail = Shop+Slash;
+    public static final String OpenShop = Shop+Slash+"openShop";
+    public static final String ClosedShop = Shop+Slash+"closeShop";
 
 
     //Another One

@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationMenu;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -23,39 +24,44 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        loadFragment(new Dashboard());
+        Dashboard dashboard = new Dashboard();
+        FragmentTransaction dashboardTransaction = getSupportFragmentManager().beginTransaction();
+        dashboardTransaction.replace(R.id.mainFrameLayout, dashboard);
+        dashboardTransaction.commit();
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.navBottomMenu);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
     }
 
-    // method untuk load fragment yang sesuai
-    private boolean loadFragment(Fragment fragment) {
-        if (fragment != null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.mainFrameLayout, fragment)
-                    .commit();
-            return true;
-        }
-        return false;
-    }
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        Fragment fragment = null;
-        switch (menuItem.getItemId()){
+        switch (menuItem.getItemId()) {
             case R.id.menu_dashboard:
-                fragment = new Dashboard();
+                Dashboard dashboard = new Dashboard();
+                FragmentTransaction dashboardTransaction = getSupportFragmentManager().beginTransaction();
+                dashboardTransaction.replace(R.id.mainFrameLayout, dashboard);
+                dashboardTransaction.commit();
                 break;
             case R.id.menu_inventory:
-                fragment = new Inventory();
+                Inventory inventory  = new Inventory();
+                FragmentTransaction inventoryTransaction = getSupportFragmentManager().beginTransaction();
+                inventoryTransaction.replace(R.id.mainFrameLayout, inventory);
+                inventoryTransaction.commit();
                 break;
             case R.id.menu_report:
-                fragment = new Report();
+                Report report = new Report();
+                FragmentTransaction reportTransaction = getSupportFragmentManager().beginTransaction();
+                reportTransaction.replace(R.id.mainFrameLayout, report);
+                reportTransaction.commit();
                 break;
+
             case R.id.menu_customer:
-                fragment = new Customer();
+                Customer customer  = new Customer();
+                FragmentTransaction customerTransaction = getSupportFragmentManager().beginTransaction();
+                customerTransaction.replace(R.id.mainFrameLayout, customer);
+                customerTransaction.commit();
                 break;
         }
-        return loadFragment(fragment);
+        return true;
     }
 }

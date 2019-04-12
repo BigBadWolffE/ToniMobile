@@ -6,6 +6,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import co.crowde.toni.R;
 
@@ -13,6 +16,8 @@ import co.crowde.toni.R;
  * A simple {@link Fragment} subclass.
  */
 public class Dashboard extends Fragment {
+
+    public static TextView tvDashboard;
 
 
     public Dashboard() {
@@ -25,9 +30,10 @@ public class Dashboard extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View  rootView =  inflater.inflate(R.layout.fragment_dashboard, container, false);
+        View  view =  inflater.inflate(R.layout.fragment_dashboard, container, false);
 
-        View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        tvDashboard = view.findViewById(R.id.tvDashboard);
+
         return view;
     }
 

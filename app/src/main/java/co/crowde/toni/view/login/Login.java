@@ -1,36 +1,25 @@
 package co.crowde.toni.view.login;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.Date;
 
 import co.crowde.toni.R;
-import co.crowde.toni.controller.main.CloseSoftKeyboard;
+import co.crowde.toni.helper.CloseSoftKeyboard;
 import co.crowde.toni.controller.network.LoginRequest;
-import co.crowde.toni.helper.DateTimeFormater;
 import co.crowde.toni.helper.SavePref;
-import co.crowde.toni.view.main.TypefaceTheme;
 
 public class Login extends AppCompatActivity {
 
     public static TextView tvLoginHeader, tvClosedLabel, tvClosedTime,
-            tvUsername, tvPassword,
             tvForgetPass;
     public static EditText et_username, et_password;
     public static CardView btnLogin;
@@ -46,8 +35,6 @@ public class Login extends AppCompatActivity {
         tvClosedLabel = findViewById(R.id.tvClosedHeader);
         tvClosedTime = findViewById(R.id.tvClosedTime);
 
-        tvUsername = findViewById(R.id.tvUserLabel);
-        tvPassword = findViewById(R.id.tvPassLabel);
         et_username = findViewById(R.id.et_username);
         et_password = findViewById(R.id.et_password);
 
@@ -56,18 +43,12 @@ public class Login extends AppCompatActivity {
         tvForgetPass = findViewById(R.id.tvForgetPassword);
 
         //Set Typeface (Font)
-        TypefaceTheme.fontMontserratReg(Login.this);
-        tvLoginHeader.setTypeface(TypefaceTheme.montserratBold);
-        tvClosedLabel.setTypeface(TypefaceTheme.montserratReg);
-        tvClosedTime.setTypeface(TypefaceTheme.montserratReg);
-
-        tvUsername.setTypeface(TypefaceTheme.montserratReg);
-        tvPassword.setTypeface(TypefaceTheme.montserratReg);
-
-        tvForgetPass.setTypeface(TypefaceTheme.montserratReg);
-
-        //Set TextSize
-        tvLoginHeader.setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
+//        TypefaceTheme.fontMontserratReg(Login.this);
+//        tvLoginHeader.setTypeface(TypefaceTheme.montserratBold);
+//        tvClosedLabel.setTypeface(TypefaceTheme.montserratReg);
+//        tvClosedTime.setTypeface(TypefaceTheme.montserratReg);
+//
+//        tvForgetPass.setTypeface(TypefaceTheme.montserratReg);
 
         //Function Status Activated Button
         et_username.addTextChangedListener(loginWatcher);
@@ -108,57 +89,33 @@ public class Login extends AppCompatActivity {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if (et_username.getText().length() > 0) {
-                tvUsername.setTextColor(
-                        getResources().getColor(R.color.colorThemeGreenDark));
-                et_username.setBackground(
-                        getResources().getDrawable(R.drawable.bg_et_login_active));
                 btnLogin.setCardBackgroundColor(
-                        getResources().getColor(R.color.colorBtnDeActived));
+                        getResources().getColor(R.color.colorThemeGrey));
                 btnLogin.setEnabled(false);
 
                 //Button Active
                 if (et_password.getText().length() > 0){
-                    tvPassword.setTextColor(
-                            getResources().getColor(R.color.colorThemeGreenDark));
-                    et_password.setBackground(
-                            getResources().getDrawable(R.drawable.bg_et_login_active));
                     btnLogin.setCardBackgroundColor(
                             getResources().getColor(R.color.colorThemeOrange));
                     btnLogin.setEnabled(true);
                 } else {
-                    tvPassword.setTextColor(
-                            getResources().getColor(R.color.colorBlack));
-                    et_password.setBackground(
-                            getResources().getDrawable(R.drawable.bg_et_login_deactive));
                     btnLogin.setCardBackgroundColor(
-                            getResources().getColor(R.color.colorBtnDeActived));
+                            getResources().getColor(R.color.colorThemeGrey));
                     btnLogin.setEnabled(false);
                 }
 
             } else {
-                tvUsername.setTextColor(
-                        getResources().getColor(R.color.colorBlack));
-                et_username.setBackground(
-                        getResources().getDrawable(R.drawable.bg_et_login_deactive));
                 btnLogin.setCardBackgroundColor(
-                        getResources().getColor(R.color.colorBtnDeActived));
+                        getResources().getColor(R.color.colorThemeGrey));
                 btnLogin.setEnabled(false);
 
                 if (et_password.getText().length() > 0){
-                    tvPassword.setTextColor(
-                            getResources().getColor(R.color.colorThemeGreenDark));
-                    et_password.setBackground(
-                            getResources().getDrawable(R.drawable.bg_et_login_active));
                     btnLogin.setCardBackgroundColor(
-                            getResources().getColor(R.color.colorBtnDeActived));
+                            getResources().getColor(R.color.colorThemeGrey));
                     btnLogin.setEnabled(false);
                 } else {
-                    tvPassword.setTextColor(
-                            getResources().getColor(R.color.colorBlack));
-                    et_password.setBackground(
-                            getResources().getDrawable(R.drawable.bg_et_login_deactive));
                     btnLogin.setCardBackgroundColor(
-                            getResources().getColor(R.color.colorBtnDeActived));
+                            getResources().getColor(R.color.colorThemeGrey));
                     btnLogin.setEnabled(false);
                 }
 
@@ -204,6 +161,7 @@ public class Login extends AppCompatActivity {
                 .setNegativeButton(android.R.string.no, null)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
+                        finish();
                         Login.super.onBackPressed();
                     }
                 }).create().show();

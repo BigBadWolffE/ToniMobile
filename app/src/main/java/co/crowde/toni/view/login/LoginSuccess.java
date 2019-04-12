@@ -1,39 +1,26 @@
 package co.crowde.toni.view.login;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.os.Handler;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-import java.lang.reflect.Type;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 import co.crowde.toni.R;
-import co.crowde.toni.controller.main.UserController;
-import co.crowde.toni.controller.network.UserRequest;
-import co.crowde.toni.helper.DateTimeFormater;
+import co.crowde.toni.controller.network.ShopRequest;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.ShopModel;
-import co.crowde.toni.model.UserModel;
-import co.crowde.toni.view.main.MainActivity;
-import co.crowde.toni.view.main.TypefaceTheme;
 
 public class LoginSuccess extends AppCompatActivity {
 
-    public static TextView tvLogSuccessHeader, tvOpenHeader, tvOpenTime,
+    public static TextView tvLogSuccessHeader, tvClosedLabel, tvClosedTime,
             tvLoginAs, tvOwnerName,
-            tvBtnOpenlabel, tvCloseShop;
+            tvBtnOpenlabel;
     public static CardView cvBtnOpen;
 
 
@@ -44,65 +31,69 @@ public class LoginSuccess extends AppCompatActivity {
 
         //Get View Id
         tvLogSuccessHeader = findViewById(R.id.tvLogSuccessHeader);
-        tvOpenHeader = findViewById(R.id.tvOpenHeader);
-        tvOpenTime = findViewById(R.id.tvOpenTime);
+        tvClosedLabel = findViewById(R.id.tvClosedLabel);
+        tvClosedTime = findViewById(R.id.tvClosedTime);
 
         tvLoginAs = findViewById(R.id.tvLoginAs);
         tvOwnerName = findViewById(R.id.tvOwnerName);
 
         tvBtnOpenlabel = findViewById(R.id.tvBtnOpenLabel);
-        tvCloseShop = findViewById(R.id.tvCloseShop);
 
         cvBtnOpen = findViewById(R.id.cvBtnOpen);
 
         //Change Font Type
-        TypefaceTheme.fontMontserratReg(LoginSuccess.this);
-        tvLogSuccessHeader.setTypeface(TypefaceTheme.montserratBold);
-        tvOpenHeader.setTypeface(TypefaceTheme.montserratReg);
-        tvOpenTime.setTypeface(TypefaceTheme.montserratReg);
+//        TypefaceTheme.fontMontserratReg(LoginSuccess.this);
+//        tvLogSuccessHeader.setTypeface(TypefaceTheme.montserratBold);
+//        tvOpenHeader.setTypeface(TypefaceTheme.montserratReg);
+//        tvOpenTime.setTypeface(TypefaceTheme.montserratReg);
+//
+//        tvLoginAs.setTypeface(TypefaceTheme.montserratReg);
+//        tvOwnerName.setTypeface(TypefaceTheme.montserratBold);
+//
+//        tvBtnOpenlabel.setTypeface(TypefaceTheme.montserratBold);
 
-        tvLoginAs.setTypeface(TypefaceTheme.montserratReg);
-        tvOwnerName.setTypeface(TypefaceTheme.montserratReg);
+        setShopClosedTime(LoginSuccess.this);
 
-        tvBtnOpenlabel.setTypeface(TypefaceTheme.montserratBold);
-        tvCloseShop.setTypeface(TypefaceTheme.montserratReg);
-
-        //Set TextSize
-        tvLogSuccessHeader.setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
-
-        UserRequest.getShopDetail(LoginSuccess.this);
-
-        tvCloseShop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                UserController.closedShop(LoginSuccess.this);
-
-            }
-        });
+        ShopRequest.getShopDetail(LoginSuccess.this);
 
         cvBtnOpen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent openShop = new Intent(LoginSuccess.this, MainActivity.class);
-                startActivity(openShop);
-                finish();
+                ShopRequest.openShop(LoginSuccess.this);
             }
         });
 
     }
 
     public static void setOwnerName(Activity activity, String user){
-        DateTimeFormater.getCurrentDateOpen();
 
         //Parsing to model
         ShopModel shopModel = new Gson().fromJson(user, ShopModel.class);
 
-        //Set to View
-
-        tvOpenTime.setText(DateTimeFormater.currentDateOpen);
         tvOwnerName.setText(
                 shopModel.getOwnerName()+" - "+shopModel.getShopName());
 
+    }
+
+    public static void setShopClosedTime(Activity activity){
+        if(SavePref.readClosedTime(activity)==null){
+            tvClosedTime.setText(activity.getResources().getString(R.string.strips));
+        } else {
+            tvClosedTime.setText(SavePref.readClosedTime(activity));
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Tutup Aplikasi TONI")
+                .setMessage("Apakah Anda ingin menutup aplikasi TONI?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        LoginSuccess.super.onBackPressed();
+                    }
+                }).create().show();
     }
 
 }

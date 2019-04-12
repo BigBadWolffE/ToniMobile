@@ -12,17 +12,19 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import co.crowde.toni.controller.network.ShopRequest;
 import co.crowde.toni.controller.network.UserRequest;
 import co.crowde.toni.helper.DateTimeFormater;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.ShopModel;
 import co.crowde.toni.view.login.Login;
 import co.crowde.toni.view.login.LoginSuccess;
+import co.crowde.toni.view.login.OpenShop;
 
 public class UserController {
 
     public static void showLoginOwner(Activity activity){
-        UserRequest.getShopDetail(activity);
+        ShopRequest.getShopDetail(activity);
 
         if(SavePref.readUserDetail(activity)!=null){
             String user = SavePref.readUserDetail(activity);
@@ -40,22 +42,34 @@ public class UserController {
     }
 
     public static void getDataLogin(Activity activity){
-        if(SavePref.readToken(activity)==null){
+
+        if(SavePref.readOpenShop(activity)==1){
+            Intent open = new Intent(activity, OpenShop.class);
+            activity.startActivity(open);
+            activity.finish();
+
+        } else if(SavePref.readToken(activity)==null){
             Intent login = new Intent(activity, Login.class);
             activity.startActivity(login);
             activity.finish();
-        } else {
+
+        }  else{
             Intent loginSuccess = new Intent(activity, LoginSuccess.class);
             activity.startActivity(loginSuccess);
             activity.finish();
+
         }
 
     }
 
-    public static void closedShop(Activity activity){
+    public static void tokenExpired(Activity activity, String message){
+        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+
         SavePref.saveShopId(activity, null);
         SavePref.saveToken(activity, null);
         SavePref.saveUserDetail(activity, null);
+        SavePref.saveOpenTime(activity, null);
+        SavePref.saveOpenShop(activity, 0);
 
         DateTimeFormater.getCurrentDateClosed(activity);
 
@@ -64,5 +78,22 @@ public class UserController {
         Intent logout = new Intent(activity, Login.class);
         activity.startActivity(logout);
         activity.finish();
+    }
+
+    public static void closedShop(Activity activity){
+        ShopRequest.closedShop(activity);
+        SavePref.saveShopId(activity, null);
+        SavePref.saveToken(activity, null);
+        SavePref.saveUserDetail(activity, null);
+        SavePref.saveOpenTime(activity, null);
+        SavePref.saveOpenShop(activity, 0);
+
+        DateTimeFormater.getCurrentDateClosed(activity);
+
+        Intent logout = new Intent(activity, Login.class);
+        activity.startActivity(logout);
+        activity.finish();
+
+        Toast.makeText(activity, "Toko Sudah ditutup.", Toast.LENGTH_SHORT).show();
     }
 }
