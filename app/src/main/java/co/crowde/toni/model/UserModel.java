@@ -15,12 +15,17 @@ public class UserModel{
     @SerializedName("token")
     private String token;
 
+    @SerializedName("picture")
+    private String picture;
+
     public UserModel() {
     }
 
-    public UserModel(String username, String password) {
+    public UserModel(String username, String password, String token, String picture) {
         this.username = username;
         this.password = password;
+        this.token = token;
+        this.picture = picture;
     }
 
     public String getUsername() {
@@ -45,5 +50,13 @@ public class UserModel{
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 }

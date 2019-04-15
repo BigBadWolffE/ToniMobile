@@ -1,8 +1,10 @@
 package co.crowde.toni.controller.network;
 
+import android.app.Activity;
+
 import co.crowde.toni.helper.SavePref;
 
-public class API {
+public class API{
     public static final String TAG = "TONI POS";
     public static final String Slash = "/";
     public static final String Count = "?count=9999";
@@ -21,10 +23,6 @@ public class API {
     public static final String Report = API+"report";
 
     public static final String Login = User+Slash+"login";
-    public static final String GetAllProducts = Product+Count;
-    public static final String GetAllCustomers = Customer+Count;
-    public static final String GetAllCategories = Category+Count;
-    public static final String GetAllSuppliers = Supplier+Count;
 
     public static final String GetShopDetail = Shop+Slash;
     public static final String OpenShop = Shop+Slash+"openShop";

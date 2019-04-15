@@ -13,6 +13,7 @@ import android.widget.TextView;
 import co.crowde.toni.R;
 import co.crowde.toni.controller.main.UserController;
 import co.crowde.toni.controller.network.ShopRequest;
+import co.crowde.toni.helper.DateTimeFormater;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.view.main.MainActivity;
 
@@ -25,6 +26,7 @@ public class OpenShop extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_open_shop);
 
         //Get Id View
@@ -35,7 +37,8 @@ public class OpenShop extends AppCompatActivity {
         tvCloseShop = findViewById(R.id.tvCloseShop);
         cvBtnOpen = findViewById(R.id.cvBtnOpen);
 
-        setShopOpenTime(OpenShop.this);
+//        setShopOpenTime(OpenShop.this);
+        tvOpenShopTime.setText(SavePref.readOpenTime(OpenShop.this));
 
         cvBtnOpen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +68,7 @@ public class OpenShop extends AppCompatActivity {
 
     public static void setShopOpenTime(Activity activity){
         if(SavePref.readClosedTime(activity)==null){
-            tvOpenShopLabel.setText(activity.getResources().getString(R.string.strips));
+            tvOpenShopTime.setText(activity.getResources().getString(R.string.strips));
         } else {
             tvOpenShopTime.setText(SavePref.readOpenTime(activity));
         }

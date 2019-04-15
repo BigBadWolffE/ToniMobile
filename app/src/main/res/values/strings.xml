@@ -206,9 +206,16 @@
         <item>laporan</item>
         <item>transaksi</item>
     </string-array>
+
     <string-array name="dropdownInfoToko">
         <item>Informasi Toko</item>
         <item>Logout</item>
+    </string-array>
+
+    <string-array name="info_user">
+        <item>Informasi Pengguna</item>
+        <item>Koneksi Printer</item>
+        <item>Tutup Toko</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -236,5 +243,7 @@
     <string name="buka_mesin_kasir">BUKA MESIN KASIR</string>
     <string name="produk">Produk</string>
     <string name="kasir">Kasir</string>
+    <string name="informasi_pengguna">Informasi Pengguna</string>
+    <string name="printer_bluetooth">Printer Bluetooth</string>
     <!--<string name="ket_lupa_nama"> untuk mengetahui username Toko Anda</string>-->
 </resources>

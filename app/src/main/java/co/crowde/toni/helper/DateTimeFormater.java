@@ -13,10 +13,11 @@ public class DateTimeFormater {
     public static String currentDateOpen, currentDateClosed;
     public static Locale lokal = new Locale("id");
 
-    public static void getCurrentDateOpen() {
+    public static void getCurrentDateOpen(Activity activity) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm | EEEE, dd MMMM yyyy", lokal);
         Date currentTime = new Date();
         currentDateOpen = dateFormat.format(currentTime);
+        SavePref.saveOpenTime(activity, currentDateOpen);
     }
 
     public static void getCurrentDateClosed(Activity activity) {

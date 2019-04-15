@@ -90,6 +90,7 @@ public class LoginRequest {
 
                                 SavePref.saveToken(activity,token);
                                 SavePref.saveShopId(activity,shopId);
+                                SavePref.savePicture(activity, picture);
 
                                 Intent loginSuccess = new Intent(activity, LoginSuccess.class);
                                 activity.startActivity(loginSuccess);

@@ -159,8 +159,7 @@ public class ShopRequest {
                                 String phoneNumber = objDataLogin.getString("phoneNumber");
                                 int isOpen = objDataLogin.getInt("isOpen");
 
-                                DateTimeFormater.getCurrentDateOpen();
-                                SavePref.saveOpenTime(activity, DateTimeFormater.currentDateOpen);
+                                DateTimeFormater.getCurrentDateOpen(activity);
                                 SavePref.saveOpenShop(activity, isOpen);
 
                                 Intent openShop = new Intent(activity, OpenShop.class);

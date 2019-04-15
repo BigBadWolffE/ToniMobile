@@ -8,7 +8,7 @@ import co.crowde.toni.controller.network.API;
 
 public class SavePref {
 
-    //UserDetail
+    //Token
     public static void saveToken(Activity activity, String token) {
         SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -20,7 +20,7 @@ public class SavePref {
         return sharedPref.getString("token", null);
     }
 
-    //UserDetail
+    //ShopId
     public static void saveShopId(Activity activity, String shopId) {
         SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -30,6 +30,18 @@ public class SavePref {
     public static String readShopId(Activity activity) {
         SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
         return sharedPref.getString("shopId", null);
+    }
+
+    //Picture
+    public static void savePicture(Activity activity, String picture) {
+        SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("picture", picture);
+        editor.commit();
+    }
+    public static String readPicture(Activity activity) {
+        SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
+        return sharedPref.getString("picture", null);
     }
 
     //UserDetail

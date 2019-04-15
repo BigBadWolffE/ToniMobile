@@ -1,12 +1,20 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <style name="AppThemeVer2" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="chipStyle">@style/Widget.MaterialComponents.Chip.Choice</item>
+    </style>
+
 
     <!-- Text Style Bold-->
     <style name="TextButtonWhiteBold">
@@ -46,6 +54,16 @@
     <style name="DialogAnimateSlide">
         <item name="android:windowEnterAnimation">@anim/animate_slide_up</item>
         <item name="android:windowExitAnimation">@anim/animate_slide_down</item>
+    </style>
+
+    <style name="DialogAnimateSlideDown">
+        <item name="android:windowEnterAnimation">@anim/animate_slide_down</item>
+        <item name="android:windowExitAnimation">@anim/animate_slide_up</item>
+    </style>
+
+    <style name="DialogAnime3">
+        <item name="android:windowEnterAnimation">@anim/anim_slide_in_down</item>
+        <item name="android:windowExitAnimation">@anim/anim_slide_out_up</item>
     </style>
 
 
