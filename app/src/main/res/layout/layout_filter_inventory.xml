@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorWhite"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="0dp"
+        android:layout_height="?actionBarSize"
+        android:background="@color/EdittextLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/layoutHeader"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imgBtnBack"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/layoutHeader"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="@+id/layoutHeader"
+                app:layout_constraintTop_toTopOf="@+id/layoutHeader"
+                app:srcCompat="@drawable/ic_close_black_24dp" />
+
+            <TextView
+                android:id="@+id/tvHeaderFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Penyaringan Produk"
+                android:textColor="@color/TextColorDefault"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/imgBtnBack"
+                app:layout_constraintEnd_toEndOf="@+id/layoutHeader"
+                app:layout_constraintStart_toEndOf="@+id/imgBtnBack"
+                app:layout_constraintTop_toTopOf="@+id/imgBtnBack" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <TextView
+        android:id="@+id/tvCategoryLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/kategori"
+        android:textColor="@color/TextColorDefault"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+    <HorizontalScrollView
+        android:id="@+id/scrollCategory"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvCategoryLabel"
+        app:layout_constraintTop_toBottomOf="@+id/tvCategoryLabel">
+
+        <android.support.design.chip.ChipGroup
+            android:id="@+id/chipCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp">
+
+        </android.support.design.chip.ChipGroup>
+
+    </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/tvStatusLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/status_stok_low"
+        android:textColor="@color/TextColorDefault"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollCategory" />
+
+    <android.support.design.chip.ChipGroup
+        android:id="@+id/chipStatus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvStatusLabel"
+        app:layout_constraintTop_toBottomOf="@+id/tvStatusLabel">
+
+    </android.support.design.chip.ChipGroup>
+</android.support.constraint.ConstraintLayout>

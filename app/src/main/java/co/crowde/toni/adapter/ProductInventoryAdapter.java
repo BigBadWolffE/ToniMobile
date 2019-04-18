@@ -1,10 +1,7 @@
 package co.crowde.toni.adapter;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Typeface;
-import android.media.MediaPlayer;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,21 +14,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
-
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import co.crowde.toni.R;
-import co.crowde.toni.controller.network.API;
 import co.crowde.toni.model.ProductModel;
-import co.crowde.toni.view.popup.ProductDetailDashboardPopup;
 
-public class ProductDashboardAdapter
-        extends RecyclerView.Adapter<ProductDashboardAdapter.ViewHolder>
-         implements Filterable{
+public class ProductInventoryAdapter
+        extends RecyclerView.Adapter<ProductInventoryAdapter.ViewHolder>
+        implements Filterable {
 
     private Context context;
     private Activity activity ;
@@ -40,27 +31,23 @@ public class ProductDashboardAdapter
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvProductQty,
-                tvProductName, tvProductUnit;
-        ImageView imgProductItem,
-                imgBtnMinQty, imgBtnPlusQty;
-        CardView cvProductItem, cvProductQty;
+        TextView tvTabProductName, tvTabProductUnit,
+                tvTabProductStock, tvTabProductStatus;
+        LinearLayout layoutProductInventory;
 
         public ViewHolder(final View itemView) {
             super(itemView);
-            tvProductQty = itemView.findViewById(R.id.tvProductQty);
-            imgBtnMinQty = itemView.findViewById(R.id.imgBtnMinQty);
-            tvProductName = itemView.findViewById(R.id.tvProductName);
-            tvProductUnit = itemView.findViewById(R.id.tvProductUnit);
-            imgBtnPlusQty = itemView.findViewById(R.id.imgBtnPlusQty);
-            imgProductItem = itemView.findViewById(R.id.imgProductItem);
-            cvProductItem = itemView.findViewById(R.id.cvProductItem);
-            cvProductQty = itemView.findViewById(R.id.cvProductQty);
+            tvTabProductName = itemView.findViewById(R.id.tvTabProductName);
+            tvTabProductUnit = itemView.findViewById(R.id.tvTabProductUnit);
+            tvTabProductStock = itemView.findViewById(R.id.tvTabProductStock);
+            tvTabProductStatus = itemView.findViewById(R.id.tvTabProductStatus);
+
+            layoutProductInventory = itemView.findViewById(R.id.layoutProductInventory);
 
         }
     }
 
-    public ProductDashboardAdapter(Context context,
+    public ProductInventoryAdapter(Context context,
                                    List<ProductModel> ProductModelList,
                                    Activity activity) {
         this.productModels = ProductModelList;
@@ -71,30 +58,49 @@ public class ProductDashboardAdapter
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ProductInventoryAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.layout_product_dashboard_item, parent, false);
+                .inflate(R.layout.layout_product_inventory_item, parent, false);
 
-        ViewHolder mViewHolder = new ViewHolder(view);
+        ProductInventoryAdapter.ViewHolder mViewHolder = new ProductInventoryAdapter.ViewHolder(view);
 
         return mViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ProductInventoryAdapter.ViewHolder holder, final int position) {
         final ProductModel model = productModelsFiltered.get(position);
-        ProductDashboardAdapter.ViewHolder viewHolder = (ProductDashboardAdapter.ViewHolder) holder;
+        ProductInventoryAdapter.ViewHolder viewHolder = (ProductInventoryAdapter.ViewHolder) holder;
 
-        holder.tvProductName.setText(model.getProductName());
-        holder.tvProductUnit.setText(model.getUnit());
+        viewHolder.tvTabProductName.setText(model.getProductName());
+        viewHolder.tvTabProductUnit.setText(model.getUnit());
+        viewHolder.tvTabProductStock.setText(String.valueOf(model.getStock()));
+        viewHolder.tvTabProductStatus.setText(model.getStatus());
 
-        Picasso.with(activity).load(API.Host+model.getPicture())
-                .into(viewHolder.imgProductItem);
+        switch (model.getStatus()) {
+            case "Habis":
+                viewHolder.tvTabProductStatus.setTextColor(
+                        activity.getResources().getColor(R.color.status_kosong));
+                break;
+            case "Mulai habis":
+                viewHolder.tvTabProductStatus.setTextColor(
+                        activity.getResources().getColor(R.color.status_persediaan_isi));
+                break;
+            case "Tersedia":
+                viewHolder.tvTabProductStatus.setTextColor(
+                        activity.getResources().getColor(R.color.status_tersedia));
+                break;
+            default:
+                viewHolder.tvTabProductStatus.setTextColor(
+                        activity.getResources().getColor(R.color.status_kosong));
+                break;
+        }
 
-        holder.cvProductItem.setOnClickListener(new View.OnClickListener() {
+        viewHolder.layoutProductInventory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ProductDetailDashboardPopup.showProductDetail(activity, model);
+                Toast.makeText(activity, model.getProductName(), Toast.LENGTH_SHORT).show();
+//                ProductDetailDashboardPopup.showProductDetail(activity, model);
             }
         });
 

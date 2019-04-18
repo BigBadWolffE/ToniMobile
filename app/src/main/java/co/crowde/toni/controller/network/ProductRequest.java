@@ -22,6 +22,7 @@ import co.crowde.toni.controller.main.UserController;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.ProductModel;
 import co.crowde.toni.view.fragment.Dashboard;
+import co.crowde.toni.view.fragment.Inventory;
 import co.crowde.toni.view.login.LoginSuccess;
 
 public class ProductRequest {
@@ -100,6 +101,95 @@ public class ProductRequest {
                                 Dashboard.productModels.addAll(productModels);
                                 Dashboard.productDashboardAdapter.notifyDataSetChanged();
 
+                            } else {
+                                if(message.equals("Token tidak valid")){
+                                    UserController.tokenExpired(activity, message);
+                                }
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+
+            }
+        });
+    }
+
+    public static void getInventoryList(final Activity activity){
+        OkHttpClient client = new OkHttpClient();
+
+        Request requestHttp = new Request.Builder()
+                .header("Authorization", SavePref.readToken(activity))
+                .url(API.Product+API.Slash+SavePref.readShopId(activity)+API.Count)
+                .build();
+
+        Log.e("URL",API.Product+API.Slash+SavePref.readShopId(activity)+API.Count);
+
+        client.newCall(requestHttp).enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, final IOException e) {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(
+                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+                        Log.e("Error",e.toString());
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                final String responseData = response.body().string();
+                Log.e("RESPONSE BODY", responseData);
+
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            JSONObject json = new JSONObject(responseData);
+                            boolean status = json.getBoolean("status");
+                            message = json.getString("message");
+                            String data = json.getString("data");
+                            Log.e("DATA RESPONSE", data);
+
+                            if(status){
+//                                JSONObject objDataLogin = new JSONObject(data);
+//                                String shopId = objDataLogin.getString("shopId");
+//                                String productId = objDataLogin.getString("productId");
+//                                String categoryId = objDataLogin.getString("categoryId");
+//                                String productName = objDataLogin.getString("productName");
+//                                String description = objDataLogin.getString("description");
+//                                String picture = objDataLogin.getString("picture");
+//                                String statusProduct = objDataLogin.getString("status");
+//                                int purchasePrice = objDataLogin.getInt("purchasePrice");
+//                                int sellingPrice = objDataLogin.getInt("sellingPrice");
+//                                String unit = objDataLogin.getString("unit");
+//                                String supplierId = objDataLogin.getString("supplierId");
+//                                String createdAt = objDataLogin.getString("createdAt");
+//                                String lastUpdated = objDataLogin.getString("lastUpdated");
+//                                String createdBy = objDataLogin.getString("createdBy");
+//                                String province = objDataLogin.getString("province");
+//                                String regency = objDataLogin.getString("regency");
+//                                String district = objDataLogin.getString("district");
+//                                String village = objDataLogin.getString("village");
+//                                int stock = objDataLogin.getInt("stock");
+//                                String supplierName = objDataLogin.getString("supplierName");
+//                                String categoryName = objDataLogin.getString("categoryName");
+
+                                List<ProductModel> productModels = new Gson()
+                                        .fromJson(data,
+                                                new TypeToken<List<ProductModel>>() {
+                                                }.getType());
+                                Log.e("ProductModels", new Gson().toJson(productModels));
+
+                                Inventory.productModels.clear();
+                                Inventory.productModels.addAll(productModels);
+                                Inventory.inventoryAdapter.notifyDataSetChanged();
+
 
                             } else {
                                 if(message.equals("Token tidak valid")){
@@ -117,4 +207,5 @@ public class ProductRequest {
             }
         });
     }
+
 }

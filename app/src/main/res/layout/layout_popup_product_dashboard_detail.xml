@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cvLayoutMain"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:cardCornerRadius="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/layoutMain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guidelineX1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guidelineY1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <ImageView
+                android:id="@+id/imgProductDetail"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/view"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineX1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvProductName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/TextColorDefault"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/tvProductUnit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guidelineX1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/tvProductUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@color/colorThemeGrey"
+                app:layout_constraintBottom_toTopOf="@+id/labelProductCategory"
+                app:layout_constraintStart_toStartOf="@+id/tvProductName"
+                app:layout_constraintTop_toBottomOf="@+id/tvProductName" />
+
+            <TextView
+                android:id="@+id/labelProductCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:layout_marginBottom="8dp"
+                android:text="Kategori :"
+                android:textColor="@color/colorThemeGrey"
+                app:layout_constraintBottom_toTopOf="@+id/labelProductPrice"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toEndOf="@+id/guidelineX1"
+                app:layout_constraintStart_toStartOf="@+id/tvProductUnit"
+                app:layout_constraintTop_toBottomOf="@id/tvProductUnit" />
+
+            <TextView
+                android:id="@+id/tvProductCategory"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@color/TextColorDefault"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/labelProductCategory"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/labelProductCategory"
+                app:layout_constraintTop_toTopOf="@+id/labelProductCategory" />
+
+            <TextView
+                android:id="@+id/labelProductPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="Harga :"
+                android:textColor="@color/colorThemeGrey"
+                app:layout_constraintBottom_toTopOf="@+id/guidelineY1"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toEndOf="@+id/guidelineX1"
+                app:layout_constraintStart_toStartOf="@+id/labelProductCategory"
+                app:layout_constraintTop_toBottomOf="@+id/labelProductCategory" />
+
+            <TextView
+                android:id="@+id/tvProductPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@color/colorThemeOrange"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/labelProductPrice"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/labelProductPrice"
+                app:layout_constraintTop_toTopOf="@+id/labelProductPrice" />
+
+            <ImageView
+                android:id="@+id/imgBtnMinQty"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/bg_rec_stroke_radius_5dp_grey"
+                android:gravity="center"
+                android:tint="@color/TextColorDefault"
+                app:layout_constraintBottom_toBottomOf="@+id/tvProductQty"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="@+id/tvProductQty"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toEndOf="@+id/guidelineX1"
+                app:layout_constraintStart_toStartOf="@+id/guidelineX1"
+                app:layout_constraintTop_toTopOf="@+id/tvProductQty"
+                app:srcCompat="@drawable/ic_remove_black_24dp" />
+
+            <TextView
+                android:id="@+id/tvProductQty"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:gravity="center"
+                android:textColor="@color/colorThemeOrange"
+                android:textStyle="bold"
+                android:background="@drawable/bg_rec_stroke_radius_5dp_grey"
+                app:layout_constraintBottom_toBottomOf="@+id/imgBtnPlusQty"
+                app:layout_constraintEnd_toStartOf="@+id/imgBtnPlusQty"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/imgBtnMinQty"
+                app:layout_constraintTop_toTopOf="@+id/imgBtnPlusQty" />
+
+            <ImageView
+                android:id="@+id/imgBtnPlusQty"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/bg_rec_radius_5dp_grey"
+                android:gravity="center"
+                android:tint="@color/TextColorDefault"
+                app:layout_constraintBottom_toBottomOf="@+id/imgBtnAddCart"
+                app:layout_constraintEnd_toStartOf="@+id/imgBtnAddCart"
+                app:layout_constraintStart_toEndOf="@+id/tvProductQty"
+                app:layout_constraintTop_toTopOf="@+id/imgBtnAddCart"
+                app:srcCompat="@drawable/ic_add_black_24dp" />
+
+            <ImageView
+                android:id="@+id/imgBtnAddCart"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/bg_rec_orange_radius_5dp"
+                android:padding="4dp"
+                android:tint="@color/colorWhite"
+                app:layout_constraintBottom_toTopOf="@id/view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/imgBtnPlusQty"
+                app:layout_constraintTop_toBottomOf="@id/guidelineY1"
+                app:srcCompat="@drawable/ic_add_shopping_cart_black_24dp" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@color/colorThemeGreyDark"
+                app:layout_constraintBottom_toBottomOf="@+id/layoutMain"
+                app:layout_constraintEnd_toEndOf="@+id/layoutMain"
+                app:layout_constraintStart_toStartOf="@+id/layoutMain"
+                app:layout_constraintTop_toTopOf="@+id/layoutMain"
+                app:layout_constraintVertical_bias="0.7" />
+
+            <ScrollView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/layoutMain"
+                app:layout_constraintEnd_toEndOf="@+id/layoutMain"
+                app:layout_constraintStart_toStartOf="@+id/layoutMain"
+                app:layout_constraintTop_toBottomOf="@+id/view">
+                <TextView
+                    android:id="@+id/tvProductDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                     />
+            </ScrollView>
+
+
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
+
+</android.support.constraint.ConstraintLayout>

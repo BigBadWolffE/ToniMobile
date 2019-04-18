@@ -105,11 +105,11 @@ public class Dashboard extends Fragment {
             @Override
             public void onClick(View v) {
                 FilterProductDashboardPopup.showFilterCategory(getActivity());
+
             }
         });
 
 //        CloseSoftKeyboard.hideSoftKeyboard(view, getActivity());
-
 
         return view;
     }

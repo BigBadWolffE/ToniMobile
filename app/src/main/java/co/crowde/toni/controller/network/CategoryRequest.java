@@ -5,6 +5,7 @@ import android.content.res.ColorStateList;
 import android.support.design.chip.Chip;
 import android.support.design.chip.ChipGroup;
 import android.util.Log;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
@@ -28,12 +29,15 @@ import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CategoryModel;
 import co.crowde.toni.model.ProductModel;
 import co.crowde.toni.view.fragment.Dashboard;
+import co.crowde.toni.view.popup.FilterInventoryPopup;
 import co.crowde.toni.view.popup.FilterProductDashboardPopup;
 
 public class CategoryRequest {
 
     public static String message;
     public static ArrayList<Boolean> booleanArrayList = new ArrayList<>();
+    public static ArrayList<String> categoryList = new ArrayList<>();
+    public static ArrayList<CategoryModel> categoryModels = new ArrayList<>();
 
     public static void getCategoryList(final Activity activity){
         OkHttpClient client = new OkHttpClient();
@@ -74,30 +78,7 @@ public class CategoryRequest {
                             Log.e("DATA RESPONSE", data);
 
                             if(status){
-//                                JSONObject objDataLogin = new JSONObject(data);
-//                                String shopId = objDataLogin.getString("shopId");
-//                                String productId = objDataLogin.getString("productId");
-//                                String categoryId = objDataLogin.getString("categoryId");
-//                                String productName = objDataLogin.getString("productName");
-//                                String description = objDataLogin.getString("description");
-//                                String picture = objDataLogin.getString("picture");
-//                                String statusProduct = objDataLogin.getString("status");
-//                                int purchasePrice = objDataLogin.getInt("purchasePrice");
-//                                int sellingPrice = objDataLogin.getInt("sellingPrice");
-//                                String unit = objDataLogin.getString("unit");
-//                                String supplierId = objDataLogin.getString("supplierId");
-//                                String createdAt = objDataLogin.getString("createdAt");
-//                                String lastUpdated = objDataLogin.getString("lastUpdated");
-//                                String createdBy = objDataLogin.getString("createdBy");
-//                                String province = objDataLogin.getString("province");
-//                                String regency = objDataLogin.getString("regency");
-//                                String district = objDataLogin.getString("district");
-//                                String village = objDataLogin.getString("village");
-//                                int stock = objDataLogin.getInt("stock");
-//                                String supplierName = objDataLogin.getString("supplierName");
-//                                String categoryName = objDataLogin.getString("categoryName");
-
-                                final List<CategoryModel> categoryModels = new Gson()
+                                categoryModels = new Gson()
                                         .fromJson(data,
                                                 new TypeToken<List<CategoryModel>>() {
                                                 }.getType());
@@ -112,6 +93,7 @@ public class CategoryRequest {
                                     chip.setCheckable(true);
                                     booleanArrayList.add(false);
 
+                                    final int finalI = i;
                                     chip.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                                         @Override
                                         public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -120,6 +102,7 @@ public class CategoryRequest {
                                             booleanArrayList.set(tag, b);
 
                                             if(b){
+                                                categoryList.add(categoryModels.get(finalI).getCategoryName());
                                                 chip.setChipBackgroundColor(ColorStateList
                                                         .valueOf(activity.getResources()
                                                                 .getColor(R.color.colorThemeGreen)));
@@ -127,6 +110,7 @@ public class CategoryRequest {
                                                         .valueOf(activity.getResources()
                                                                 .getColor(R.color.colorWhite)));
                                             } else {
+                                                categoryList.remove(categoryModels.get(finalI).getCategoryName());
                                                 chip.setChipBackgroundColor(ColorStateList
                                                         .valueOf(activity.getResources()
                                                                 .getColor(R.color.colorThemeGreyLight)));
@@ -134,12 +118,126 @@ public class CategoryRequest {
                                                         .valueOf(activity.getResources()
                                                                 .getColor(R.color.colorBlack)));
                                             }
-                                            Toast.makeText(activity,
-                                                    String.valueOf(booleanArrayList),
-                                                    Toast.LENGTH_SHORT).show();
                                         }
                                     });
                                     FilterProductDashboardPopup.chipCategory.addView(chip);
+
+                                    FilterProductDashboardPopup.tvHeaderFilter.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            Toast.makeText(activity, new Gson().toJson(categoryList), Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    });
+                                }
+
+                            } else {
+                                if(message.equals("Token tidak valid")){
+                                    UserController.tokenExpired(activity, message);
+                                }
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+
+            }
+        });
+    }
+
+    public static void getCategoryInventory(final Activity activity){
+        OkHttpClient client = new OkHttpClient();
+
+        Request requestHttp = new Request.Builder()
+                .header("Authorization", SavePref.readToken(activity))
+                .url(API.Category+API.Count)
+                .build();
+
+        Log.e("URL",API.Category+API.Count);
+
+        client.newCall(requestHttp).enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, final IOException e) {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(
+                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+                        Log.e("Error",e.toString());
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                final String responseData = response.body().string();
+                Log.e("RESPONSE BODY", responseData);
+
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            JSONObject json = new JSONObject(responseData);
+                            boolean status = json.getBoolean("status");
+                            message = json.getString("message");
+                            String data = json.getString("data");
+                            Log.e("DATA RESPONSE", data);
+
+                            if(status){
+                                categoryModels = new Gson()
+                                        .fromJson(data,
+                                                new TypeToken<List<CategoryModel>>() {
+                                                }.getType());
+                                Log.e("ProductModels", new Gson().toJson(categoryModels));
+
+                                for (int i=0;i<categoryModels.size();i++){
+                                    final Chip chip = new Chip(activity);
+                                    chip.setId(i);
+                                    chip.setTag(i);
+
+                                    chip.setText(categoryModels.get(i).getCategoryName());
+                                    chip.setCheckable(true);
+                                    booleanArrayList.add(false);
+
+                                    final int finalI = i;
+                                    chip.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                        @Override
+                                        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+                                            int tag = (int) compoundButton.getTag();
+                                            booleanArrayList.set(tag, b);
+
+                                            if(b){
+                                                categoryList.add(categoryModels.get(finalI).getCategoryName());
+                                                chip.setChipBackgroundColor(ColorStateList
+                                                        .valueOf(activity.getResources()
+                                                                .getColor(R.color.colorThemeGreen)));
+                                                chip.setTextColor(ColorStateList
+                                                        .valueOf(activity.getResources()
+                                                                .getColor(R.color.colorWhite)));
+                                            } else {
+                                                categoryList.remove(categoryModels.get(finalI).getCategoryName());
+                                                chip.setChipBackgroundColor(ColorStateList
+                                                        .valueOf(activity.getResources()
+                                                                .getColor(R.color.colorThemeGreyLight)));
+                                                chip.setTextColor(ColorStateList
+                                                        .valueOf(activity.getResources()
+                                                                .getColor(R.color.colorBlack)));
+                                            }
+                                        }
+                                    });
+                                    FilterInventoryPopup.chipCategory.addView(chip);
+
+                                    FilterInventoryPopup.tvHeaderFilter.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            Toast.makeText(activity, new Gson().toJson(categoryList), Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    });
                                 }
 
                             } else {

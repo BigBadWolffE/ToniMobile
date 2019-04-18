@@ -4,26 +4,131 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="8dp"
+    android:paddingRight="16dp"
+    android:paddingLeft="16dp"
+    android:paddingEnd="16dp"
+    android:paddingStart="16dp"
+    android:paddingBottom="4dp"
+    android:clickable="true"
+    android:focusable="true"
     android:background="@color/colorWhite"
     tools:context=".view.fragment.Inventory">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/tvInventory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+
+    <EditText
+        android:id="@+id/etSearchProduct"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/produk"
-        android:textColor="@color/TextColorDefault"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:maxLength="20"
+        android:background="@color/colorWhite"
+        android:hint="@string/cari_barang"
+        android:inputType="textPersonName"
+        android:paddingStart="16dp"
+        android:paddingLeft="16dp"
+        android:paddingEnd="4dp"
+        android:paddingRight="4dp"
+        android:drawablePadding="4dp"
+        android:imeOptions="actionDone"
+        app:layout_constraintBottom_toTopOf="@id/view2"
+        app:layout_constraintEnd_toStartOf="@+id/view1"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <View
+        android:id="@+id/view1"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="@color/colorThemeGreyLight"
+        app:layout_constraintBottom_toBottomOf="@+id/etSearchProduct"
+        app:layout_constraintEnd_toStartOf="@+id/imgBtnFilter"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/etSearchProduct"
+        app:layout_constraintTop_toTopOf="@+id/etSearchProduct" />
+
+    <ImageView
+        android:id="@+id/imgBtnFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/etSearchProduct"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/view1"
+        app:layout_constraintTop_toTopOf="@+id/etSearchProduct"
+        app:srcCompat="@drawable/ic_filter_list_black_24dp" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorThemeGreyLight"
+        app:layout_constraintBottom_toTopOf="@+id/layoutTabHeader"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etSearchProduct" />
+
+    <LinearLayout
+        android:id="@+id/layoutTabHeader"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@color/colorThemeGreen"
+        android:weightSum="3"
+        android:padding="4dp"
+        app:layout_constraintBottom_toTopOf="@id/rcProduct"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2"
+        app:layout_constraintVertical_chainStyle="spread">
+        <TextView
+            android:id="@+id/labelTabProductName"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:text="@string/nama_barang"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/colorWhite"/>
+
+        <TextView
+            android:id="@+id/labelTabProductStock"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:text="@string/stok"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/colorWhite"/>
+        <TextView
+            android:id="@+id/labelTabProductStatus"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/status_stok"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/colorWhite"/>
+
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rcProduct"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutTabHeader" />
 </android.support.constraint.ConstraintLayout>

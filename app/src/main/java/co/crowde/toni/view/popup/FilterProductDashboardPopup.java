@@ -2,6 +2,7 @@ package co.crowde.toni.view.popup;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.support.design.chip.Chip;
 import android.support.design.chip.ChipGroup;
 import android.support.v7.widget.CardView;
@@ -14,9 +15,6 @@ import android.widget.Toast;
 
 import co.crowde.toni.R;
 import co.crowde.toni.controller.network.CategoryRequest;
-import co.crowde.toni.helper.CallCenter;
-import co.crowde.toni.view.login.Login;
-import co.crowde.toni.view.main.TypefaceTheme;
 
 public class FilterProductDashboardPopup {
 
@@ -48,20 +46,13 @@ public class FilterProductDashboardPopup {
         });
 
         CategoryRequest.getCategoryList(activity);
-//        chipCategory.invalidate();
-//        chipCategory.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(ChipGroup chipGroup, int i) {
-//
-//                Chip chip = chipGroup.findViewById(i);
-//
-//                if (chip != null){
-//                    Log.e("ChipGroup", chip.getText().toString());
-//                    Toast.makeText(activity, "Chip is " + chip.getText().toString(), Toast.LENGTH_SHORT).show();
-//                }
-//
-//            }
-//        });
 
-    }
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+
+            }
+        });
+
+        }
 }
