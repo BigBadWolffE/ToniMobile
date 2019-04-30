@@ -1,15 +1,15 @@
 package co.crowde.toni.view.popup;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.chip.ChipGroup;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import co.crowde.toni.R;
@@ -22,15 +22,17 @@ public class ProductDetailDashboardPopup {
     public static TextView tvProductName, tvProductUnit, labelProductCategory, tvProductCategory,
             labelProductPrice, tvProductPrice, tvProductQty, tvProductDesc;
     public static ImageView imgProductDetail, imgBtnMinQty, imgBtnPlusQty, imgBtnAddCart;
+    public static ConstraintLayout constraintLayout;
 
-    public static void showProductDetail(final Activity activity, ProductModel model) {
+    @SuppressLint("SetTextI18n")
+    public static void showProductDetail(Activity activity, ProductModel model) {
         final LayoutInflater inflater = LayoutInflater.from(activity);
         final View dialogView = inflater.inflate(
                 R.layout.layout_popup_product_dashboard_detail, null);
 
         final Dialog dialog = new Dialog(activity, android.R.style.Theme_Black_NoTitleBar);
         dialog.setContentView(dialogView);
-        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimateSlide;
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimateFade;
 
         //Get View Id
         tvProductName = dialogView.findViewById(R.id.tvProductName);
@@ -45,6 +47,7 @@ public class ProductDetailDashboardPopup {
         imgBtnMinQty = dialogView.findViewById(R.id.imgBtnMinQty);
         imgBtnPlusQty = dialogView.findViewById(R.id.imgBtnPlusQty);
         imgBtnAddCart = dialogView.findViewById(R.id.imgBtnAddCart);
+        constraintLayout = dialogView.findViewById(R.id.constraintLayout);
 
         //Fetch data
         tvProductName.setText(model.getProductName());
@@ -59,9 +62,16 @@ public class ProductDetailDashboardPopup {
         Picasso.with(activity).load(API.Host+model.getPicture())
                 .into(imgProductDetail);
 
+        constraintLayout.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                dialog.dismiss();
+            }
+        });
+
         dialog.show();
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.getWindow().setBackgroundDrawableResource(R.color.overlayBackground);
 
     }
 }

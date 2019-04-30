@@ -20,6 +20,7 @@ import co.crowde.toni.model.ShopModel;
 import co.crowde.toni.view.login.Login;
 import co.crowde.toni.view.login.LoginSuccess;
 import co.crowde.toni.view.login.OpenShop;
+import co.crowde.toni.view.main.SplashScreen;
 
 public class UserController {
 

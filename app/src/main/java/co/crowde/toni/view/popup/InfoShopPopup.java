@@ -66,17 +66,22 @@ public class InfoShopPopup {
                 switch (position){
                     case 0:
                         infouser(activity);
-
                         break;
 
                     case 1:
                         pairingBluetooth(activity);
-
                         break;
 
                     case 2:
-                        closeShop(activity);
+                        offlineMode(activity);
+                        break;
 
+                    case 3:
+                        sync(activity);
+                        break;
+
+                    case 4:
+                        closeShop(activity);
                         break;
                 }
             }
@@ -109,17 +114,22 @@ public class InfoShopPopup {
                 switch (item.getItemId()){
                     case R.id.menuInfoToko:
                         infouser(activity);
-
                         break;
 
                     case R.id.menuBluetooth:
                         pairingBluetooth(activity);
+                        break;
 
+                    case R.id.menuOffMode:
+                        offlineMode(activity);
+                        break;
+
+                    case R.id.menuSync:
+                        sync(activity);
                         break;
 
                     case R.id.menuLogout:
                         closeShop(activity);
-
                         break;
                 }
                 return true;
@@ -129,11 +139,20 @@ public class InfoShopPopup {
     }
 
     public static void infouser(Activity activity) {
-        Toast.makeText(activity, "Informasi Pengguna", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(activity, "Informasi Pengguna", Toast.LENGTH_SHORT).show();
+        ShopDetailPopup.showDetailShop(activity);
     }
 
     public static void pairingBluetooth(Activity activity) {
         Toast.makeText(activity, "Koneksi Bluetooth", Toast.LENGTH_SHORT).show();
+    }
+
+    public static void offlineMode(Activity activity) {
+        Toast.makeText(activity, "Mode Offline", Toast.LENGTH_SHORT).show();
+    }
+
+    public static void sync(Activity activity) {
+        Toast.makeText(activity, "Sinkronisasi", Toast.LENGTH_SHORT).show();
     }
 
     public static void closeShop(final Activity activity) {

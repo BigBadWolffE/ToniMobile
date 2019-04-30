@@ -17,14 +17,15 @@
     <color name="colorBtnDeActived">#FFCC8E</color>
 
     <color name="TextColorDefault">#52575C</color>
+    <color name="TextColorBlack">#25282B</color>
+    <color name="TextColorLight">#A0A4A8</color>
     <color name="EdittextLogin">#FAFAFA</color>
 
-
-
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorWhiteLight">#32FFFFFF</color>
     <color name="colorBlack">#000000</color>
 
-    <color name="overlayBackground">#7F333639</color>
+    <color name="overlayBackground">#32000000</color>
     <color name="overlayActionBar">#0E0D0E</color>
 
     <color name="status_tersedia">#B8E986</color>

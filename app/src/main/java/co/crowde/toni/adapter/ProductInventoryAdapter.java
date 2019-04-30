@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -19,6 +21,7 @@ import java.util.List;
 
 import co.crowde.toni.R;
 import co.crowde.toni.model.ProductModel;
+import co.crowde.toni.view.popup.InventoryDetailedPopup;
 
 public class ProductInventoryAdapter
         extends RecyclerView.Adapter<ProductInventoryAdapter.ViewHolder>
@@ -28,6 +31,8 @@ public class ProductInventoryAdapter
     private Activity activity ;
     private List<ProductModel> productModels;
     private List<ProductModel> productModelsFiltered;
+
+    private int lastPosition = -1;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -72,37 +77,39 @@ public class ProductInventoryAdapter
         final ProductModel model = productModelsFiltered.get(position);
         ProductInventoryAdapter.ViewHolder viewHolder = (ProductInventoryAdapter.ViewHolder) holder;
 
-        viewHolder.tvTabProductName.setText(model.getProductName());
-        viewHolder.tvTabProductUnit.setText(model.getUnit());
-        viewHolder.tvTabProductStock.setText(String.valueOf(model.getStock()));
-        viewHolder.tvTabProductStatus.setText(model.getStatus());
+        holder.tvTabProductName.setText(model.getProductName());
+        holder.tvTabProductUnit.setText(model.getUnit());
+        holder.tvTabProductStock.setText(String.valueOf(model.getStock()));
+        holder.tvTabProductStatus.setText(model.getStatus());
 
         switch (model.getStatus()) {
             case "Habis":
-                viewHolder.tvTabProductStatus.setTextColor(
+                holder.tvTabProductStatus.setTextColor(
                         activity.getResources().getColor(R.color.status_kosong));
                 break;
             case "Mulai habis":
-                viewHolder.tvTabProductStatus.setTextColor(
+                holder.tvTabProductStatus.setTextColor(
                         activity.getResources().getColor(R.color.status_persediaan_isi));
                 break;
             case "Tersedia":
-                viewHolder.tvTabProductStatus.setTextColor(
+                holder.tvTabProductStatus.setTextColor(
                         activity.getResources().getColor(R.color.status_tersedia));
                 break;
             default:
-                viewHolder.tvTabProductStatus.setTextColor(
+                holder.tvTabProductStatus.setTextColor(
                         activity.getResources().getColor(R.color.status_kosong));
                 break;
         }
 
-        viewHolder.layoutProductInventory.setOnClickListener(new View.OnClickListener() {
+        holder.layoutProductInventory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(activity, model.getProductName(), Toast.LENGTH_SHORT).show();
-//                ProductDetailDashboardPopup.showProductDetail(activity, model);
+//                Toast.makeText(activity, model.getProductName(), Toast.LENGTH_SHORT).show();
+                InventoryDetailedPopup.showPopup(activity, model);
             }
         });
+
+        setAnimation(holder.itemView, position);
 
     }
 
@@ -142,6 +149,17 @@ public class ProductInventoryAdapter
                 notifyDataSetChanged();
             }
         };
+    }
+
+    private void setAnimation(View viewToAnimate, int position)
+    {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition)
+        {
+            Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
+        }
     }
 
 }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import co.crowde.toni.R;
 import co.crowde.toni.controller.main.UserController;
+import co.crowde.toni.controller.network.ShopRequest;
 import co.crowde.toni.view.login.Login;
 
 public class SplashScreen extends AppCompatActivity {
@@ -22,6 +23,6 @@ public class SplashScreen extends AppCompatActivity {
                 UserController.getDataLogin(SplashScreen.this);
 
             }
-        }, 2000);
+        }, 3000);
     }
 }

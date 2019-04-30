@@ -9,6 +9,14 @@
         android:title="@string/printer_bluetooth"/>
 
     <item
+        android:id="@+id/menuOffMode"
+        android:title="@string/mode_offline"/>
+
+    <item
+        android:id="@+id/menuSync"
+        android:title="@string/sinkronisasi"/>
+
+    <item
         android:id="@+id/menuLogout"
         android:title="@string/tutup_toko_low"/>
 </menu>

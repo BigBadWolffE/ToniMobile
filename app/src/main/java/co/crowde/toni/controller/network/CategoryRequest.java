@@ -24,7 +24,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.crowde.toni.R;
+import co.crowde.toni.controller.main.ProductController;
 import co.crowde.toni.controller.main.UserController;
+import co.crowde.toni.helper.ChipsCategory;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CategoryModel;
 import co.crowde.toni.model.ProductModel;
@@ -37,6 +39,7 @@ public class CategoryRequest {
     public static String message;
     public static ArrayList<Boolean> booleanArrayList = new ArrayList<>();
     public static ArrayList<String> categoryList = new ArrayList<>();
+    public static ArrayList<String> categoryInventory = new ArrayList<>();
     public static ArrayList<CategoryModel> categoryModels = new ArrayList<>();
 
     public static void getCategoryList(final Activity activity){
@@ -78,58 +81,90 @@ public class CategoryRequest {
                             Log.e("DATA RESPONSE", data);
 
                             if(status){
+
+
                                 categoryModels = new Gson()
                                         .fromJson(data,
                                                 new TypeToken<List<CategoryModel>>() {
                                                 }.getType());
-                                Log.e("ProductModels", new Gson().toJson(categoryModels));
-
-                                for (int i=0;i<categoryModels.size();i++){
-                                    final Chip chip = new Chip(activity);
-                                    chip.setId(i);
-                                    chip.setTag(i);
-
-                                    chip.setText(categoryModels.get(i).getCategoryName());
-                                    chip.setCheckable(true);
-                                    booleanArrayList.add(false);
-
-                                    final int finalI = i;
-                                    chip.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                                        @Override
-                                        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
-                                            int tag = (int) compoundButton.getTag();
-                                            booleanArrayList.set(tag, b);
-
-                                            if(b){
-                                                categoryList.add(categoryModels.get(finalI).getCategoryName());
-                                                chip.setChipBackgroundColor(ColorStateList
-                                                        .valueOf(activity.getResources()
-                                                                .getColor(R.color.colorThemeGreen)));
-                                                chip.setTextColor(ColorStateList
-                                                        .valueOf(activity.getResources()
-                                                                .getColor(R.color.colorWhite)));
-                                            } else {
-                                                categoryList.remove(categoryModels.get(finalI).getCategoryName());
-                                                chip.setChipBackgroundColor(ColorStateList
-                                                        .valueOf(activity.getResources()
-                                                                .getColor(R.color.colorThemeGreyLight)));
-                                                chip.setTextColor(ColorStateList
-                                                        .valueOf(activity.getResources()
-                                                                .getColor(R.color.colorBlack)));
-                                            }
-                                        }
-                                    });
-                                    FilterProductDashboardPopup.chipCategory.addView(chip);
-
-                                    FilterProductDashboardPopup.tvHeaderFilter.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            Toast.makeText(activity, new Gson().toJson(categoryList), Toast.LENGTH_SHORT).show();
-
-                                        }
-                                    });
+                                for(int i=0; i<categoryModels.size();i++){
+                                    FilterProductDashboardPopup.categories.add(new ChipsCategory(
+                                            categoryModels.get(i).getCategoryName()));
                                 }
+
+                                FilterProductDashboardPopup.chipsInput
+                                        .setFilterableList(FilterProductDashboardPopup.categories);
+
+//                                Log.e("ProductModels", new Gson().toJson(categoryModels));
+//
+//                                Log.e("CategoryList", String.valueOf(categoryList.size()));
+
+//                                for (int i=0;i<categoryModels.size();i++){
+//                                    final Chip chip = new Chip(activity);
+//                                    chip.setId(i);
+//                                    chip.setTag(i);
+//
+//                                    chip.setText(categoryModels.get(i).getCategoryName());
+//                                    chip.setCheckable(true);
+//                                    booleanArrayList.add(false);
+//
+//                                    for(int j=0; j<categoryList.size();j++){
+//                                        if(chip.getText().equals(categoryList.get(j))){
+//                                            chip.setChecked(true);
+//                                            chip.setChipBackgroundColor(ColorStateList
+//                                                    .valueOf(activity.getResources()
+//                                                            .getColor(R.color.colorThemeGreen)));
+//                                            chip.setTextColor(ColorStateList
+//                                                    .valueOf(activity.getResources()
+//                                                            .getColor(R.color.colorWhite)));
+//                                        }
+//
+//                                    }
+//
+//                                    final int finalI = i;
+//                                    chip.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//                                        @Override
+//                                        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//
+//                                            int tag = (int) compoundButton.getTag();
+//                                            booleanArrayList.set(tag, b);
+//
+//                                            if(b){
+//                                                categoryList.add(
+//                                                        categoryModels.get(finalI).getCategoryName());
+//                                                ProductController.categoryList.add(
+//                                                        categoryModels.get(finalI).getCategoryName());
+//                                                chip.setChipBackgroundColor(ColorStateList
+//                                                        .valueOf(activity.getResources()
+//                                                                .getColor(R.color.colorThemeGreen)));
+//                                                chip.setTextColor(ColorStateList
+//                                                        .valueOf(activity.getResources()
+//                                                                .getColor(R.color.colorWhite)));
+//                                            } else {
+//                                                categoryList.remove(
+//                                                        categoryModels.get(finalI).getCategoryName());
+//                                                ProductController.categoryList.remove(
+//                                                        categoryModels.get(finalI).getCategoryName());
+//                                                chip.setChipBackgroundColor(ColorStateList
+//                                                        .valueOf(activity.getResources()
+//                                                                .getColor(R.color.colorThemeGreyLight)));
+//                                                chip.setTextColor(ColorStateList
+//                                                        .valueOf(activity.getResources()
+//                                                                .getColor(R.color.colorBlack)));
+//                                            }
+//                                        }
+//                                    });
+////                                    FilterProductDashboardPopup.chipCategory.addView(chip);
+//
+//                                    FilterProductDashboardPopup.tvHeaderFilter.setOnClickListener(new View.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(View v) {
+//                                            Toast.makeText(activity,
+//                                                    new Gson().toJson(categoryList),
+//                                                    Toast.LENGTH_SHORT).show();
+//                                        }
+//                                    });
+//                                }
 
                             } else {
                                 if(message.equals("Token tidak valid")){
@@ -202,6 +237,19 @@ public class CategoryRequest {
                                     chip.setCheckable(true);
                                     booleanArrayList.add(false);
 
+                                    for(int j=0; j<categoryInventory.size();j++){
+                                        if(chip.getText().equals(categoryInventory.get(j))){
+                                            chip.setChecked(true);
+                                            chip.setChipBackgroundColor(ColorStateList
+                                                    .valueOf(activity.getResources()
+                                                            .getColor(R.color.colorThemeGreen)));
+                                            chip.setTextColor(ColorStateList
+                                                    .valueOf(activity.getResources()
+                                                            .getColor(R.color.colorWhite)));
+                                        }
+
+                                    }
+
                                     final int finalI = i;
                                     chip.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                                         @Override
@@ -211,7 +259,10 @@ public class CategoryRequest {
                                             booleanArrayList.set(tag, b);
 
                                             if(b){
-                                                categoryList.add(categoryModels.get(finalI).getCategoryName());
+                                                categoryInventory.add(
+                                                        categoryModels.get(finalI).getCategoryName());
+                                                ProductController.categoryInventory.add(
+                                                        categoryModels.get(finalI).getCategoryName());
                                                 chip.setChipBackgroundColor(ColorStateList
                                                         .valueOf(activity.getResources()
                                                                 .getColor(R.color.colorThemeGreen)));
@@ -219,7 +270,10 @@ public class CategoryRequest {
                                                         .valueOf(activity.getResources()
                                                                 .getColor(R.color.colorWhite)));
                                             } else {
-                                                categoryList.remove(categoryModels.get(finalI).getCategoryName());
+                                                categoryInventory.remove(
+                                                        categoryModels.get(finalI).getCategoryName());
+                                                ProductController.categoryInventory.remove(
+                                                        categoryModels.get(finalI).getCategoryName());
                                                 chip.setChipBackgroundColor(ColorStateList
                                                         .valueOf(activity.getResources()
                                                                 .getColor(R.color.colorThemeGreyLight)));
@@ -234,7 +288,9 @@ public class CategoryRequest {
                                     FilterInventoryPopup.tvHeaderFilter.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-                                            Toast.makeText(activity, new Gson().toJson(categoryList), Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(activity,
+                                                    new Gson().toJson(categoryInventory),
+                                                    Toast.LENGTH_SHORT).show();
 
                                         }
                                     });

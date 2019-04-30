@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.support.design.chip.Chip;
 import android.support.design.chip.ChipGroup;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -18,6 +19,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 
 import co.crowde.toni.R;
+import co.crowde.toni.controller.main.ProductController;
 import co.crowde.toni.controller.network.CategoryRequest;
 
 public class FilterInventoryPopup {
@@ -27,7 +29,7 @@ public class FilterInventoryPopup {
     public static ChipGroup chipCategory, chipStatus;
     public static ArrayList<Boolean> booleanArrayList = new ArrayList<>();
     public static ArrayList<String> statusList = new ArrayList<>();
-    public static String[] status = {"Semua","Tersedia", "Mulai habis", "Habis"};
+    public static String[] status = {"Tersedia", "Mulai habis", "Habis"};
 
     public static void showFilterInventory(final Activity activity) {
         final LayoutInflater inflater = LayoutInflater.from(activity);
@@ -59,10 +61,25 @@ public class FilterInventoryPopup {
         dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
+                ProductController.filterInventory(activity);
+            }
+        });
+
+        filterStatusInventory(activity);
+
+        tvStatusLabel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(activity, new Gson().toJson(statusList), Toast.LENGTH_SHORT).show();
 
             }
         });
 
+
+
+        }
+
+    private static void filterStatusInventory(final Activity activity) {
         for (int i=0;i<status.length;i++){
             final Chip chip = new Chip(activity);
             chip.setId(i);
@@ -71,6 +88,19 @@ public class FilterInventoryPopup {
             chip.setText(status[i]);
             chip.setCheckable(true);
             booleanArrayList.add(false);
+
+            for(int j=0; j<statusList.size();j++){
+                if(chip.getText().equals(statusList.get(j))){
+                    chip.setChecked(true);
+                    chip.setChipBackgroundColor(ColorStateList
+                            .valueOf(activity.getResources()
+                                    .getColor(R.color.colorThemeGreen)));
+                    chip.setTextColor(ColorStateList
+                            .valueOf(activity.getResources()
+                                    .getColor(R.color.colorWhite)));
+                }
+
+            }
 
             chip.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -81,6 +111,7 @@ public class FilterInventoryPopup {
 
                     if(b){
                         statusList.add(chip.getText().toString());
+                        ProductController.statusInventory.add(chip.getText().toString());
                         chip.setChipBackgroundColor(ColorStateList
                                 .valueOf(activity.getResources()
                                         .getColor(R.color.colorThemeGreen)));
@@ -89,6 +120,7 @@ public class FilterInventoryPopup {
                                         .getColor(R.color.colorWhite)));
                     } else {
                         statusList.remove(chip.getText().toString());
+                        ProductController.statusInventory.remove(chip.getText().toString());
                         chip.setChipBackgroundColor(ColorStateList
                                 .valueOf(activity.getResources()
                                         .getColor(R.color.colorThemeGreyLight)));
@@ -96,21 +128,11 @@ public class FilterInventoryPopup {
                                 .valueOf(activity.getResources()
                                         .getColor(R.color.colorBlack)));
                     }
+
+                    Log.e("StatusStock",new Gson().toJson(ProductController.statusInventory));
                 }
             });
-
             chipStatus.addView(chip);
-
-            tvStatusLabel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(activity, new Gson().toJson(statusList), Toast.LENGTH_SHORT).show();
-
-                }
-            });
         }
-
-
-
-        }
+    }
 }

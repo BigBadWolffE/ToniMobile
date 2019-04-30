@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import co.crowde.toni.adapter.ProductDashboardAdapter;
@@ -68,38 +69,17 @@ public class ProductRequest {
                             Log.e("DATA RESPONSE", data);
 
                             if(status){
-//                                JSONObject objDataLogin = new JSONObject(data);
-//                                String shopId = objDataLogin.getString("shopId");
-//                                String productId = objDataLogin.getString("productId");
-//                                String categoryId = objDataLogin.getString("categoryId");
-//                                String productName = objDataLogin.getString("productName");
-//                                String description = objDataLogin.getString("description");
-//                                String picture = objDataLogin.getString("picture");
-//                                String statusProduct = objDataLogin.getString("status");
-//                                int purchasePrice = objDataLogin.getInt("purchasePrice");
-//                                int sellingPrice = objDataLogin.getInt("sellingPrice");
-//                                String unit = objDataLogin.getString("unit");
-//                                String supplierId = objDataLogin.getString("supplierId");
-//                                String createdAt = objDataLogin.getString("createdAt");
-//                                String lastUpdated = objDataLogin.getString("lastUpdated");
-//                                String createdBy = objDataLogin.getString("createdBy");
-//                                String province = objDataLogin.getString("province");
-//                                String regency = objDataLogin.getString("regency");
-//                                String district = objDataLogin.getString("district");
-//                                String village = objDataLogin.getString("village");
-//                                int stock = objDataLogin.getInt("stock");
-//                                String supplierName = objDataLogin.getString("supplierName");
-//                                String categoryName = objDataLogin.getString("categoryName");
-
                                 List<ProductModel> productModels = new Gson()
                                         .fromJson(data,
                                         new TypeToken<List<ProductModel>>() {
                                         }.getType());
                                 Log.e("ProductModels", new Gson().toJson(productModels));
 
+//                                Dashboard.productModels = new ArrayList<>();
                                 Dashboard.productModels.clear();
                                 Dashboard.productModels.addAll(productModels);
                                 Dashboard.productDashboardAdapter.notifyDataSetChanged();
+//                                Dashboard.productModels = new ArrayList<>();
 
                             } else {
                                 if(message.equals("Token tidak valid")){
@@ -157,29 +137,6 @@ public class ProductRequest {
                             Log.e("DATA RESPONSE", data);
 
                             if(status){
-//                                JSONObject objDataLogin = new JSONObject(data);
-//                                String shopId = objDataLogin.getString("shopId");
-//                                String productId = objDataLogin.getString("productId");
-//                                String categoryId = objDataLogin.getString("categoryId");
-//                                String productName = objDataLogin.getString("productName");
-//                                String description = objDataLogin.getString("description");
-//                                String picture = objDataLogin.getString("picture");
-//                                String statusProduct = objDataLogin.getString("status");
-//                                int purchasePrice = objDataLogin.getInt("purchasePrice");
-//                                int sellingPrice = objDataLogin.getInt("sellingPrice");
-//                                String unit = objDataLogin.getString("unit");
-//                                String supplierId = objDataLogin.getString("supplierId");
-//                                String createdAt = objDataLogin.getString("createdAt");
-//                                String lastUpdated = objDataLogin.getString("lastUpdated");
-//                                String createdBy = objDataLogin.getString("createdBy");
-//                                String province = objDataLogin.getString("province");
-//                                String regency = objDataLogin.getString("regency");
-//                                String district = objDataLogin.getString("district");
-//                                String village = objDataLogin.getString("village");
-//                                int stock = objDataLogin.getInt("stock");
-//                                String supplierName = objDataLogin.getString("supplierName");
-//                                String categoryName = objDataLogin.getString("categoryName");
-
                                 List<ProductModel> productModels = new Gson()
                                         .fromJson(data,
                                                 new TypeToken<List<ProductModel>>() {

@@ -9,6 +9,10 @@
     <string name="laporan">LAPORAN</string>
     <string name="transaksi">TRANSAKSI</string>
 
+    <!-- Nav Drawer-->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
     <!-- Login Layout -->
     <string name="toko_tutup"><h2>TOKO TUTUP</h2></string>
     <string name="toko_tutup_low">Toko Tutup</string>
@@ -245,5 +249,18 @@
     <string name="kasir">Kasir</string>
     <string name="informasi_pengguna">Informasi Pengguna</string>
     <string name="printer_bluetooth">Printer Bluetooth</string>
+    <string name="mode_offline">Mode Offline</string>
+    <string name="sinkronisasi">Sinkronisasi</string>
+    <string name="nama_pengguna">Nama Pengguna</string>
+    <string name="nomor_ponsel">Nomor Ponsel</string>
+    <string name="jenis_bisnis">Jenis Bisnis</string>
+    <string name="tambah_cap">TAMBAH</string>
+    <string name="kategori_cap">KATEGORI</string>
+    <string name="penambahan_stok">Penambahan Stok</string>
+    <string name="perbaharui_harga_rupiah">Perbaharui Harga (Rupiah)</string>
+    <string name="harga_jual">Harga Jual</string>
+    <string name="harga_beli">Harga Beli</string>
+    <string name="tentang_aplikasi">Tentang Aplikasi</string>
+    <string name="hubungkan_printer">Hubungkan Printer</string>
     <!--<string name="ket_lupa_nama"> untuk mengetahui username Toko Anda</string>-->
 </resources>

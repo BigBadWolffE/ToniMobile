@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        app:cardBackgroundColor="@color/EdittextLogin"
+        app:cardCornerRadius="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgShop"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:civ_border_color="@color/colorWhite"
+                app:civ_border_width="1dp"
+                app:layout_constraintBottom_toTopOf="@+id/tvShopeName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvShopeName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:shadowColor="@color/colorThemeGreen"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="2"
+                android:textColor="@color/TextColorDefault"
+                android:textStyle="bold"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toTopOf="@+id/lineX50"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgShop" />
+
+            <TextView
+                android:id="@+id/labelUsername"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/nama_pengguna"
+                android:textColor="@color/TextColorDefault"
+                app:layout_constraintBottom_toBottomOf="@+id/tvUsername"
+                app:layout_constraintEnd_toStartOf="@+id/lineY50"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvUsername"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/labelPhoneNumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/nomor_ponsel"
+                android:textColor="@color/TextColorDefault"
+                app:layout_constraintBottom_toBottomOf="@+id/tvPhoneNumber"
+                app:layout_constraintEnd_toEndOf="@+id/labelUsername"
+                app:layout_constraintStart_toStartOf="@+id/labelUsername"
+                app:layout_constraintTop_toTopOf="@+id/tvPhoneNumber" />
+
+            <TextView
+                android:id="@+id/labelAddress"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="@string/alamat_low"
+                android:gravity="top"
+                android:textColor="@color/TextColorDefault"
+                app:layout_constraintBottom_toBottomOf="@+id/tvAddress"
+                app:layout_constraintEnd_toEndOf="@+id/labelUsername"
+                app:layout_constraintStart_toStartOf="@+id/labelUsername"
+                app:layout_constraintTop_toTopOf="@+id/tvAddress" />
+
+            <TextView
+                android:id="@+id/labelBusinessType"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/jenis_bisnis"
+                android:textColor="@color/TextColorDefault"
+                app:layout_constraintBottom_toBottomOf="@+id/tvBusinessType"
+                app:layout_constraintEnd_toEndOf="@+id/labelUsername"
+                app:layout_constraintStart_toStartOf="@+id/labelUsername"
+                app:layout_constraintTop_toTopOf="@+id/tvBusinessType" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/lineX50"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/lineY50"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <TextView
+                android:id="@+id/tvUsername"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:ellipsize="end"
+                android:textColor="@color/TextColorBlack"
+                app:layout_constraintBottom_toTopOf="@+id/tvPhoneNumber"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/lineY50"
+                app:layout_constraintTop_toTopOf="@+id/lineX50"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/tvPhoneNumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/TextColorBlack"
+                app:layout_constraintBottom_toTopOf="@+id/tvAddress"
+                app:layout_constraintEnd_toEndOf="@+id/tvUsername"
+                app:layout_constraintStart_toStartOf="@+id/tvUsername"
+                app:layout_constraintTop_toBottomOf="@+id/tvUsername"
+                app:layout_constraintVertical_bias="0.737" />
+
+            <TextView
+                android:id="@+id/tvAddress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                app:autoSizeTextType="uniform"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:textColor="@color/TextColorBlack"
+                app:layout_constraintBottom_toTopOf="@+id/tvBusinessType"
+                app:layout_constraintEnd_toEndOf="@+id/tvUsername"
+                app:layout_constraintStart_toStartOf="@+id/tvUsername"
+                app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber" />
+
+            <TextView
+                android:id="@+id/tvBusinessType"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/TextColorBlack"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/tvUsername"
+                app:layout_constraintStart_toStartOf="@+id/tvUsername"
+                app:layout_constraintTop_toBottomOf="@+id/tvAddress" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+
+</android.support.constraint.ConstraintLayout>

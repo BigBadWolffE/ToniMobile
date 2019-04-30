@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:id="@+id/group1">
+        <item android:id="@+id/nav_info"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="@string/informasi_pengguna" />
+        <item android:id="@+id/nav_print"
+            android:icon="@drawable/ic_print_black_24dp"
+            android:title="@string/hubungkan_printer" />
+    </group>
+    <item android:title="@string/mode_offline">
+        <menu>
+            <item android:id="@+id/nav_offline"
+                android:icon="@drawable/ic_signal_cellular_connected_no_internet_0_bar_black_24dp"
+                android:title="Mode Offline : Off " />
+            <item android:id="@+id/nav_sync"
+                android:icon="@drawable/ic_sync_black_24dp"
+                android:title="@string/sinkronisasi" />
+        </menu>
+    </item>
+
+    <group android:id="@+id/group2">
+        <item android:id="@+id/nav_about"
+            android:title="@string/tentang_aplikasi" />
+        <item android:id="@+id/nav_logout"
+            android:title="@string/tutup_toko_low" />
+    </group>
+
+</menu>
