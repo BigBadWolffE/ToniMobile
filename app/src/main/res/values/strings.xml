@@ -40,7 +40,7 @@
     <string name="no_telp_pelanggan">NOMOR PELANGGAN</string>
     <string name="no_telp_pelanggan_low">Nomor Telepon</string>
     <string name="tambah_pelanggan">TAMBAH PELANGGAN</string>
-    <string name="cari_pelanggan">Cari nama pelanggan</string>
+    <string name="cari_pelanggan">Cari pelanggan</string>
 
     <!-- Transaksi Menu POS DASHBOARD-->
     <string name="cari_barang">Cari barang</string>
@@ -262,5 +262,13 @@
     <string name="harga_beli">Harga Beli</string>
     <string name="tentang_aplikasi">Tentang Aplikasi</string>
     <string name="hubungkan_printer">Hubungkan Printer</string>
+    <string name="total_pembayaran">TOTAL PEMBAYARAN</string>
+    <string name="pembayaran">PEMBAYARAN</string>
+    <string name="confirm">KONFIRMASI</string>
+    <string name="pilih_metode_pembayaran">Pilih Metode Pembayaran</string>
+    <string name="tunai">TUNAI</string>
+    <string name="hapus">Hapus</string>
+    <string name="masukkan_nama_pelanggan">Masukkan Nama Pelanggan</string>
+    <string name="nomor_telepon">Nomor Telepon</string>
     <!--<string name="ket_lupa_nama"> untuk mengetahui username Toko Anda</string>-->
 </resources>

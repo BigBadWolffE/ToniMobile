@@ -16,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,8 +79,19 @@ public class ProductInventoryAdapter
         final ProductModel model = productModelsFiltered.get(position);
         ProductInventoryAdapter.ViewHolder viewHolder = (ProductInventoryAdapter.ViewHolder) holder;
 
-        holder.tvTabProductName.setText(model.getProductName());
-        holder.tvTabProductUnit.setText(model.getUnit());
+        String product = model.getProductName();
+        String nama;
+        String varian;
+        if(product.contains("_")){
+            nama = StringUtils.substringBeforeLast(product, "_");
+            varian = StringUtils.substringAfterLast(product, "_");
+        } else {
+            nama = product;
+            varian = "-";
+        }
+
+        holder.tvTabProductName.setText(nama);
+        holder.tvTabProductUnit.setText(varian);
         holder.tvTabProductStock.setText(String.valueOf(model.getStock()));
         holder.tvTabProductStatus.setText(model.getStatus());
 

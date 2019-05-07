@@ -313,10 +313,6 @@ public class ShopRequest {
                                 SavePref.saveOpenShop(activity, isOpen);
                                 SavePref.saveOpenTime(activity, DateTimeFormater.currentDateOpen);
 
-                                Intent open = new Intent(activity, Login.class);
-                                activity.startActivity(open);
-                                activity.finish();
-
                             } else {
                                 if(message.equals("Token tidak valid")){
                                     UserController.tokenExpired(activity, message);

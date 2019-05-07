@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity
                 android.R.anim.fade_in, android.R.anim.fade_out);
         dashboardTransaction.replace(R.id.mainFrameLayout, dashboard);
         dashboardTransaction.commit();
+
     }
 
     @Override

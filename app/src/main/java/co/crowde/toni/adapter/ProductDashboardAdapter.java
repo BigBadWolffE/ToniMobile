@@ -3,6 +3,8 @@ package co.crowde.toni.adapter;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.support.v7.widget.CardView;
@@ -21,6 +23,8 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,7 +32,12 @@ import java.util.List;
 
 import co.crowde.toni.R;
 import co.crowde.toni.controller.network.API;
+import co.crowde.toni.database.Cart;
+import co.crowde.toni.helper.SavePref;
+import co.crowde.toni.listener.ProductListener;
+import co.crowde.toni.model.CartModel;
 import co.crowde.toni.model.ProductModel;
+import co.crowde.toni.view.fragment.Dashboard;
 import co.crowde.toni.view.popup.ProductDetailDashboardPopup;
 
 public class ProductDashboardAdapter
@@ -39,6 +48,10 @@ public class ProductDashboardAdapter
     private Activity activity ;
     private List<ProductModel> productModels;
     private List<ProductModel> productModelsFiltered;
+    ProductListener listener;
+
+    static Cart dbCart;
+    static CartModel cartModel;
 
     private int lastPosition = -1;
 
@@ -66,12 +79,11 @@ public class ProductDashboardAdapter
 
     public ProductDashboardAdapter(Context context,
                                    List<ProductModel> ProductModelList,
-                                   Activity activity) {
+                                   ProductListener listener) {
+        this.context = context;
         this.productModels = ProductModelList;
         this.productModelsFiltered = ProductModelList;
-        this.context = context;
-        this.activity = activity;
-//        this.listener = listener;
+        this.listener = listener;
     }
 
     @Override
@@ -87,20 +99,56 @@ public class ProductDashboardAdapter
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final ProductModel model = productModelsFiltered.get(position);
+//        int Qty = dbCart.getQty(model.getProductId());
         ProductDashboardAdapter.ViewHolder viewHolder = (ProductDashboardAdapter.ViewHolder) holder;
 
-        holder.tvProductName.setText(model.getProductName());
-        holder.tvProductUnit.setText(model.getUnit());
+        String product = model.getProductName();
+        String nama;
+        String varian;
+        if(product.contains("_")){
+            nama = StringUtils.substringBeforeLast(product, "_");
+            varian = StringUtils.substringAfterLast(product, "_");
+        } else {
+            nama = product;
+            varian = "-";
+        }
+
+        holder.tvProductName.setText(nama);
+        holder.tvProductUnit.setText(varian);
 
         Picasso.with(activity).load(API.Host+model.getPicture())
                 .into(viewHolder.imgProductItem);
 
+//        dbCart = new Cart(activity);
+//        if(dbCart.getItemCount()>0){
+//            CartModel cartModel = dbCart.getItem(model.getProductId());
+//            holder.tvProductQty.setText(String.valueOf(cartModel.getQuantity()));
+//        } else {
+//            holder.tvProductQty.setText("0");
+//        }
+
+//        holder.tvProductQty.setText(Qty);
+
         holder.cvProductItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ProductDetailDashboardPopup.showProductDetail(activity, model);
+                listener.onItemClick(v, position);
             }
         });
+
+//        holder.imgBtnPlusQty.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                listener.onIncreaseItem(v, position);
+//            }
+//        });
+//
+//        holder.imgBtnMinQty.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                listener.onDecreaseItem(v, position);
+//            }
+//        });
 
         setAnimation(holder.itemView, position);
 

@@ -1,6 +1,7 @@
 package co.crowde.toni.controller.main;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,6 +12,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
+import co.crowde.toni.R;
 import co.crowde.toni.adapter.ProductDashboardAdapter;
 import co.crowde.toni.model.CategoryModel;
 import co.crowde.toni.model.ProductModel;
@@ -47,7 +49,15 @@ public class ProductController {
         Dashboard.productModelsFiltered = new ArrayList<>();
         Dashboard.productModelsFiltered = filteredList;
         Dashboard.productDashboardAdapter.notifyDataSetChanged();
-        Dashboard.productList(activity);
+
+        boolean tabletSize = activity.getResources().getBoolean(R.bool.isTablet);
+        if (tabletSize) {
+            activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            Dashboard.productListLanscape(activity);
+        } else {
+            activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            Dashboard.productListPotrait(activity);
+        }
 
 //        Toast.makeText(activity, new Gson().toJson(Dashboard.productModelsFiltered), Toast.LENGTH_SHORT).show();
 

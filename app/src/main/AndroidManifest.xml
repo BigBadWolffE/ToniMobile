@@ -14,40 +14,27 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity
-            android:name=".view.login.OpenShop"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".view.notification.TransactionSuccess"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".view.notification.ProductAddSuccess"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".view.notification.PrintLoading"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".view.notification.PrintSuccess"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".view.notification.PaymentSuccess"
-            android:screenOrientation="portrait" />
+        android:theme="@style/AppTheme"
+        android:windowSoftInputMode="stateHidden|adjustPan">
+        <activity android:name=".view.main.SelectCustomer"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".view.main.CartList"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".view.login.OpenShop" />
+        <activity android:name=".view.notification.TransactionSuccess" />
+        <activity android:name=".view.notification.ProductAddSuccess" />
+        <activity android:name=".view.notification.PrintLoading" />
+        <activity android:name=".view.notification.PrintSuccess" />
+        <activity android:name=".view.notification.PaymentSuccess" />
         <activity
             android:name=".view.main.MainActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
-        <activity
-            android:name=".view.login.LoginSuccess"
-            android:screenOrientation="portrait" />
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".view.login.LoginSuccess"
+            />
         <activity
             android:name=".view.login.Login"
-            android:noHistory="true"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".view.main.SplashScreen"
-            android:screenOrientation="portrait">
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".view.main.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

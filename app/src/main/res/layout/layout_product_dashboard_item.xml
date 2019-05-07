@@ -9,7 +9,7 @@
         android:id="@+id/cvProductItem"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_margin="8dp"
+        android:layout_margin="4dp"
         app:cardBackgroundColor="@color/EdittextLogin"
         app:cardCornerRadius="5dp"
         app:cardElevation="1dp"
@@ -45,7 +45,8 @@
                 app:layout_constraintBottom_toTopOf="@id/guidelineY1"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="@+id/layoutMain"
-                app:layout_constraintTop_toTopOf="@+id/layoutMain">
+                app:layout_constraintTop_toTopOf="@+id/layoutMain"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tvProductQty"
@@ -56,7 +57,7 @@
                     app:autoSizeMinTextSize="1sp"
                     android:maxLines="1"
                     android:layout_margin="1dp"
-                    android:text="1"
+                    android:text="0"
                     android:textColor="@color/colorWhite"
                     android:textStyle="bold" />
 
@@ -67,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.15" />
+                app:layout_constraintGuide_percent="0.2" />
 
             <View
                 android:id="@+id/view1"
@@ -82,9 +83,9 @@
 
             <ImageView
                 android:id="@+id/imgBtnMinQty"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_margin="8dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="4dp"
                 android:background="@drawable/bg_rec_stroke_radius_5dp_grey"
                 android:gravity="center"
                 android:tint="@color/TextColorDefault"
@@ -93,7 +94,8 @@
                 app:layout_constraintEnd_toEndOf="@id/guidelineX1"
                 app:layout_constraintStart_toStartOf="@id/layoutMain"
                 app:layout_constraintTop_toBottomOf="@id/view1"
-                app:srcCompat="@drawable/ic_remove_black_24dp" />
+                app:srcCompat="@drawable/ic_remove_black_24dp"
+                android:visibility="gone"/>
 
             <android.support.constraint.Guideline
                 android:id="@+id/guidelineX1"
@@ -121,9 +123,9 @@
 
             <ImageView
                 android:id="@+id/imgBtnPlusQty"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_margin="8dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="4dp"
                 android:background="@drawable/bg_rec_radius_5dp_grey"
                 android:gravity="center"
                 android:tint="@color/TextColorDefault"
@@ -132,7 +134,8 @@
                 app:layout_constraintEnd_toEndOf="@id/layoutMain"
                 app:layout_constraintStart_toStartOf="@id/guidelineX2"
                 app:layout_constraintTop_toBottomOf="@id/view1"
-                app:srcCompat="@drawable/ic_add_black_24dp" />
+                app:srcCompat="@drawable/ic_add_black_24dp"
+                android:visibility="gone"/>
 
             <android.support.constraint.Guideline
                 android:id="@+id/guidelineX2"

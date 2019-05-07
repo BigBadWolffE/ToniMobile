@@ -2,6 +2,7 @@ package co.crowde.toni.view.login;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.pm.ActivityInfo;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,14 +19,23 @@ public class ForgetUsername{
     public static CardView cvBtnBack;
 
     public static void showForgetUser(final Activity activity) {
+
+        boolean tabletSize = activity.getResources().getBoolean(R.bool.isTablet);
+        if (tabletSize) {
+            activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else {
+            activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+
         final LayoutInflater inflater = LayoutInflater.from(activity);
         final View dialogView = inflater.inflate(
                 R.layout.activity_forget_username, null);
 
         final Dialog dialog = new Dialog(activity, android.R.style.Theme_Black_NoTitleBar);
         dialog.setContentView(dialogView);
-        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimateSlide;
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimateFade;
         dialog.show();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
         //Get View Id
         tvForgetUser = dialogView.findViewById(R.id.tvForgetUser);
@@ -57,4 +67,5 @@ public class ForgetUsername{
         });
 
     }
+
 }

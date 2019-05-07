@@ -66,6 +66,9 @@ public class ProductModel {
     @SerializedName("categoryName")
     private String categoryName;
 
+    @SerializedName("qty")
+    private int qty;
+
     public ProductModel() {
     }
 
@@ -111,6 +114,31 @@ public class ProductModel {
         this.stock = stock;
         this.supplierName = supplierName;
         this.categoryName = categoryName;
+    }
+
+    public ProductModel(String shopId, String productId, String categoryId, String productName, String description, String picture, String status, int purchasePrice, int sellingPrice, String unit, String supplierId, String createdAt, String lastUpdated, String createdBy, String province, String regency, String district, String village, int stock, String supplierName, String categoryName, int qty) {
+        this.shopId = shopId;
+        this.productId = productId;
+        this.categoryId = categoryId;
+        this.productName = productName;
+        this.description = description;
+        this.picture = picture;
+        this.status = status;
+        this.purchasePrice = purchasePrice;
+        this.sellingPrice = sellingPrice;
+        this.unit = unit;
+        this.supplierId = supplierId;
+        this.createdAt = createdAt;
+        this.lastUpdated = lastUpdated;
+        this.createdBy = createdBy;
+        this.province = province;
+        this.regency = regency;
+        this.district = district;
+        this.village = village;
+        this.stock = stock;
+        this.supplierName = supplierName;
+        this.categoryName = categoryName;
+        this.qty = qty;
     }
 
     public String getShopId() {
@@ -279,5 +307,13 @@ public class ProductModel {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public int getQty() {
+        return qty;
+    }
+
+    public void setQty(int qty) {
+        this.qty = qty;
     }
 }

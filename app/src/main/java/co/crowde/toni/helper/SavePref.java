@@ -91,4 +91,28 @@ public class SavePref {
         SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
         return sharedPref.getInt("isOpen", 0);
     }
+
+    //Save ID Pelanggan
+    public static void saveCustomerId(Activity activity, String customerId) {
+        SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("customerId", customerId);
+        editor.commit();
+    }
+    public static String readCustomerId(Activity activity) {
+        SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
+        return sharedPref.getString("customerId", null);
+    }
+
+    //Save Pelanggan
+    public static void saveCustomer(Activity activity, String customer) {
+        SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("customer", customer);
+        editor.commit();
+    }
+    public static String readCustomer(Activity activity) {
+        SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
+        return sharedPref.getString("customer", null);
+    }
 }

@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_percent="0.05" />
 
     <ImageView
         android:id="@+id/imgLogo"
@@ -34,18 +34,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.2" />
+        app:layout_constraintGuide_percent="0.15" />
 
     <ImageView
         android:id="@+id/imgForget"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        app:srcCompat="@drawable/ic_person_black_24dp"
         app:layout_constraintBottom_toBottomOf="@+id/guideline2"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guideline2"/>
+        app:srcCompat="@drawable/ic_person_black_24dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline2"
@@ -58,11 +57,11 @@
         android:id="@+id/layoutMain"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintDimensionRatio="4:2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,13 +74,13 @@
             android:layout_height="wrap_content"
             android:text="@string/lupa_nama_pengguna"
             android:textColor="@color/colorBlack"
-            android:textSize="24sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/tvForgetUserDesc"
             app:layout_constraintEnd_toEndOf="@+id/tvForgetUserDesc"
             app:layout_constraintStart_toStartOf="@+id/tvForgetUserDesc"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.80"
+            app:layout_constraintVertical_bias="0.5"
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
@@ -95,6 +94,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
             android:gravity="center"
+            android:textSize="12sp"
             android:text="@string/forget_pass"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -108,32 +108,49 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.8" />
+        app:layout_constraintGuide_percent="0.7" />
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cvBtnBack"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/layoutLoginFooter"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:foreground="?attr/selectableItemBackground"
-        app:cardBackgroundColor="@color/colorThemeOrange"
-        app:cardCornerRadius="25dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/layoutMain"
-        app:layout_constraintStart_toStartOf="@+id/layoutMain"
-        app:layout_constraintTop_toBottomOf="@+id/guideline3"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintDimensionRatio="16:9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline3">
 
-        <TextView
-            android:id="@+id/tvBtnBack"
-            style="@style/TextButtonWhiteBold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/coba_lagi" />
+        <android.support.v7.widget.CardView
+            android:id="@+id/cvBtnBack"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            app:cardBackgroundColor="@color/colorThemeOrange"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </android.support.v7.widget.CardView>
+            <TextView
+                android:id="@+id/tvBtnBack"
+                style="@style/TextButtonWhiteBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/coba_lagi" />
+
+        </android.support.v7.widget.CardView>
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

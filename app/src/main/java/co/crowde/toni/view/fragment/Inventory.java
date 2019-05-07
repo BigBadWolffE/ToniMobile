@@ -138,7 +138,7 @@ public class Inventory extends Fragment {
             imgBtnFilter.setBackground(
                     activity.getResources().getDrawable(R.color.colorWhite));
             imgBtnFilter.setImageDrawable(
-                    activity.getResources().getDrawable(R.drawable.ic_filter_list_black_24dp));
+                    activity.getResources().getDrawable(R.drawable.ic_tune_black_24dp));
 
         } else {
             inventoryAdapter = new ProductInventoryAdapter(activity,
@@ -149,7 +149,7 @@ public class Inventory extends Fragment {
             imgBtnFilter.setBackground(
                     activity.getResources().getDrawable(R.drawable.bg_rec_radius_5dp_green));
             imgBtnFilter.setImageDrawable(
-                    activity.getResources().getDrawable(R.drawable.ic_filter_list_white_24dp));
+                    activity.getResources().getDrawable(R.drawable.ic_tune_white_24dp));
         }
     }
 

@@ -16,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,8 +83,19 @@ public class CatalogProductAdapter
         final CatalogModel model = productModelsFiltered.get(position);
         CatalogProductAdapter.ViewHolder viewHolder = (CatalogProductAdapter.ViewHolder) holder;
 
-        viewHolder.tvTabProductName.setText(model.getProductName());
-        viewHolder.tvTabProductUnit.setText(model.getUnit());
+        String product = model.getProductName();
+        String nama;
+        String varian;
+        if(product.contains("_")){
+            nama = StringUtils.substringBeforeLast(product, "_");
+            varian = StringUtils.substringAfterLast(product, "_");
+        } else {
+            nama = product;
+            varian = "-";
+        }
+
+        viewHolder.tvTabProductName.setText(nama);
+        viewHolder.tvTabProductUnit.setText(varian);
         viewHolder.tvTabProductCategory.setText(String.valueOf(model.getCategoryName()));
         viewHolder.tvTabProductSupplier.setText(model.getSupplierName());
         viewHolder.checkProduct.setOnCheckedChangeListener(null);

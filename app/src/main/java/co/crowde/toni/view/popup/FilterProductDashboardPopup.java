@@ -1,5 +1,6 @@
 package co.crowde.toni.view.popup;
 
+import android.R.id;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -10,21 +11,36 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.pchmn.materialchips.ChipsInput;
 import com.pchmn.materialchips.model.ChipInterface;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import co.crowde.toni.R;
 import co.crowde.toni.controller.main.ProductController;
+import co.crowde.toni.controller.main.UserController;
+import co.crowde.toni.controller.network.API;
 import co.crowde.toni.controller.network.CategoryRequest;
 import co.crowde.toni.helper.ChipsCategory;
+import co.crowde.toni.helper.SavePref;
+import co.crowde.toni.model.CategoryModel;
 import co.crowde.toni.view.fragment.Dashboard;
 
 public class FilterProductDashboardPopup {
@@ -33,6 +49,7 @@ public class FilterProductDashboardPopup {
     public static ImageView imgBtnBack;
     public static ChipsInput chipsInput;
     public static List<ChipsCategory> categories = new ArrayList<>();
+    public static ArrayList<CategoryModel> categoryModels = new ArrayList<>();
 //    public static ChipGroup chipCategory;
 
     public static void showFilterCategory(final Activity activity) {
@@ -60,7 +77,80 @@ public class FilterProductDashboardPopup {
             }
         });
 
-        CategoryRequest.getCategoryList(activity);
+//        CategoryRequest.getCategoryList(activity);
+
+        OkHttpClient client = new OkHttpClient();
+
+        Request requestHttp = new Request.Builder()
+                .header("Authorization", SavePref.readToken(activity))
+                .url(API.Category)
+                .build();
+
+        Log.e("URL",API.Category);
+
+        client.newCall(requestHttp).enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, final IOException e) {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(
+                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+                        Log.e("Error",e.toString());
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                final String responseData = response.body().string();
+                Log.e("RESPONSE BODY", responseData);
+
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            JSONObject json = new JSONObject(responseData);
+                            boolean status = json.getBoolean("status");
+                            String data = json.getString("data");
+                            Log.e("DATA RESPONSE", data);
+
+                            if(status){
+
+                                categoryModels = new Gson()
+                                        .fromJson(data,
+                                                new TypeToken<List<CategoryModel>>() {
+                                                }.getType());
+                                for(int i=0; i<categoryModels.size();i++){
+                                    String category = categoryModels.get(i).getCategoryName();
+                                    categories.add(new ChipsCategory(category));
+                                }
+                                setCategories();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+
+            }
+        });
+
+
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                ProductController.filterProductDashboard(activity);
+
+            }
+        });
+
+    }
+
+    public static void setCategories(){
+        chipsInput.setFilterableList(categories);
         chipsInput.addChipsListener(new ChipsInput.ChipsListener() {
             @Override
             public void onChipAdded(ChipInterface chip, int newSize) {
@@ -79,14 +169,5 @@ public class FilterProductDashboardPopup {
                 // text changed
             }
         });
-
-        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                ProductController.filterProductDashboard(activity);
-
-            }
-        });
-
-        }
+    }
 }
