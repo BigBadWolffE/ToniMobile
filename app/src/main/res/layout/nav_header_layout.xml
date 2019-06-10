@@ -12,7 +12,7 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
-    tools:context=".view.main.MainActivity">
+    tools:context=".view.activity.home.MainActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/navImg"

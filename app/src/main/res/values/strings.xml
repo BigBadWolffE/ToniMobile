@@ -165,30 +165,6 @@
     <string name="alamat">ALAMAT</string>
     <string name="alamat_low">Alamat</string>
 
-
-    <string-array name="kategori">
-        <item>Kategori</item>
-        <item>Buah-buahan</item>
-        <item>Sayur-sayuran</item>
-        <item>Obat-obatan</item>
-        <item>Pupuk</item>
-        <item>Vitamin</item>
-        <item>Peralatan</item>
-        <item>Lain-lain.</item>
-    </string-array>
-
-    <string-array name="produsen">
-        <item>Semua</item>
-        <item>PT. Agrotama Tunas</item>
-        <item>PT. Bayer Indonesia</item>
-        <item>PT. Pupuk Sriwidjaja</item>
-        <item>PT. Hextar Fertilizer</item>
-        <item>PT. Biotis Agrindo</item>
-        <item>PT. Samudera Utama</item>
-        <item>PT. Nufarm Utama</item>
-        <item>Lain-lain.</item>
-    </string-array>
-
     <string-array name="status_stok">
         <item>Semua</item>
         <item>Tersedia</item>
@@ -270,5 +246,41 @@
     <string name="hapus">Hapus</string>
     <string name="masukkan_nama_pelanggan">Masukkan Nama Pelanggan</string>
     <string name="nomor_telepon">Nomor Telepon</string>
-    <!--<string name="ket_lupa_nama"> untuk mengetahui username Toko Anda</string>-->
+    <string name="ok">OK</string>
+    <string name="uang_pas">UANG PAS</string>
+    <string name="tambah_hutang">TAMBAH HUTANG</string>
+    <string name="total_tagihan">Total Tagihan</string>
+    <string name="total_tagihan_cap">TOTAL TAGIHAN</string>
+    <string name="total_hutang">Total Hutang</string>
+    <string name="ya">YA</string>
+    <string name="yakin_transaksi_anda_benar">“YAKIN TRANSAKSI ANDA BENAR?”</string>
+    <string name="periksa_dahulu_isi_transaksi_anda_sebelum_melanjutkan_ke_tahap_berikutnya">Periksa dahulu isi transaksi Anda sebelum \n  melanjutkan ke tahap berikutnya.</string>
+    <string name="halaman_utama_cap">HALAMAN UTAMA</string>
+    <string name="menunggu_mencetak_struk_cap">MENUNGGU \n MENCETAK STRUK</string>
+    <string name="dots">•••</string>
+    <string name="transaksi_anda_berhasil">TRANSAKSI ANDA \n BERHASIL</string>
+    <string name="cari_kategori">Cari Kategori</string>
+    <string name="habis">Habis</string>
+    <string name="hampir_habis">Hampir Habis</string>
+    <string name="simpan">SIMPAN</string>
+    <string name="cari_produsen">Cari Produsen</string>
+
+    <!-- DIALOG MESSAGE -->
+    <string name="dialog_label_update_product">“YAKIN PERUBAHAN \n DATA ANDA BENAR?”</string>
+    <string name="dialog_desc_update_product">Periksa dahulu perubahan data informasi Anda \n sebelum melanjutkan ke tahap berikutnya.</string>
+
+    <string name="dialog_label_add_new_product">“YAKIN PENAMBAHAN \n KATALOG ANDA BENAR?”</string>
+    <string name="dialog_desc_add_new_product">Periksa dahulu penambahan katalog Anda \n sebelum melanjutkan ke tahap berikutnya.</string>
+
+    <string name="dialog_label_confirm_transaction">“YAKIN TRANSAKSI \n ANDA BENAR?”</string>
+    <string name="dialog_desc_confirm_transaction">Periksa dahulu isi transaksi Anda sebelum \n melanjutkan ke tahap berikutnya.</string>
+
+
+    <!-- NOTIFICATION MESSAGE -->
+    <string name="notif_update_product">PERUBAHAN INFORMASI ANDA BERHASIL</string>
+    <string name="notif_add_new_product">PENAMBAHAN KATALOG ANDA BERHASIL</string>
+    <string name="total_hutang_cap">TOTAL HUTANG</string>
+    <string name="input_credit">Silahkan isi nominal hutang</string>
+    <string name="input_amount_pay">Silahkan isi nomial pembayaran</string>
+
 </resources>

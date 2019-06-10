@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/contentLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        android:padding="10dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/bg_btn_transaksi_hari_ini_laporan"
+                android:layout_width="65dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:background="@drawable/bg_white_grey_rec"
+                app:cardCornerRadius="10dp">
+
+                <TextView
+                    android:id="@+id/btn_transaksi_hari_ini_laporan"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="0dp"
+                    android:gravity="center"
+                    android:text="HARI INI"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="10sp" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/bg_btn_transaksi_3hari_ini_laporan"
+                android:layout_width="65dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:background="@drawable/bg_white_grey_rec"
+                app:cardCornerRadius="10dp">
+
+                <TextView
+                    android:id="@+id/btn_transaksi_3hari_ini_laporan"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:gravity="center"
+                    android:text="3 HARI"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="10sp" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/bg_btn_transaksi_seminggu_laporan"
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:background="@drawable/bg_white_grey_rec"
+                app:cardCornerRadius="10dp">
+
+                <TextView
+                    android:id="@+id/btn_transaksi_seminggu_laporan"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="0dp"
+                    android:gravity="center"
+                    android:text="1 MINGGU"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="10sp" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/bg_btn_transaksi_sebulan_laporan"
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:background="@drawable/bg_white_grey_rec"
+                app:cardCornerRadius="10dp">
+
+                <TextView
+                    android:id="@+id/btn_transaksi_sebulan_laporan"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="0dp"
+                    android:gravity="center"
+                    android:text="1 BULAN"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="10sp" />
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/bg_btn_transaksi_range_waktu_laporan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:background="@drawable/bg_white_grey_rec"
+            android:orientation="horizontal">
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView27"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/textView25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tanggal Awal"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toTopOf="@+id/range_sebelum"
+                    app:layout_constraintEnd_toEndOf="@+id/range_sebelum"
+                    app:layout_constraintStart_toStartOf="@+id/range_sebelum"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/range_sebelum"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="Sebelum"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView25" />
+            </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/textView27"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:text="S/D"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/constraintLayout10"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/constraintLayout11"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/bg_btn_range_pilihan_laporan"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/textView27"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/textView26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tanggal Akhir"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toTopOf="@+id/range_sesudah"
+                    app:layout_constraintEnd_toEndOf="@+id/range_sesudah"
+                    app:layout_constraintStart_toStartOf="@+id/range_sesudah"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/range_sesudah"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="Sesudah"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView26" />
+
+            </android.support.constraint.ConstraintLayout>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/bg_btn_range_pilihan_laporan"
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_white_grey_rec"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/constraintLayout10"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+
+                    android:id="@+id/btn_range_pilihan_laporan"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Pilih"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="10sp" />
+
+            </android.support.v7.widget.CardView>
+
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

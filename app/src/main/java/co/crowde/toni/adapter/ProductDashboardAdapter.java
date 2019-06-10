@@ -1,48 +1,31 @@
 package co.crowde.toni.adapter;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Typeface;
-import android.media.MediaPlayer;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import co.crowde.toni.R;
-import co.crowde.toni.controller.network.API;
-import co.crowde.toni.database.Cart;
-import co.crowde.toni.helper.SavePref;
+import co.crowde.toni.network.API;
 import co.crowde.toni.listener.ProductListener;
-import co.crowde.toni.model.CartModel;
 import co.crowde.toni.model.ProductModel;
-import co.crowde.toni.view.fragment.Dashboard;
-import co.crowde.toni.view.popup.ProductDetailDashboardPopup;
+import co.crowde.toni.view.dialog.product.ProductDetailDashboardPopup;
 
 public class ProductDashboardAdapter
-        extends RecyclerView.Adapter<ProductDashboardAdapter.ViewHolder>
-         implements Filterable{
+        extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private Context context;
     private Activity activity ;
@@ -50,10 +33,8 @@ public class ProductDashboardAdapter
     private List<ProductModel> productModelsFiltered;
     ProductListener listener;
 
-    static Cart dbCart;
-    static CartModel cartModel;
-
-    private int lastPosition = -1;
+    private final int VIEW_TYPE_ITEM = 0;
+    private final int VIEW_TYPE_LOADING = 1;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -79,45 +60,59 @@ public class ProductDashboardAdapter
 
     public ProductDashboardAdapter(Context context,
                                    List<ProductModel> ProductModelList,
-                                   ProductListener listener) {
+                                   Activity activity) {
         this.context = context;
         this.productModels = ProductModelList;
         this.productModelsFiltered = ProductModelList;
-        this.listener = listener;
+        this.activity = activity;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.layout_product_dashboard_item, parent, false);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        ViewHolder mViewHolder = new ViewHolder(view);
-
-        return mViewHolder;
-    }
-
-    @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
-        final ProductModel model = productModelsFiltered.get(position);
-//        int Qty = dbCart.getQty(model.getProductId());
-        ProductDashboardAdapter.ViewHolder viewHolder = (ProductDashboardAdapter.ViewHolder) holder;
-
-        String product = model.getProductName();
-        String nama;
-        String varian;
-        if(product.contains("_")){
-            nama = StringUtils.substringBeforeLast(product, "_");
-            varian = StringUtils.substringAfterLast(product, "_");
+        if (viewType == VIEW_TYPE_ITEM) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_product_dashboard_item, parent, false);
+            return new ViewHolder(view);
         } else {
-            nama = product;
-            varian = "-";
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_progress_bar, parent, false);
+            return new LoadingViewHolder(view);
         }
+    }
 
-        holder.tvProductName.setText(nama);
-        holder.tvProductUnit.setText(varian);
 
-        Picasso.with(activity).load(API.Host+model.getPicture())
-                .into(viewHolder.imgProductItem);
+    @Override
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
+        if (holder instanceof ViewHolder) {
+
+            final ProductModel model = productModelsFiltered.get(position);
+            final ViewHolder viewHolder = (ViewHolder) holder;
+
+            if(model!=null) {
+                String product = model.getProductName();
+                final String nama;
+                String varian;
+                if (product.contains("_")) {
+                    nama = StringUtils.substringBeforeLast(product, "_");
+                    varian = StringUtils.substringAfterLast(product, "_");
+                } else {
+                    nama = product;
+                    varian = model.getUnit();
+                }
+
+                viewHolder.tvProductName.setText(nama);
+                viewHolder.tvProductUnit.setText(varian);
+
+                Picasso.with(activity).load(API.Host + model.getPicture())
+                        .into(viewHolder.imgProductItem);
+
+
+                viewHolder.cvProductItem.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+//                        Toast.makeText(activity, ""+nama, Toast.LENGTH_SHORT).show();
+                        ProductDetailDashboardPopup.showPopup(activity, model);
+                    }
+                });
 
 //        dbCart = new Cart(activity);
 //        if(dbCart.getItemCount()>0){
@@ -128,13 +123,6 @@ public class ProductDashboardAdapter
 //        }
 
 //        holder.tvProductQty.setText(Qty);
-
-        holder.cvProductItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onItemClick(v, position);
-            }
-        });
 
 //        holder.imgBtnPlusQty.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -149,9 +137,21 @@ public class ProductDashboardAdapter
 //                listener.onDecreaseItem(v, position);
 //            }
 //        });
+            }
+        } else if (holder instanceof LoadingViewHolder) {
+            showLoadingView((LoadingViewHolder) holder, position);
+        }
 
-        setAnimation(holder.itemView, position);
+    }
 
+    private class LoadingViewHolder extends ViewHolder {
+
+        ProgressBar progressBar;
+
+        public LoadingViewHolder(@NonNull View itemView) {
+            super(itemView);
+            progressBar = itemView.findViewById(R.id.progressBar);
+        }
     }
 
     @Override
@@ -159,48 +159,14 @@ public class ProductDashboardAdapter
         return productModelsFiltered!=null? productModelsFiltered.size():0;
     }
 
-    private void setAnimation(View viewToAnimate, int position)
-    {
-        // If the bound view wasn't previously displayed on screen, it's animated
-        if (position > lastPosition)
-        {
-            Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
-            viewToAnimate.startAnimation(animation);
-            lastPosition = position;
-        }
+    @Override
+    public int getItemViewType(int position) {
+        return productModelsFiltered.get(position) == null ? VIEW_TYPE_LOADING : VIEW_TYPE_ITEM;
     }
 
-    @Override
-    public Filter getFilter() {
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence charSequence) {
-                String charString = charSequence.toString();
-                if (charString.isEmpty()) {
-                    productModelsFiltered = productModels;
-                } else {
-                    List<ProductModel> filteredList = new ArrayList<>();
+    private void showLoadingView(LoadingViewHolder viewHolder, int position) {
+        //ProgressBar would be displayed
 
-                    for (ProductModel row : productModels) {
-                        if (row.getProductName().toLowerCase().contains(charString.toLowerCase())) {
-                            filteredList.add(row);
-                        }
-                    }
-
-                    productModelsFiltered = filteredList;
-                }
-
-                FilterResults filterResults = new FilterResults();
-                filterResults.values = productModelsFiltered;
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                productModelsFiltered = (ArrayList<ProductModel>) filterResults.values;
-                notifyDataSetChanged();
-            }
-        };
     }
 
 }

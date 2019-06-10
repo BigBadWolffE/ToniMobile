@@ -7,27 +7,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.EditText;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import co.crowde.toni.R;
 import co.crowde.toni.database.Cart;
 import co.crowde.toni.listener.ItemClickListener;
 import co.crowde.toni.model.CartModel;
-import co.crowde.toni.model.ProductModel;
-import co.crowde.toni.view.popup.InventoryDetailedPopup;
 
 public class CartAdapter
         extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
@@ -35,17 +26,16 @@ public class CartAdapter
     private Context context;
     private List<CartModel> cartModels;
     private Cart dbCart;
+    private Activity activity;
     ItemClickListener listener;
 
-    private int lastPosition = -1;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvName, tvVarian, tvStock, tvPrice,
-                tvDelete, tvAmount;
+                tvDelete, tvAmount, tvQty;
         ImageView imgDecrease, imgIncrease;
         ConstraintLayout layout;
-        EditText etQty;
 
         public ViewHolder(final View itemView) {
             super(itemView);
@@ -57,7 +47,7 @@ public class CartAdapter
             tvAmount = itemView.findViewById(R.id.tvAmount);
             imgDecrease = itemView.findViewById(R.id.imgDecrease);
             imgIncrease = itemView.findViewById(R.id.imgIncrease);
-            etQty = itemView.findViewById(R.id.etQty);
+            tvQty = itemView.findViewById(R.id.tvQty);
 
             layout = itemView.findViewById(R.id.layout);
 
@@ -66,9 +56,11 @@ public class CartAdapter
 
     public CartAdapter(Context context,
                        List<CartModel> cartModels,
+                       Activity activity,
                        ItemClickListener listener) {
         this.context = context;
         this.cartModels = cartModels;
+        this.activity = activity;
         this.listener = listener;
     }
 
@@ -88,6 +80,9 @@ public class CartAdapter
         CartAdapter.ViewHolder viewHolder = (CartAdapter.ViewHolder) holder;
         DecimalFormat formatNumber = new DecimalFormat("###,###,###,###,###,###");
 
+        dbCart = new Cart(context);
+        dbCart.getItem(model.getProductId());
+
         String product = model.getProductName();
         String nama;
         String varian;
@@ -103,7 +98,7 @@ public class CartAdapter
         holder.tvVarian.setText("Kemasan "+varian);
         holder.tvStock.setText("Stok : "+model.getStok()+" "+model.getUnit());
         holder.tvPrice.setText("Rp. "+String.valueOf(formatNumber.format(model.getSellingPrice()))+",-");
-        holder.etQty.setText(String.valueOf(model.getQuantity()));
+        holder.tvQty.setText(String.valueOf(model.getQuantity()));
         holder.tvAmount.setText("Rp. "+String.valueOf(formatNumber.format(model.getAmount()))+",-");
 
         holder.tvDelete.setOnClickListener(new View.OnClickListener() {
@@ -127,14 +122,13 @@ public class CartAdapter
             }
         });
 
-        holder.etQty.setOnClickListener(new View.OnClickListener() {
+        holder.tvQty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onChangeQty(v, position);
+                listener.onChangeQty(v, position, holder.tvQty);
             }
         });
 
-        setAnimation(holder.itemView, position);
 
     }
 
@@ -142,16 +136,4 @@ public class CartAdapter
     public int getItemCount() {
         return cartModels.size();
     }
-
-    private void setAnimation(View viewToAnimate, int position)
-    {
-        // If the bound view wasn't previously displayed on screen, it's animated
-        if (position > lastPosition)
-        {
-            Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
-            viewToAnimate.startAnimation(animation);
-            lastPosition = position;
-        }
-    }
-
 }

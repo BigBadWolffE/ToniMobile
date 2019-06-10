@@ -1,21 +1,8 @@
 package co.crowde.toni.helper;
 
 import android.app.Activity;
-import android.content.res.ColorStateList;
-import android.support.design.chip.Chip;
-import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.Toast;
-
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
-
-import co.crowde.toni.R;
-import co.crowde.toni.model.CategoryModel;
-import co.crowde.toni.view.popup.FilterProductDashboardPopup;
-
-import static co.crowde.toni.controller.network.CategoryRequest.categoryModels;
 
 public class StatusStockList {
 

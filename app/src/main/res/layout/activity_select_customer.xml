@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.main.SelectCustomer"
+    tools:context=".view.activity.customer.SelectCustomer"
     android:background="@color/colorWhite">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="0dp"
         android:layout_height="?actionBarSize"
-        android:background="@color/colorThemeGreyLight"
+        android:background="@color/EdittextLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -74,7 +74,7 @@
         android:id="@+id/footer"
         android:layout_width="0dp"
         android:layout_height="?actionBarSize"
-        android:background="@color/colorThemeGreyLight"
+        android:background="@color/EdittextLogin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

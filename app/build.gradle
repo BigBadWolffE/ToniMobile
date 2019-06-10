@@ -34,8 +34,11 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.squareup.okhttp:okhttp:2.0.0'
+    implementation 'com.android.volley:volley:1.1.0'
 
     implementation 'de.hdodenhof:circleimageview:3.0.0'
     implementation 'com.github.pchmn:MaterialChipsInput:1.0.8'
     implementation 'org.apache.commons:commons-lang3:3.7'
+    implementation 'com.nex3z:flow-layout:1.2.4'
+    implementation 'com.github.kishan2612:Material-Backdrop-Android:v1.1.0'
 }

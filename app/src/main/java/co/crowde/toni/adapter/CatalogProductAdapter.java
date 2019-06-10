@@ -2,6 +2,7 @@ package co.crowde.toni.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +14,8 @@ import android.widget.CompoundButton;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -24,11 +25,11 @@ import java.util.List;
 import co.crowde.toni.R;
 import co.crowde.toni.model.CatalogModel;
 import co.crowde.toni.model.ProductModel;
-import co.crowde.toni.view.main.CatalogProduct;
+import co.crowde.toni.view.activity.catalog.CatalogProduct;
 
 public class CatalogProductAdapter
-        extends RecyclerView.Adapter<CatalogProductAdapter.ViewHolder>
-        implements Filterable {
+        extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+        {
 
     private Context context;
     private Activity activity ;
@@ -36,7 +37,8 @@ public class CatalogProductAdapter
     private List<CatalogModel> productModelsFiltered;
     ArrayList<CatalogModel> arrayList = new ArrayList<>();
 
-    private int lastPosition = -1;
+    private final int VIEW_TYPE_ITEM = 0;
+    private final int VIEW_TYPE_LOADING = 1;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -69,62 +71,65 @@ public class CatalogProductAdapter
     }
 
     @Override
-    public CatalogProductAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.layout_catalog_item, parent, false);
-
-        CatalogProductAdapter.ViewHolder mViewHolder = new CatalogProductAdapter.ViewHolder(view);
-
-        return mViewHolder;
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType == VIEW_TYPE_ITEM) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_catalog_item, parent, false);
+            return new ViewHolder(view);
+        } else {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_progress_bar, parent, false);
+            return new LoadingViewHolder(view);
+        }
     }
 
     @Override
-    public void onBindViewHolder(final CatalogProductAdapter.ViewHolder holder, final int position) {
-        final CatalogModel model = productModelsFiltered.get(position);
-        CatalogProductAdapter.ViewHolder viewHolder = (CatalogProductAdapter.ViewHolder) holder;
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
+        if (holder instanceof ViewHolder) {
+            final CatalogModel model = productModelsFiltered.get(position);
+            ViewHolder viewHolder = (ViewHolder) holder;
 
-        String product = model.getProductName();
-        String nama;
-        String varian;
-        if(product.contains("_")){
-            nama = StringUtils.substringBeforeLast(product, "_");
-            varian = StringUtils.substringAfterLast(product, "_");
-        } else {
-            nama = product;
-            varian = "-";
+            if (model != null) {
+                String product = model.getProductName();
+                String nama;
+                String varian;
+                if(product.contains("_")){
+                    nama = StringUtils.substringBeforeLast(product, "_");
+                    varian = StringUtils.substringAfterLast(product, "_");
+                } else {
+                    nama = product;
+                    varian = "-";
+                }
+
+                viewHolder.tvTabProductName.setText(nama);
+                viewHolder.tvTabProductUnit.setText(varian);
+                viewHolder.tvTabProductCategory.setText(String.valueOf(model.getCategoryName()));
+                viewHolder.tvTabProductSupplier.setText(model.getSupplierName());
+                viewHolder.checkProduct.setOnCheckedChangeListener(null);
+
+                //if true, your checkbox will be selected, else unselected
+                viewHolder.checkProduct.setChecked(model.isChecked());
+
+                viewHolder.checkProduct.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked){
+                            model.setChecked(true);
+                            arrayList.add(model);
+                            CatalogProduct.setEnabledButton(activity, getCount());
+
+                        } else {
+                            model.setChecked(false);
+                            arrayList.remove(model);
+                            CatalogProduct.setEnabledButton(activity, getCount());
+                        }
+                    }
+                });
+
+
+            }
+        } else if (holder instanceof LoadingViewHolder) {
+            showLoadingView((LoadingViewHolder) holder, position);
         }
 
-        viewHolder.tvTabProductName.setText(nama);
-        viewHolder.tvTabProductUnit.setText(varian);
-        viewHolder.tvTabProductCategory.setText(String.valueOf(model.getCategoryName()));
-        viewHolder.tvTabProductSupplier.setText(model.getSupplierName());
-        viewHolder.checkProduct.setOnCheckedChangeListener(null);
-
-        //if true, your checkbox will be selected, else unselected
-        viewHolder.checkProduct.setChecked(model.isChecked());
-
-        viewHolder.checkProduct.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    model.setChecked(true);
-                    arrayList.add(model);
-                    CatalogProduct.setEnabledButton(activity, getCount());
-
-                } else {
-                    model.setChecked(false);
-                    arrayList.remove(model);
-                    CatalogProduct.setEnabledButton(activity, getCount());
-                }
-            }
-        });
-        setAnimation(holder.itemView, position);
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return productModelsFiltered!=null? productModelsFiltered.size():0;
     }
 
     public int getCount() {
@@ -140,48 +145,30 @@ public class CatalogProductAdapter
         return list;
     }
 
-    @Override
-    public Filter getFilter() {
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence charSequence) {
-                String charString = charSequence.toString();
-                if (charString.isEmpty()) {
-                    productModelsFiltered = productModels;
-                } else {
-                    List<CatalogModel> filteredList = new ArrayList<>();
+    private class LoadingViewHolder extends ViewHolder {
 
-                    for (CatalogModel row : productModels) {
-                        if (row.getProductName().toLowerCase().contains(charString.toLowerCase())) {
-                            filteredList.add(row);
-                        }
-                    }
+        ProgressBar progressBar;
 
-                    productModelsFiltered = filteredList;
-                }
-
-                FilterResults filterResults = new FilterResults();
-                filterResults.values = productModelsFiltered;
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                productModelsFiltered = (ArrayList<CatalogModel>) filterResults.values;
-                notifyDataSetChanged();
-            }
-        };
-    }
-
-    private void setAnimation(View viewToAnimate, int position)
-    {
-        // If the bound view wasn't previously displayed on screen, it's animated
-        if (position > lastPosition)
-        {
-            Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
-            viewToAnimate.startAnimation(animation);
-            lastPosition = position;
+        public LoadingViewHolder(@NonNull View itemView) {
+            super(itemView);
+            progressBar = itemView.findViewById(R.id.progressBar);
         }
     }
+
+    @Override
+    public int getItemCount() {
+        return productModelsFiltered!=null? productModelsFiltered.size():0;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return productModelsFiltered.get(position) == null ? VIEW_TYPE_LOADING : VIEW_TYPE_ITEM;
+    }
+
+    private void showLoadingView(LoadingViewHolder viewHolder, int position) {
+        //ProgressBar would be displayed
+
+    }
+
 
 }

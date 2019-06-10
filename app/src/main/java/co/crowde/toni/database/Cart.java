@@ -215,6 +215,18 @@ public class Cart extends SQLiteOpenHelper {
         return count;
     }
 
+    //Get Item Count
+    public int getQtyount() {
+        String queryCount = "SELECT * FROM " + CartModel.TABLE_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryCount, null);
+        int count = cursor.getCount();
+        cursor.close();
+
+        // return count
+        return count;
+    }
+
     //Update Data
     public int updateItem(CartModel model) {
         SQLiteDatabase db = this.getWritableDatabase();

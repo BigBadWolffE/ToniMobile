@@ -4,10 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clickable="true"
-    android:focusable="true"
-    android:focusableInTouchMode="true">
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.CardView
         android:id="@+id/cvLayoutMain"
@@ -25,7 +22,8 @@
         app:layout_constraintDimensionRatio="1:1.3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="true">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/layoutMain"
@@ -50,15 +48,26 @@
                 android:id="@+id/imgProductDetail"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
                 app:layout_constraintBottom_toTopOf="@+id/view"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineX1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imgClose"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_close_black_24dp" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -78,16 +87,7 @@
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1">
-
-                    <ImageView
-                        android:id="@+id/imgClose"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_close_black_24dp" />
+                    android:layout_weight="0.5">
                 </android.support.constraint.ConstraintLayout>
 
                 <LinearLayout
@@ -104,8 +104,8 @@
                         android:layout_weight="2"
                         app:autoSizeTextType="uniform"
                         app:autoSizeMaxTextSize="24sp"
-                        app:autoSizeMinTextSize="18sp"
-                        android:maxLines="1"
+                        app:autoSizeMinTextSize="16sp"
+                        android:maxLines="2"
                         android:ellipsize="end"
                         android:gravity="bottom"
                         android:textStyle="bold"
@@ -242,6 +242,7 @@
                         android:textStyle="bold"
                         app:autoSizeTextType="uniform"
                         android:maxLines="1"
+                        android:inputType="number"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/imgBtnPlusQty"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -341,6 +342,7 @@
                     android:textColor="@color/colorThemeOrange"
                     android:textStyle="bold"
                     app:autoSizeTextType="uniform"
+                    android:inputType="number"
                     app:layout_constraintBottom_toTopOf="@+id/cvBtnAddProduct"
                     app:layout_constraintEnd_toStartOf="@+id/guideline6"
                     app:layout_constraintStart_toStartOf="parent"
@@ -374,6 +376,7 @@
                     android:textColor="@color/colorThemeOrange"
                     android:textStyle="bold"
                     app:autoSizeTextType="uniform"
+                    android:inputType="number"
                     app:layout_constraintBottom_toBottomOf="@+id/etPurchase"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.486"
@@ -395,7 +398,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
-                    app:cardBackgroundColor="@color/colorThemeGrey"
+                    app:cardBackgroundColor="@color/colorThemeOrange"
                     app:cardCornerRadius="15dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintDimensionRatio="5:1"
@@ -408,7 +411,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="@string/tambah_cap"
+                        android:text="@string/simpan"
                         android:textColor="@color/colorWhite"
                         android:textStyle="bold" />
 

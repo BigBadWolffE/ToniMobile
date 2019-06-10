@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorThemeGreyLight"
+            android:background="@color/EdittextLogin"
             app:itemBackground="@drawable/selector_menu_background"
             app:itemIconTint="@drawable/selector_menu"
             app:itemTextColor="@drawable/selector_menu"

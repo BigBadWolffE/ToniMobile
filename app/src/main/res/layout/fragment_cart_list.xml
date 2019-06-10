@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.fragment.CartListItem"
+    tools:context=".view.fragment.cart.CartListItem"
     android:background="@color/colorWhite">
 
     <android.support.v7.widget.CardView
@@ -85,7 +85,7 @@
         android:paddingEnd="16dp"
         android:paddingRight="16dp"
         android:paddingStart="16dp"
-        android:background="@color/colorThemeGreyLight"
+        android:background="@color/EdittextLogin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

@@ -13,7 +13,7 @@
     android:clickable="true"
     android:focusable="true"
     android:background="@color/colorWhite"
-    tools:context=".view.fragment.Inventory">
+    tools:context=".view.fragment.modul.Inventory">
 
 
     <EditText

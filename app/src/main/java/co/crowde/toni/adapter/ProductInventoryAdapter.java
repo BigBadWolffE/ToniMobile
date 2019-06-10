@@ -2,39 +2,33 @@ package co.crowde.toni.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v7.widget.CardView;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import co.crowde.toni.R;
 import co.crowde.toni.model.ProductModel;
-import co.crowde.toni.view.popup.InventoryDetailedPopup;
+import co.crowde.toni.view.dialog.product.InventoryDetailPopup;
 
 public class ProductInventoryAdapter
-        extends RecyclerView.Adapter<ProductInventoryAdapter.ViewHolder>
-        implements Filterable {
+        extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private Context context;
     private Activity activity ;
     private List<ProductModel> productModels;
     private List<ProductModel> productModelsFiltered;
 
-    private int lastPosition = -1;
+    private final int VIEW_TYPE_ITEM = 0;
+    private final int VIEW_TYPE_LOADING = 1;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -57,73 +51,91 @@ public class ProductInventoryAdapter
     public ProductInventoryAdapter(Context context,
                                    List<ProductModel> ProductModelList,
                                    Activity activity) {
+        this.context = context;
         this.productModels = ProductModelList;
         this.productModelsFiltered = ProductModelList;
-        this.context = context;
         this.activity = activity;
-//        this.listener = listener;
     }
 
     @Override
-    public ProductInventoryAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.layout_product_inventory_item, parent, false);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        ProductInventoryAdapter.ViewHolder mViewHolder = new ProductInventoryAdapter.ViewHolder(view);
-
-        return mViewHolder;
-    }
-
-    @Override
-    public void onBindViewHolder(final ProductInventoryAdapter.ViewHolder holder, final int position) {
-        final ProductModel model = productModelsFiltered.get(position);
-        ProductInventoryAdapter.ViewHolder viewHolder = (ProductInventoryAdapter.ViewHolder) holder;
-
-        String product = model.getProductName();
-        String nama;
-        String varian;
-        if(product.contains("_")){
-            nama = StringUtils.substringBeforeLast(product, "_");
-            varian = StringUtils.substringAfterLast(product, "_");
+        if (viewType == VIEW_TYPE_ITEM) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_product_inventory_item, parent, false);
+            return new ViewHolder(view);
         } else {
-            nama = product;
-            varian = "-";
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_progress_bar, parent, false);
+            return new LoadingViewHolder(view);
         }
+    }
 
-        holder.tvTabProductName.setText(nama);
-        holder.tvTabProductUnit.setText(varian);
-        holder.tvTabProductStock.setText(String.valueOf(model.getStock()));
-        holder.tvTabProductStatus.setText(model.getStatus());
+    @Override
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
+        if (holder instanceof ViewHolder) {
+            final ProductModel model = productModelsFiltered.get(position);
+            ViewHolder viewHolder = (ViewHolder) holder;
 
-        switch (model.getStatus()) {
-            case "Habis":
-                holder.tvTabProductStatus.setTextColor(
-                        activity.getResources().getColor(R.color.status_kosong));
-                break;
-            case "Mulai habis":
-                holder.tvTabProductStatus.setTextColor(
-                        activity.getResources().getColor(R.color.status_persediaan_isi));
-                break;
-            case "Tersedia":
-                holder.tvTabProductStatus.setTextColor(
-                        activity.getResources().getColor(R.color.status_tersedia));
-                break;
-            default:
-                holder.tvTabProductStatus.setTextColor(
-                        activity.getResources().getColor(R.color.status_kosong));
-                break;
-        }
+            if(model!=null) {
+                String product = model.getProductName();
+                String nama;
+                String varian;
+                if(product.contains("_")){
+                    nama = StringUtils.substringBeforeLast(product, "_");
+                    varian = StringUtils.substringAfterLast(product, "_");
+                } else {
+                    nama = product;
+                    varian = model.getUnit();
+                }
 
-        holder.layoutProductInventory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                viewHolder.tvTabProductName.setText(nama);
+                viewHolder.tvTabProductUnit.setText("("+varian+")");
+                viewHolder.tvTabProductStock.setText(String.valueOf(model.getStock()));
+                viewHolder.tvTabProductStatus.setText(model.getStatus());
+
+                switch (model.getStatus()) {
+                    case "Habis":
+                        viewHolder.tvTabProductStatus.setTextColor(
+                                activity.getResources().getColor(R.color.status_kosong));
+                        break;
+                    case "Mulai habis":
+                        viewHolder.tvTabProductStatus.setTextColor(
+                                activity.getResources().getColor(R.color.status_persediaan_isi));
+                        break;
+                    case "Tersedia":
+                        viewHolder.tvTabProductStatus.setTextColor(
+                                activity.getResources().getColor(R.color.status_tersedia));
+                        break;
+                    default:
+                        viewHolder.tvTabProductStatus.setTextColor(
+                                activity.getResources().getColor(R.color.status_kosong));
+                        break;
+                }
+
+                viewHolder.layoutProductInventory.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 //                Toast.makeText(activity, model.getProductName(), Toast.LENGTH_SHORT).show();
-                InventoryDetailedPopup.showPopup(activity, model);
+                        InventoryDetailPopup.showPopup(activity, model);
+                    }
+                });
+
             }
-        });
 
-        setAnimation(holder.itemView, position);
+        } else if (holder instanceof LoadingViewHolder) {
+            showLoadingView((LoadingViewHolder) holder, position);
+        }
 
+
+    }
+
+    private class LoadingViewHolder extends ViewHolder {
+
+        ProgressBar progressBar;
+
+        public LoadingViewHolder(@NonNull View itemView) {
+            super(itemView);
+            progressBar = itemView.findViewById(R.id.progressBar);
+        }
     }
 
     @Override
@@ -132,47 +144,13 @@ public class ProductInventoryAdapter
     }
 
     @Override
-    public Filter getFilter() {
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence charSequence) {
-                String charString = charSequence.toString();
-                if (charString.isEmpty()) {
-                    productModelsFiltered = productModels;
-                } else {
-                    List<ProductModel> filteredList = new ArrayList<>();
-
-                    for (ProductModel row : productModels) {
-                        if (row.getProductName().toLowerCase().contains(charString.toLowerCase())) {
-                            filteredList.add(row);
-                        }
-                    }
-
-                    productModelsFiltered = filteredList;
-                }
-
-                FilterResults filterResults = new FilterResults();
-                filterResults.values = productModelsFiltered;
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                productModelsFiltered = (ArrayList<ProductModel>) filterResults.values;
-                notifyDataSetChanged();
-            }
-        };
+    public int getItemViewType(int position) {
+        return productModelsFiltered.get(position) == null ? VIEW_TYPE_LOADING : VIEW_TYPE_ITEM;
     }
 
-    private void setAnimation(View viewToAnimate, int position)
-    {
-        // If the bound view wasn't previously displayed on screen, it's animated
-        if (position > lastPosition)
-        {
-            Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
-            viewToAnimate.startAnimation(animation);
-            lastPosition = position;
-        }
+    private void showLoadingView(LoadingViewHolder viewHolder, int position) {
+        //ProgressBar would be displayed
+
     }
 
 }

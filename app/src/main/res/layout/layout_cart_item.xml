@@ -117,8 +117,8 @@
                 android:tint="@color/TextColorDefault"
                 app:srcCompat="@drawable/ic_remove_black_24dp" />
 
-            <EditText
-                android:id="@+id/etQty"
+            <TextView
+                android:id="@+id/tvQty"
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="2dp"
@@ -135,9 +135,7 @@
                 android:paddingRight="4dp"
                 android:textColor="@color/colorThemeOrange"
                 android:textStyle="bold"
-                app:autoSizeTextType="uniform"
-                android:maxLines="1"
-                android:ems="3"/>
+                app:autoSizeTextType="uniform"/>
 
             <ImageView
                 android:id="@+id/imgIncrease"

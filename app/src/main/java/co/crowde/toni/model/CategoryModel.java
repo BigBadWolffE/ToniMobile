@@ -22,6 +22,15 @@ public class CategoryModel {
     public CategoryModel() {
     }
 
+    public CategoryModel(String categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public CategoryModel(String categoryId, String categoryName) {
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
+    }
+
     public CategoryModel(String categoryId,
                          String categoryName,
                          String createdAt,
@@ -72,5 +81,10 @@ public class CategoryModel {
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
+    }
+
+    @Override
+    public String toString() {
+        return categoryName;
     }
 }

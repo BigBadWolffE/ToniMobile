@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragment.CartPayment"
+    tools:context=".view.fragment.cart.CartPayment"
     android:background="@color/colorWhite">
 
 
@@ -33,7 +33,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        app:cardBackgroundColor="@color/colorThemeGreyLight"
+        app:cardBackgroundColor="@color/CardView"
         app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="@+id/tvPaymentMethod"
         app:layout_constraintStart_toStartOf="@+id/tvPaymentMethod"
@@ -84,7 +84,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        app:cardBackgroundColor="@color/colorThemeGreyLight"
+        app:cardBackgroundColor="@color/CardView"
         app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="@+id/tvPaymentMethod"
         app:layout_constraintStart_toStartOf="@+id/tvPaymentMethod"
@@ -135,7 +135,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        app:cardBackgroundColor="@color/colorThemeGreyLight"
+        app:cardBackgroundColor="@color/CardView"
         app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="@+id/tvPaymentMethod"
         app:layout_constraintStart_toStartOf="@+id/tvPaymentMethod"
@@ -216,7 +216,7 @@
         android:id="@+id/footer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/colorThemeGreyLight"
+        android:background="@color/EdittextLogin"
         android:paddingStart="16dp"
         android:paddingLeft="16dp"
         android:paddingTop="8dp"
@@ -271,13 +271,13 @@
             android:textColor="@color/colorBlack"
             android:textSize="14sp"
             android:textStyle="bold"
+            android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/tvAmountLabel"
             app:layout_constraintEnd_toStartOf="@+id/tvPayment"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvCreditLabel"
-            android:visibility="visible"/>
+            app:layout_constraintTop_toBottomOf="@id/tvCreditLabel" />
 
         <TextView
             android:id="@+id/tvPayment"
@@ -302,7 +302,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:gravity="center_vertical"
-            android:text="@string/total_pembayaran"
+            android:text="@string/total_tagihan_cap"
             android:textColor="@color/colorBlack"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -340,7 +340,7 @@
             android:textColor="@color/colorThemeOrange"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/cvConfirm"
+            app:layout_constraintBottom_toTopOf="@+id/tvCreditTotalLabel"
             app:layout_constraintEnd_toStartOf="@+id/tvChange"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -363,6 +363,39 @@
             app:layout_constraintTop_toTopOf="@+id/tvChangeLabel"
             android:visibility="visible"/>
 
+        <TextView
+            android:id="@+id/tvCreditTotalLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/total_hutang_cap"
+            android:textColor="@color/colorThemeOrange"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/cvConfirm"
+            app:layout_constraintEnd_toStartOf="@+id/tvCreditTotal"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvChangeLabel"
+            android:visibility="visible"/>
+
+        <TextView
+            android:id="@+id/tvCreditTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rp. 0,-"
+            android:textColor="@color/colorThemeOrange"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tvCreditTotalLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tvCreditTotalLabel"
+            app:layout_constraintTop_toTopOf="@+id/tvCreditTotalLabel"
+            android:visibility="visible"/>
+
         <android.support.v7.widget.CardView
             android:id="@+id/cvConfirm"
             android:layout_width="0dp"
@@ -379,7 +412,7 @@
             app:layout_constraintDimensionRatio="w,5:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvChangeLabel">
+            app:layout_constraintTop_toBottomOf="@id/tvCreditTotalLabel">
 
             <TextView
                 android:layout_width="match_parent"

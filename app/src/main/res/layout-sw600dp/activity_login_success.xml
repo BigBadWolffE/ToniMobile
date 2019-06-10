@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/img1"
-    tools:context=".view.login.LoginSuccess">
+    tools:context=".view.activity.onboard.LoginSuccess">
 
     <View
         android:id="@+id/bgView"

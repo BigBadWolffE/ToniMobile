@@ -7,20 +7,13 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-
-import co.crowde.toni.controller.network.ShopRequest;
-import co.crowde.toni.controller.network.UserRequest;
+import co.crowde.toni.network.ShopRequest;
 import co.crowde.toni.helper.DateTimeFormater;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.ShopModel;
-import co.crowde.toni.view.login.Login;
-import co.crowde.toni.view.login.LoginSuccess;
-import co.crowde.toni.view.login.OpenShop;
-import co.crowde.toni.view.main.SplashScreen;
+import co.crowde.toni.view.activity.auth.Login;
+import co.crowde.toni.view.activity.onboard.LoginSuccess;
+import co.crowde.toni.view.activity.openshop.OpenShop;
 
 public class UserController {
 

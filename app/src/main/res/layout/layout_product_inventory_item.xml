@@ -23,7 +23,8 @@
             android:gravity="center_vertical"
             android:textColor="@color/TextColorDefault"
             android:ellipsize="end"
-            android:maxLines="1"/>
+            android:maxLines="1"
+            android:textStyle="bold"/>
         <TextView
             android:id="@+id/tvTabProductUnit"
             android:layout_width="match_parent"

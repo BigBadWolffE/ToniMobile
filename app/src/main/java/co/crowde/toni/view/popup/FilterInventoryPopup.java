@@ -3,6 +3,7 @@ package co.crowde.toni.view.popup;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.pm.ActivityInfo;
 import android.content.res.ColorStateList;
 import android.support.design.chip.Chip;
 import android.support.design.chip.ChipGroup;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 
 import co.crowde.toni.R;
 import co.crowde.toni.controller.main.ProductController;
-import co.crowde.toni.controller.network.CategoryRequest;
+import co.crowde.toni.network.CategoryRequest;
 
 public class FilterInventoryPopup {
 
@@ -33,6 +34,12 @@ public class FilterInventoryPopup {
 
     public static void showFilterInventory(final Activity activity) {
         final LayoutInflater inflater = LayoutInflater.from(activity);
+        boolean tabletSize = activity.getResources().getBoolean(R.bool.isTablet);
+        if (tabletSize) {
+            activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else {
+            activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
         final View dialogView = inflater.inflate(
                 R.layout.layout_filter_inventory, null);
 
@@ -61,7 +68,7 @@ public class FilterInventoryPopup {
         dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-                ProductController.filterInventory(activity);
+//                ProductController.filterInventory(activity);
             }
         });
 

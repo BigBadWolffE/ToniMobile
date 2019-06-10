@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import co.crowde.toni.controller.network.API;
+import co.crowde.toni.network.API;
 
 public class SavePref {
 
@@ -114,5 +114,29 @@ public class SavePref {
     public static String readCustomer(Activity activity) {
         SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
         return sharedPref.getString("customer", null);
+    }
+
+    //Detail Toko
+    public static void saveDetailToko(Activity activity, String detailToko) {
+        SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("detail_toko", detailToko);
+        editor.commit();
+    }
+    public static String readDetailToko(Activity activity) {
+        SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
+        return sharedPref.getString("detail_toko", null);
+    }
+
+    //Save Bluetooth Device Address
+    public static void saveDeviceAddress(Activity activity, String deviceAddress) {
+        SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("deviceAddress", deviceAddress);
+        editor.commit();
+    }
+    public static String readDeviceAddress(Activity activity) {
+        SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
+        return sharedPref.getString("deviceAddress", null);
     }
 }

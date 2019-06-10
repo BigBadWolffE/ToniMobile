@@ -18,39 +18,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/layoutHeader"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/imgBtnBack"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/layoutHeader"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
-                app:layout_constraintStart_toStartOf="@+id/layoutHeader"
-                app:layout_constraintTop_toTopOf="@+id/layoutHeader"
-                app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
-
-            <TextView
-                android:id="@+id/tvHeaderCatalog"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Katalog Barang"
-                android:textColor="@color/TextColorDefault"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/imgBtnBack"
-                app:layout_constraintEnd_toEndOf="@+id/layoutHeader"
-                app:layout_constraintStart_toEndOf="@+id/imgBtnBack"
-                app:layout_constraintTop_toTopOf="@+id/imgBtnBack" />
-
-        </android.support.constraint.ConstraintLayout>
+            android:layout_height="?attr/actionBarSize"
+            app:title="Katalog Barang">
+        </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -106,7 +79,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/view1"
         app:layout_constraintTop_toTopOf="@+id/etSearchProduct"
-        app:srcCompat="@drawable/ic_filter_list_black_24dp" />
+        app:srcCompat="@drawable/ic_tune_black_24dp" />
 
     <View
         android:id="@+id/view2"
@@ -207,6 +180,7 @@
             android:foreground="?attr/selectableItemBackground"
             app:cardBackgroundColor="@color/colorThemeGrey"
             app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="5:1"
             app:layout_constraintEnd_toEndOf="parent"

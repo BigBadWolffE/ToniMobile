@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.main.CartList">
+    android:background="@color/colorWhite"
+    tools:context=".view.activity.cart.CartList">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="0dp"
         android:layout_height="?actionBarSize"
-        android:background="@color/colorThemeGreyLight"
+        android:background="@color/EdittextLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -19,7 +20,17 @@
             android:id="@+id/toolbarCart"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="Keranjang Belanja"/>
+            app:title="Keranjang Belanja">
+            <ImageView
+                android:id="@+id/imgDeleteCart"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="16dp"
+                app:srcCompat="@drawable/icon_delete"
+                android:layout_marginRight="16dp" />
+
+        </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 

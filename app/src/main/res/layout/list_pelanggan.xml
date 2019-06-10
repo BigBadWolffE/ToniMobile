@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:padding="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/transaksinamapelanggan"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="Nama Pelanggan"
+                android:textColor="@color/colorBlack"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/transaksitelponpelanggan"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <!--<TextView-->
+            <!--android:id="@+id/transaksitglterdaftarpelanggan"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="left"-->
+            <!--android:text="Tanggal Terdaftar"-->
+            <!--android:textColor="@color/colorBlack"-->
+            <!--android:textSize="20dp" />-->
+
+
+            <TextView
+                android:id="@+id/transaksitelponpelanggan"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="Telepon"
+                android:textColor="@color/colorBlack"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="@+id/transaksinamapelanggan"
+                app:layout_constraintEnd_toStartOf="@+id/transaksihutangpelanggan"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/transaksinamapelanggan"
+                app:layout_constraintTop_toTopOf="@+id/transaksinamapelanggan" />
+
+
+            <TextView
+                android:id="@+id/transaksihutangpelanggan"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="Hutang"
+                android:textColor="@color/colorBlack"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="@+id/transaksitelponpelanggan"
+                app:layout_constraintEnd_toStartOf="@+id/transaksinamapelanggan"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/transaksitelponpelanggan"
+                app:layout_constraintTop_toTopOf="@+id/transaksitelponpelanggan" />
+        </android.support.constraint.ConstraintLayout>
+
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<android.support.v7.widget.CardView-->
+        <!--android:id="@+id/btntransaksihutangpelanggan"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--app:cardBackgroundColor="@color/colorThemeOrange"-->
+        <!--app:cardCornerRadius="20dp">-->
+
+        <!--<TextView-->
+        <!--android:layout_width="120dp"-->
+        <!--android:layout_height="35dp"-->
+        <!--android:gravity="center"-->
+        <!--android:text="Bayar"-->
+        <!--android:textColor="@color/colorWhite"-->
+        <!--android:textSize="20dp"-->
+        <!--android:textStyle="bold" />-->
+
+
+        <!--</android.support.v7.widget.CardView>-->
+
+        <!--<android.support.v7.widget.CardView-->
+        <!--android:id="@+id/btncetakstrukhutang"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+
+        <!--android:layout_marginLeft="20dp"-->
+        <!--app:cardBackgroundColor="@color/colorThemeOrange"-->
+        <!--app:cardCornerRadius="20dp">-->
+
+
+        <!--<TextView-->
+        <!--android:layout_width="120dp"-->
+        <!--android:layout_height="35dp"-->
+        <!--android:gravity="center"-->
+        <!--android:text="Cetak"-->
+        <!--android:textColor="@color/colorWhite"-->
+        <!--android:textSize="20dp"-->
+        <!--android:textStyle="bold" />-->
+
+
+        <!--</android.support.v7.widget.CardView>-->
+
+        <!--</LinearLayout>-->
+
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>
+
+
