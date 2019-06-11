@@ -50,7 +50,7 @@ public class Inventory extends Fragment {
     public static RecyclerView rcProduct;
     public static RecyclerView.LayoutManager rcLayoutDashboard;
     public static ProductInventoryAdapter inventoryAdapter;
-    public static List<ProductModel> productModels;
+    public static List<ProductModel> productModels = new ArrayList<>();
     public static List<ProductModel> productModelsFiltered;
 
     static DividerItemDecoration itemDecorator;
@@ -259,7 +259,7 @@ public class Inventory extends Fragment {
     };
 
     public static void initAdapter(Activity activity) {
-        productModels = new ArrayList<>();
+//        productModels = new ArrayList<>();
         inventoryAdapter = new ProductInventoryAdapter(activity, productModels, activity);
 
         rcProduct.setLayoutManager(new LinearLayoutManager(activity));
@@ -274,8 +274,10 @@ public class Inventory extends Fragment {
             inventoryAdapter.notifyItemRemoved(scrollPosition);
         }
 
+        productModels.clear();
         productModels.addAll(productModelResponse);
-        inventoryAdapter.notifyDataSetChanged();
+        inventoryAdapter.replaceItemFiltered(productModels);
+//        inventoryAdapter.notifyDataSetChanged();
         isLoading= false;
     }
 
@@ -340,7 +342,9 @@ public class Inventory extends Fragment {
         ProductRequest.productName=etSearch.getText().toString();
         ProductRequest.productName = etSearch.getText().toString();
         productModels.clear();
-        inventoryAdapter.notifyDataSetChanged();
+
+//        inventoryAdapter.replaceItemFiltered(productModels);
+//        inventoryAdapter.notifyDataSetChanged();
         ProductRequest.getInventoryList(activity);
 
     }

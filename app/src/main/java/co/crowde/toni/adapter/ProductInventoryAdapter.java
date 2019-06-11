@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import co.crowde.toni.R;
@@ -24,8 +25,7 @@ public class ProductInventoryAdapter
 
     private Context context;
     private Activity activity ;
-    private List<ProductModel> productModels;
-    private List<ProductModel> productModelsFiltered;
+    private List<ProductModel> productModelsFiltered = new ArrayList<>();
 
     private final int VIEW_TYPE_ITEM = 0;
     private final int VIEW_TYPE_LOADING = 1;
@@ -52,9 +52,16 @@ public class ProductInventoryAdapter
                                    List<ProductModel> ProductModelList,
                                    Activity activity) {
         this.context = context;
-        this.productModels = ProductModelList;
-        this.productModelsFiltered = ProductModelList;
+        this.productModelsFiltered.clear();
+        this.productModelsFiltered.addAll(ProductModelList);
+//        this.productModelsFiltered = ProductModelList;
         this.activity = activity;
+    }
+
+    public void replaceItemFiltered(List<ProductModel> ProductModelList){
+        this.productModelsFiltered.clear();
+        this.productModelsFiltered.addAll(ProductModelList);
+        notifyDataSetChanged();
     }
 
     @Override
