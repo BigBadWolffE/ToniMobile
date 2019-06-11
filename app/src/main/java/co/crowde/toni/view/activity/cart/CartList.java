@@ -213,6 +213,7 @@ implements View.OnClickListener{
         dbCart.deleteAllItem();
         CartListItem.cartModels.clear();
         CartListItem.cartAdapter.notifyDataSetChanged();
+        Dashboard.productDashboardAdapter.notifyDataSetChanged();
         Dashboard.setTotal(activity, dbCart);
         CartListItem.setTotalAmount(activity);
         SavePref.saveCustomer(activity, null);

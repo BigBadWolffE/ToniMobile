@@ -19,16 +19,18 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.List;
 
 import co.crowde.toni.R;
+import co.crowde.toni.model.CartModel;
 import co.crowde.toni.network.API;
 import co.crowde.toni.listener.ProductListener;
 import co.crowde.toni.model.ProductModel;
 import co.crowde.toni.view.dialog.product.ProductDetailDashboardPopup;
+import co.crowde.toni.view.fragment.modul.Dashboard;
 
 public class ProductDashboardAdapter
-        extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+        extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
-    private Activity activity ;
+    private Activity activity;
     private List<ProductModel> productModels;
     private List<ProductModel> productModelsFiltered;
     ProductListener listener;
@@ -39,13 +41,14 @@ public class ProductDashboardAdapter
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvProductQty,
-                tvProductName, tvProductUnit;
+                tvProductName, tvProductUnit, tvProductCount;
         ImageView imgProductItem,
                 imgBtnMinQty, imgBtnPlusQty;
         CardView cvProductItem, cvProductQty;
 
         public ViewHolder(final View itemView) {
             super(itemView);
+            tvProductCount = itemView.findViewById(R.id.tvProductCount);
             tvProductQty = itemView.findViewById(R.id.tvProductQty);
             imgBtnMinQty = itemView.findViewById(R.id.imgBtnMinQty);
             tvProductName = itemView.findViewById(R.id.tvProductName);
@@ -87,7 +90,7 @@ public class ProductDashboardAdapter
             final ProductModel model = productModelsFiltered.get(position);
             final ViewHolder viewHolder = (ViewHolder) holder;
 
-            if(model!=null) {
+            if (model != null) {
                 String product = model.getProductName();
                 final String nama;
                 String varian;
@@ -101,6 +104,17 @@ public class ProductDashboardAdapter
 
                 viewHolder.tvProductName.setText(nama);
                 viewHolder.tvProductUnit.setText(varian);
+
+                // TODO : init count of product
+                CartModel cart = Dashboard.dbCart.getItem(model.getProductId());
+                int countProduct = 0;
+                if (cart != null)
+                    countProduct = cart.getQuantity();
+//                    countProduct = model.getCountItem();
+//                else
+//                    countProduct = cart.getQuantity();
+                viewHolder.tvProductCount.setVisibility(countProduct > 0 ? View.VISIBLE : View.GONE);
+                viewHolder.tvProductCount.setText(countProduct + "");
 
                 Picasso.with(activity).load(API.Host + model.getPicture())
                         .into(viewHolder.imgProductItem);
@@ -156,7 +170,7 @@ public class ProductDashboardAdapter
 
     @Override
     public int getItemCount() {
-        return productModelsFiltered!=null? productModelsFiltered.size():0;
+        return productModelsFiltered != null ? productModelsFiltered.size() : 0;
     }
 
     @Override

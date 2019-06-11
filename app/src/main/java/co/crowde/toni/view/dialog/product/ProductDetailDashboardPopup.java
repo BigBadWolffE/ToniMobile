@@ -179,6 +179,7 @@ public class ProductDetailDashboardPopup {
                         if(Dashboard.cartModel.getQuantity()<=stok){
                             Dashboard.dbCart.updateItem(Dashboard.cartModel);
                             Dashboard.ifCartEmpty(activity);
+                            Dashboard.productDashboardAdapter.notifyDataSetChanged();
                             alertDialog.dismiss();
                         } else {
                             Toast.makeText(activity, "Stok tidak mencukupi permintaan pelanggan.", Toast.LENGTH_SHORT).show();
@@ -189,6 +190,7 @@ public class ProductDetailDashboardPopup {
                             CartModel models = Dashboard.dbCart.getItem(id);
                             if (models != null) {
                                 Dashboard.ifCartEmpty(activity);
+                                Dashboard.productDashboardAdapter.notifyDataSetChanged();
                                 alertDialog.dismiss();
                             } else {
                                 Toast.makeText(activity, "Error", Toast.LENGTH_SHORT).show();

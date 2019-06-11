@@ -139,6 +139,7 @@ implements View.OnClickListener{
                 cartModels.remove(position);
                 cartAdapter.notifyItemRemoved(position);
                 cartAdapter.notifyItemRangeChanged(position, cartModels.size());
+                Dashboard.productDashboardAdapter.notifyDataSetChanged();
                 Dashboard.ifCartEmpty(activity);
                 Dashboard.setTotal(activity, dbCart);
                 setTotalAmount(activity);
