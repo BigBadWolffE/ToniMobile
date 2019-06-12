@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "645339470643",
+    "firebase_url": "https://toni-crowde-app.firebaseio.com",
+    "project_id": "toni-crowde-app",
+    "storage_bucket": "toni-crowde-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:645339470643:android:eca6494b8ac88509",
+        "android_client_info": {
+          "package_name": "co.crowde.toni"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "645339470643-3gp5nkba5hpg560am1ef2n57h84lhhfs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.crowde.toni",
+            "certificate_hash": "a9d8e6228c5fb59c4e27060ff0b0e087dc55341e"
+          }
+        },
+        {
+          "client_id": "645339470643-siob1uqp1e7dnpp3spq6h6589nmm2hl9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDGwBISeuuVDSKMtXhzPLb2T5zm0kz1As"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "645339470643-siob1uqp1e7dnpp3spq6h6589nmm2hl9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
