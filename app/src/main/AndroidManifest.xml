@@ -18,14 +18,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-        <activity android:name=".view.activity.notification.SuccessAddNewProduct"></activity>
+        <activity android:name=".view.activity.auth.RegisterActivity"></activity>
+        <activity android:name=".view.activity.notification.SuccessAddNewProduct" />
         <activity android:name=".view.activity.filter.CatalogFilter" />
         <activity android:name=".view.activity.notification.SuccessUpdateProduct" />
         <activity android:name=".view.activity.catalog.CatalogProduct" />
         <activity android:name=".view.activity.filter.InventoryFilter" />
         <activity android:name=".view.activity.filter.DashboardFilter" />
-        <activity android:name=".view.activity.auth.ForgotUser" />
-        <activity android:name=".view.activity.auth.ForgotPass" />
+        <activity android:name=".view.activity.auth.ForgotUserActivity" />
+        <activity android:name=".view.activity.auth.ForgotPassActivity" />
         <activity android:name=".view.activity.print.WaitingPrint" />
         <activity
             android:name=".view.activity.customer.SelectCustomer"
@@ -33,7 +34,7 @@
         <activity
             android:name=".view.activity.cart.CartList"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
-        <activity android:name=".view.activity.openshop.OpenShop" />
+        <activity android:name=".view.activity.shop.OpenShop" />
         <activity android:name=".view.notification.TransactionSuccess" />
         <activity android:name=".view.notification.ProductAddSuccess" />
         <activity android:name=".view.notification.PrintLoading" />
@@ -42,9 +43,9 @@
         <activity
             android:name=".view.activity.home.MainActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
-        <activity android:name=".view.activity.onboard.LoginSuccess" />
+        <activity android:name=".view.activity.auth.LoginSuccess" />
         <activity
-            android:name=".view.activity.auth.Login"
+            android:name=".view.activity.auth.LoginActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity android:name=".view.activity.welcoming.SplashScreen">
             <intent-filter>
@@ -53,6 +54,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="9c39c79dc9d6e1bab0d1176684d356a8f98e3c03" />

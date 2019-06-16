@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import java.util.List;
 import co.crowde.toni.R;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CustomerModel;
+import co.crowde.toni.utils.Utils;
 import co.crowde.toni.view.fragment.cart.CartListItem;
 import co.crowde.toni.view.activity.cart.CartList;
 
@@ -78,7 +80,10 @@ public class CustomerAdapter
             final CustomerModel model = customerModelsFiltered.get(position);
             CustomerAdapter.ViewHolder viewHolder = (CustomerAdapter.ViewHolder) holder;
             if (model != null) {
-                viewHolder.tvName.setText(model.getCustomerName());
+                String text = "<font color=#52575C><b>" + model.getCustomerName() + "</b></font>" + (!Utils.calculateDateBetweenTwoDays(model.getCreatedAt())?
+                        "" : "<font color=#F7931D> (Baru!)</font>");
+                viewHolder.tvName.setText(Html.fromHtml(text));
+//                viewHolder.tvName.setText(model.getCustomerName());
                 viewHolder.tvPhone.setText(model.getPhone());
 
                 viewHolder.layoutCustomer.setOnClickListener(new View.OnClickListener() {

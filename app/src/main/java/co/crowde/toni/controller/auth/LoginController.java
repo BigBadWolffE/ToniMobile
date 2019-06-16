@@ -4,22 +4,20 @@ import android.app.Activity;
 import android.content.Intent;
 import android.widget.Toast;
 
-import co.crowde.toni.view.activity.auth.ForgotPass;
-import co.crowde.toni.view.activity.auth.ForgotUser;
+import co.crowde.toni.view.activity.auth.ForgotPassActivity;
+import co.crowde.toni.view.activity.auth.ForgotUserActivity;
 
 public class LoginController {
 
     public static void loginResponse(Activity activity, String message){
         switch (message) {
             case "Password anda salah!":
-                Intent wrongPass = new Intent(activity, ForgotPass.class);
+                Intent wrongPass = new Intent(activity, ForgotPassActivity.class);
                 activity.startActivity(wrongPass);
-                activity.finish();
                 break;
             case "Username anda salah!":
-                Intent wrongUser = new Intent(activity, ForgotUser.class);
+                Intent wrongUser = new Intent(activity, ForgotUserActivity.class);
                 activity.startActivity(wrongUser);
-                activity.finish();
                 break;
             default:
                 Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +19,14 @@ import java.util.List;
 
 import co.crowde.toni.R;
 import co.crowde.toni.model.ProductModel;
+import co.crowde.toni.utils.Utils;
 import co.crowde.toni.view.dialog.product.InventoryDetailPopup;
 
 public class ProductInventoryAdapter
-        extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+        extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
-    private Activity activity ;
+    private Activity activity;
     private List<ProductModel> productModelsFiltered = new ArrayList<>();
 
     private final int VIEW_TYPE_ITEM = 0;
@@ -58,7 +60,7 @@ public class ProductInventoryAdapter
         this.activity = activity;
     }
 
-    public void replaceItemFiltered(List<ProductModel> ProductModelList){
+    public void replaceItemFiltered(List<ProductModel> ProductModelList) {
         this.productModelsFiltered.clear();
         this.productModelsFiltered.addAll(ProductModelList);
         notifyDataSetChanged();
@@ -82,20 +84,22 @@ public class ProductInventoryAdapter
             final ProductModel model = productModelsFiltered.get(position);
             ViewHolder viewHolder = (ViewHolder) holder;
 
-            if(model!=null) {
+            if (model != null) {
                 String product = model.getProductName();
                 String nama;
                 String varian;
-                if(product.contains("_")){
+                if (product.contains("_")) {
                     nama = StringUtils.substringBeforeLast(product, "_");
                     varian = StringUtils.substringAfterLast(product, "_");
                 } else {
                     nama = product;
                     varian = model.getUnit();
                 }
-
-                viewHolder.tvTabProductName.setText(nama);
-                viewHolder.tvTabProductUnit.setText("("+varian+")");
+                String text = "<font color=#52575C><b>" + nama + "</b></font>" + (!Utils.calculateDateBetweenTwoDays(model.getCreatedAt())?
+                        "" : "<font color=#F7931D> (Baru!)</font>");
+                viewHolder.tvTabProductName.setText(Html.fromHtml(text));
+//                viewHolder.tvTabProductName.setText(nama);
+                viewHolder.tvTabProductUnit.setText("(" + varian + ")");
                 viewHolder.tvTabProductStock.setText(String.valueOf(model.getStock()));
                 viewHolder.tvTabProductStatus.setText(model.getStatus());
 
@@ -147,7 +151,7 @@ public class ProductInventoryAdapter
 
     @Override
     public int getItemCount() {
-        return productModelsFiltered!=null? productModelsFiltered.size():0;
+        return productModelsFiltered != null ? productModelsFiltered.size() : 0;
     }
 
     @Override

@@ -2,6 +2,8 @@ package co.crowde.toni.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -19,11 +22,15 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.List;
 
 import co.crowde.toni.R;
+import co.crowde.toni.controller.cart.CartController;
+import co.crowde.toni.database.Cart;
+import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CartModel;
 import co.crowde.toni.network.API;
 import co.crowde.toni.listener.ProductListener;
 import co.crowde.toni.model.ProductModel;
 import co.crowde.toni.view.dialog.product.ProductDetailDashboardPopup;
+import co.crowde.toni.view.fragment.cart.CartListItem;
 import co.crowde.toni.view.fragment.modul.Dashboard;
 
 public class ProductDashboardAdapter
@@ -34,6 +41,8 @@ public class ProductDashboardAdapter
     private List<ProductModel> productModels;
     private List<ProductModel> productModelsFiltered;
     ProductListener listener;
+    private Cart dbCart;
+    int countProduct;
 
     private final int VIEW_TYPE_ITEM = 0;
     private final int VIEW_TYPE_LOADING = 1;
@@ -48,7 +57,6 @@ public class ProductDashboardAdapter
 
         public ViewHolder(final View itemView) {
             super(itemView);
-            tvProductCount = itemView.findViewById(R.id.tvProductCount);
             tvProductQty = itemView.findViewById(R.id.tvProductQty);
             imgBtnMinQty = itemView.findViewById(R.id.imgBtnMinQty);
             tvProductName = itemView.findViewById(R.id.tvProductName);
@@ -86,6 +94,7 @@ public class ProductDashboardAdapter
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof ViewHolder) {
+            dbCart = new Cart(context);
 
             final ProductModel model = productModelsFiltered.get(position);
             final ViewHolder viewHolder = (ViewHolder) holder;
@@ -106,19 +115,33 @@ public class ProductDashboardAdapter
                 viewHolder.tvProductUnit.setText(varian);
 
                 // TODO : init count of product
-                CartModel cart = Dashboard.dbCart.getItem(model.getProductId());
-                int countProduct = 0;
+                final CartModel cart = Dashboard.dbCart.getItem(model.getProductId());
+                countProduct = 0;
                 if (cart != null)
                     countProduct = cart.getQuantity();
 //                    countProduct = model.getCountItem();
 //                else
 //                    countProduct = cart.getQuantity();
-                viewHolder.tvProductCount.setVisibility(countProduct > 0 ? View.VISIBLE : View.GONE);
-                viewHolder.tvProductCount.setText(countProduct + "");
+                viewHolder.cvProductQty.setVisibility(countProduct > 0 ? View.VISIBLE : View.GONE);
+                viewHolder.tvProductQty.setText(countProduct + "");
 
                 Picasso.with(activity).load(API.Host + model.getPicture())
                         .into(viewHolder.imgProductItem);
 
+                viewHolder.imgBtnPlusQty.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        CartController.addFromPlus(activity, model);
+                    }
+                });
+
+                viewHolder.imgBtnMinQty.setVisibility(countProduct > 0 ? View.VISIBLE : View.GONE);
+                viewHolder.imgBtnMinQty.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        CartController.minQtyCart(activity, model);
+                    }
+                });
 
                 viewHolder.cvProductItem.setOnClickListener(new View.OnClickListener() {
                     @Override

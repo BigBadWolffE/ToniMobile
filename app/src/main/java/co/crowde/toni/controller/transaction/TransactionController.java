@@ -17,6 +17,7 @@ import java.io.IOException;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CustomerModel;
 import co.crowde.toni.network.ProductRequest;
+import co.crowde.toni.network.TransactionRequest;
 import co.crowde.toni.utils.PrinterNetwork;
 import co.crowde.toni.view.dialog.transaction.MessageConfirmTransaction;
 import co.crowde.toni.view.fragment.cart.CartPayment;
@@ -37,7 +38,7 @@ public class TransactionController {
                 PrinterNetwork.mBluetoothSocket.connect();
                 if (PrinterNetwork.mBluetoothSocket.isConnected()){
 
-                    ProductRequest.postNewTransaction(activity);
+                    TransactionRequest.postNewTransaction(activity);
 
                 }
             } catch (IOException e) {

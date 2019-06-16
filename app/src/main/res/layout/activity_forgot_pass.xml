@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activity.auth.ForgotPass"
+    tools:context=".view.activity.auth.ForgotPassActivity"
     android:background="@color/colorWhite">
 
     <android.support.constraint.Guideline

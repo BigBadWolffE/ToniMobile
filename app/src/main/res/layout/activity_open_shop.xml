@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
-    tools:context=".view.activity.openshop.OpenShop">
+    tools:context=".view.activity.shop.OpenShop">
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
@@ -113,7 +113,7 @@
         android:layout_marginRight="32dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@id/guideline3"
-        app:layout_constraintDimensionRatio="16:9"
+        app:layout_constraintDimensionRatio="2.5:1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guideline2" />
@@ -129,30 +129,25 @@
         android:id="@+id/layoutFooter"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="16:9"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/layoutOpenShopMain"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/layoutOpenShopMain"
         app:layout_constraintTop_toBottomOf="@id/guideline3">
 
         <android.support.v7.widget.CardView
             android:id="@+id/cvBtnOpen"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="@dimen/height_button"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             app:cardBackgroundColor="@color/colorThemeOrange"
-            app:cardCornerRadius="20dp"
+            app:cardCornerRadius="@dimen/radius"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -176,6 +171,7 @@
             android:text="@string/tutup_toko"
             android:textColor="@color/colorBlack"
             android:textStyle="bold"
+            android:textSize="@dimen/text_default_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

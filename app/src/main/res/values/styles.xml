@@ -30,7 +30,7 @@
 
     <!-- Text Style Bold-->
     <style name="TextButtonWhiteBold">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/text_20_size</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textStyle">bold</item>
     </style>
@@ -45,8 +45,8 @@
 
     <!-- Text Style Default-->
     <style name="TextDefaultBlack">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">@dimen/text_default_size</item>
+        <item name="android:textColor">@color/TextColorDefault</item>
     </style>
     <style name="TextDefaultWhite">
         <item name="android:textSize">14sp</item>

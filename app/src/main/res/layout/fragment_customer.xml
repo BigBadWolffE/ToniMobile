@@ -19,8 +19,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/bg_oval_white_grey_30dp"
         android:drawableRight="@drawable/ic_search_black_24dp"
+        android:background="@drawable/bg_oval_white_grey_30dp"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:gravity="center"
@@ -29,7 +29,7 @@
         app:layout_constraintBottom_toTopOf="@id/guideline1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline1"

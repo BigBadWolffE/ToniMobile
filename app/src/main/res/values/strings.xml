@@ -13,7 +13,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <!-- Login Layout -->
+    <!-- LoginActivity Layout -->
     <string name="toko_tutup"><h2>TOKO TUTUP</h2></string>
     <string name="toko_tutup_low">Toko Tutup</string>
     <string name="toko_buka">TOKO BUKA</string>
@@ -266,6 +266,9 @@
     <string name="cari_produsen">Cari Produsen</string>
 
     <!-- DIALOG MESSAGE -->
+    <string name="dialog_label_close_app">“YAKIN KELUAR \n DARI APLIKASI TONI?”</string>
+    <string name="dialog_desc_close_app">Aplikasi TONI akan ditutup \n silahkan klik Ya untuk melanjutkan.</string>
+
     <string name="dialog_label_update_product">“YAKIN PERUBAHAN \n DATA ANDA BENAR?”</string>
     <string name="dialog_desc_update_product">Periksa dahulu perubahan data informasi Anda \n sebelum melanjutkan ke tahap berikutnya.</string>
 
@@ -282,5 +285,6 @@
     <string name="total_hutang_cap">TOTAL HUTANG</string>
     <string name="input_credit">Silahkan isi nominal hutang</string>
     <string name="input_amount_pay">Silahkan isi nomial pembayaran</string>
+    <string name="register">Daftar akun</string>
 
 </resources>

@@ -19,12 +19,15 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.List;
 
+import co.crowde.toni.controller.main.PrintController;
 import co.crowde.toni.controller.main.UserController;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CatalogModel;
 import co.crowde.toni.model.CustomerModel;
+import co.crowde.toni.model.body.post.CreditPay;
 import co.crowde.toni.view.activity.catalog.CatalogProduct;
 import co.crowde.toni.view.activity.customer.SelectCustomer;
+import co.crowde.toni.view.fragment.cart.CartPayment;
 
 public class CustomerRequest {
 
@@ -172,6 +175,78 @@ public class CustomerRequest {
 //                                SelectCustomer.customerAdapter.notifyDataSetChanged();
 //                                SelectCustomer.alertDialog.dismiss();
 //                                SelectCustomer.loadCustomerList(activity);
+
+                            } else {
+                                if(message.equals("Token tidak valid")){
+                                    UserController.tokenExpired(activity, message);
+
+                                } else if(message.equals("Internal server error!")){
+                                    SelectCustomer.progressDialog.dismiss();
+                                    Toast.makeText(activity, "Nama Pelanggan atau Nomor Telepon sudah terdaftar.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+
+            }
+        });
+    }
+
+    public static void payCredit(final Activity activity){
+
+        final CreditPay pay = new CreditPay();
+        pay.setShopId(SavePref.readShopId(activity));
+        pay.setCustomerId(SavePref.readCustomerId(activity));
+        pay.setAmount(String.valueOf(CartPayment.creditPay));
+
+        String postBody = new Gson().toJson(pay);
+
+        OkHttpClient client = new OkHttpClient();
+
+        RequestBody body = RequestBody.create(JSON, postBody);
+        Log.e("REQUEST BODY",body.toString());
+
+        Request requestHttp = new Request.Builder()
+                .header("Authorization", SavePref.readToken(activity))
+                .url(API.CreditPaid)
+                .post(body)
+                .build();
+
+        client.newCall(requestHttp).enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, final IOException e) {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(
+                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+                        Log.e("Error",e.toString());
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(final Response response) throws IOException {
+                final String responseData = response.body().string();
+                Log.e("RESPONSE BODY", responseData);
+
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            JSONObject json = new JSONObject(responseData);
+                            boolean status = json.getBoolean("status");
+                            message = json.getString("message");
+                            String data = json.getString("data");
+                            Log.e("DATA RESPONSE", data);
+
+                            if(status){
+                                Log.e("Res", data);
 
                             } else {
                                 if(message.equals("Token tidak valid")){

@@ -1,8 +1,9 @@
-package co.crowde.toni.view.activity.openshop;
+package co.crowde.toni.view.activity.shop;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import co.crowde.toni.R;
 import co.crowde.toni.controller.main.UserController;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.view.activity.home.MainActivity;
+import co.crowde.toni.view.dialog.app.CloseAppsDialog;
 
 public class OpenShop extends AppCompatActivity {
     public static TextView tvOpenShopHeader,
@@ -26,12 +28,12 @@ public class OpenShop extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
-//        if (tabletSize) {
-//            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-//        } else {
-//            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-//        }
+        boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
+        if (tabletSize) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
 
         setContentView(R.layout.activity_open_shop);
 
@@ -78,14 +80,6 @@ public class OpenShop extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        new AlertDialog.Builder(this)
-                .setTitle("Tutup Aplikasi TONI")
-                .setMessage("Apakah Anda ingin menutup aplikasi TONI?")
-                .setNegativeButton(android.R.string.no, null)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        OpenShop.super.onBackPressed();
-                    }
-                }).create().show();
+        CloseAppsDialog.showDialog(OpenShop.this);
     }
 }

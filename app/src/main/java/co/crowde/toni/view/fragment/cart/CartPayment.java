@@ -497,6 +497,7 @@ implements View.OnClickListener{
 
         formatNumber = new DecimalFormat("###,###,###,###,###,###");
         creditPay = 0;
+        totalBill = 0;
 
         //setting the view of the builder to our custom view that we already inflated
         builder.setView(dialogView);
@@ -522,57 +523,7 @@ implements View.OnClickListener{
         groupNominal = dialogView.findViewById(R.id.groupNominal);
         groupNominalAmount = dialogView.findViewById(R.id.groupNOminalAmount);
 
-        cashCredit01 = (int) Math.ceil((double)Dashboard.totalAmount/5000)*5000;
-        cashCredit02 = (int) Math.ceil((double)Dashboard.totalAmount/10000)*10000;
-        cashCredit03 = (int) Math.ceil((double)Dashboard.totalAmount/20000)*20000;
-        cashCredit04 = (int) Math.ceil((double)Dashboard.totalAmount/50000)*50000;
-        cashCredit05 = (int) Math.ceil((double)Dashboard.totalAmount/100000)*100000;
-
         showCreditGroup(activity);
-
-        if(Dashboard.totalAmount<49999){
-            if(cashCredit01==cashCredit02 || cashCredit01==cashCredit03 || cashCredit02==cashCredit03){
-                tvCashCredit02.setText(formatNumber.format(cashCredit01)+",-");
-                tvCashCredit03.setText(formatNumber.format(cashCredit04)+",-");
-                tvCashCredit04.setText(formatNumber.format(cashCredit05)+",-");
-            } else {
-                tvCashCredit02.setText(formatNumber.format(cashCredit01)+",-");
-                tvCashCredit03.setText(formatNumber.format(cashCredit02)+",-");
-                tvCashCredit04.setText(formatNumber.format(cashCredit03)+",-");
-
-            }
-        } else if(Dashboard.totalAmount>49999 && Dashboard.totalAmount<100000){
-            if(cashCredit01==cashCredit02 || cashCredit01==cashCredit03 || cashCredit02==cashCredit03){
-                tvCashCredit02.setText(formatNumber.format(cashCredit02)+",-");
-                tvCashCredit03.setText(formatNumber.format(cashCredit03)+",-");
-                tvCashCredit04.setText(formatNumber.format(cashCredit04)+",-");
-            } else {
-                tvCashCredit02.setText(formatNumber.format(cashCredit01)+",-");
-                tvCashCredit03.setText(formatNumber.format(cashCredit02)+",-");
-                tvCashCredit04.setVisibility(View.VISIBLE);
-                tvCashCredit04.setText(formatNumber.format(cashCredit03)+",-");
-
-            }
-
-        } else if(Dashboard.totalAmount>99999){
-            if(cashCredit01==cashCredit02 || cashCredit01==cashCredit03 || cashCredit02==cashCredit03){
-                tvCashCredit02.setText(formatNumber.format(cashCredit03)+",-");
-                tvCashCredit03.setText(formatNumber.format(cashCredit04)+",-");
-                tvCashCredit04.setText(formatNumber.format(cashCredit05)+",-");
-                if(cashCredit04==cashCredit05){
-                    tvCashCredit04.setVisibility(View.GONE);
-                } else {
-                    tvCashCredit04.setVisibility(View.VISIBLE);
-                }
-            } else {
-                tvCashCredit02.setText(formatNumber.format(cashCredit01)+",-");
-                tvCashCredit03.setText(formatNumber.format(cashCredit02)+",-");
-                tvCashCredit04.setVisibility(View.VISIBLE);
-                tvCashCredit04.setText(formatNumber.format(cashCredit03)+",-");
-
-            }
-
-        }
 
         tvAmountCashCredit.setText("Rp. "+formatNumber.format(Dashboard.totalAmount)+",-");
         etCashCredit.addTextChangedListener(watcherCashCredit);
@@ -595,9 +546,9 @@ implements View.OnClickListener{
                 paymentType = "Cash";
                 enablePayBill();
                 nominal = totalBill;
-                tvPayment.setText("Rp. "+formatNumber.format(nominal)+",-");
+
                 showLabel(activity);
-                dialogCash.dismiss();
+                dialogCashCredit.dismiss();
             }
         });
 
@@ -612,9 +563,9 @@ implements View.OnClickListener{
                 enablePayBill();
                 nominal = Integer.parseInt(tvCashCredit02.getText().toString()
                         .replaceAll("[,-]",""));
-                tvPayment.setText("Rp. "+formatNumber.format(nominal)+",-");
+
                 showLabel(activity);
-                dialogCash.dismiss();
+                dialogCashCredit.dismiss();
             }
         });
 
@@ -629,9 +580,9 @@ implements View.OnClickListener{
                 enablePayBill();
                 nominal = Integer.parseInt(tvCashCredit03.getText().toString()
                         .replaceAll("[,-]",""));
-                tvPayment.setText("Rp. "+formatNumber.format(nominal)+",-");
+
                 showLabel(activity);
-                dialogCash.dismiss();
+                dialogCashCredit.dismiss();
             }
         });
 
@@ -646,9 +597,9 @@ implements View.OnClickListener{
                 enablePayBill();
                 nominal = Integer.parseInt(tvCashCredit04.getText().toString()
                         .replaceAll("[,-]",""));
-                tvPayment.setText("Rp. "+formatNumber.format(nominal)+",-");
+
                 showLabel(activity);
-                dialogCash.dismiss();
+                dialogCashCredit.dismiss();
             }
         });
 
@@ -656,6 +607,8 @@ implements View.OnClickListener{
         dialogCashCredit.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
     }
+
+
 
     public TextWatcher watcherCashCredit = new TextWatcher() {
         @Override
@@ -666,7 +619,9 @@ implements View.OnClickListener{
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if(etCashCredit.getText().length()>0){
                 if (Integer.parseInt(etCashCredit.getText().toString()
-                        .replaceAll("[,-]",""))<=900) {
+                        .replaceAll("[,-]",""))<=999 ||
+                        Integer.parseInt(etCashCredit.getText().toString()
+                                .replaceAll("[,-]",""))>model.getSaldo()) {
                     btnCreditOK.setBackground(getResources().getDrawable(R.drawable.bg_rec_stroke_radius_5dp_grey));
                     btnCreditOK.setTextColor(getResources().getColor(R.color.colorThemeGrey));
                     btnCreditOK.setEnabled(false);
@@ -880,7 +835,14 @@ implements View.OnClickListener{
 
             if(payment){
                 change = nominal - totalBill;
+                totalCredit = model.getSaldo() - creditPay;
+
+                tvPayment.setText("Rp. "+formatNumber.format(nominal)+",-");
+                tvCredit.setText("Rp. "+formatNumber.format(creditPay)+",-");
+                tvAmount.setText("Rp. " +formatNumber.format(totalBill)+",-");
                 tvChange.setText("Rp. "+formatNumber.format(change)+",-");
+                tvCreditTotal.setText("Rp. "+formatNumber.format(totalCredit)+",-");
+
                 imgCashBtn.setImageDrawable(activity
                         .getResources().getDrawable(R.drawable.ic_add_black_24dp));
                 imgCreditBtn.setImageDrawable(activity
@@ -896,8 +858,8 @@ implements View.OnClickListener{
                 cvCashCredit.setCardElevation(2);
             }
 
-            tvPaymentLabel.setVisibility(View.GONE);
-            tvPayment.setVisibility(View.GONE);
+            tvPaymentLabel.setVisibility(View.VISIBLE);
+            tvPayment.setVisibility(View.VISIBLE);
 
             tvCreditLabel.setVisibility(View.VISIBLE);
             tvCredit.setVisibility(View.VISIBLE);
@@ -908,13 +870,12 @@ implements View.OnClickListener{
             tvCreditTotalLabel.setVisibility(View.VISIBLE);
             tvCreditTotal.setVisibility(View.VISIBLE);
 
-//            cvConfirm.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-////                    Toast.makeText(activity, "TUNAI + HUTANG", Toast.LENGTH_SHORT).show();
-//                    MessageConfirmTransaction.showDialog(activity);
-//                }
-//            });
+            cvConfirm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MessageConfirmTransaction.showDialog(activity);
+                }
+            });
 
         } else {
 
@@ -948,8 +909,14 @@ implements View.OnClickListener{
         }
     }
 
-    public void showCreditGroup(Activity activity){
+    public void showCreditGroup(final Activity activity){
         if(creditPay!=0){
+
+            totalBill = Dashboard.totalAmount+Integer.parseInt(etCashCredit.getText().toString()
+                    .replaceAll("[,-]",""));
+            squareupTotalAmount();
+
+
             groupCredit.setVisibility(View.GONE);
             groupNominal.setVisibility(View.VISIBLE);
             groupNominalAmount.setVisibility(View.VISIBLE);
@@ -957,14 +924,23 @@ implements View.OnClickListener{
             labelCredit.setText("Berhasil menambahkan");
             labelCredit.setTextColor(activity.getResources().getColor(R.color.colorThemeOrange));
             tvCreditAdd.setText("Hutang Rp."+formatNumber.format(creditPay)+",-");
-            labelCredit.setTextColor(activity.getResources().getColor(R.color.colorThemeOrange));
+            tvCreditAdd.setTextColor(activity.getResources().getColor(R.color.colorThemeOrange));
             layoutCredit.setBackground(activity.getResources().getDrawable(R.drawable.bg_rec_stroke_radius_5dp_orange));
             layoutCredit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    totalBill = 0;
+                    creditPay = 0;
+                    etCashCredit.setText("");
+                    showCreditGroup(activity);
                     
                 }
             });
+
+            tvAmountCashCredit.setTextColor(activity.getResources().getColor(R.color.colorThemeOrange));
+            tvAmountCashCredit.setText("Rp. "+(formatNumber.format(totalBill))+",-");
+
+
         } else {
             groupCredit.setVisibility(View.VISIBLE);
             groupNominal.setVisibility(View.GONE);
@@ -973,8 +949,63 @@ implements View.OnClickListener{
             labelCredit.setText("Hutang");
             labelCredit.setTextColor(activity.getResources().getColor(R.color.colorWhite));
             tvCreditAdd.setText("Rp. "+formatNumber.format(model.getSaldo())+",-");
-            labelCredit.setTextColor(activity.getResources().getColor(R.color.colorWhite));
+            tvCreditAdd.setTextColor(activity.getResources().getColor(R.color.colorWhite));
             layoutCredit.setBackground(activity.getResources().getDrawable(R.drawable.bg_rec_orange_radius_5dp));
+
+            tvAmountCashCredit.setTextColor(activity.getResources().getColor(R.color.colorWhite));
+            tvAmountCashCredit.setText("Rp. "+formatNumber.format(Dashboard.totalAmount)+",-");
+        }
+    }
+
+    private void squareupTotalAmount() {
+        cashCredit01 = (int) Math.ceil((double)totalBill/5000)*5000;
+        cashCredit02 = (int) Math.ceil((double)totalBill/10000)*10000;
+        cashCredit03 = (int) Math.ceil((double)totalBill/20000)*20000;
+        cashCredit04 = (int) Math.ceil((double)totalBill/50000)*50000;
+        cashCredit05 = (int) Math.ceil((double)totalBill/100000)*100000;
+
+        if(totalBill<49999){
+            if(cashCredit01==cashCredit02 || cashCredit01==cashCredit03 || cashCredit02==cashCredit03){
+                tvCashCredit02.setText(formatNumber.format(cashCredit01)+",-");
+                tvCashCredit03.setText(formatNumber.format(cashCredit04)+",-");
+                tvCashCredit04.setText(formatNumber.format(cashCredit05)+",-");
+            } else {
+                tvCashCredit02.setText(formatNumber.format(cashCredit01)+",-");
+                tvCashCredit03.setText(formatNumber.format(cashCredit02)+",-");
+                tvCashCredit04.setText(formatNumber.format(cashCredit03)+",-");
+
+            }
+        } else if(totalBill>49999 && totalBill<100000){
+            if(cashCredit01==cashCredit02 || cashCredit01==cashCredit03 || cashCredit02==cashCredit03){
+                tvCashCredit02.setText(formatNumber.format(cashCredit02)+",-");
+                tvCashCredit03.setText(formatNumber.format(cashCredit03)+",-");
+                tvCashCredit04.setText(formatNumber.format(cashCredit04)+",-");
+            } else {
+                tvCashCredit02.setText(formatNumber.format(cashCredit01)+",-");
+                tvCashCredit03.setText(formatNumber.format(cashCredit02)+",-");
+                tvCashCredit04.setVisibility(View.VISIBLE);
+                tvCashCredit04.setText(formatNumber.format(cashCredit03)+",-");
+
+            }
+
+        } else if(totalBill>99999){
+            if(cashCredit01==cashCredit02 || cashCredit01==cashCredit03 || cashCredit02==cashCredit03){
+                tvCashCredit02.setText(formatNumber.format(cashCredit03)+",-");
+                tvCashCredit03.setText(formatNumber.format(cashCredit04)+",-");
+                tvCashCredit04.setText(formatNumber.format(cashCredit05)+",-");
+                if(cashCredit04==cashCredit05){
+                    tvCashCredit04.setVisibility(View.GONE);
+                } else {
+                    tvCashCredit04.setVisibility(View.VISIBLE);
+                }
+            } else {
+                tvCashCredit02.setText(formatNumber.format(cashCredit01)+",-");
+                tvCashCredit03.setText(formatNumber.format(cashCredit02)+",-");
+                tvCashCredit04.setVisibility(View.VISIBLE);
+                tvCashCredit04.setText(formatNumber.format(cashCredit03)+",-");
+
+            }
+
         }
     }
 

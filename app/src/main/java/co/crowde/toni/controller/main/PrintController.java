@@ -19,6 +19,8 @@ import co.crowde.toni.model.CartModel;
 import co.crowde.toni.model.CustomerModel;
 import co.crowde.toni.model.UserDetailModel;
 import co.crowde.toni.model.response.object.AddNewTransactionModel;
+import co.crowde.toni.model.response.object.CreditPayModel;
+import co.crowde.toni.network.CustomerRequest;
 import co.crowde.toni.view.fragment.cart.CartPayment;
 import co.crowde.toni.view.fragment.modul.Dashboard;
 
@@ -75,7 +77,7 @@ public class PrintController {
             printText("Kode Struk: "+model.getTransactionId()+"\n");
             printText("Tanggal   : "+ubahTanggalTransaksi+"\n");
 //                                    printText("Tanggal   : "+ubahTanggalTransaksi+"\n");
-            printText("Pelanggan : "+model.getCostumerName()+"\n");
+            printText("Pelanggan : "+model.getCustomerName()+"\n");
             printText("================================\n");
 
             for(CartModel cartModel : Dashboard.cartModels){
@@ -173,7 +175,7 @@ public class PrintController {
             printText("Kode Struk: "+model.getTransactionId()+"\n");
             printText("Tanggal   : "+ubahTanggalTransaksi+"\n");
 //                                    printText("Tanggal   : "+ubahTanggalTransaksi+"\n");
-            printText("Pelanggan : "+model.getCostumerName()+"\n");
+            printText("Pelanggan : "+model.getCustomerName()+"\n");
             printText("================================\n");
 
             DecimalFormatRupiah.changeFormat(activity);
@@ -231,7 +233,116 @@ public class PrintController {
         }
     }
 
-    public static void printCashCredit(Activity activity, String data){
+    public static void printCashCredit(Activity activity, String dataTransaction){
+        AddNewTransactionModel model = new Gson().fromJson(dataTransaction, AddNewTransactionModel.class);
+
+//        CreditPayModel creditPay = new Gson().fromJson(credit, CreditPayModel.class);
+
+        UserDetailModel models = new Gson().fromJson(SavePref.readUserDetail(activity), UserDetailModel.class);
+
+        CustomerModel customer = new Gson().fromJson(SavePref.readCustomer(activity), CustomerModel.class);
+
+        String village = models.getVillage();
+        String villages = village.replaceAll("[^A-Za-z ]","");
+        String district = models.getDistrict();
+        String districts = district.replaceAll("[^A-Za-z ]","");
+        String regency = models.getRegency();
+        String regencys = regency.replaceAll("[^A-Za-z ]","");
+        String province = models.getProvince();
+        String provinces = province.replaceAll("[^A-Za-z ]","");
+
+        String tanggalTransaksi = model.getCreatedAt();
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = null;
+        try {
+            date = dateFormat.parse(tanggalTransaksi);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        DateFormat formatter = new SimpleDateFormat("dd-MM-YYYY HH:mm"); //If you need time just put specific format for time like 'HH:mm:ss'
+        String ubahTanggalTransaksi = formatter.format(date);
+        try {
+            os = mBluetoothSocket.getOutputStream();
+
+            printNewLine();
+            printPhoto(R.drawable.toni_black, activity);
+
+            printCustom(models.getShopName().toUpperCase(),0,1);
+            printCustom(models.getStreet(),0,1);
+            printCustom(villages+", "+districts,0,1);
+            printCustom(regencys,0,1);
+            printCustom("",0,0);
+
+            printNewLine();
+            printText("Kode Struk: "+model.getTransactionId()+"\n");
+            printText("Tanggal   : "+ubahTanggalTransaksi+"\n");
+//                                    printText("Tanggal   : "+ubahTanggalTransaksi+"\n");
+            printText("Pelanggan : "+model.getCustomerName()+"\n");
+            printText("================================\n");
+
+            DecimalFormatRupiah.changeFormat(activity);
+
+            for(CartModel cartModel : Dashboard.cartModels){
+                String product = cartModel.getProductName();
+                String nama;
+                if(product.contains("_")){
+                    nama = StringUtils.substringBeforeLast(product, "_")
+                            +"("+StringUtils.substringAfterLast(product, "_")+")";
+                } else {
+                    nama = product;
+                }
+
+                int qty = cartModel.getQuantity();
+                String price = formatNumber.format(cartModel.getSellingPrice());
+                String total = formatNumber.format(cartModel.getAmount());
+                printText(nama+"\n");
+                printText(String.format("%-17s %14s",qty+" x "+price,total)+"\n");
+            }
+
+            printText("================================\n");
+            printText(String.format("%-18s %13s","Bayar Hutang",
+                    formatNumber.format(CartPayment.creditPay))+"\n");
+
+            printText("================================\n");
+            final int totalHutangSekarang = CartPayment.totalBill;
+            String ubahTotal = String.valueOf(totalHutangSekarang);
+            printText(String.format("%-18s %13s", "" +
+                            "Total Item : " + (Dashboard.totalItem + 1),
+                    formatNumber.format(Integer.parseInt(ubahTotal))) + "\n");
+
+            printNewLine();
+            printText(String.format("%-10s %21s","Tunai",
+                    formatNumber.format(Integer
+                            .parseInt(model.getPaid())))+"\n");
+            printText(String.format("%-10s %21s","Kembali",
+                    formatNumber.format(Integer
+                            .parseInt(model.get_change())))+"\n");
+
+            printNewLine();
+            printText(String.format("%-18s %13s","Hutang Sebelumnya",
+                    formatNumber.format(customer.getSaldo()))+"\n");
+            printText(String.format("%-15s %16s","Total Hutang",(
+                    formatNumber.format(customer.getSaldo()-CartPayment.creditPay)))+"\n");
+
+            printNewLine();
+            printNewLine();
+            printCustom("Terima Kasih telah membeli\nproduk pertanian di\nToko "
+                    + models.getShopName(), 0, 1);
+
+            printNewLine();
+            printText("--------------------------------\n");
+            printCustom("Layanan Konsumen Toko", 0, 1);
+            printCustom(models.getPhoneNumber(), 0, 1);
+            printCustom("", 0, 0);
+
+            printNewLine();
+            printNewLine();
+
+            os.flush();
+        }catch (IOException e) {
+        }
 
     }
 }

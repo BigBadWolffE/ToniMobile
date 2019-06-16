@@ -115,7 +115,7 @@ public class TransaksiBagianPelangganAdapter extends RecyclerView.Adapter<Recycl
             viewHolder.namapelanggan.setText(model.getCustomerName());
             //date setup
             String tanggal = model.getCreatedAt();
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
             Date date = null;
             try {
                 date = dateFormat.parse(tanggal);

@@ -9,8 +9,8 @@ public class API{
     public static final String Slash = "/";
     public static final String Count = "?count=9999";
 
-    //    public static final String Host = "https://apitoni-staging.crowde.co/";
-    public static final String Host = "https://toni-api.crowde.co/";
+        public static final String Host = "https://apitoni-staging.crowde.co/";
+//    public static final String Host = "https://toni-api.crowde.co/";
     public static final String API = Host+"api/";
 
     public static final String User = API+"user";
@@ -23,12 +23,14 @@ public class API{
     public static final String Warehouse = API+"warehouse";
     public static final String Transaction = API+"transaction";
     public static final String Report = API+"report";
+    public static final String Credit = API+"credit";
 
     public static final String Login = User+Slash+"login";
 
     public static final String GetShopDetail = Shop+Slash;
     public static final String OpenShop = Shop+Slash+"openShop";
     public static final String ClosedShop = Shop+Slash+"closeShop";
+    public static final String CreditPaid = Credit+Slash+"paid";
 
     public static final String AddNewProduct = Product+Slash+"createMultiple";
 

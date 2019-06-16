@@ -21,8 +21,8 @@ import java.io.IOException;
 import co.crowde.toni.controller.auth.LoginController;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.UserModel;
-import co.crowde.toni.view.activity.auth.Login;
-import co.crowde.toni.view.activity.onboard.LoginSuccess;
+import co.crowde.toni.view.activity.auth.LoginActivity;
+import co.crowde.toni.view.activity.auth.LoginSuccess;
 
 public class LoginRequest {
 
@@ -30,8 +30,11 @@ public class LoginRequest {
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     public static void postLogin(final Activity activity){
-        String username = Login.et_username.getText().toString();
-        String password = Login.et_password.getText().toString();
+//        String username = LoginActivity.et_username.getText().toString();
+//        String password = LoginActivity.et_password.getText().toString();
+
+        String username = "";
+        String password = "";
 
         final UserModel user = new UserModel();
         user.setUsername(username);
@@ -59,7 +62,7 @@ public class LoginRequest {
                     public void run() {
                         Toast.makeText(
                                 activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
-                        Login.progressDialog.dismiss();
+//                        LoginActivity.progressDialog.dismiss();
                         Log.e("Error",e.toString());
                     }
                 });
@@ -98,8 +101,8 @@ public class LoginRequest {
                                 activity.finish();
 
                             } else {
+//                                LoginActivity.progressDialog.dismiss();
                                 LoginController.loginResponse(activity, message);
-                                Login.progressDialog.dismiss();
                             }
 
                         } catch (JSONException e) {

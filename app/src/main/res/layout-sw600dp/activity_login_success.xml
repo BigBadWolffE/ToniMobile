@@ -4,186 +4,390 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/img1"
-    tools:context=".view.activity.onboard.LoginSuccess">
+    android:background="@color/colorWhite"
+    tools:context=".view.activity.auth.LoginSuccess">
 
-    <View
-        android:id="@+id/bgView"
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <ImageView
+        android:id="@+id/imgLogo"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/bg_black_transparent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:srcCompat="@drawable/toni_logo"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2a"
+        app:layout_constraintDimensionRatio="16:9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/guideline" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2a"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/bgMain"
+        android:id="@+id/layoutLoginHeader"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/bg_white_transparent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/imgLogo"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:src="@drawable/toni_logo"
-            app:layout_constraintBottom_toTopOf="@+id/line02"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/line01" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="@+id/layoutLoginMain"
+        app:layout_constraintStart_toStartOf="@+id/layoutLoginMain"
+        app:layout_constraintTop_toTopOf="@id/guideline2a">
 
         <TextView
-            android:id="@+id/tvLoginHeader"
+            android:id="@+id/tvLogSuccessHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="4dp"
-            android:gravity="center"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
             android:text="@string/toko_tutup"
-            android:textSize="36sp"
-            android:textStyle="bold"
             android:textColor="@color/colorBlack"
-            app:layout_constraintBottom_toTopOf="@+id/tvOpenShopLabel"
+            android:textSize="@dimen/text_36_size"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/line02"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread" />
 
-        <TextView
-            android:id="@+id/tvOpenShopLabel"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:gravity="center"
-            android:text="@string/waktu_tutup"
-            android:textColor="@color/colorBlack"
-            app:layout_constraintBottom_toTopOf="@+id/tvClosedTime"
-            app:layout_constraintEnd_toEndOf="@+id/tvLoginHeader"
-            app:layout_constraintStart_toStartOf="@+id/tvLoginHeader"
-            app:layout_constraintTop_toBottomOf="@+id/tvLoginHeader" />
-
-        <TextView
-            android:id="@+id/tvClosedTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
             android:layout_marginBottom="8dp"
             android:gravity="center"
-            android:text="-"
-            android:textColor="@color/colorBlack"
-            app:layout_constraintBottom_toTopOf="@+id/line04"
-            app:layout_constraintEnd_toEndOf="@+id/tvLoginHeader"
-            app:layout_constraintStart_toStartOf="@+id/tvLoginHeader"
-            app:layout_constraintTop_toBottomOf="@+id/tvOpenShopLabel" />
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvLogSuccessHeader">
+
+            <TextView
+                android:id="@+id/tvClosedLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/waktu_tutup"
+                android:textSize="@dimen/text_default_size"
+                android:textColor="@color/TextColorDefault"/>
+
+            <TextView
+                android:id="@+id/tvClosedTime"
+                style="@style/TextDefaultGreenDark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/strips"
+                android:textSize="@dimen/text_default_size"
+                android:textColor="@color/TextColorDefault"/>
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/layoutLoginMain"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@id/guideline3"
+        app:layout_constraintDimensionRatio="2.5:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline2">
 
         <TextView
             android:id="@+id/tvLoginAs"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="4dp"
-            android:gravity="center"
             android:text="@string/anda_terdaftar_sebagai"
-            android:textColor="@color/colorBlack"
-            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="@color/TextColorDefault"
+            android:textSize="@dimen/text_default_size"
             app:layout_constraintBottom_toTopOf="@+id/tvOwnerName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/line04"
-            app:layout_constraintVertical_bias="0.7"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
             android:id="@+id/tvOwnerName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
             android:text="@string/strips"
-            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_24_size"
+            android:textColor="@color/TextColorDefault"
             android:textStyle="bold"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/line07"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvLoginAs" />
 
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/layoutLogSuccessFooter"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/layoutLoginMain"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/layoutLoginMain"
+        app:layout_constraintTop_toBottomOf="@id/guideline3">
+
         <android.support.v7.widget.CardView
             android:id="@+id/cvBtnOpen"
             android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_height="@dimen/height_button"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
             app:cardBackgroundColor="@color/colorThemeOrange"
-            app:cardCornerRadius="20dp"
-            app:layout_constraintDimensionRatio="5:1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/line07">
+            app:cardCornerRadius="@dimen/radius"
+            app:layout_constraintEnd_toEndOf="@id/layoutLogSuccessFooter"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/layoutLogSuccessFooter"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/layoutLogSuccessFooter">
 
             <TextView
                 android:id="@+id/tvBtnOpenLabel"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/buka_toko_cap"
-                android:textColor="@color/colorWhite"
-                android:textStyle="bold"
-                app:autoSizeMaxTextSize="20sp"
-                app:autoSizeMinTextSize="10sp"
-                app:autoSizeTextType="uniform" />
+                style="@style/TextButtonWhiteBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/buka_toko_cap" />
+
         </android.support.v7.widget.CardView>
-
-
-        <android.support.constraint.Guideline
-            android:id="@+id/line01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.05" />
-
-        <android.support.constraint.Guideline
-            android:id="@+id/line02"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.15" />
-
-        <android.support.constraint.Guideline
-            android:id="@+id/line04"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.5" />
-
-        <android.support.constraint.Guideline
-            android:id="@+id/line07"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.8" />
 
     </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@drawable/img1"-->
+    <!--tools:context=".view.activity.onboard.LoginSuccess">-->
+
+    <!--<View-->
+        <!--android:id="@+id/bgView"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:background="@drawable/bg_black_transparent"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--<android.support.constraint.ConstraintLayout-->
+        <!--android:id="@+id/bgMain"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_marginStart="32dp"-->
+        <!--android:layout_marginLeft="32dp"-->
+        <!--android:layout_marginTop="32dp"-->
+        <!--android:layout_marginEnd="32dp"-->
+        <!--android:layout_marginRight="32dp"-->
+        <!--android:layout_marginBottom="32dp"-->
+        <!--android:background="@drawable/bg_white_transparent"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintDimensionRatio="1:1"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent">-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/imgLogo"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:src="@drawable/toni_logo"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/line02"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="@+id/line01" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tvLoginHeader"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--android:layout_marginBottom="4dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="@string/toko_tutup"-->
+            <!--android:textSize="36sp"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textColor="@color/colorBlack"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/tvOpenShopLabel"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/line02"-->
+            <!--app:layout_constraintVertical_chainStyle="packed" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tvOpenShopLabel"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="4dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="@string/waktu_tutup"-->
+            <!--android:textColor="@color/colorBlack"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/tvClosedTime"-->
+            <!--app:layout_constraintEnd_toEndOf="@+id/tvLoginHeader"-->
+            <!--app:layout_constraintStart_toStartOf="@+id/tvLoginHeader"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/tvLoginHeader" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tvClosedTime"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="-"-->
+            <!--android:textColor="@color/colorBlack"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/line04"-->
+            <!--app:layout_constraintEnd_toEndOf="@+id/tvLoginHeader"-->
+            <!--app:layout_constraintStart_toStartOf="@+id/tvLoginHeader"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/tvOpenShopLabel" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tvLoginAs"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_marginBottom="4dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="@string/anda_terdaftar_sebagai"-->
+            <!--android:textColor="@color/colorBlack"-->
+            <!--android:textSize="20sp"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/tvOwnerName"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="@+id/line04"-->
+            <!--app:layout_constraintVertical_bias="0.7"-->
+            <!--app:layout_constraintVertical_chainStyle="packed" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tvOwnerName"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/strips"-->
+            <!--android:textColor="@color/colorBlack"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textSize="20sp"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/line07"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintHorizontal_bias="0.5"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/tvLoginAs" />-->
+
+        <!--<android.support.v7.widget.CardView-->
+            <!--android:id="@+id/cvBtnOpen"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--app:cardBackgroundColor="@color/colorThemeOrange"-->
+            <!--app:cardCornerRadius="20dp"-->
+            <!--app:layout_constraintDimensionRatio="5:1"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="@+id/line07">-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/tvBtnOpenLabel"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:gravity="center"-->
+                <!--android:text="@string/buka_toko_cap"-->
+                <!--android:textColor="@color/colorWhite"-->
+                <!--android:textStyle="bold"-->
+                <!--app:autoSizeMaxTextSize="20sp"-->
+                <!--app:autoSizeMinTextSize="10sp"-->
+                <!--app:autoSizeTextType="uniform" />-->
+        <!--</android.support.v7.widget.CardView>-->
+
+
+        <!--<android.support.constraint.Guideline-->
+            <!--android:id="@+id/line01"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--app:layout_constraintGuide_percent="0.05" />-->
+
+        <!--<android.support.constraint.Guideline-->
+            <!--android:id="@+id/line02"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--app:layout_constraintGuide_percent="0.15" />-->
+
+        <!--<android.support.constraint.Guideline-->
+            <!--android:id="@+id/line04"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--app:layout_constraintGuide_percent="0.5" />-->
+
+        <!--<android.support.constraint.Guideline-->
+            <!--android:id="@+id/line07"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--app:layout_constraintGuide_percent="0.8" />-->
+
+    <!--</android.support.constraint.ConstraintLayout>-->
+
+<!--</android.support.constraint.ConstraintLayout>-->

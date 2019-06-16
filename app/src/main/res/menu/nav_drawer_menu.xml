@@ -11,16 +11,16 @@
             android:icon="@drawable/ic_print_black_24dp"
             android:title="@string/hubungkan_printer" />
     </group>
-    <item android:title="@string/mode_offline">
-        <menu>
-            <item android:id="@+id/nav_offline"
-                android:icon="@drawable/ic_signal_cellular_connected_no_internet_0_bar_black_24dp"
-                android:title="Mode Offline : Off " />
-            <item android:id="@+id/nav_sync"
-                android:icon="@drawable/ic_sync_black_24dp"
-                android:title="@string/sinkronisasi" />
-        </menu>
-    </item>
+    <!--<item android:title="@string/mode_offline">-->
+        <!--<menu>-->
+            <!--<item android:id="@+id/nav_offline"-->
+                <!--android:icon="@drawable/ic_signal_cellular_connected_no_internet_0_bar_black_24dp"-->
+                <!--android:title="Mode Offline : Off " />-->
+            <!--<item android:id="@+id/nav_sync"-->
+                <!--android:icon="@drawable/ic_sync_black_24dp"-->
+                <!--android:title="@string/sinkronisasi" />-->
+        <!--</menu>-->
+    <!--</item>-->
 
     <group android:id="@+id/group2">
         <item android:id="@+id/nav_about"

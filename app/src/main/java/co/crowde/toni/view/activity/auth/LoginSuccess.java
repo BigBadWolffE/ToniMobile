@@ -1,10 +1,8 @@
-package co.crowde.toni.view.activity.onboard;
+package co.crowde.toni.view.activity.auth;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -17,7 +15,7 @@ import co.crowde.toni.R;
 import co.crowde.toni.network.ShopRequest;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.ShopModel;
-import co.crowde.toni.view.activity.auth.Login;
+import co.crowde.toni.view.dialog.app.CloseAppsDialog;
 
 public class LoginSuccess extends AppCompatActivity {
 
@@ -33,12 +31,13 @@ public class LoginSuccess extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
-//        if (tabletSize) {
-//            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-//        } else {
-//            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-//        }
+        boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
+        if (tabletSize) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+
         setContentView(R.layout.activity_login_success);
 
         progressDialog = new ProgressDialog(LoginSuccess.this);
@@ -109,15 +108,7 @@ public class LoginSuccess extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        new AlertDialog.Builder(this)
-                .setTitle("Tutup Aplikasi TONI")
-                .setMessage("Apakah Anda ingin menutup aplikasi TONI?")
-                .setNegativeButton(android.R.string.no, null)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        LoginSuccess.super.onBackPressed();
-                    }
-                }).create().show();
+        CloseAppsDialog.showDialog(LoginSuccess.this);
     }
 
 }

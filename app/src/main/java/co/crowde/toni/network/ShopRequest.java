@@ -20,8 +20,8 @@ import java.io.IOException;
 import co.crowde.toni.controller.main.UserController;
 import co.crowde.toni.helper.DateTimeFormater;
 import co.crowde.toni.helper.SavePref;
-import co.crowde.toni.view.activity.onboard.LoginSuccess;
-import co.crowde.toni.view.activity.openshop.OpenShop;
+import co.crowde.toni.view.activity.auth.LoginSuccess;
+import co.crowde.toni.view.activity.shop.OpenShop;
 
 public class ShopRequest {
 

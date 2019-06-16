@@ -11,9 +11,9 @@ import co.crowde.toni.network.ShopRequest;
 import co.crowde.toni.helper.DateTimeFormater;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.ShopModel;
-import co.crowde.toni.view.activity.auth.Login;
-import co.crowde.toni.view.activity.onboard.LoginSuccess;
-import co.crowde.toni.view.activity.openshop.OpenShop;
+import co.crowde.toni.view.activity.auth.LoginActivity;
+import co.crowde.toni.view.activity.auth.LoginSuccess;
+import co.crowde.toni.view.activity.shop.OpenShop;
 
 public class UserController {
 
@@ -43,7 +43,7 @@ public class UserController {
             activity.finish();
 
         } else if(SavePref.readToken(activity)==null){
-            Intent login = new Intent(activity, Login.class);
+            Intent login = new Intent(activity, LoginActivity.class);
             activity.startActivity(login);
             activity.finish();
 
@@ -69,7 +69,7 @@ public class UserController {
 
         Toast.makeText(activity, "Toko Sudah ditutup.", Toast.LENGTH_SHORT).show();
 
-        Intent logout = new Intent(activity, Login.class);
+        Intent logout = new Intent(activity, LoginActivity.class);
         activity.startActivity(logout);
         activity.finish();
     }
@@ -84,7 +84,7 @@ public class UserController {
 
         DateTimeFormater.getCurrentDateClosed(activity);
 
-        Intent logout = new Intent(activity, Login.class);
+        Intent logout = new Intent(activity, LoginActivity.class);
         activity.startActivity(logout);
         activity.finish();
 

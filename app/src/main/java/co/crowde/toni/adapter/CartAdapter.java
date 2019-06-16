@@ -19,6 +19,7 @@ import co.crowde.toni.R;
 import co.crowde.toni.database.Cart;
 import co.crowde.toni.listener.ItemClickListener;
 import co.crowde.toni.model.CartModel;
+import co.crowde.toni.view.fragment.modul.Dashboard;
 
 public class CartAdapter
         extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
@@ -112,6 +113,7 @@ public class CartAdapter
             @Override
             public void onClick(View v) {
                 listener.onDecreaseItem(v, position);
+                Dashboard.productDashboardAdapter.notifyDataSetChanged();
             }
         });
 
@@ -119,6 +121,7 @@ public class CartAdapter
             @Override
             public void onClick(View v) {
                 listener.onIncreaseItem(v, position);
+                Dashboard.productDashboardAdapter.notifyDataSetChanged();
             }
         });
 
@@ -126,6 +129,7 @@ public class CartAdapter
             @Override
             public void onClick(View v) {
                 listener.onChangeQty(v, position, holder.tvQty);
+                Dashboard.productDashboardAdapter.notifyDataSetChanged();
             }
         });
 

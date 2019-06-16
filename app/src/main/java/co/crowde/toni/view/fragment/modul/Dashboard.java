@@ -115,7 +115,6 @@ public class Dashboard extends Fragment {
         progressDialog = new ProgressDialog(getActivity());
         initAdapter(getActivity());
         requestFilter(getActivity());
-//        ProductRequest.getProductList(getActivity());
         initScrollListener(getActivity());
         showFloatingCart();
 
@@ -126,7 +125,6 @@ public class Dashboard extends Fragment {
         imgBtnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                FilterProductDashboardPopup.showFilterCategory(getActivity());
                 Intent filter = new Intent(getActivity(), DashboardFilter.class);
                 startActivity(filter);
             }
@@ -231,12 +229,10 @@ public class Dashboard extends Fragment {
             if (etSearch.getText().length() > 0) {
                 etSearch.setCompoundDrawablesWithIntrinsicBounds(
                         null, null, close, null);
-                etSearch.setEnabled(true);
 
             } else {
                 etSearch.setCompoundDrawablesWithIntrinsicBounds(
                         null,null,search,null);
-                etSearch.setEnabled(false);
             }
         }
 
@@ -256,30 +252,6 @@ public class Dashboard extends Fragment {
             }
         });
     }
-
-
-//    public static void productListLanscape(Activity activity){
-//        if(ProductController.categoryList.isEmpty()){
-//            ProductRequest.getProductList(activity);
-//            productModels = new ArrayList<>();
-//            productDashboardAdapter = new ProductDashboardAdapter(activity,
-//                    productModels, listener);
-//            rcProduct.setLayoutManager(new GridLayoutManager(activity, 3));
-//            rcProduct.setAdapter(productDashboardAdapter);
-//            imgBtnFilter.setBackground(
-//                    activity.getResources().getDrawable(R.color.colorWhite));
-//            imgBtnFilter.setImageResource(R.drawable.ic_tune_black_24dp);
-//
-//        } else {
-//            productDashboardAdapter = new ProductDashboardAdapter(activity,
-//                    productModelsFiltered, listener);
-//            rcProduct.setLayoutManager(new GridLayoutManager(activity, 3));
-//            rcProduct.setAdapter(Dashboard.productDashboardAdapter);
-//            imgBtnFilter.setBackground(
-//                    activity.getResources().getDrawable(R.drawable.bg_rec_radius_5dp_green));
-//            imgBtnFilter.setImageResource(R.drawable.ic_tune_white_24dp);
-//        }
-//    }
 
     public static void ifCartEmpty(Activity activity){
         dbCart = new Cart(activity);

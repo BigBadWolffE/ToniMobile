@@ -117,11 +117,11 @@ public class AddNewTransactionModel {
         this.lastUpdated = lastUpdated;
     }
 
-    public String getCostumerName() {
+    public String getCustomerName() {
         return customerName;
     }
 
-    public void setCostumerName(String costumerName) {
+    public void setCustomerName(String customerName) {
         this.customerName = customerName;
     }
 }

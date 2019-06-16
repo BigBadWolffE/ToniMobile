@@ -16,7 +16,6 @@
         android:layout_marginEnd="4dp"
         android:layout_marginRight="4dp"
         android:textSize="16sp"
-        android:textStyle="bold"
         android:textColor="@color/colorBlack"
         app:layout_constraintBottom_toTopOf="@+id/tvPhone"
         app:layout_constraintEnd_toEndOf="parent"

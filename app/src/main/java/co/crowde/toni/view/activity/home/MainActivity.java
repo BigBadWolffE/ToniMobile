@@ -144,11 +144,11 @@ public class MainActivity extends AppCompatActivity
 //            Toast.makeText(this, "Printer", Toast.LENGTH_SHORT).show();
             PrinterNetwork.pairingBluetooth(this);
 
-        } else if (id == R.id.nav_offline) {
-            Toast.makeText(this, "Mode Offline", Toast.LENGTH_SHORT).show();
-
-        } else if (id == R.id.nav_sync) {
-            Toast.makeText(this, "Sinkronisasi", Toast.LENGTH_SHORT).show();
+//        } else if (id == R.id.nav_offline) {
+//            Toast.makeText(this, "Mode Offline", Toast.LENGTH_SHORT).show();
+//
+//        } else if (id == R.id.nav_sync) {
+//            Toast.makeText(this, "Sinkronisasi", Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.nav_about) {
             Toast.makeText(this, "Tentang Aplikasi", Toast.LENGTH_SHORT).show();
