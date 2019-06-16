@@ -2,11 +2,12 @@ package co.crowde.toni.view.dialog.catalog;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 
 import co.crowde.toni.R;
 import co.crowde.toni.network.CatalogRequest;
