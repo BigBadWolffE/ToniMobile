@@ -94,8 +94,9 @@ public class InventoryFilter extends AppCompatActivity {
         toolbarFilter.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-                Inventory.requestFilter(InventoryFilter.this);
+                onBackPressed();
+//                finish();
+//                Inventory.requestFilter(InventoryFilter.this);
             }
         });
 
@@ -338,7 +339,7 @@ public class InventoryFilter extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        finish();
         Inventory.requestFilter(InventoryFilter.this);
+        super.onBackPressed();
     }
 }

@@ -173,7 +173,7 @@ public class ProductRequest {
                                         .fromJson(data,
                                                 new TypeToken<List<ProductModel>>() {
                                                 }.getType());
-                                Inventory.updateDataProduct(productModels);
+                                Inventory.updateDataProduct(productModels, page);
                                 Inventory.progressDialog.dismiss();
                             } else if(message.equals("Data produk tidak ditemukan!")){
                                 if (Inventory.productModels.size() != 0){

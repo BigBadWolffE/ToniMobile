@@ -129,7 +129,7 @@ public class Inventory extends Fragment {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    public void searchProduct(final Activity activity, Context context){
+    public void searchProduct(final Activity activity, Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             close = context.getDrawable(R.drawable.ic_close_black_24dp);
             search = context.getDrawable(R.drawable.ic_search_black_24dp);
@@ -137,7 +137,7 @@ public class Inventory extends Fragment {
             close = activity.getResources().getDrawable(R.drawable.ic_close_black_24dp);
             search = activity.getResources().getDrawable(R.drawable.ic_search_black_24dp);
         }
-        etSearch.setCompoundDrawablesWithIntrinsicBounds(null,null,search,null);
+        etSearch.setCompoundDrawablesWithIntrinsicBounds(null, null, search, null);
         etSearch.addTextChangedListener(searchWatcher);
         etSearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -178,17 +178,17 @@ public class Inventory extends Fragment {
                 final int DRAWABLE_RIGHT = 2;
                 final int DRAWABLE_BOTTOM = 3;
 
-                if(event.getAction() == MotionEvent.ACTION_UP) {
-                    if(event.getRawX() >= (etSearch.getRight() -
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (etSearch.getRight() -
                             etSearch.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                        if(etSearch.length()>0){
+                        if (etSearch.length() > 0) {
                             progressDialog = new ProgressDialog(getActivity());
                             progressDialog.setMessage("Harap tunggu...");
                             progressDialog.setCanceledOnTouchOutside(false);
                             progressDialog.show();
                             etSearch.setText("");
                             event.setAction(MotionEvent.ACTION_CANCEL);
-                            ProductRequest.productName ="";
+                            ProductRequest.productName = "";
                             ProductRequest.page = 1;
                             ProductRequest.getInventoryList(activity);
                         }
@@ -251,7 +251,7 @@ public class Inventory extends Fragment {
 
             } else {
                 etSearch.setCompoundDrawablesWithIntrinsicBounds(
-                        null,null,search,null);
+                        null, null, search, null);
             }
         }
 
@@ -270,18 +270,23 @@ public class Inventory extends Fragment {
         rcProduct.setAdapter(inventoryAdapter);
     }
 
-    public static void updateDataProduct(List<ProductModel> productModelResponse) {
-        if (productModels.size() != 0){
+    public static void updateDataProduct(List<ProductModel> productModelResponse, int page) {
+        if (productModels.size() != 0) {
             productModels.remove(productModels.size() - 1);
             int scrollPosition = productModels.size();
             inventoryAdapter.notifyItemRemoved(scrollPosition);
         }
 
-        productModels.clear();
+        if (page == 1)
+            productModels.clear();
         productModels.addAll(productModelResponse);
         inventoryAdapter.replaceItemFiltered(productModels);
 //        inventoryAdapter.notifyDataSetChanged();
-        isLoading= false;
+        isLoading = false;
+
+        if (page == 1)
+            if (productModels.size() > 0)
+                rcProduct.scrollToPosition(0);
     }
 
     static boolean isLoading = false;
@@ -318,12 +323,12 @@ public class Inventory extends Fragment {
         ProductRequest.getInventoryList(activity);
     }
 
-    public static void requestFilter(final Activity activity){
+    public static void requestFilter(final Activity activity) {
         progressDialog.setMessage("Harap tunggu...");
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
 
-        if(InventoryFilter.category.size()>0){
+        if (InventoryFilter.category.size() > 0) {
             StringBuilder buffer = new StringBuilder();
             for (String each : InventoryFilter.category)
                 buffer.append(",").append(each);
@@ -332,17 +337,17 @@ public class Inventory extends Fragment {
             ProductRequest.categoryId = "";
         }
 
-        if(InventoryFilter.statusList.size()>0){
+        if (InventoryFilter.statusList.size() > 0) {
             StringBuilder buffer1 = new StringBuilder();
             for (String each : InventoryFilter.statusList)
                 buffer1.append(",").append(each);
-            ProductRequest.status= buffer1.deleteCharAt(0).toString();
+            ProductRequest.status = buffer1.deleteCharAt(0).toString();
         } else {
             ProductRequest.status = "";
         }
-        ProductRequest.page=1;
-        ProductRequest.supplierId="";
-        ProductRequest.productName=etSearch.getText().toString();
+        ProductRequest.page = 1;
+        ProductRequest.supplierId = "";
+        ProductRequest.productName = etSearch.getText().toString();
         ProductRequest.productName = etSearch.getText().toString();
         productModels.clear();
 
