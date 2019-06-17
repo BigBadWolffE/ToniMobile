@@ -2,8 +2,9 @@ package co.crowde.toni.view.activity.welcoming;
 
 import android.content.pm.ActivityInfo;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import co.crowde.toni.R;
 import co.crowde.toni.controller.main.UserController;

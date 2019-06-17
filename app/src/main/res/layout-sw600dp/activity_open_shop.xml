@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout2"
@@ -8,7 +8,7 @@
     android:background="@color/colorWhite"
     tools:context=".view.activity.shop.OpenShop">
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,14 +30,14 @@
         app:layout_constraintTop_toBottomOf="@id/guideline"
         app:srcCompat="@drawable/toni_logo" />
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2a"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.15" />
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutLoginHeader"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -95,16 +95,16 @@
                 android:textColor="@color/TextColorDefault" />
         </LinearLayout>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.4" />
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutOpenShopMain"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -118,14 +118,14 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guideline2" />
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.7" />
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutFooter"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -138,7 +138,7 @@
         app:layout_constraintStart_toStartOf="@+id/layoutOpenShopMain"
         app:layout_constraintTop_toBottomOf="@id/guideline3">
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/cvBtnOpen"
             android:layout_width="0dp"
             android:layout_height="@dimen/height_button"
@@ -160,7 +160,7 @@
                 android:layout_gravity="center"
                 android:text="@string/buka_mesin_kasir" />
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/tvCloseShop"
@@ -178,182 +178,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cvBtnOpen" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</android.support.constraint.ConstraintLayout>
-
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--xmlns:tools="http://schemas.android.com/tools"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:background="@drawable/img2"-->
-    <!--tools:context=".view.activity.openshop.OpenShop">-->
-
-    <!--<View-->
-        <!--android:id="@+id/bgView"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:background="@drawable/bg_black_transparent"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent" />-->
-
-    <!--<android.support.constraint.ConstraintLayout-->
-        <!--android:id="@+id/bgMain"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_marginStart="32dp"-->
-        <!--android:layout_marginLeft="32dp"-->
-        <!--android:layout_marginTop="32dp"-->
-        <!--android:layout_marginEnd="32dp"-->
-        <!--android:layout_marginRight="32dp"-->
-        <!--android:layout_marginBottom="32dp"-->
-        <!--android:background="@drawable/bg_white_transparent"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintDimensionRatio="1:1"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent">-->
-
-        <!--<ImageView-->
-            <!--android:id="@+id/imgLogo"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="0dp"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_marginStart="8dp"-->
-            <!--android:layout_marginLeft="8dp"-->
-            <!--android:layout_marginTop="8dp"-->
-            <!--android:layout_marginEnd="8dp"-->
-            <!--android:layout_marginRight="8dp"-->
-            <!--android:layout_marginBottom="8dp"-->
-            <!--android:src="@drawable/toni_logo"-->
-            <!--app:layout_constraintBottom_toTopOf="@+id/line02"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--app:layout_constraintTop_toTopOf="@+id/line01" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/tvOpenShopHeader"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginStart="8dp"-->
-            <!--android:layout_marginLeft="8dp"-->
-            <!--android:layout_marginEnd="8dp"-->
-            <!--android:layout_marginRight="8dp"-->
-            <!--android:layout_marginBottom="4dp"-->
-            <!--android:gravity="center"-->
-            <!--android:text="@string/toko_buka"-->
-            <!--android:textSize="36sp"-->
-            <!--android:textStyle="bold"-->
-            <!--android:textColor="@color/colorBlack"-->
-            <!--app:layout_constraintBottom_toTopOf="@+id/tvClosedHeader"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--app:layout_constraintTop_toBottomOf="@+id/line02"-->
-            <!--app:layout_constraintVertical_chainStyle="packed" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/tvClosedHeader"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginBottom="4dp"-->
-            <!--android:gravity="center"-->
-            <!--android:text="@string/waktu_buka"-->
-            <!--android:textColor="@color/colorBlack"-->
-            <!--app:layout_constraintBottom_toTopOf="@+id/tvOpenShopTime"-->
-            <!--app:layout_constraintEnd_toEndOf="@+id/tvOpenShopHeader"-->
-            <!--app:layout_constraintStart_toStartOf="@+id/tvOpenShopHeader"-->
-            <!--app:layout_constraintTop_toBottomOf="@+id/tvOpenShopHeader" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/tvOpenShopTime"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginBottom="8dp"-->
-            <!--android:gravity="center"-->
-            <!--android:text="-"-->
-            <!--android:textColor="@color/colorBlack"-->
-            <!--app:layout_constraintBottom_toTopOf="@+id/line04"-->
-            <!--app:layout_constraintEnd_toEndOf="@+id/tvOpenShopHeader"-->
-            <!--app:layout_constraintStart_toStartOf="@+id/tvOpenShopHeader"-->
-            <!--app:layout_constraintTop_toBottomOf="@+id/tvClosedHeader" />-->
-
-        <!--<android.support.v7.widget.CardView-->
-            <!--android:id="@+id/cvBtnOpen"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="40dp"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_marginStart="8dp"-->
-            <!--android:layout_marginLeft="8dp"-->
-            <!--app:cardBackgroundColor="@color/colorThemeOrange"-->
-            <!--app:cardCornerRadius="20dp"-->
-            <!--app:layout_constraintDimensionRatio="5:1"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--app:layout_constraintTop_toTopOf="@+id/line07">-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/tvBtnOpen"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:gravity="center"-->
-                <!--android:text="@string/buka_mesin_kasir"-->
-                <!--android:textColor="@color/colorWhite"-->
-                <!--android:textStyle="bold"-->
-                <!--app:autoSizeMaxTextSize="20sp"-->
-                <!--app:autoSizeMinTextSize="10sp"-->
-                <!--app:autoSizeTextType="uniform" />-->
-        <!--</android.support.v7.widget.CardView>-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/tvCloseShop"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginBottom="8dp"-->
-            <!--android:text="@string/tutup_toko"-->
-            <!--android:textColor="@color/colorBlack"-->
-            <!--android:textStyle="bold"-->
-            <!--app:autoSizeMaxTextSize="20sp"-->
-            <!--app:autoSizeMinTextSize="10sp"-->
-            <!--app:autoSizeTextType="uniform"-->
-            <!--app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintHorizontal_bias="0.5"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--app:layout_constraintTop_toBottomOf="@+id/cvBtnOpen" />-->
-
-
-        <!--<android.support.constraint.Guideline-->
-            <!--android:id="@+id/line01"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="horizontal"-->
-            <!--app:layout_constraintGuide_percent="0.05" />-->
-
-        <!--<android.support.constraint.Guideline-->
-            <!--android:id="@+id/line02"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="horizontal"-->
-            <!--app:layout_constraintGuide_percent="0.15" />-->
-
-        <!--<android.support.constraint.Guideline-->
-            <!--android:id="@+id/line04"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="horizontal"-->
-            <!--app:layout_constraintGuide_percent="0.5" />-->
-
-        <!--<android.support.constraint.Guideline-->
-            <!--android:id="@+id/line07"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="horizontal"-->
-            <!--app:layout_constraintGuide_percent="0.7" />-->
-
-    <!--</android.support.constraint.ConstraintLayout>-->
-
-<!--</android.support.constraint.ConstraintLayout>-->
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,21 +1,16 @@
 package co.crowde.toni.view.activity.print;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Handler;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
+import android.os.Handler;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentTransaction;
+
 import co.crowde.toni.R;
 import co.crowde.toni.controller.transaction.TransactionController;
-import co.crowde.toni.view.activity.home.MainActivity;
 import co.crowde.toni.view.fragment.print.PrintDone;
 import co.crowde.toni.view.fragment.print.PrintWait;
 

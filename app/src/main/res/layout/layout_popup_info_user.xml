@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/shadow_bot_grey">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutHeader"
         android:layout_width="220dp"
         android:layout_height="?actionBarSize">
@@ -60,7 +60,7 @@
             app:layout_constraintTop_toTopOf="@+id/layoutHeader" />
 
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
         android:id="@+id/view"

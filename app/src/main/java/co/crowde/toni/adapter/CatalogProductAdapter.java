@@ -2,20 +2,17 @@ package co.crowde.toni.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -24,7 +21,6 @@ import java.util.List;
 
 import co.crowde.toni.R;
 import co.crowde.toni.model.CatalogModel;
-import co.crowde.toni.model.ProductModel;
 import co.crowde.toni.view.activity.catalog.CatalogProduct;
 
 public class CatalogProductAdapter

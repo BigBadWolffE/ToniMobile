@@ -1,7 +1,8 @@
 package co.crowde.toni.view.notification;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import co.crowde.toni.R;
 

@@ -9,7 +9,7 @@
     android:layout_gravity="center"
     android:background="@drawable/bg_white_radius_20dp">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toast_custom"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -69,6 +69,6 @@
             app:layout_constraintTop_toBottomOf="@+id/textView28" />
 
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>

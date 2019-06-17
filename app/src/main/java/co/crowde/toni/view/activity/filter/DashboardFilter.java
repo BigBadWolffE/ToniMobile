@@ -3,13 +3,7 @@ package co.crowde.toni.view.activity.filter;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.res.ColorStateList;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.chip.Chip;
-import android.support.design.chip.ChipGroup;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,6 +12,13 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.gson.Gson;
 import com.pchmn.materialchips.ChipsInput;
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorWhite"
@@ -39,14 +39,14 @@
             android:textSize="30dp" />
     </LinearLayout>
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.1" />
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout5"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -75,7 +75,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout19"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
             tools:layout_conversion_wrapHeight="0"
             tools:layout_conversion_wrapWidth="0">
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -136,9 +136,9 @@
                     tools:layout_conversion_absoluteWidth="116dp"
                     tools:layout_editor_absoluteX="43dp"
                     tools:layout_editor_absoluteY="101dp" />
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout15"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -185,11 +185,11 @@
                     tools:layout_conversion_absoluteWidth="122dp"
                     tools:layout_editor_absoluteX="40dp"
                     tools:layout_editor_absoluteY="141dp" />
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -203,7 +203,7 @@
             tools:layout_conversion_wrapHeight="0"
             tools:layout_conversion_wrapWidth="0">
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -250,9 +250,9 @@
                     tools:layout_conversion_absoluteWidth="96dp"
                     tools:layout_editor_absoluteX="238dp"
                     tools:layout_editor_absoluteY="101dp" />
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -299,28 +299,28 @@
                     tools:layout_conversion_absoluteWidth="88dp"
                     tools:layout_editor_absoluteX="242dp"
                     tools:layout_editor_absoluteY="141dp" />
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.4" />
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.8" />
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -328,38 +328,31 @@
         app:layout_constraintGuide_percent="0.98" />
 
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/guideline4"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btntransaksihutangpelanggan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        app:cardBackgroundColor="@color/colorThemeOrange"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/btncetakstrukhutang"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline3">
+        app:layout_constraintTop_toTopOf="@+id/guideline3"
+        app:layout_constraintVertical_chainStyle="spread">
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/btntransaksihutangpelanggan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            app:cardBackgroundColor="@color/colorThemeOrange"
-            app:cardCornerRadius="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/btncetakstrukhutang"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="spread">
-
-            <TextView
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:gravity="center"
-                android:text="Bayar"
-                android:textColor="@color/colorWhite"
-                android:textSize="25dp"
-                android:textStyle="bold" />
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="Bayar"
+            android:textColor="@color/colorWhite"
+            android:textSize="25dp"
+            android:textStyle="bold" />
 
 
-        </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
         <RelativeLayout
             android:id="@+id/btncetakstrukhutang"
@@ -386,9 +379,4 @@
         </RelativeLayout>
 
 
-    </android.support.constraint.ConstraintLayout>
-
-
-
-
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,10 +1,11 @@
 package co.crowde.toni.view.activity.auth;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import co.crowde.toni.R;
 import co.crowde.toni.helper.CallCenter;
