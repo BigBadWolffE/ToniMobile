@@ -15,7 +15,8 @@ import co.crowde.toni.R;
 import co.crowde.toni.controller.main.UserController;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.view.activity.home.MainActivity;
-import co.crowde.toni.view.dialog.app.CloseAppsDialog;
+import co.crowde.toni.view.dialog.message.app.CloseAppsDialog;
+import co.crowde.toni.view.dialog.message.shop.CloseShopDialog;
 
 public class OpenShop extends AppCompatActivity {
     public static TextView tvOpenShopHeader,
@@ -60,19 +61,7 @@ public class OpenShop extends AppCompatActivity {
         tvCloseShop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AlertDialog.Builder(OpenShop.this)
-                        .setTitle("Tutup Toko")
-                        .setMessage("Apakah Anda ingin menutup Toko sekarang?")
-                        .setNegativeButton(android.R.string.no, null)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface arg0, int arg1) {
-                                progressDialog = new ProgressDialog(OpenShop.this);
-                                progressDialog.setMessage("Harap tunggu...");
-                                progressDialog.setCanceledOnTouchOutside(false);
-                                progressDialog.show();
-                                UserController.closedShop(OpenShop.this);
-                            }
-                        }).create().show();
+                CloseShopDialog.showDialog(OpenShop.this);
             }
         });
 

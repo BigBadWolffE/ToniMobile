@@ -25,7 +25,8 @@ import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CustomerModel;
 import co.crowde.toni.model.body.post.AddTransaction;
 import co.crowde.toni.view.activity.print.WaitingPrint;
-import co.crowde.toni.view.dialog.transaction.MessageConfirmTransaction;
+import co.crowde.toni.view.dialog.message.network.NetworkOfflineDialog;
+import co.crowde.toni.view.dialog.message.transaction.ConfirmTransactionDialog;
 import co.crowde.toni.view.fragment.cart.CartPayment;
 import co.crowde.toni.view.fragment.modul.Dashboard;
 
@@ -70,8 +71,9 @@ public class TransactionRequest {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(
-                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(
+//                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+                        NetworkOfflineDialog.showDialog(activity);
                         Log.e("Error",e.toString());
                     }
                 });
@@ -93,8 +95,8 @@ public class TransactionRequest {
                             Log.e("DATA RESPONSE", data);
 
                             if(status){
-                                MessageConfirmTransaction.dialogConfirm.dismiss();
-                                MessageConfirmTransaction.progressDialog.dismiss();
+                                ConfirmTransactionDialog.dialogConfirm.dismiss();
+                                ConfirmTransactionDialog.progressDialog.dismiss();
 
                                 if(CartPayment.cash){
                                     PrintController.printCash(activity, data);
@@ -113,8 +115,8 @@ public class TransactionRequest {
                                 if(message.equals("Token tidak valid")){
                                     UserController.tokenExpired(activity, message);
                                 } else {
-                                    MessageConfirmTransaction.dialogConfirm.dismiss();
-                                    MessageConfirmTransaction.progressDialog.dismiss();
+                                    ConfirmTransactionDialog.dialogConfirm.dismiss();
+                                    ConfirmTransactionDialog.progressDialog.dismiss();
                                 }
                             }
 

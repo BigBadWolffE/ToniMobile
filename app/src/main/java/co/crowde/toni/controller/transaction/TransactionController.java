@@ -1,26 +1,18 @@
 package co.crowde.toni.controller.transaction;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
-import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
-
-import com.google.gson.Gson;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.IOException;
 
 import co.crowde.toni.helper.SavePref;
-import co.crowde.toni.model.CustomerModel;
 import co.crowde.toni.network.ProductRequest;
 import co.crowde.toni.network.TransactionRequest;
 import co.crowde.toni.utils.PrinterNetwork;
-import co.crowde.toni.view.dialog.transaction.MessageConfirmTransaction;
-import co.crowde.toni.view.fragment.cart.CartPayment;
+import co.crowde.toni.view.dialog.message.printer.PrinterConnectivityDialog;
+import co.crowde.toni.view.dialog.message.transaction.ConfirmTransactionDialog;
 import co.crowde.toni.view.fragment.modul.Dashboard;
 
 import static co.crowde.toni.utils.PrinterNetwork.resetConnection;
@@ -42,13 +34,14 @@ public class TransactionController {
 
                 }
             } catch (IOException e) {
-                Toast.makeText(activity, "Tidak dapat terhubung dengan Bluetooth Printer.", Toast.LENGTH_SHORT).show();
-                MessageConfirmTransaction.progressDialog.dismiss();
+//                Toast.makeText(activity, "Tidak dapat terhubung dengan Bluetooth Printer.", Toast.LENGTH_SHORT).show();
+                PrinterConnectivityDialog.showDialog(activity);
+                ConfirmTransactionDialog.progressDialog.dismiss();
                 Log.e("Bluetooth","Can't Connect");
             }
 
         } else {
-            MessageConfirmTransaction.progressDialog.dismiss();
+            ConfirmTransactionDialog.progressDialog.dismiss();
             PrinterNetwork.pairingBluetooth(activity);
         }
     }

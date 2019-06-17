@@ -23,22 +23,18 @@ import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.UserModel;
 import co.crowde.toni.view.activity.auth.LoginActivity;
 import co.crowde.toni.view.activity.auth.LoginSuccess;
+import co.crowde.toni.view.dialog.message.network.NetworkOfflineDialog;
 
 public class LoginRequest {
 
     public static String message = "";
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    public static void postLogin(final Activity activity){
-//        String username = LoginActivity.et_username.getText().toString();
-//        String password = LoginActivity.et_password.getText().toString();
-
-        String username = "";
-        String password = "";
+    public static void postLogin(final Activity activity, String username, String pass){
 
         final UserModel user = new UserModel();
         user.setUsername(username);
-        user.setPassword(password);
+        user.setPassword(pass);
 
         String postBody = new Gson().toJson(user);
         Log.e("POST BODY", postBody);
@@ -60,9 +56,10 @@ public class LoginRequest {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(
-                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
-//                        LoginActivity.progressDialog.dismiss();
+//                        Toast.makeText(
+//                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+                        NetworkOfflineDialog.showDialog(activity);
+                        LoginActivity.progressDialog.dismiss();
                         Log.e("Error",e.toString());
                     }
                 });

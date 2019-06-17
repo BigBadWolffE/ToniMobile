@@ -15,7 +15,7 @@ import co.crowde.toni.R;
 import co.crowde.toni.network.ShopRequest;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.ShopModel;
-import co.crowde.toni.view.dialog.app.CloseAppsDialog;
+import co.crowde.toni.view.dialog.message.app.CloseAppsDialog;
 
 public class LoginSuccess extends AppCompatActivity {
 

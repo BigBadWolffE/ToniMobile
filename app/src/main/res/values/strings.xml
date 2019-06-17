@@ -265,9 +265,16 @@
     <string name="simpan">SIMPAN</string>
     <string name="cari_produsen">Cari Produsen</string>
 
+    <string name="register">Daftar akun</string>
+    <string name="register_label">Pendaftaran Akun</string>
+    <string name="info_shop">Informasi Toko Tani</string>
+
     <!-- DIALOG MESSAGE -->
     <string name="dialog_label_close_app">“YAKIN KELUAR \n DARI APLIKASI TONI?”</string>
     <string name="dialog_desc_close_app">Aplikasi TONI akan ditutup \n silahkan klik Ya untuk melanjutkan.</string>
+
+    <string name="dialog_label_close_shop">“YAKIN INGIN \n MENUTUP TOKO?”</string>
+    <string name="dialog_desc_close_shop">Toko akan ditutup \n silahkan klik Ya untuk melanjutkan.</string>
 
     <string name="dialog_label_update_product">“YAKIN PERUBAHAN \n DATA ANDA BENAR?”</string>
     <string name="dialog_desc_update_product">Periksa dahulu perubahan data informasi Anda \n sebelum melanjutkan ke tahap berikutnya.</string>
@@ -278,6 +285,14 @@
     <string name="dialog_label_confirm_transaction">“YAKIN TRANSAKSI \n ANDA BENAR?”</string>
     <string name="dialog_desc_confirm_transaction">Periksa dahulu isi transaksi Anda sebelum \n melanjutkan ke tahap berikutnya.</string>
 
+    <string name="dialog_label_add_new_customer">‘DATA ANDA SUDAH \n TERDAFTAR’</string>
+    <string name="dialog_desc_add_new_customer">Periksa kembali dahulu isi detail data \n Anda untuk menghindari kesamaan informasi.</string>
+
+    <string name="dialog_label_connect_printer">‘KONEKSI KE PRINTER \n GAGAL’</string>
+    <string name="dialog_desc_connect_printer">Periksa kembali dahulu koneksi Bluetooth \n dan Printer Anda lalu coba lagi.</string>
+
+    <string name="dialog_label_connect_internet">‘KERUSAKAN JARINGAN \n INTERNET’</string>
+    <string name="dialog_desc_connect_internet">Pastikan jaringan internet Anda \n sudah terkoneksi dengan benar.</string>
 
     <!-- NOTIFICATION MESSAGE -->
     <string name="notif_update_product">PERUBAHAN INFORMASI ANDA BERHASIL</string>
@@ -285,6 +300,19 @@
     <string name="total_hutang_cap">TOTAL HUTANG</string>
     <string name="input_credit">Silahkan isi nominal hutang</string>
     <string name="input_amount_pay">Silahkan isi nomial pembayaran</string>
-    <string name="register">Daftar akun</string>
+    <string name="data_owner_shop">Data Pemilik Toko</string>
+    <string name="nama_toko_tani">Nama toko tani</string>
+    <string name="keterangan_toko_tani">Keterangan toko tani</string>
+    <string name="pilih_kelurahan">Pilih kelurahan</string>
+    <string name="pilih_kecamatan">Pilih kecamatan</string>
+    <string name="pilih_kabupaten_kota">Pilih kabupaten/kota</string>
+    <string name="pilih_provinsi">Pilih Provinsi</string>
+    <string name="alamat_toko_tani">Alamat toko tani</string>
+    <string name="data_nama_pemilik_toko">Nama pemilik toko</string>
+    <string name="data_nomor_ponsel">Nomor ponsel</string>
+    <string name="atur_kata_sandi">Atur kata sandi</string>
+    <string name="ulang_kata_sandi">Ulang kata sandi</string>
+    <string name="daftar">DAFTAR</string>
+    <string name="tutup">TUTUP</string>
 
 </resources>

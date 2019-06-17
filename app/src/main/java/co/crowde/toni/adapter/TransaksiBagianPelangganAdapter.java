@@ -115,7 +115,7 @@ public class TransaksiBagianPelangganAdapter extends RecyclerView.Adapter<Recycl
             viewHolder.namapelanggan.setText(model.getCustomerName());
             //date setup
             String tanggal = model.getCreatedAt();
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
             Date date = null;
             try {
                 date = dateFormat.parse(tanggal);
@@ -137,7 +137,27 @@ public class TransaksiBagianPelangganAdapter extends RecyclerView.Adapter<Recycl
 //            viewHolder.btncetakhutang.setVisibility(View.VISIBLE);
 //        }
 
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
+                    Intent detailPelanggan = new Intent(activity, CustomerHutangActivity.class);
+                    detailPelanggan.putExtra(CustomerModel.class.getSimpleName(), models.get(position));
+
+//                    detailPelanggan.putExtra("namapelanggan",models.get(getAdapterPosition()).getCustomerName());
+//                    detailPelanggan.putExtra("nomortelpon",models.get(getAdapterPosition()).getPhone());
+//                    detailPelanggan.putExtra("tanggalterdaftar",models.get(getAdapterPosition()).getCreatedAt());
+//                    detailPelanggan.putExtra("totalhutang",models.get(getAdapterPosition()).getCredit());
+//                    detailPelanggan.putExtra("hutangterbayar",models.get(getAdapterPosition()).getCreditPaid());
+//                    detailPelanggan.putExtra("customerid",models.get(getAdapterPosition()).getCustomerId());
+
+//                    detailPelanggan.putExtra("totalhutang",models.get(getAdapterPosition()).getCredit());
+//                    detailPelanggan.putExtra("hutangterbayar",models.get(getAdapterPosition()).getCreditPaid());
+                    ((Activity) mContext).startActivityForResult(detailPelanggan, 5);
+
+
+                }
+            });
 
 
         }
@@ -273,27 +293,7 @@ public class TransaksiBagianPelangganAdapter extends RecyclerView.Adapter<Recycl
 //                }
 //            });
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                    Intent detailPelanggan = new Intent(activity, CustomerHutangActivity.class);
-                    detailPelanggan.putExtra(CustomerModel.class.getSimpleName(), models.get(getAdapterPosition()));
-
-//                    detailPelanggan.putExtra("namapelanggan",models.get(getAdapterPosition()).getCustomerName());
-//                    detailPelanggan.putExtra("nomortelpon",models.get(getAdapterPosition()).getPhone());
-//                    detailPelanggan.putExtra("tanggalterdaftar",models.get(getAdapterPosition()).getCreatedAt());
-//                    detailPelanggan.putExtra("totalhutang",models.get(getAdapterPosition()).getCredit());
-//                    detailPelanggan.putExtra("hutangterbayar",models.get(getAdapterPosition()).getCreditPaid());
-//                    detailPelanggan.putExtra("customerid",models.get(getAdapterPosition()).getCustomerId());
-
-//                    detailPelanggan.putExtra("totalhutang",models.get(getAdapterPosition()).getCredit());
-//                    detailPelanggan.putExtra("hutangterbayar",models.get(getAdapterPosition()).getCreditPaid());
-                    ((Activity) mContext).startActivityForResult(detailPelanggan, 5);
-
-
-                }
-            });
 
         }
 

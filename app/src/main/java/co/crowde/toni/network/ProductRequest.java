@@ -20,19 +20,14 @@ import java.io.IOException;
 import java.util.List;
 
 import co.crowde.toni.constant.Const;
-import co.crowde.toni.controller.main.PrintController;
 import co.crowde.toni.controller.main.UserController;
 import co.crowde.toni.helper.SavePref;
-import co.crowde.toni.model.CustomerModel;
 import co.crowde.toni.model.ProductModel;
-import co.crowde.toni.model.body.post.AddTransaction;
 import co.crowde.toni.model.body.post.UpdateProduct;
 import co.crowde.toni.view.activity.notification.SuccessUpdateProduct;
-import co.crowde.toni.view.activity.print.WaitingPrint;
-import co.crowde.toni.view.dialog.product.InventoryDetailPopup;
-import co.crowde.toni.view.dialog.product.MessageUpdateProduct;
-import co.crowde.toni.view.dialog.transaction.MessageConfirmTransaction;
-import co.crowde.toni.view.fragment.cart.CartPayment;
+import co.crowde.toni.view.dialog.message.network.NetworkOfflineDialog;
+import co.crowde.toni.view.dialog.popup.product.InventoryDetailPopup;
+import co.crowde.toni.view.dialog.message.product.MessageUpdateProduct;
 import co.crowde.toni.view.fragment.modul.Dashboard;
 import co.crowde.toni.view.fragment.modul.Inventory;
 
@@ -73,8 +68,9 @@ public class ProductRequest {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(
-                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(
+//                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+                        NetworkOfflineDialog.showDialog(activity);
                         Log.e("Error",e.toString());
                     }
                 });
@@ -149,8 +145,9 @@ public class ProductRequest {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(
-                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(
+//                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+                        NetworkOfflineDialog.showDialog(activity);
                         Log.e("Error",e.toString());
                     }
                 });
@@ -244,8 +241,9 @@ public class ProductRequest {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(
-                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(
+//                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+                        NetworkOfflineDialog.showDialog(activity);
                         Log.e("Error",e.toString());
                     }
                 });

@@ -28,7 +28,7 @@
 
             <TextView
                 android:id="@+id/namabarangpembelianpelanggan"
-                android:layout_width="120dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
@@ -45,7 +45,7 @@
 
             <TextView
                 android:id="@+id/banyakpembelianpelanggan"
-                android:layout_width="40dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
@@ -62,7 +62,7 @@
 
             <TextView
                 android:id="@+id/ukuranpembelianpelanggan"
-                android:layout_width="100dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
@@ -89,7 +89,7 @@
             <!--/>-->
             <TextView
                 android:id="@+id/hargapembelianpelanggan"
-                android:layout_width="120dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"

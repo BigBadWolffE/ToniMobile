@@ -57,7 +57,7 @@ import co.crowde.toni.helper.volley.AppController;
 import co.crowde.toni.model.CustomerModel;
 import co.crowde.toni.model.UserDetailModel;
 import co.crowde.toni.network.API;
-import co.crowde.toni.view.dialog.customer.PopUpTambahPelangganTransaksi;
+import co.crowde.toni.view.dialog.popup.customer.PopUpTambahPelangganTransaksi;
 
 import static android.app.Activity.RESULT_OK;
 

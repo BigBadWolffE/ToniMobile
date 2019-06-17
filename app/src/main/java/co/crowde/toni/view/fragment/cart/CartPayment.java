@@ -3,15 +3,14 @@ package co.crowde.toni.view.fragment.cart;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.constraint.Group;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.CardView;
 import android.text.Editable;
-import android.text.Html;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +19,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -32,7 +30,7 @@ import co.crowde.toni.R;
 import co.crowde.toni.helper.CloseSoftKeyboard;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CustomerModel;
-import co.crowde.toni.view.dialog.transaction.MessageConfirmTransaction;
+import co.crowde.toni.view.dialog.message.transaction.ConfirmTransactionDialog;
 import co.crowde.toni.view.fragment.modul.Dashboard;
 
 /**
@@ -84,7 +82,7 @@ implements View.OnClickListener{
     public static LinearLayout layoutCredit;
     public static int cashCredit01, cashCredit02, cashCredit03, cashCredit04, cashCredit05;
     public static Group groupCredit, groupNominal, groupNominalAmount;
-
+    public static ConstraintLayout layoutNominalCashCredit, layoutNominalGroup;
 
     public static int nominal, change, creditPay, totalBill, totalCredit;
     public static boolean payment;
@@ -520,13 +518,15 @@ implements View.OnClickListener{
         tvCashCredit04 = dialogView.findViewById(R.id.tvCashCredit04);
         layoutCredit = dialogView.findViewById(R.id.layoutCredit);
         groupCredit = dialogView.findViewById(R.id.groupCredit);
-        groupNominal = dialogView.findViewById(R.id.groupNominal);
-        groupNominalAmount = dialogView.findViewById(R.id.groupNOminalAmount);
+        layoutNominalCashCredit = dialogView.findViewById(R.id.layout_input_nominal);
+        layoutNominalGroup = dialogView.findViewById(R.id.layout_nominal_group);
+//        groupNominal = dialogView.findViewById(R.id.groupNominal);
+//        groupNominalAmount = dialogView.findViewById(R.id.groupNOminalAmount);
 
         showCreditGroup(activity);
 
         tvAmountCashCredit.setText("Rp. "+formatNumber.format(Dashboard.totalAmount)+",-");
-        etCashCredit.addTextChangedListener(watcherCashCredit);
+//        etCashCredit.addTextChangedListener(watcherCashCredit);
         etCashCreditNominal.addTextChangedListener(watcherCashCreditNominal);
 
         imgClose.setOnClickListener(new View.OnClickListener() {
@@ -610,69 +610,69 @@ implements View.OnClickListener{
 
 
 
-    public TextWatcher watcherCashCredit = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if(etCashCredit.getText().length()>0){
-                if (Integer.parseInt(etCashCredit.getText().toString()
-                        .replaceAll("[,-]",""))<=999 ||
-                        Integer.parseInt(etCashCredit.getText().toString()
-                                .replaceAll("[,-]",""))>model.getSaldo()) {
-                    btnCreditOK.setBackground(getResources().getDrawable(R.drawable.bg_rec_stroke_radius_5dp_grey));
-                    btnCreditOK.setTextColor(getResources().getColor(R.color.colorThemeGrey));
-                    btnCreditOK.setEnabled(false);
-                } else {
-                    btnCreditOK.setBackground(getResources().getDrawable(R.drawable.bg_rec_stroke_radius_5dp_orange));
-                    btnCreditOK.setTextColor(getResources().getColor(R.color.colorThemeOrange));
-                    btnCreditOK.setEnabled(true);
-
-                    btnCreditOK.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            creditPay = Integer.parseInt(etCashCredit.getText().toString()
-                                    .replaceAll("[,-]",""));
-                            showCreditGroup(getActivity());
-                        }
-                    });
-                }
-            } else{
-                btnCreditOK.setBackground(getResources().getDrawable(R.drawable.bg_rec_stroke_radius_5dp_grey));
-                btnCreditOK.setTextColor(getResources().getColor(R.color.colorThemeGrey));
-                btnCreditOK.setEnabled(false);
-            }
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            etCashCredit.removeTextChangedListener(this);
-            try {
-                String originalString = s.toString();
-
-                Long longval;
-                if (originalString.contains(",")) {
-                    originalString = originalString.replaceAll(",", "");
-                }
-                longval = Long.parseLong(originalString);
-
-                DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
-                formatter.applyPattern("###,###,###,###,###,###,###");
-                String formattedString = formatter.format(longval);
-
-                //setting text after format to EditText
-                etCashCredit.setText(formattedString);
-                etCashCredit.setSelection(etCashCredit.getText().length());
-
-            } catch (NumberFormatException nfe) {
-                nfe.printStackTrace();
-            }
-
-            etCashCredit.addTextChangedListener(this);
-        }
-    };
+//    public TextWatcher watcherCashCredit = new TextWatcher() {
+//        @Override
+//        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//        }
+//
+//        @Override
+//        public void onTextChanged(CharSequence s, int start, int before, int count) {
+//            if(etCashCredit.getText().length()>0){
+//                if (Integer.parseInt(etCashCredit.getText().toString()
+//                        .replaceAll("[,-]",""))<=999 ||
+//                        Integer.parseInt(etCashCredit.getText().toString()
+//                                .replaceAll("[,-]",""))>model.getSaldo()) {
+//                    btnCreditOK.setBackground(getResources().getDrawable(R.drawable.bg_rec_stroke_radius_5dp_grey));
+//                    btnCreditOK.setTextColor(getResources().getColor(R.color.colorThemeGrey));
+//                    btnCreditOK.setEnabled(false);
+//                } else {
+//                    btnCreditOK.setBackground(getResources().getDrawable(R.drawable.bg_rec_stroke_radius_5dp_orange));
+//                    btnCreditOK.setTextColor(getResources().getColor(R.color.colorThemeOrange));
+//                    btnCreditOK.setEnabled(true);
+//
+//                    btnCreditOK.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            creditPay = Integer.parseInt(etCashCredit.getText().toString()
+//                                    .replaceAll("[,-]",""));
+//                            showCreditGroup(getActivity());
+//                        }
+//                    });
+//                }
+//            } else{
+//                btnCreditOK.setBackground(getResources().getDrawable(R.drawable.bg_rec_stroke_radius_5dp_grey));
+//                btnCreditOK.setTextColor(getResources().getColor(R.color.colorThemeGrey));
+//                btnCreditOK.setEnabled(false);
+//            }
+//        }
+//
+//        @Override
+//        public void afterTextChanged(Editable s) {
+//            etCashCredit.removeTextChangedListener(this);
+//            try {
+//                String originalString = s.toString();
+//
+//                Long longval;
+//                if (originalString.contains(",")) {
+//                    originalString = originalString.replaceAll(",", "");
+//                }
+//                longval = Long.parseLong(originalString);
+//
+//                DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+//                formatter.applyPattern("###,###,###,###,###,###,###");
+//                String formattedString = formatter.format(longval);
+//
+//                //setting text after format to EditText
+//                etCashCredit.setText(formattedString);
+//                etCashCredit.setSelection(etCashCredit.getText().length());
+//
+//            } catch (NumberFormatException nfe) {
+//                nfe.printStackTrace();
+//            }
+//
+//            etCashCredit.addTextChangedListener(this);
+//        }
+//    };
 
     public TextWatcher watcherCashCreditNominal = new TextWatcher() {
         @Override
@@ -701,11 +701,11 @@ implements View.OnClickListener{
                             cashCredit = true;
                             paymentType = "Cash";
                             enablePayBill();
-                            nominal = Integer.parseInt(etCash.getText().toString()
+                            nominal = Integer.parseInt(etCashCreditNominal.getText().toString()
                                     .replaceAll("[,-]",""));
                             tvPayment.setText("Rp. "+formatNumber.format(nominal)+",-");
                             showLabel(getActivity());
-                            dialogCash.dismiss();
+                            dialogCashCredit.dismiss();
                         }
                     });
                 }
@@ -718,7 +718,7 @@ implements View.OnClickListener{
 
         @Override
         public void afterTextChanged(Editable s) {
-            etCashCredit.removeTextChangedListener(this);
+            etCashCreditNominal.removeTextChangedListener(this);
             try {
                 String originalString = s.toString();
 
@@ -733,14 +733,14 @@ implements View.OnClickListener{
                 String formattedString = formatter.format(longval);
 
                 //setting text after format to EditText
-                etCashCredit.setText(formattedString);
-                etCashCredit.setSelection(etCashCredit.getText().length());
+                etCashCreditNominal.setText(formattedString);
+                etCashCreditNominal.setSelection(etCashCreditNominal.getText().length());
 
             } catch (NumberFormatException nfe) {
                 nfe.printStackTrace();
             }
 
-            etCashCredit.addTextChangedListener(this);
+            etCashCreditNominal.addTextChangedListener(this);
         }
     };
 
@@ -790,7 +790,7 @@ implements View.OnClickListener{
             cvConfirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MessageConfirmTransaction.showDialog(activity);
+                    ConfirmTransactionDialog.showDialog(activity);
                 }
             });
 
@@ -827,7 +827,7 @@ implements View.OnClickListener{
             cvConfirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MessageConfirmTransaction.showDialog(activity);
+                    ConfirmTransactionDialog.showDialog(activity);
                 }
             });
 
@@ -873,7 +873,7 @@ implements View.OnClickListener{
             cvConfirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MessageConfirmTransaction.showDialog(activity);
+                    ConfirmTransactionDialog.showDialog(activity);
                 }
             });
 
@@ -912,14 +912,16 @@ implements View.OnClickListener{
     public void showCreditGroup(final Activity activity){
         if(creditPay!=0){
 
-            totalBill = Dashboard.totalAmount+Integer.parseInt(etCashCredit.getText().toString()
-                    .replaceAll("[,-]",""));
+//            totalBill = Dashboard.totalAmount+Integer.parseInt(etCashCredit.getText().toString()
+////                    .replaceAll("[,-]",""));
+            totalBill = Dashboard.totalAmount+model.getSaldo();
             squareupTotalAmount();
 
 
-            groupCredit.setVisibility(View.GONE);
-            groupNominal.setVisibility(View.VISIBLE);
-            groupNominalAmount.setVisibility(View.VISIBLE);
+//            groupCredit.setVisibility(View.GONE);
+//            groupNominal.setVisibility(View.VISIBLE);
+            layoutNominalGroup.setVisibility(View.VISIBLE);
+            layoutNominalCashCredit.setVisibility(View.VISIBLE);
 
             labelCredit.setText("Berhasil menambahkan");
             labelCredit.setTextColor(activity.getResources().getColor(R.color.colorThemeOrange));
@@ -942,15 +944,26 @@ implements View.OnClickListener{
 
 
         } else {
-            groupCredit.setVisibility(View.VISIBLE);
-            groupNominal.setVisibility(View.GONE);
-            groupNominalAmount.setVisibility(View.GONE);
+//            groupCredit.setVisibility(View.VISIBLE);
+//            groupNominal.setVisibility(View.GONE);
+            layoutNominalGroup.setVisibility(View.GONE);
+            layoutNominalCashCredit.setVisibility(View.GONE);
 
             labelCredit.setText("Hutang");
             labelCredit.setTextColor(activity.getResources().getColor(R.color.colorWhite));
             tvCreditAdd.setText("Rp. "+formatNumber.format(model.getSaldo())+",-");
             tvCreditAdd.setTextColor(activity.getResources().getColor(R.color.colorWhite));
             layoutCredit.setBackground(activity.getResources().getDrawable(R.drawable.bg_rec_orange_radius_5dp));
+            layoutCredit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    totalBill = 0;
+                    creditPay = model.getSaldo();
+//                    etCashCredit.setText("");
+                    showCreditGroup(activity);
+
+                }
+            });
 
             tvAmountCashCredit.setTextColor(activity.getResources().getColor(R.color.colorWhite));
             tvAmountCashCredit.setText("Rp. "+formatNumber.format(Dashboard.totalAmount)+",-");

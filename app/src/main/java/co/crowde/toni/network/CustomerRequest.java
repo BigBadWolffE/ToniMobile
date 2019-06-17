@@ -19,14 +19,13 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.List;
 
-import co.crowde.toni.controller.main.PrintController;
 import co.crowde.toni.controller.main.UserController;
 import co.crowde.toni.helper.SavePref;
-import co.crowde.toni.model.CatalogModel;
 import co.crowde.toni.model.CustomerModel;
 import co.crowde.toni.model.body.post.CreditPay;
-import co.crowde.toni.view.activity.catalog.CatalogProduct;
 import co.crowde.toni.view.activity.customer.SelectCustomer;
+import co.crowde.toni.view.dialog.message.customer.CustomerAlreadyRegisterDialog;
+import co.crowde.toni.view.dialog.message.network.NetworkOfflineDialog;
 import co.crowde.toni.view.fragment.cart.CartPayment;
 
 public class CustomerRequest {
@@ -52,8 +51,9 @@ public class CustomerRequest {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(
-                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(
+//                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+                        NetworkOfflineDialog.showDialog(activity);
                         Log.e("Error",e.toString());
                     }
                 });
@@ -142,8 +142,9 @@ public class CustomerRequest {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(
-                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(
+//                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+                        NetworkOfflineDialog.showDialog(activity);
                         Log.e("Error",e.toString());
                     }
                 });
@@ -182,7 +183,8 @@ public class CustomerRequest {
 
                                 } else if(message.equals("Internal server error!")){
                                     SelectCustomer.progressDialog.dismiss();
-                                    Toast.makeText(activity, "Nama Pelanggan atau Nomor Telepon sudah terdaftar.", Toast.LENGTH_SHORT).show();
+                                    CustomerAlreadyRegisterDialog.showDialog(activity);
+//                                    Toast.makeText(activity, "Nama Pelanggan atau Nomor Telepon sudah terdaftar.", Toast.LENGTH_SHORT).show();
                                 }
                             }
 
@@ -223,8 +225,9 @@ public class CustomerRequest {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(
-                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(
+//                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+                        NetworkOfflineDialog.showDialog(activity);
                         Log.e("Error",e.toString());
                     }
                 });

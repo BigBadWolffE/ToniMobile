@@ -18,6 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+        <activity android:name=".intent.CustomerHutangActivity"></activity>
         <activity android:name=".view.activity.auth.RegisterActivity"></activity>
         <activity android:name=".view.activity.notification.SuccessAddNewProduct" />
         <activity android:name=".view.activity.filter.CatalogFilter" />

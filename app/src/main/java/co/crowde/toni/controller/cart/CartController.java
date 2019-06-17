@@ -9,7 +9,7 @@ import co.crowde.toni.database.Cart;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CartModel;
 import co.crowde.toni.model.ProductModel;
-import co.crowde.toni.view.dialog.product.ProductDetailDashboardPopup;
+import co.crowde.toni.view.dialog.popup.product.ProductDetailDashboardPopup;
 import co.crowde.toni.view.fragment.modul.Dashboard;
 
 public class CartController {

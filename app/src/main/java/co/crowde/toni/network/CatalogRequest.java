@@ -28,6 +28,7 @@ import co.crowde.toni.model.CatalogModel;
 import co.crowde.toni.model.CatalogRequestModel;
 import co.crowde.toni.view.activity.catalog.CatalogProduct;
 import co.crowde.toni.view.activity.notification.SuccessAddNewProduct;
+import co.crowde.toni.view.dialog.message.network.NetworkOfflineDialog;
 import co.crowde.toni.view.fragment.modul.Inventory;
 
 public class CatalogRequest {
@@ -60,8 +61,9 @@ public class CatalogRequest {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(
-                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(
+//                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+                        NetworkOfflineDialog.showDialog(activity);
                         Log.e("Error",e.toString());
                     }
                 });
@@ -172,7 +174,8 @@ public class CatalogRequest {
         client.newCall(requestHttp).enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
-                Toast.makeText(activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+                NetworkOfflineDialog.showDialog(activity);
                 e.printStackTrace();
             }
 

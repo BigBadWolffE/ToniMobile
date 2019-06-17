@@ -22,18 +22,19 @@
 
             <android.support.v7.widget.CardView
                 android:id="@+id/cardView2"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/colorThemeCream"
+                app:cardBackgroundColor="@color/colorThemeGreyLight"
                 app:cardCornerRadius="20dp"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
                 app:layout_constraintEnd_toEndOf="@+id/linearLayout8"
                 app:layout_constraintStart_toStartOf="@+id/linearLayout8"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <LinearLayout
+                <android.support.constraint.ConstraintLayout
                     android:id="@+id/header_bottom2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -45,9 +46,14 @@
                     tools:layout_editor_absoluteY="199dp">
 
                     <LinearLayout
+                        android:id="@+id/linearLayout13"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toTopOf="@+id/linearLayout12"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
                             android:layout_width="350dp"
@@ -71,23 +77,28 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/linearLayout12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout13">
 
                         <LinearLayout
 
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/bg_white_transparent"
-                            android:backgroundTint="@color/colorWhite"
+                            android:backgroundTint="@color/colorThemeGreyLight"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="175dp"
                                 android:layout_height="20dp"
                                 android:gravity="center"
-                                android:text="JUMLAH FREKUENSI TRANSAKSI"
+                                android:text="Frekuensi Transaksi"
                                 android:textColor="@color/colorThemeGrey"
                                 android:textSize="10dp"
                                 android:textStyle="bold" />
@@ -110,14 +121,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/bg_white_transparent"
-                            android:backgroundTint="@color/colorWhite"
+                            android:backgroundTint="@color/colorThemeGreyLight"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="175dp"
                                 android:layout_height="20dp"
                                 android:gravity="center"
-                                android:text="RATA PENJUALAN PER TRANSAKSI"
+                                android:text="Rata-Rata Transaksi"
                                 android:textColor="@color/colorThemeGrey"
                                 android:textSize="10dp"
                                 android:textStyle="bold" />
@@ -139,7 +150,7 @@
                     </LinearLayout>
 
 
-                </LinearLayout>
+                </android.support.constraint.ConstraintLayout>
 
             </android.support.v7.widget.CardView>
 
@@ -255,7 +266,7 @@
 
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/rc_produk_laris"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:clickable="true"
                             android:scrollbars="vertical"

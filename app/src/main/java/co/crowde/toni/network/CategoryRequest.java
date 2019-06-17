@@ -24,6 +24,7 @@ import co.crowde.toni.model.CategoryModel;
 import co.crowde.toni.view.activity.filter.CatalogFilter;
 import co.crowde.toni.view.activity.filter.DashboardFilter;
 import co.crowde.toni.view.activity.filter.InventoryFilter;
+import co.crowde.toni.view.dialog.message.network.NetworkOfflineDialog;
 
 public class CategoryRequest {
 
@@ -46,8 +47,9 @@ public class CategoryRequest {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(
-                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(
+//                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+                        NetworkOfflineDialog.showDialog(activity);
                         Log.e("Error",e.toString());
                     }
                 });
@@ -115,8 +117,9 @@ public class CategoryRequest {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(
-                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(
+//                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+                        NetworkOfflineDialog.showDialog(activity);
                         Log.e("Error",e.toString());
                     }
                 });
@@ -184,8 +187,9 @@ public class CategoryRequest {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(
-                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(
+//                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+                        NetworkOfflineDialog.showDialog(activity);
                         Log.e("Error",e.toString());
                     }
                 });

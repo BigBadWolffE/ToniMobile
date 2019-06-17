@@ -1,5 +1,6 @@
 package co.crowde.toni.view.fragment.modul;
 
+
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -60,7 +61,7 @@ import co.crowde.toni.model.LaporanAmbilModel;
 import co.crowde.toni.model.LaporanBestProductModel;
 import co.crowde.toni.model.LaporanTopCustomer;
 import co.crowde.toni.network.API;
-import co.crowde.toni.view.fragment.transaction.TransactionFragment;
+import co.crowde.toni.view.fragment.transaction.TransactionReport;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -88,7 +89,7 @@ public class Report extends Fragment {
     EditText tglsesudah;
     CardView todaysbg,weeksbg, threedaysbg, monthbg, rangebg;
     RelativeLayout idDashboardLayoutInfoToko;
-    //    TransaksiFragment transaksiFragment;
+//    TransaksiFragment transaksiFragment;
     Calendar myCalendar;
     Calendar myCalendar1;
     private TextView emptyView;
@@ -99,7 +100,7 @@ public class Report extends Fragment {
     Dialog loadingData,dialogLoad,dataKosong;
     TextView tvLoader;
     String ubahTanggal,total;
-    TransactionFragment transactionFragment;
+    TransactionReport transactionReport;
     ConstraintLayout btnlaporan,btntransaksi;
     private Toolbar toolbar;
     private BackdropContainer backdropContainer;
@@ -217,7 +218,7 @@ public class Report extends Fragment {
         btntransaksi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TransactionFragment fragment = new TransactionFragment();
+                TransactionReport fragment = new TransactionReport();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.mainFrameLayout,fragment);
@@ -233,7 +234,7 @@ public class Report extends Fragment {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         final String formattedDate = dateFormat.format(currentDateTimeString);
         Date dateString = Calendar.getInstance().getTime();
-        SimpleDateFormat datedFormat = new SimpleDateFormat(" dd MMM yyyy");
+        SimpleDateFormat datedFormat = new SimpleDateFormat("EE, dd MM yyyy");
         final String todaysDate = datedFormat.format(dateString);
 
         //3 days
@@ -920,7 +921,7 @@ public class Report extends Fragment {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         final String formattedDate = dateFormat.format(currentDateTimeString);
         Date dateString = Calendar.getInstance().getTime();
-        SimpleDateFormat datedFormat = new SimpleDateFormat(" dd MMM yyyy");
+        SimpleDateFormat datedFormat = new SimpleDateFormat("EE, dd MM yyyy");
         final String todaysDate = datedFormat.format(dateString);
 
         tanggalLaporan1.setText(todaysDate);
@@ -1048,8 +1049,8 @@ public class Report extends Fragment {
 
 
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
-        int dialogWidth = (int)(displayMetrics.widthPixels * 0.5);
-        int dialogHeight = (int)(displayMetrics.heightPixels * 0.6);
+        int dialogWidth = (int)(displayMetrics.widthPixels * 0.8);
+        int dialogHeight = (int)(displayMetrics.heightPixels * 0.2);
         loadingData.getWindow().setLayout(dialogWidth, dialogHeight);
 
         loadingData.show();

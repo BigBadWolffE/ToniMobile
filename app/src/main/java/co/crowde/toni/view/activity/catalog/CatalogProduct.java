@@ -35,7 +35,7 @@ import co.crowde.toni.network.CatalogRequest;
 import co.crowde.toni.helper.CloseSoftKeyboard;
 import co.crowde.toni.model.CatalogModel;
 import co.crowde.toni.view.activity.filter.CatalogFilter;
-import co.crowde.toni.view.dialog.catalog.MessageAddNewCatalog;
+import co.crowde.toni.view.dialog.message.catalog.MessageAddNewCatalog;
 
 public class CatalogProduct extends AppCompatActivity {
 

@@ -2,8 +2,6 @@ package co.crowde.toni.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -24,13 +21,11 @@ import java.util.List;
 import co.crowde.toni.R;
 import co.crowde.toni.controller.cart.CartController;
 import co.crowde.toni.database.Cart;
-import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CartModel;
 import co.crowde.toni.network.API;
 import co.crowde.toni.listener.ProductListener;
 import co.crowde.toni.model.ProductModel;
-import co.crowde.toni.view.dialog.product.ProductDetailDashboardPopup;
-import co.crowde.toni.view.fragment.cart.CartListItem;
+import co.crowde.toni.view.dialog.popup.product.ProductDetailDashboardPopup;
 import co.crowde.toni.view.fragment.modul.Dashboard;
 
 public class ProductDashboardAdapter

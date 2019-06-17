@@ -30,17 +30,22 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.IOException;
 
 import co.crowde.toni.R;
+import co.crowde.toni.controller.main.UserController;
 import co.crowde.toni.network.API;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.ShopModel;
 import co.crowde.toni.utils.PrinterNetwork;
+import co.crowde.toni.view.activity.shop.OpenShop;
+import co.crowde.toni.view.dialog.message.app.CloseAppsDialog;
+import co.crowde.toni.view.dialog.message.shop.CloseShopDialog;
 import co.crowde.toni.view.fragment.modul.Customer;
 import co.crowde.toni.view.fragment.modul.Dashboard;
 import co.crowde.toni.view.fragment.modul.Inventory;
 import co.crowde.toni.view.fragment.modul.Report;
-import co.crowde.toni.view.dialog.auth.ShopDetailPopup;
+import co.crowde.toni.view.dialog.popup.auth.ShopDetailPopup;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static co.crowde.toni.utils.PrinterNetwork.applicationUUID;
 import static co.crowde.toni.utils.PrinterNetwork.mBluetoothAdapter;
 import static co.crowde.toni.utils.PrinterNetwork.mBluetoothDevice;
 import static co.crowde.toni.utils.PrinterNetwork.mBluetoothSocket;
@@ -119,15 +124,16 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            new AlertDialog.Builder(this)
-                    .setTitle("Tutup Aplikasi TONI")
-                    .setMessage("Apakah Anda ingin menutup aplikasi TONI?")
-                    .setNegativeButton(android.R.string.no, null)
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface arg0, int arg1) {
-                            MainActivity.super.onBackPressed();
-                        }
-                    }).create().show();
+//            new AlertDialog.Builder(this)
+//                    .setTitle("Tutup Aplikasi TONI")
+//                    .setMessage("Apakah Anda ingin menutup aplikasi TONI?")
+//                    .setNegativeButton(android.R.string.no, null)
+//                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface arg0, int arg1) {
+//                            MainActivity.super.onBackPressed();
+//                        }
+//                    }).create().show();
+            CloseAppsDialog.showDialog(MainActivity.this);
         }
     }
 
@@ -151,10 +157,11 @@ public class MainActivity extends AppCompatActivity
 //            Toast.makeText(this, "Sinkronisasi", Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.nav_about) {
-            Toast.makeText(this, "Tentang Aplikasi", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Tentang Aplikasi", Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.nav_logout) {
-            Toast.makeText(this, "Tutup Toko", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Tutup Toko", Toast.LENGTH_SHORT).show();
+            CloseShopDialog.showDialog(MainActivity.this);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

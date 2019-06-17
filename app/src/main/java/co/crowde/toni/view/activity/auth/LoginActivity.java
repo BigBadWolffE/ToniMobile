@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -14,33 +13,20 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.OnTextChanged;
 import co.crowde.toni.R;
 import co.crowde.toni.helper.CloseSoftKeyboard;
 import co.crowde.toni.network.LoginRequest;
 import co.crowde.toni.helper.SavePref;
-import co.crowde.toni.view.dialog.app.CloseAppsDialog;
+import co.crowde.toni.view.dialog.message.app.CloseAppsDialog;
 
-import static co.crowde.toni.constant.Const.KEY_PASSWORD_FROM_LOGIN;
-import static co.crowde.toni.constant.Const.KEY_USERNAME_FROM_LOGIN;
 
 
 public class LoginActivity extends AppCompatActivity {
-
-    @BindView(R.id.tv_login_header) TextView tvLoginHeader;
-    @BindView(R.id.tv_closed_header) TextView tvClosedLabel;
-    @BindView(R.id.tv_closed_time) TextView tvClosedTime;
-    @BindView(R.id.tv_forgot_password) TextView tvForgetPass;
-    @BindView(R.id.tv_register) TextView tvRegister;
-    @BindView(R.id.et_username) EditText et_username;
-    @BindView(R.id.et_password) EditText et_password;
-    @BindView(R.id.cv_btn_login) CardView btnLogin;
-
+    public static TextView tvLoginHeader, tvClosedLabel, tvClosedTime,
+            tvForgetPass, tvRegister;
+    public static EditText et_username, et_password;
+    public static CardView btnLogin;
     public static ProgressDialog progressDialog;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,66 +39,61 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_login);
-        ButterKnife.bind(this);
 
-        btnLoginClicked();
-        tvForgetPassClicked();
-        tvRegisterClicked();
+        tvLoginHeader = findViewById(R.id.tv_login_header);
+        tvClosedLabel = findViewById(R.id.tv_closed_header);
+        tvClosedTime = findViewById(R.id.tv_closed_time);
+        et_username = findViewById(R.id.et_username);
+        et_password = findViewById(R.id.et_password);
+        btnLogin = findViewById(R.id.cv_btn_login);
+        btnLogin.setEnabled(false);
+        tvForgetPass = findViewById(R.id.tv_forgot_password);
+        tvRegister = findViewById(R.id.tv_register);
 
-        etUsernameListener();
-        etPasswordListener();
+        et_username.addTextChangedListener(loginWatcher);
+        et_password.addTextChangedListener(loginWatcher);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressDialog = new ProgressDialog(LoginActivity.this);
+                progressDialog.setMessage("Harap tunggu...");
+                progressDialog.setCanceledOnTouchOutside(false);
+                progressDialog.show();
+
+                if(et_username.getText().toString().equals("admin")){
+                    Intent wrongUser = new Intent(LoginActivity.this, ForgotUserActivity.class);
+                    startActivity(wrongUser);
+                } else {
+                    String username = et_username.getText().toString();
+                    String pass = et_password.getText().toString();
+                    LoginRequest.postLogin(LoginActivity.this, username, pass);
+                }
+            }
+        });
+
+        tvForgetPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent wrongPass = new Intent(LoginActivity.this, ForgotPassActivity.class);
+                startActivity(wrongPass);
+            }
+        });
+
+        tvRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent wrongPass = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(wrongPass);
+            }
+        });
 
         setShopClosedTime(LoginActivity.this);
         hideKeyboard(LoginActivity.this);
-
     }
-
-    @OnClick(R.id.cv_btn_login)
-    void btnLoginClicked(){
-        progressDialog = new ProgressDialog(LoginActivity.this);
-        progressDialog.setMessage("Harap tunggu...");
-        progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.show();
-
-        String username = et_username.getText().toString();
-
-        if(username.equals("admin")){
-//            progressDialog.dismiss();
-            Intent wrongUser = new Intent(LoginActivity.this, ForgotUserActivity.class);
-            startActivity(wrongUser);
-        } else {
-            LoginRequest.postLogin(LoginActivity.this);
-        }
-    }
-
-    @OnClick(R.id.tv_forgot_password)
-    void tvForgetPassClicked(){
-        Intent wrongPass = new Intent(LoginActivity.this, ForgotPassActivity.class);
-        startActivity(wrongPass);
-    }
-
-    @OnClick(R.id.tv_register)
-    void tvRegisterClicked(){
-        Intent wrongPass = new Intent(LoginActivity.this, ForgotPassActivity.class);
-        startActivity(wrongPass);
-    }
-
-    @OnTextChanged(R.id.et_username)
-    void etUsernameListener(){
-        et_username.addTextChangedListener(loginWatcher);
-    }
-
-    @OnTextChanged(R.id.et_password)
-    void etPasswordListener(){
-        et_password.addTextChangedListener(loginWatcher);
-    }
-
     public TextWatcher loginWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
         }
-
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if (et_username.getText().length() > 0) {
@@ -120,7 +101,6 @@ public class LoginActivity extends AppCompatActivity {
                         getResources().getColor(R.color.colorThemeGrey));
                 btnLogin.setEnabled(false);
 
-                //Button Active
                 if (et_password.getText().length() > 0){
                     btnLogin.setCardBackgroundColor(
                             getResources().getColor(R.color.colorThemeOrange));
@@ -130,12 +110,10 @@ public class LoginActivity extends AppCompatActivity {
                             getResources().getColor(R.color.colorThemeGrey));
                     btnLogin.setEnabled(false);
                 }
-
             } else {
                 btnLogin.setCardBackgroundColor(
                         getResources().getColor(R.color.colorThemeGrey));
                 btnLogin.setEnabled(false);
-
                 if (et_password.getText().length() > 0){
                     btnLogin.setCardBackgroundColor(
                             getResources().getColor(R.color.colorThemeGrey));
@@ -145,17 +123,14 @@ public class LoginActivity extends AppCompatActivity {
                             getResources().getColor(R.color.colorThemeGrey));
                     btnLogin.setEnabled(false);
                 }
-
             }
         }
-
         @Override
         public void afterTextChanged(Editable s) {
-
         }
     };
 
-    public void setShopClosedTime(Activity activity){
+    public static void setShopClosedTime(Activity activity){
         if(SavePref.readClosedTime(activity)==null){
             tvClosedTime.setText(activity.getResources().getString(R.string.strips));
         } else {
@@ -163,37 +138,19 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public void hideKeyboard(final Activity activity){
+    public static void hideKeyboard(final Activity activity){
         et_username.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 CloseSoftKeyboard.hideSoftKeyboard(v, activity);
             }
         });
-
         et_password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 CloseSoftKeyboard.hideSoftKeyboard(v, activity);
             }
         });
-
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == 1) {
-            if(resultCode == Activity.RESULT_OK){
-                String username = data.getStringExtra(KEY_USERNAME_FROM_LOGIN);
-                String password = data.getStringExtra(KEY_PASSWORD_FROM_LOGIN);
-
-                et_username.setText(username);
-                et_password.setText(password);
-            }
-            if (resultCode == Activity.RESULT_CANCELED) {
-
-            }
-        }
     }
 
     @Override

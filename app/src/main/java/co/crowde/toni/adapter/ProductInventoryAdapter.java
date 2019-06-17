@@ -20,7 +20,7 @@ import java.util.List;
 import co.crowde.toni.R;
 import co.crowde.toni.model.ProductModel;
 import co.crowde.toni.utils.Utils;
-import co.crowde.toni.view.dialog.product.InventoryDetailPopup;
+import co.crowde.toni.view.dialog.popup.product.InventoryDetailPopup;
 
 public class ProductInventoryAdapter
         extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

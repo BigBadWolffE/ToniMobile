@@ -8,7 +8,7 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -17,40 +17,38 @@
         app:cardBackgroundColor="@color/colorWhite"
         app:cardCornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:weightSum="5">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/imgClose"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_height="24dp"
                 android:layout_gravity="end"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_weight="0.5"
+                android:layout_marginBottom="8dp"
                 app:srcCompat="@drawable/ic_close_black_24dp" />
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.5"
-                android:background="@color/colorThemeGreen">
-
+                android:layout_height="100dp"
+                android:background="@color/colorThemeGreen"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:layout_marginBottom="24dp">
 
                 <LinearLayout
                     android:id="@+id/linearLayout3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:orientation="vertical"
                     android:weightSum="2"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -87,7 +85,7 @@
                 <LinearLayout
                     android:id="@+id/layoutCredit"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="match_parent"
                     android:padding="4dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
@@ -97,6 +95,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_weight="1"
                     android:orientation="vertical"
+                    android:gravity="center"
                     android:background="@drawable/bg_rec_orange_radius_5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -106,7 +105,7 @@
                     <TextView
                         android:id="@+id/labelCredit"
                         android:layout_width="match_parent"
-                        android:layout_height="26dp"
+                        android:layout_height="30dp"
                         android:textColor="@color/colorWhite"
                         android:gravity="center"
                         android:paddingTop="6dp"
@@ -116,7 +115,7 @@
                     <TextView
                         android:id="@+id/tvCredit"
                         android:layout_width="match_parent"
-                        android:layout_height="26dp"
+                        android:layout_height="30dp"
                         android:textColor="@color/colorWhite"
                         android:gravity="center"
                         android:paddingBottom="6dp"
@@ -138,15 +137,16 @@
 
 
             <android.support.constraint.ConstraintLayout
+                android:id="@+id/layout_input_nominal"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.5">
+                android:layout_height="100dp"
+                android:visibility="gone">
 
                 <android.support.constraint.Group
                     android:id="@+id/groupCredit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:constraint_referenced_ids="btnCreditOK,etCashCredit,labelAddCredit" />
 
                 <TextView
@@ -212,28 +212,27 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <android.support.constraint.Group
-                    android:id="@+id/groupNominal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="gone"
-                    app:constraint_referenced_ids="etCashCreditNominal,labelAddNominal,btnNominalOK" />
+                <!--<android.support.constraint.Group-->
+                    <!--android:id="@+id/groupNominal"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--app:constraint_referenced_ids="etCashCreditNominal, btnNominalOK" />-->
 
-                <TextView
-                    android:id="@+id/labelAddNominal"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:gravity="center"
-                    android:text="@string/input_amount_pay"
-                    android:textColor="@color/colorBlack"
-                    app:autoSizeTextType="uniform"
-                    android:maxLines="1"
-                    app:layout_constraintBottom_toTopOf="@+id/etCashCreditNominal"
-                    app:layout_constraintEnd_toEndOf="@+id/etCashCreditNominal"
-                    app:layout_constraintStart_toStartOf="@+id/etCashCreditNominal"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <!--<TextView-->
+                    <!--android:id="@+id/labelAddNominal"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--android:layout_marginBottom="8dp"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="@string/input_amount_pay"-->
+                    <!--android:textColor="@color/colorBlack"-->
+                    <!--app:autoSizeTextType="uniform"-->
+                    <!--android:maxLines="1"-->
+                    <!--app:layout_constraintBottom_toTopOf="@+id/etCashCreditNominal"-->
+                    <!--app:layout_constraintEnd_toEndOf="@+id/etCashCreditNominal"-->
+                    <!--app:layout_constraintStart_toStartOf="@+id/etCashCreditNominal"-->
+                    <!--app:layout_constraintTop_toTopOf="parent" />-->
 
                 <EditText
                     android:id="@+id/etCashCreditNominal"
@@ -288,13 +287,14 @@
 
 
             <android.support.constraint.ConstraintLayout
+                android:id="@+id/layout_nominal_group"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="100dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_weight="1.5">
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tvCashCredit01"
@@ -371,13 +371,6 @@
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/tvCashCredit03"
                     app:layout_constraintTop_toTopOf="@+id/tvCashCredit01" />
-
-                <android.support.constraint.Group
-                    android:id="@+id/groupNOminalAmount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    app:constraint_referenced_ids="tvCashCredit03,tvCashCredit04,tvCashCredit02,tvCashCredit01" />
 
             </android.support.constraint.ConstraintLayout>
 

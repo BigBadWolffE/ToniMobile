@@ -22,6 +22,7 @@ import java.util.UUID;
 
 import co.crowde.toni.constant.Const;
 import co.crowde.toni.helper.SavePref;
+import co.crowde.toni.view.dialog.message.printer.PrinterConnectivityDialog;
 
 public class PrinterNetwork {
 
@@ -74,13 +75,15 @@ public class PrinterNetwork {
 
                 } catch (IOException e) {
                     try {
-                        Toast.makeText(activity, "Tidak dapat terhubung dengan Bluetooth Printer", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(activity, "Tidak dapat terhubung dengan Bluetooth Printer", Toast.LENGTH_SHORT).show();
+                        PrinterConnectivityDialog.showDialog(activity);
                         dialog.dismiss();
                         mBluetoothSocket.close();
                         Log.e("Bluetooth","Can't Connect");
                     } catch (IOException e1) {
                         e1.printStackTrace();
-                        Toast.makeText(activity, "Tidak dapat terhubung dengan Bluetooth Socket", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(activity, "Tidak dapat terhubung dengan Bluetooth Socket", Toast.LENGTH_SHORT).show();
+                        PrinterConnectivityDialog.showDialog(activity);
                         Log.e("Bluetooth","Socket can't closed");
                     }
                 }

@@ -2,10 +2,8 @@ package co.crowde.toni.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,13 +16,13 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import co.crowde.toni.R;
 import co.crowde.toni.model.TransaksiModel;
-import co.crowde.toni.view.dialog.transaction.TransactionPopUpDetail;
+//import co.crowde.toni.view.intent.TransactionDetailActivity;
+import co.crowde.toni.view.dialog.popup.transaction.TransactionPopUpDetail;
 
 //import soedja.crowde.tokotani.DetailTransaksiFragment;
 //import soedja.crowde.tokotani.R;

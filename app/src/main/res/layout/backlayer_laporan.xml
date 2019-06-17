@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorThemeGreyLight"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/contentLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="vertical"
         android:padding="10dip"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/linearLayout11"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="horizontal">
+            app:layout_constraintBottom_toTopOf="@+id/bg_btn_transaksi_range_waktu_laporan"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <android.support.v7.widget.CardView
                 android:id="@+id/bg_btn_transaksi_hari_ini_laporan"
@@ -31,7 +33,12 @@
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
                 android:background="@drawable/bg_white_grey_rec"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/bg_btn_transaksi_3hari_ini_laporan"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/btn_transaksi_hari_ini_laporan"
@@ -53,7 +60,12 @@
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
                 android:background="@drawable/bg_white_grey_rec"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/bg_btn_transaksi_seminggu_laporan"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/bg_btn_transaksi_hari_ini_laporan"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/btn_transaksi_3hari_ini_laporan"
@@ -77,7 +89,12 @@
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
                 android:background="@drawable/bg_white_grey_rec"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/bg_btn_transaksi_sebulan_laporan"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/bg_btn_transaksi_3hari_ini_laporan"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/btn_transaksi_seminggu_laporan"
@@ -99,7 +116,12 @@
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
                 android:background="@drawable/bg_white_grey_rec"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/bg_btn_transaksi_seminggu_laporan"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/btn_transaksi_sebulan_laporan"
@@ -114,16 +136,20 @@
 
             </android.support.v7.widget.CardView>
 
-        </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/bg_btn_transaksi_range_waktu_laporan"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="5dp"
             android:background="@drawable/bg_white_grey_rec"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout11">
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/constraintLayout11"
@@ -140,6 +166,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tanggal Awal"
+                    android:textColor="@color/colorBlack"
                     android:textSize="12dp"
                     app:layout_constraintBottom_toTopOf="@+id/range_sebelum"
                     app:layout_constraintEnd_toEndOf="@+id/range_sebelum"
@@ -195,6 +222,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tanggal Akhir"
+                    android:textColor="@color/colorBlack"
                     android:textSize="12dp"
                     app:layout_constraintBottom_toTopOf="@+id/range_sesudah"
                     app:layout_constraintEnd_toEndOf="@+id/range_sesudah"
@@ -249,6 +277,6 @@
         </android.support.constraint.ConstraintLayout>
 
 
-    </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

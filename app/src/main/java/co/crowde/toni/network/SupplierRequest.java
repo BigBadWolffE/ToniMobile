@@ -23,6 +23,7 @@ import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CategoryModel;
 import co.crowde.toni.model.response.list.SupplierModel;
 import co.crowde.toni.view.activity.filter.CatalogFilter;
+import co.crowde.toni.view.dialog.message.network.NetworkOfflineDialog;
 
 public class SupplierRequest {
 
@@ -45,8 +46,9 @@ public class SupplierRequest {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(
-                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(
+//                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+                        NetworkOfflineDialog.showDialog(activity);
                         Log.e("Error",e.toString());
                     }
                 });

@@ -87,4 +87,15 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
+    <style name="TextAppearance.App.TextInputLayout" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/colorThemeGreen</item>
+        <item name="android:textSize">8sp</item>
+    </style>
+
+    <style name="EditTextTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!--<item name="colorControlNormal">@color/colorThemeGreen</item>-->
+        <item name="colorControlActivated">@color/colorThemeGreen</item>
+        <!--<item name="colorControlHighlight">@color/colorThemeGreenDark</item>-->
+    </style>
+
 </resources>

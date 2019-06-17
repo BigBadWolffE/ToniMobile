@@ -7,7 +7,7 @@
 
     <RelativeLayout
         android:id="@+id/empty_text_transaksi"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
@@ -15,6 +15,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:gravity="center"
+        android:background="@color/colorThemeGreyLight"
         app:layout_constraintBottom_toTopOf="@+id/scrollview_data"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -26,7 +27,6 @@
             android:id="@+id/textempty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorThemeCream"
             android:gravity="center"
             android:text="Mohon Pilih Tab Terlebih Dahulu"
             android:textSize="50dp"
@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:cardBackgroundColor="@color/colorThemeCream">
+            app:cardBackgroundColor="@color/colorThemeGreyLight">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rc_daftar_transaksi"

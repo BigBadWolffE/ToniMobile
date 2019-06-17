@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    tools:context=".view.activity.auth.RegisterActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="?actionBarSize"
+        android:layout_height="0dp"
+        android:background="@color/colorThemeGreen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarFilter"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="">
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <TextView
+        android:id="@+id/tv_register_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/register_label"
+        android:textColor="@color/colorThemeGreen"
+        android:textSize="@dimen/text_36_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/appBar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/appBar"
+        app:layout_constraintTop_toBottomOf="@+id/tv_register_label"
+        tools:ignore="NestedWeights">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:weightSum="9"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/info_shop_label"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/info_shop"
+                android:textSize="@dimen/text_24_size"
+                android:textStyle="bold"
+                android:textColor="@color/TextColorBlack" />
+
+            <EditText
+                android:id="@+id/et_shop_name"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingStart="12dp"
+                android:paddingLeft="12dp"
+                android:paddingEnd="12dp"
+                android:paddingRight="12dp"
+                android:hint="@string/nama_toko_tani"
+                android:inputType="text"
+                android:minEms="3"/>
+            <EditText
+                android:id="@+id/et_shop_address"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingStart="12dp"
+                android:paddingLeft="12dp"
+                android:paddingEnd="12dp"
+                android:paddingRight="12dp"
+                android:hint="@string/alamat_toko_tani"
+                android:inputType="text"
+                android:minEms="3"/>
+            <AutoCompleteTextView
+                android:id="@+id/et_shop_province"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingStart="12dp"
+                android:paddingLeft="12dp"
+                android:paddingEnd="12dp"
+                android:paddingRight="12dp"
+                android:hint="@string/pilih_provinsi"
+                android:inputType="text"
+                android:minEms="3"/>
+            <AutoCompleteTextView
+                android:id="@+id/et_shop_kab_kota"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingStart="12dp"
+                android:paddingLeft="12dp"
+                android:paddingEnd="12dp"
+                android:paddingRight="12dp"
+                android:hint="@string/pilih_kabupaten_kota"
+                android:inputType="text"
+                android:minEms="3"/>
+            <AutoCompleteTextView
+                android:id="@+id/et_shop_kecamatan"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingStart="12dp"
+                android:paddingLeft="12dp"
+                android:paddingEnd="12dp"
+                android:paddingRight="12dp"
+                android:hint="@string/pilih_kecamatan"
+                android:inputType="text"
+                android:minEms="3"/>
+            <AutoCompleteTextView
+                android:id="@+id/et_shop_kelurahan"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingStart="12dp"
+                android:paddingLeft="12dp"
+                android:paddingEnd="12dp"
+                android:paddingRight="12dp"
+                android:hint="@string/pilih_kelurahan"
+                android:inputType="text"
+                android:minEms="3"/>
+            <EditText
+                android:id="@+id/et_shop_ket"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingStart="12dp"
+                android:paddingLeft="12dp"
+                android:paddingEnd="12dp"
+                android:paddingRight="12dp"
+                android:hint="@string/keterangan_toko_tani"
+                android:inputType="text"
+                android:minEms="3"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:weightSum="9"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/data_shop_label"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/data_owner_shop"
+                android:textSize="@dimen/text_24_size"
+                android:textStyle="bold"
+                android:textColor="@color/TextColorBlack" />
+
+            <EditText
+                android:id="@+id/et_shop_owner"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingStart="12dp"
+                android:paddingLeft="12dp"
+                android:paddingEnd="12dp"
+                android:paddingRight="12dp"
+                android:hint="@string/data_nama_pemilik_toko"
+                android:inputType="text"
+                android:minEms="3"/>
+
+            <EditText
+                android:id="@+id/et_shop_phone"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingStart="12dp"
+                android:paddingLeft="12dp"
+                android:paddingEnd="12dp"
+                android:paddingRight="12dp"
+                android:hint="@string/data_nomor_ponsel"
+                android:inputType="phone"
+                android:minEms="10"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/layout_set_pass"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textColorHint="@color/colorThemeGrey"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/colorThemeGrey"
+                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
+                <EditText
+                    android:id="@+id/et_set_pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/atur_kata_sandi"
+                    android:maxLength="20"
+                    android:inputType="textPassword"
+                    android:paddingStart="12dp"
+                    android:paddingLeft="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingRight="12dp"
+                    android:imeOptions="actionNext"
+                    android:textColor="@color/colorThemeGreenDark"
+                    android:textColorHint="@color/colorThemeGrey"
+                    android:theme="@style/EditTextTheme"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/layout_type_pass"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:hintEnabled="true"
+                android:textColorHint="@color/colorThemeGrey"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/colorThemeGrey"
+                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout" >
+                <EditText
+                    android:id="@+id/et_type_pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/ulang_kata_sandi"
+                    android:maxLength="20"
+                    android:inputType="textPassword"
+                    android:paddingStart="12dp"
+                    android:paddingLeft="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingRight="12dp"
+                    android:imeOptions="actionNext"
+                    android:textColor="@color/colorThemeGreenDark"
+                    android:textColorHint="@color/colorThemeGrey"
+                    android:theme="@style/EditTextTheme"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3">
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center|end">
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv_btn_register"
+                    android:layout_width="250dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    app:cardBackgroundColor="@color/colorThemeGrey"
+                    app:cardCornerRadius="15dp">
+
+                    <TextView
+                        android:id="@+id/tv_btn_register_label"
+                        style="@style/TextButtonWhiteBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:text="@string/daftar" />
+
+                </android.support.v7.widget.CardView>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

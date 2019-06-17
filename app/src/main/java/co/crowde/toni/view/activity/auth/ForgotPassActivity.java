@@ -27,7 +27,7 @@ public class ForgotPassActivity extends AppCompatActivity {
 
         tvBtnBack = findViewById(R.id.tvBtnBack);
 
-//        LoginActivity.btnLogin.setEnabled(true);
+        LoginActivity.btnLogin.setEnabled(true);
         cvBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
