@@ -182,6 +182,8 @@ public class ProductRequest {
                                     Inventory.inventoryAdapter.notifyItemRemoved(scrollPosition);
                                 } else {
                                     Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+                                    Inventory.productModels.clear();
+                                    Inventory.inventoryAdapter.replaceItemFiltered(Inventory.productModels);
                                     Inventory.inventoryAdapter.notifyDataSetChanged();
                                 }
                                 Inventory.progressDialog.dismiss();
