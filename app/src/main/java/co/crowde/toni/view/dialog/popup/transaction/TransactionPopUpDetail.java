@@ -51,6 +51,7 @@ import java.util.UUID;
 
 import co.crowde.toni.R;
 import co.crowde.toni.adapter.DetailTransaksiWaktuPelangganAdapter;
+import co.crowde.toni.controller.main.PrintController;
 import co.crowde.toni.helper.DecimalFormatRupiah;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.helper.volley.AppController;
@@ -60,6 +61,8 @@ import co.crowde.toni.model.TransaksiModel;
 import co.crowde.toni.model.UserDetailModel;
 import co.crowde.toni.network.API;
 import co.crowde.toni.utils.PrinterCommands;
+import co.crowde.toni.utils.PrinterNetwork;
+import co.crowde.toni.view.dialog.message.printer.PrinterConnectivityDialog;
 
 
 public class TransactionPopUpDetail {
@@ -317,84 +320,24 @@ public class TransactionPopUpDetail {
                                     if(status){
                                         resetConnection();
                                         if(SavePref.readDeviceAddress(activity)!=null){
-                                            bluetoothAddress = SavePref.readDeviceAddress(activity);
-                                            mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-                                            mBluetoothDevice= mBluetoothAdapter.getRemoteDevice(bluetoothAddress);
+                                            PrinterNetwork.bluetoothAddress = SavePref.readDeviceAddress(activity);
+                                            PrinterNetwork.mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+                                            PrinterNetwork.mBluetoothDevice= PrinterNetwork.mBluetoothAdapter.getRemoteDevice(PrinterNetwork.bluetoothAddress);
                                             try {
-                                                mBluetoothSocket = createBluetoothSocket(mBluetoothDevice);
-                                                mBluetoothSocket.connect();
-                                                if (mBluetoothSocket.isConnected()){
-                                                    try {
-                                                        outputStream = mBluetoothSocket
-                                                                .getOutputStream();
-
-                                                        printNewLine();
-
-                                                        printCustom(shopModel.getShopName(),2,0);
-                                                        printCustom(""+shopModel.getStreet()+", "+
-                                                                shopModel.getVillage()+", "+
-                                                                shopModel.getDistrict()+", "+
-                                                                shopModel.getProvince(),0,0);
-
-                                                        printNewLine();
-                                                        printText("Nomor Transaksi : "+ model.getTransactionId()+"\n");
-                                                        printText("Pelanggan : "+ model.getCostumerName()+"\n");
-                                                        printText("--------------------------------\n");
-                                                        printText("Tanggal : "+ formattedDate+"\n");
-                                                        printText("--------------------------------\n");
-                                                        printText("Pembayaran: "+ jenisBayar +"\n");
-                                                        printText("--------------------------------\n");
-
-                                                        for(DetailTransaksiModel model : models  ){
-                                                            int sellingprice = Integer.parseInt(model.getSellingPrice());
-                                                            printText(model.getProductName()+"\n");
-                                                            printText(String.format("%2s %1s %1s ",model.getQuantity(), "X","Rp."
-                                                                    +DecimalFormatRupiah.formatNumber.format(sellingprice)+"\n"));
-
-                                                        }
-                                                        printText("-------------------------------\n");
-                                                        int amount = Integer.parseInt(model.getAmount());
-                                                        printText("Total  : "+"Rp."+DecimalFormatRupiah.formatNumber.format(amount));
-                                                        printNewLine();
-                                                        printText("--------------------------------\n");
-                                                        printText("--------------------------------\n");
-                                                        printText("TERIMAKASIH SUDAH MEMBELI PRODUK PERTANIAN DI TOKO KAMI.\n\n");
-                                                        printCustom("====LAYANAN KONSUMEN KAMI ====",0,1);
-
-                                                        printText("SMS/TELP "+shopModel.getPhoneNumber()+"\n");
-                                                        printText("Dicetak Tanggal :"+formattedDate+"\n");
-                                                        printText("------------------------------------------\n");
-                                                        printNewLine();
-                                                        printNewLine();
-                                                        printNewLine();
-                                                        printNewLine();
-                                                        outputStream.flush();
-                                                    } catch (IOException e) {
-                                                        try {
-                                                            Toast.makeText(activity, "Tidak dapat terhubung dengan Bluetooth Printer", Toast.LENGTH_SHORT).show();
-                                                            mBluetoothSocket.close();
-                                                            Log.e("Bluetooth","Can't Connect");
-                                                        } catch (IOException e1) {
-                                                            e1.printStackTrace();
-                                                            Toast.makeText(activity, "Tidak dapat terhubung dengan Bluetooth Socket", Toast.LENGTH_SHORT).show();
-                                                            Log.e("Bluetooth","Socket can't closed");
-                                                        }
-                                                    }
-
+                                                PrinterNetwork.mBluetoothSocket = PrinterNetwork.createBluetoothSocket(PrinterNetwork.mBluetoothDevice);
+                                                PrinterNetwork.mBluetoothSocket.connect();
+                                                if (PrinterNetwork.mBluetoothSocket.isConnected()){
+                                                    PrintController.printDetailTransaction(activity, model, models, formattedDate , jenisBayar);
                                                 }
                                             } catch (IOException e) {
-                                                try {
-                                                    Toast.makeText(activity, "Tidak dapat terhubung dengan Bluetooth Printer", Toast.LENGTH_SHORT).show();
-                                                    mBluetoothSocket.close();
-                                                    Log.e("Bluetooth","Can't Connect");
-                                                } catch (IOException e1) {
-                                                    e1.printStackTrace();
-                                                    Toast.makeText(activity, "Tidak dapat terhubung dengan Bluetooth Socket", Toast.LENGTH_SHORT).show();
-                                                    Log.e("Bluetooth","Socket can't closed");
-                                                }
+                                                PrinterConnectivityDialog.showDialog(activity);
+//                                                ConfirmTransactionDialog.progressDialog.dismiss();
+                                                Log.e("Bluetooth","Can't Connect");
                                             }
+
                                         } else {
-                                            pairingBluetooth(activity);
+//                                            ConfirmTransactionDialog.progressDialog.dismiss();
+                                            PrinterNetwork.pairingBluetooth(activity);
                                         }
                                     }
 

@@ -8,15 +8,19 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import co.crowde.toni.R;
 import co.crowde.toni.helper.DecimalFormatRupiah;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CartModel;
 import co.crowde.toni.model.CustomerModel;
+import co.crowde.toni.model.DetailTransaksiModel;
+import co.crowde.toni.model.TransaksiModel;
 import co.crowde.toni.model.UserDetailModel;
 import co.crowde.toni.model.response.object.AddNewTransactionModel;
 import co.crowde.toni.model.response.object.CreditPayModel;
@@ -344,5 +348,122 @@ public class PrintController {
         }catch (IOException e) {
         }
 
+    }
+
+    public static void printCustomerCredit(Activity activity, CustomerModel customerModel){
+
+        UserDetailModel models = new Gson().fromJson(SavePref.readUserDetail(activity), UserDetailModel.class);
+
+        String village = models.getVillage();
+        String villages = village.replaceAll("[^A-Za-z ]","");
+        String district = models.getDistrict();
+        String districts = district.replaceAll("[^A-Za-z ]","");
+        String regency = models.getRegency();
+        String regencys = regency.replaceAll("[^A-Za-z ]","");
+        String province = models.getProvince();
+        String provinces = province.replaceAll("[^A-Za-z ]","");
+
+        try {
+            os = mBluetoothSocket.getOutputStream();
+
+            printNewLine();
+            printPhoto(R.drawable.toni_black, activity);
+
+            printCustom(models.getShopName().toUpperCase(),0,1);
+            printCustom(models.getStreet(),0,1);
+            printCustom(villages+", "+districts,0,1);
+            printCustom(regencys,0,1);
+            printCustom("",0,0);
+
+            printNewLine();
+
+            printText(customerModel.getCustomerName()+"\n");
+            DecimalFormat money = new DecimalFormat("#,###,###");
+            final int amount = customerModel.getCredit() - customerModel.getCreditPaid();
+            printText("Sisa Hutang Anda : Rp."+money.format(amount)+"\n");
+            printText("--------------------------------\n");
+
+            printNewLine();
+            printNewLine();
+            printCustom("Terima Kasih telah membeli\nproduk pertanian di\nToko "
+                    + models.getShopName(), 0, 1);
+
+            printNewLine();
+            printText("--------------------------------\n");
+            printCustom("Layanan Konsumen Toko", 0, 1);
+            printCustom(models.getPhoneNumber(), 0, 1);
+            printCustom("", 0, 0);
+
+            printNewLine();
+            printNewLine();
+
+            os.flush();
+        }catch (IOException e) {
+        }
+
+    }
+
+    public static void printDetailTransaction(Activity activity, TransaksiModel model, List<DetailTransaksiModel> models , String formattedDate, String jenisBayar){
+        UserDetailModel userModels = new Gson().fromJson(SavePref.readUserDetail(activity), UserDetailModel.class);
+
+        String village = userModels.getVillage();
+        String villages = village.replaceAll("[^A-Za-z ]","");
+        String district = userModels.getDistrict();
+        String districts = district.replaceAll("[^A-Za-z ]","");
+        String regency = userModels.getRegency();
+        String regencys = regency.replaceAll("[^A-Za-z ]","");
+        String province = userModels.getProvince();
+        String provinces = province.replaceAll("[^A-Za-z ]","");
+
+        try {
+            os = mBluetoothSocket.getOutputStream();
+
+            printNewLine();
+            printPhoto(R.drawable.toni_black, activity);
+
+            printCustom(userModels.getShopName().toUpperCase(),0,1);
+            printCustom(userModels.getStreet(),0,1);
+            printCustom(villages+", "+districts,0,1);
+            printCustom(regencys,0,1);
+            printCustom("",0,0);
+
+            printNewLine();
+            printText("Nomor Transaksi : "+ model.getTransactionId()+"\n");
+            printText("Pelanggan : "+ model.getCostumerName()+"\n");
+            printText("--------------------------------\n");
+            printText("Tanggal : "+ formattedDate+"\n");
+            printText("--------------------------------\n");
+            printText("Pembayaran: "+ jenisBayar +"\n");
+            printText("--------------------------------\n");
+
+            for(DetailTransaksiModel modelss : models  ){
+                int sellingprice = Integer.parseInt(modelss.getSellingPrice());
+                printText(modelss.getProductName()+"\n");
+                printText(String.format("%2s %1s %1s ",modelss.getQuantity(), "X","Rp."
+                        +DecimalFormatRupiah.formatNumber.format(sellingprice)+"\n"));
+
+            }
+            printText("-------------------------------\n");
+            int amount = Integer.parseInt(model.getAmount());
+            printText("Total  : "+"Rp."+DecimalFormatRupiah.formatNumber.format(amount));
+            printNewLine();
+            printText("--------------------------------\n");
+
+            printNewLine();
+            printCustom("Terima Kasih telah membeli\nproduk pertanian di\nToko "
+                    + userModels.getShopName(), 0, 1);
+
+            printNewLine();
+            printText("--------------------------------\n");
+            printCustom("Layanan Konsumen Toko", 0, 1);
+            printCustom(userModels.getPhoneNumber(), 0, 1);
+            printCustom("", 0, 0);
+
+            printNewLine();
+            printNewLine();
+
+            os.flush();
+        } catch (IOException e) {
+        }
     }
 }

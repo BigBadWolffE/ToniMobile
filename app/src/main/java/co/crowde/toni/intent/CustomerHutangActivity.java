@@ -62,6 +62,7 @@ import java.util.UUID;
 
 import co.crowde.toni.R;
 import co.crowde.toni.adapter.TransaksiBagianPelangganAdapter;
+import co.crowde.toni.controller.main.PrintController;
 import co.crowde.toni.helper.CloseSoftKeyboard;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.helper.volley.AppController;
@@ -69,7 +70,9 @@ import co.crowde.toni.model.CustomerModel;
 import co.crowde.toni.model.ShopModel;
 import co.crowde.toni.network.API;
 import co.crowde.toni.utils.PrinterCommands;
+import co.crowde.toni.utils.PrinterNetwork;
 import co.crowde.toni.utils.UtilsImage;
+import co.crowde.toni.view.dialog.message.printer.PrinterConnectivityDialog;
 
 public class CustomerHutangActivity extends AppCompatActivity {
 
@@ -353,7 +356,7 @@ public class CustomerHutangActivity extends AppCompatActivity {
         btncetakstrukdialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cetakHutang();
+                cetakHutang(CustomerHutangActivity.this);
             }
         });
 
@@ -363,7 +366,7 @@ public class CustomerHutangActivity extends AppCompatActivity {
         dialoghutangcetak.getWindow().setBackgroundDrawableResource(android.R.color.white);
 
     }
-    private void cetakHutang(){
+    private void cetakHutang(Activity activity){
 
         final LayoutInflater inflaterUser = LayoutInflater.from(CustomerHutangActivity.this);
         final View dialogView = inflaterUser.inflate(R.layout.layout_konfirmasi_cetak_hutang, null);
@@ -382,63 +385,24 @@ public class CustomerHutangActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 resetConnection();
-                if(SavePref.readDeviceAddress(CustomerHutangActivity.this)!=null){
-                    bluetoothAddress = SavePref.readDeviceAddress(CustomerHutangActivity.this);
-                    mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-                    mBluetoothDevice= mBluetoothAdapter.getRemoteDevice(bluetoothAddress);
+                if(SavePref.readDeviceAddress(activity)!=null){
+                    PrinterNetwork.bluetoothAddress = SavePref.readDeviceAddress(activity);
+                    PrinterNetwork.mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+                    PrinterNetwork.mBluetoothDevice= PrinterNetwork.mBluetoothAdapter.getRemoteDevice(PrinterNetwork.bluetoothAddress);
                     try {
-                        mBluetoothSocket = createBluetoothSocket(mBluetoothDevice);
-                        mBluetoothSocket.connect();
-                        if (mBluetoothSocket.isConnected()){
-                            try {
-                                outputStream = mBluetoothSocket
-                                        .getOutputStream();
-
-                                printNewLine();
-
-//                                printPhoto(R.drawable.tonoo);
-
-                                printCustom(shopModel.getShopName(),2,0);
-                                printCustom(""+shopModel.getStreet()+", "+
-                                        shopModel.getVillage()+", "+
-                                        shopModel.getDistrict()+", "+
-                                        shopModel.getProvince(),0,0);
-                                printText("Telp. "+shopModel.getPhoneNumber()+"\n");
-                                printNewLine();
-                                printText(customerModel.getCustomerName()+"\n");
-                                DecimalFormat money = new DecimalFormat("#,###,###");
-                                final int amount = customerModel.getCredit() - customerModel.getCreditPaid();
-                                printText("Sisa Hutang Anda : Rp."+money.format(amount)+"\n");
-                                printText("--------------------------------\n");
-                                printText("--------------------------------\n");
-
-                                printNewLine();
-                                printText("TERIMAKASIH SUDAH MEMBELI PRODUK PERTANIAN DI TOKO KAMI.\n\n");
-                                printCustom("========== LAYANAN KONSUMEN KAMI =========",0,1);
-                                printText("SMS/TELP "+shopModel.getPhoneNumber()+"\n");
-                                printText("Dicetak Tanggal :"+shopModel+"\n");
-                                printNewLine();
-                                printNewLine();
-                                printNewLine();
-                                outputStream.flush();
-
-                            } catch (IOException e1) {
-                                e1.printStackTrace();
-                            }
+                        PrinterNetwork.mBluetoothSocket = PrinterNetwork.createBluetoothSocket(PrinterNetwork.mBluetoothDevice);
+                        PrinterNetwork.mBluetoothSocket.connect();
+                        if (PrinterNetwork.mBluetoothSocket.isConnected()){
+                            PrintController.printCustomerCredit(activity, customerModel);
                         }
                     } catch (IOException e) {
-                        try {
-                            Toast.makeText(CustomerHutangActivity.this, "Tidak dapat terhubung dengan Bluetooth Printer", Toast.LENGTH_SHORT).show();
-                            mBluetoothSocket.close();
-                            Log.e("Bluetooth","Can't Connect");
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                            Toast.makeText(CustomerHutangActivity.this, "Tidak dapat terhubung dengan Bluetooth Socket", Toast.LENGTH_SHORT).show();
-                            Log.e("Bluetooth","Socket can't closed");
-                        }
+                        PrinterConnectivityDialog.showDialog(activity);
+//                                                ConfirmTransactionDialog.progressDialog.dismiss();
+                        Log.e("Bluetooth","Can't Connect");
                     }
+
                 } else {
-                    pairingBluetooth();
+                    PrinterNetwork.pairingBluetooth(activity);
                 }
             }
         });

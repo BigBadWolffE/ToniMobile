@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,8 +27,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import co.crowde.toni.R;
+import co.crowde.toni.controller.main.ProductController;
 import co.crowde.toni.helper.CloseSoftKeyboard;
 import co.crowde.toni.model.CategoryModel;
 import co.crowde.toni.model.custom.CategoryChipsModel;
@@ -39,9 +42,9 @@ public class DashboardFilter extends AppCompatActivity {
 
     public static ProgressDialog progressDialog;
 
-    public static ArrayList<CategoryModel> categoryModels = new ArrayList<>();
-    public static ArrayList<CategoryChipsModel> category = new ArrayList<>();
-    public static ArrayList<StatusModel> statusList = new ArrayList<>();
+    public static ArrayList<Boolean> booleanArrayList = new ArrayList<>();
+    public static ArrayList<String> statusList = new ArrayList<>();
+    public static String[] status = {"Tersedia", "Mulai habis", "Habis"};
 
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -51,6 +54,9 @@ public class DashboardFilter extends AppCompatActivity {
     public static Toolbar toolbarFilter;
     public static ChipsInput chipsInput;
 
+    public static List<CategoryModel> categories = new ArrayList<>();
+    public static ArrayList<CategoryModel> categoryModels = new ArrayList<>();
+    public static ArrayList<String> category = new ArrayList<>();
     public static ChipGroup chipCategory, chipHistoryCategory, chipStatus;
 
     public static AutoCompleteTextView etCategory;
@@ -89,6 +95,7 @@ public class DashboardFilter extends AppCompatActivity {
         toolbarFilter.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onBackPressed();
                 finish();
                 Dashboard.requestFilter(DashboardFilter.this);
             }
@@ -134,7 +141,6 @@ public class DashboardFilter extends AppCompatActivity {
             }
         });
 
-        statusList();
         filterStatus(DashboardFilter.this);
 
     }
@@ -173,19 +179,20 @@ public class DashboardFilter extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 if(category.size()>0){
                     for(int i=0; i<category.size();i++){
-                        if(etCategory.getText().toString().equals(category.get(i).getCategoryName())){
+                        if(etCategory.getText().toString().equals(categories.get(i).getCategoryName())){
                             Toast.makeText(activity, "Kategori sudah terpilih.", Toast.LENGTH_SHORT).show();
                         } else {
                             String str = new Gson().toJson(etCategory.getAdapter().getItem(position));
                             try {
                                 JSONObject obj = new JSONObject(str);
-                                category.add(new CategoryChipsModel(true, obj.getString("categoryId"), obj.getString("categoryName")));
+                                categories.add(new CategoryModel(obj.getString("categoryId"), obj.getString("categoryName")));
+                                category.add(obj.getString("categoryId"));
 
                                 final Chip chip = new Chip(activity);
                                 chip.setId(i);
                                 chip.setTag(i);
 
-                                chip.setText(category.get(i).getCategoryName());
+                                chip.setText(categories.get(i).getCategoryName());
                                 chip.setCloseIconVisible(true);
                                 chip.setCheckable(false);
 
@@ -195,13 +202,10 @@ public class DashboardFilter extends AppCompatActivity {
                                 chip.setOnCloseIconClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        category.remove(new CategoryChipsModel(chip.getText().toString()));
-                                    }
-                                });
-                                chip.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-//                                        Toast.makeText(activity, category, Toast.LENGTH_SHORT).show();
+                                        int tag = (int) v.getTag();
+                                        chipCategory.removeView(v);
+                                        category.remove(tag);
+                                        categories.remove(tag);
                                     }
                                 });
                                 chipCategory.addView(chip);
@@ -214,14 +218,15 @@ public class DashboardFilter extends AppCompatActivity {
                     String str = new Gson().toJson(etCategory.getAdapter().getItem(position));
                     try {
                         JSONObject obj = new JSONObject(str);
-                        category.add(new CategoryChipsModel(true, obj.getString("categoryId"), obj.getString("categoryName")));
+                        categories.add(new CategoryModel(obj.getString("categoryId"), obj.getString("categoryName")));
+                        category.add(obj.getString("categoryId"));
 
-                        for (int i=0; i<category.size();i++){
+                        for (int i=0; i<categories.size();i++){
                             final Chip chip = new Chip(activity);
                             chip.setId(i);
                             chip.setTag(i);
 
-                            chip.setText(category.get(i).getCategoryName());
+                            chip.setText(categories.get(i).getCategoryName());
                             chip.setCloseIconVisible(true);
                             chip.setCheckable(false);
 
@@ -231,7 +236,10 @@ public class DashboardFilter extends AppCompatActivity {
                             chip.setOnCloseIconClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    category.remove(new CategoryChipsModel(chip.getText().toString()));
+                                    int tag = (int) v.getTag();
+                                    chipCategory.removeView(v);
+                                    category.remove(tag);
+                                    categories.remove(tag);
                                 }
                             });
                             chipCategory.addView(chip);
@@ -258,39 +266,56 @@ public class DashboardFilter extends AppCompatActivity {
     }
 
     private static void filterStatus(final Activity activity) {
-        for (int i=0;i<statusList.size();i++){
+        for (int i=0;i<status.length;i++){
             final Chip chip = new Chip(activity);
             chip.setId(i);
             chip.setTag(i);
 
-            chip.setText(statusList.get(i).getStatus());
-            chip.setCheckable(true);
+            chip.setText(status[i]);
 
-            if(statusList.get(i).isActive()){
-                chip.setChecked(true);
-                chip.setChipBackgroundColor(ColorStateList
-                        .valueOf(activity.getResources()
-                                .getColor(R.color.colorThemeGreen)));
-                chip.setTextColor(ColorStateList
-                        .valueOf(activity.getResources()
-                                .getColor(R.color.colorWhite)));
-            } else {
-                chip.setChecked(false);
-                chip.setChipBackgroundColor(ColorStateList
-                        .valueOf(activity.getResources()
-                                .getColor(R.color.colorThemeGreyLight)));
-                chip.setTextColor(ColorStateList
-                        .valueOf(activity.getResources()
-                                .getColor(R.color.colorBlack)));
+
+            chip.setCheckable(true);
+            booleanArrayList.add(false);
+
+            for(int j=0; j<statusList.size();j++){
+                if(chip.getText().equals(statusList.get(j))){
+                    chip.setChecked(true);
+                    chip.setChipBackgroundColor(ColorStateList
+                            .valueOf(activity.getResources()
+                                    .getColor(R.color.colorThemeGreen)));
+                    chip.setTextColor(ColorStateList
+                            .valueOf(activity.getResources()
+                                    .getColor(R.color.colorWhite)));
+                } else if(statusList.get(j).equals("Mulai%20habis")){
+                    if(chip.getText().equals("Mulai habis")){
+                        chip.setChecked(true);
+                        chip.setChipBackgroundColor(ColorStateList
+                                .valueOf(activity.getResources()
+                                        .getColor(R.color.colorThemeGreen)));
+                        chip.setTextColor(ColorStateList
+                                .valueOf(activity.getResources()
+                                        .getColor(R.color.colorWhite)));
+                    }
+
+                }
+
             }
 
             chip.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 
+                    int tag = (int) compoundButton.getTag();
+                    booleanArrayList.set(tag, b);
+
                     if(b){
-                        statusList.set(chip.getId(),
-                                new StatusModel(true, chip.getText().toString()));
+                        if(chip.getText().equals("Mulai habis")){
+                            statusList.add("Mulai%20habis");
+                        } else {
+                            statusList.add(chip.getText().toString());
+                        }
+
+//                        ProductController.statusInventory.add(chip.getText().toString());
                         chip.setChipBackgroundColor(ColorStateList
                                 .valueOf(activity.getResources()
                                         .getColor(R.color.colorThemeGreen)));
@@ -298,8 +323,13 @@ public class DashboardFilter extends AppCompatActivity {
                                 .valueOf(activity.getResources()
                                         .getColor(R.color.colorWhite)));
                     } else {
-                        statusList.set(chip.getId(),
-                                new StatusModel(false, chip.getText().toString()));
+                        if(chip.getText().equals("Mulai habis")){
+                            statusList.remove("Mulai%20habis");
+                        } else {
+                            statusList.remove(chip.getText().toString());
+                        }
+//                        statusList.remove(chip.getText().toString());
+//                        ProductController.statusInventory.remove(chip.getText().toString());
                         chip.setChipBackgroundColor(ColorStateList
                                 .valueOf(activity.getResources()
                                         .getColor(R.color.colorThemeGreyLight)));
@@ -307,30 +337,16 @@ public class DashboardFilter extends AppCompatActivity {
                                 .valueOf(activity.getResources()
                                         .getColor(R.color.colorBlack)));
                     }
+
+                    Log.e("StatusStock",new Gson().toJson(ProductController.statusInventory));
                 }
             });
             chipStatus.addView(chip);
         }
     }
-
-    public static void statusList(){
-        if(statusList.size()==0){
-            statusList.add(new StatusModel(
-                    false,
-                    "Tersedia"));
-            statusList.add(new StatusModel(
-                    false,
-                    "Mulai habis"));
-            statusList.add(new StatusModel(
-                    false,
-                    "Habis"));
-        }
-
-    }
-
     @Override
     public void onBackPressed() {
-        finish();
         Dashboard.requestFilter(DashboardFilter.this);
+        super.onBackPressed();
     }
 }

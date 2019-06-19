@@ -96,7 +96,7 @@ public class ProductRequest {
                                         .fromJson(data,
                                         new TypeToken<List<ProductModel>>() {
                                         }.getType());
-                                Dashboard.updateDataProduct(productModels);
+                                Dashboard.updateDataProduct(productModels, page);
                                 Dashboard.progressDialog.dismiss();
                             } else if(message.equals("Data produk tidak ditemukan!")){
                                 if (Dashboard.productModels.size() != 0){

@@ -51,10 +51,8 @@ public class Inventory extends Fragment {
     public static ImageView imgBtnFilter;
     public static FloatingActionButton btnAddProduct;
     public static RecyclerView rcProduct;
-    public static RecyclerView.LayoutManager rcLayoutDashboard;
     public static ProductInventoryAdapter inventoryAdapter;
     public static List<ProductModel> productModels = new ArrayList<>();
-    public static List<ProductModel> productModelsFiltered;
 
     static DividerItemDecoration itemDecorator;
 
@@ -89,18 +87,9 @@ public class Inventory extends Fragment {
         itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(),
                 R.drawable.divider_line_item));
 
-//        ProductRequest.page = 1;
-//        ProductRequest.status = "";
-//        ProductRequest.categoryId = "";
-//        ProductRequest.productName = "";
-//        ProductRequest.supplierId = "";
-
         initAdapter(getActivity());
         requestFilter(getActivity());
-//        ProductRequest.getInventoryList(getActivity());
         initScrollListener(getActivity());
-
-//        productList(getActivity());
 
         //Edittext Watcher
         searchProduct(getActivity(), getContext());
@@ -109,7 +98,6 @@ public class Inventory extends Fragment {
         imgBtnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                FilterInventoryPopup.showFilterInventory(getActivity());
                 Intent filter = new Intent(getActivity(), InventoryFilter.class);
                 startActivity(filter);
 
@@ -208,33 +196,6 @@ public class Inventory extends Fragment {
         });
     }
 
-//    public static void productList(Activity activity){
-//        if(ProductController.categoryInventory.isEmpty()){
-//            ProductRequest.getInventoryList(activity);
-//            productModels = new ArrayList<>();
-//            inventoryAdapter = new ProductInventoryAdapter(activity,
-//                    productModels, activity);
-//            rcProduct.addItemDecoration(itemDecorator);
-//            rcProduct.setLayoutManager(new LinearLayoutManager(activity));
-//            rcProduct.setAdapter(inventoryAdapter);
-//            imgBtnFilter.setBackground(
-//                    activity.getResources().getDrawable(R.color.colorWhite));
-//            imgBtnFilter.setImageDrawable(
-//                    activity.getResources().getDrawable(R.drawable.ic_tune_black_24dp));
-//
-//        } else {
-//            inventoryAdapter = new ProductInventoryAdapter(activity,
-//                    productModelsFiltered, activity);
-//            rcProduct.addItemDecoration(itemDecorator);
-//            rcProduct.setLayoutManager(new LinearLayoutManager(activity));
-//            rcProduct.setAdapter(inventoryAdapter);
-//            imgBtnFilter.setBackground(
-//                    activity.getResources().getDrawable(R.drawable.bg_rec_radius_5dp_green));
-//            imgBtnFilter.setImageDrawable(
-//                    activity.getResources().getDrawable(R.drawable.ic_tune_white_24dp));
-//        }
-//    }
-
     public TextWatcher searchWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -262,7 +223,6 @@ public class Inventory extends Fragment {
     };
 
     public static void initAdapter(Activity activity) {
-//        productModels = new ArrayList<>();
         inventoryAdapter = new ProductInventoryAdapter(activity, productModels, activity);
 
         rcProduct.setLayoutManager(new LinearLayoutManager(activity));

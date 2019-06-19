@@ -58,7 +58,7 @@ public class Dashboard extends Fragment {
     public static ImageView imgBtnFilter;
     public static RecyclerView rcProduct;
     public static ProductDashboardAdapter productDashboardAdapter;
-    public static List<ProductModel> productModels;
+    public static List<ProductModel> productModels = new ArrayList<>();
 
     public  static CardView cvBtnCart;
 
@@ -93,6 +93,8 @@ public class Dashboard extends Fragment {
         // Inflate the layout for this fragment
         View  view =  inflater.inflate(R.layout.fragment_dashboard, container, false);
 
+        progressDialog = new ProgressDialog(getActivity());
+
         etSearch = view.findViewById(R.id.etSearchProduct);
         imgBtnFilter = view.findViewById(R.id.imgBtnFilter);
         rcProduct = view.findViewById(R.id.rcProduct);
@@ -112,8 +114,6 @@ public class Dashboard extends Fragment {
 //            showFloatingCart();
 //        }
 
-
-        progressDialog = new ProgressDialog(getActivity());
         initAdapter(getActivity());
         requestFilter(getActivity());
         initScrollListener(getActivity());
@@ -132,8 +132,6 @@ public class Dashboard extends Fragment {
         });
 
         ifCartEmpty(getActivity());
-
-//        CloseSoftKeyboard.hideSoftKeyboard(view, getActivity());
 
         return view;
     }
@@ -291,23 +289,29 @@ public class Dashboard extends Fragment {
     }
 
     public static void initAdapter(Activity activity) {
-        productModels = new ArrayList<>();
         productDashboardAdapter = new ProductDashboardAdapter(activity, productModels, activity);
 
         rcProduct.setLayoutManager(new GridLayoutManager(activity, 2));
         rcProduct.setAdapter(productDashboardAdapter);
     }
 
-    public static void updateDataProduct(List<ProductModel> productModelResponse) {
+    public static void updateDataProduct(List<ProductModel> productModelResponse, int page) {
         if (productModels.size() != 0){
             productModels.remove(productModels.size() - 1);
             int scrollPosition = productModels.size();
             productDashboardAdapter.notifyItemRemoved(scrollPosition);
         }
 
+        if (page == 1)
+            productModels.clear();
         productModels.addAll(productModelResponse);
-        productDashboardAdapter.notifyDataSetChanged();
+        productDashboardAdapter.replaceItemFiltered(productModels);
+//        inventoryAdapter.notifyDataSetChanged();
         isLoading = false;
+
+        if (page == 1)
+            if (productModels.size() > 0)
+                rcProduct.scrollToPosition(0);
     }
 
     static boolean isLoading = false;
@@ -349,23 +353,23 @@ public class Dashboard extends Fragment {
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
 
-//        if(DashboardFilter.category.size()>0){
-//            StringBuilder buffer = new StringBuilder();
-//            for (String each : DashboardFilter.category)
-//                buffer.append(",").append(each);
-//            ProductRequest.categoryId = buffer.deleteCharAt(0).toString();
-//        } else {
-//            ProductRequest.categoryId = "";
-//        }
+        if(DashboardFilter.category.size()>0){
+            StringBuilder buffer = new StringBuilder();
+            for (String each : DashboardFilter.category)
+                buffer.append(",").append(each);
+            ProductRequest.categoryId = buffer.deleteCharAt(0).toString();
+        } else {
+            ProductRequest.categoryId = "";
+        }
 
-//        if(DashboardFilter.statusList.size()>0){
-//            StringBuilder buffer1 = new StringBuilder();
-//            for (String each : DashboardFilter.statusList)
-//                buffer1.append(",").append(each);
-//            ProductRequest.status= buffer1.deleteCharAt(0).toString();
-//        } else {
-//            ProductRequest.status = "";
-//        }
+        if(DashboardFilter.statusList.size()>0){
+            StringBuilder buffer1 = new StringBuilder();
+            for (String each : DashboardFilter.statusList)
+                buffer1.append(",").append(each);
+            ProductRequest.status= buffer1.deleteCharAt(0).toString();
+        } else {
+            ProductRequest.status = "";
+        }
 
         ProductRequest.categoryId = "";
         ProductRequest.status = "";
@@ -373,6 +377,8 @@ public class Dashboard extends Fragment {
         ProductRequest.supplierId="";
         ProductRequest.productName=etSearch.getText().toString();
         ProductRequest.productName = etSearch.getText().toString();
+        productModels.clear();
+
         ProductRequest.getProductList(activity);
 
     }

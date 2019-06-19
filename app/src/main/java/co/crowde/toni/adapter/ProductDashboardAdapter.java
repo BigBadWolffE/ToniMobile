@@ -18,6 +18,7 @@ import com.squareup.picasso.Picasso;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import co.crowde.toni.R;
@@ -35,9 +36,7 @@ public class ProductDashboardAdapter
 
     private Context context;
     private Activity activity;
-    private List<ProductModel> productModels;
-    private List<ProductModel> productModelsFiltered;
-    ProductListener listener;
+    private List<ProductModel> productModelsFiltered = new ArrayList<>();
     private Cart dbCart;
     int countProduct;
 
@@ -70,9 +69,16 @@ public class ProductDashboardAdapter
                                    List<ProductModel> ProductModelList,
                                    Activity activity) {
         this.context = context;
-        this.productModels = ProductModelList;
-        this.productModelsFiltered = ProductModelList;
+        this.productModelsFiltered.clear();
+        this.productModelsFiltered.addAll(ProductModelList);
+//        this.productModelsFiltered = ProductModelList;
         this.activity = activity;
+    }
+
+    public void replaceItemFiltered(List<ProductModel> ProductModelList) {
+        this.productModelsFiltered.clear();
+        this.productModelsFiltered.addAll(ProductModelList);
+        notifyDataSetChanged();
     }
 
     @Override
