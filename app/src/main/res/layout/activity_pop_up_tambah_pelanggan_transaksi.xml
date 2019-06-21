@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    tools:context=".view.dialog.popup.customer.PopUpTambahPelangganTransaksi">
+    tools:context=".view.dialog.popup.customerFragment.PopUpTambahPelangganTransaksi">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

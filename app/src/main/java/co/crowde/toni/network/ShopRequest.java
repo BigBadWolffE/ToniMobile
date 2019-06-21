@@ -3,7 +3,6 @@ package co.crowde.toni.network;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.MediaType;
@@ -17,11 +16,11 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-import co.crowde.toni.controller.main.UserController;
+import co.crowde.toni.controller.user.UserController;
 import co.crowde.toni.helper.DateTimeFormater;
 import co.crowde.toni.helper.SavePref;
-import co.crowde.toni.view.activity.auth.LoginSuccess;
-import co.crowde.toni.view.activity.shop.OpenShop;
+import co.crowde.toni.view.activity.auth.LoginSuccessActivity;
+import co.crowde.toni.view.activity.shop.OpenShopActivity;
 import co.crowde.toni.view.dialog.message.network.NetworkOfflineDialog;
 
 public class ShopRequest {
@@ -155,7 +154,7 @@ public class ShopRequest {
                                 String phoneNumber = objDataLogin.getString("phoneNumber");
 
                                 SavePref.saveUserDetail(activity,data);
-                                LoginSuccess.setOwnerName(activity, data);
+                                LoginSuccessActivity.setOwnerName(activity, data);
                             } else {
                                 if(message.equals("Token tidak valid")){
                                     UserController.tokenExpired(activity, message);
@@ -233,7 +232,7 @@ public class ShopRequest {
                                 DateTimeFormater.getCurrentDateOpen(activity);
                                 SavePref.saveOpenShop(activity, isOpen);
 
-                                Intent openShop = new Intent(activity, OpenShop.class);
+                                Intent openShop = new Intent(activity, OpenShopActivity.class);
                                 activity.startActivity(openShop);
                                 activity.finish();
 

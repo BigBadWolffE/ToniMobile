@@ -20,7 +20,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 
 import co.crowde.toni.R;
-import co.crowde.toni.controller.main.ProductController;
+import co.crowde.toni.controller.product.ProductController;
 import co.crowde.toni.network.CategoryRequest;
 
 public class FilterInventoryPopup {
@@ -143,3 +143,25 @@ public class FilterInventoryPopup {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

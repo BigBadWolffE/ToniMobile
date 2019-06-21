@@ -61,7 +61,7 @@ import co.crowde.toni.listener.ChangeClickListener;
 import co.crowde.toni.model.CustomerModel;
 import co.crowde.toni.model.UserDetailModel;
 import co.crowde.toni.network.API;
-import co.crowde.toni.utils.PrinterCommands;
+import co.crowde.toni.utils.print.PrinterCommands;
 //import soedja.crowde.tokotani.HalamanAwalTransaksiPelangganActivity;
 //import soedja.crowde.tokotani.R;
 //import soedja.crowde.tokotani.adapter.TransaksiBagianPelangganAdapter;

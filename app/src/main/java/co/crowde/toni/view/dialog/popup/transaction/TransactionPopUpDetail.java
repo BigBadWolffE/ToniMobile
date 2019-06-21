@@ -51,7 +51,7 @@ import java.util.UUID;
 
 import co.crowde.toni.R;
 import co.crowde.toni.adapter.DetailTransaksiWaktuPelangganAdapter;
-import co.crowde.toni.controller.main.PrintController;
+import co.crowde.toni.controller.print.PrintController;
 import co.crowde.toni.helper.DecimalFormatRupiah;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.helper.volley.AppController;
@@ -60,8 +60,8 @@ import co.crowde.toni.model.ShopModel;
 import co.crowde.toni.model.TransaksiModel;
 import co.crowde.toni.model.UserDetailModel;
 import co.crowde.toni.network.API;
-import co.crowde.toni.utils.PrinterCommands;
-import co.crowde.toni.utils.PrinterNetwork;
+import co.crowde.toni.utils.print.PrinterCommands;
+import co.crowde.toni.utils.print.PrinterNetwork;
 import co.crowde.toni.view.dialog.message.printer.PrinterConnectivityDialog;
 
 

@@ -2,7 +2,7 @@ package co.crowde.toni.view.activity.home;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -31,27 +30,24 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.IOException;
 
 import co.crowde.toni.R;
-import co.crowde.toni.controller.main.UserController;
 import co.crowde.toni.network.API;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.ShopModel;
-import co.crowde.toni.network.API;
-import co.crowde.toni.utils.PrinterNetwork;
-import co.crowde.toni.view.activity.shop.OpenShop;
+import co.crowde.toni.utils.print.PrinterNetwork;
+import co.crowde.toni.view.activity.user.InfoShopActivity;
 import co.crowde.toni.view.dialog.message.app.CloseAppsDialog;
 import co.crowde.toni.view.dialog.message.shop.CloseShopDialog;
-import co.crowde.toni.view.dialog.auth.ShopDetailPopup;
-import co.crowde.toni.view.fragment.modul.Customer;
-import co.crowde.toni.view.fragment.modul.Dashboard;
-import co.crowde.toni.view.fragment.modul.Inventory;
-import co.crowde.toni.view.fragment.modul.Report;
+import co.crowde.toni.view.dialog.popup.auth.ShopDetailPopup;
+import co.crowde.toni.view.fragment.modul.CustomerFragment;
+import co.crowde.toni.view.fragment.modul.DashboardFragment;
+import co.crowde.toni.view.fragment.modul.InventoryFragment;
+import co.crowde.toni.view.fragment.modul.ReportFragment;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static co.crowde.toni.utils.PrinterNetwork.applicationUUID;
-import static co.crowde.toni.utils.PrinterNetwork.mBluetoothAdapter;
-import static co.crowde.toni.utils.PrinterNetwork.mBluetoothDevice;
-import static co.crowde.toni.utils.PrinterNetwork.mBluetoothSocket;
-import static co.crowde.toni.utils.PrinterNetwork.printNewLine;
+import static co.crowde.toni.utils.print.PrinterNetwork.mBluetoothAdapter;
+import static co.crowde.toni.utils.print.PrinterNetwork.mBluetoothDevice;
+import static co.crowde.toni.utils.print.PrinterNetwork.mBluetoothSocket;
+import static co.crowde.toni.utils.print.PrinterNetwork.printNewLine;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -102,12 +98,12 @@ public class MainActivity extends AppCompatActivity
         bottomNav();
 
         //Set Fragment
-        Dashboard dashboard = new Dashboard();
+        DashboardFragment dashboardFragment = new DashboardFragment();
         FragmentTransaction dashboardTransaction = getSupportFragmentManager()
                 .beginTransaction();
         dashboardTransaction.setCustomAnimations(
                 android.R.anim.fade_in, android.R.anim.fade_out);
-        dashboardTransaction.replace(R.id.mainFrameLayout, dashboard);
+        dashboardTransaction.replace(R.id.mainFrameLayout, dashboardFragment);
         dashboardTransaction.commit();
 
         toolbar.setOnClickListener(new View.OnClickListener() {
@@ -146,7 +142,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_info) {
-            ShopDetailPopup.showDetailShop(MainActivity.this);
+            Intent infoShop = new Intent(MainActivity.this, InfoShopActivity.class);
+            startActivity(infoShop);
 
         } else if (id == R.id.nav_print) {
 //            Toast.makeText(this, "Printer", Toast.LENGTH_SHORT).show();
@@ -180,43 +177,43 @@ public class MainActivity extends AppCompatActivity
                 switch (menuItem.getItemId()) {
                     case R.id.menu_dashboard:
                         menuItem.setChecked(true);
-                        Dashboard dashboard = new Dashboard();
+                        DashboardFragment dashboardFragment = new DashboardFragment();
                         FragmentTransaction dashboardTransaction = getSupportFragmentManager()
                                 .beginTransaction();
                         dashboardTransaction.setCustomAnimations(
                                 android.R.anim.fade_in, android.R.anim.fade_out);
-                        dashboardTransaction.replace(R.id.mainFrameLayout, dashboard);
+                        dashboardTransaction.replace(R.id.mainFrameLayout, dashboardFragment);
                         dashboardTransaction.commit();
                         break;
                     case R.id.menu_inventory:
                         menuItem.setChecked(true);
-                        Inventory inventory  = new Inventory();
+                        InventoryFragment inventoryFragment = new InventoryFragment();
                         FragmentTransaction inventoryTransaction = getSupportFragmentManager()
                                 .beginTransaction();
                         inventoryTransaction.setCustomAnimations(
                                 android.R.anim.fade_in, android.R.anim.fade_out);
-                        inventoryTransaction.replace(R.id.mainFrameLayout, inventory);
+                        inventoryTransaction.replace(R.id.mainFrameLayout, inventoryFragment);
                         inventoryTransaction.commit();
                         break;
                     case R.id.menu_report:
                         menuItem.setChecked(true);
-                        Report report = new Report();
+                        ReportFragment reportFragment = new ReportFragment();
                         FragmentTransaction reportTransaction = getSupportFragmentManager()
                                 .beginTransaction();
                         reportTransaction.setCustomAnimations(
                                 android.R.anim.fade_in, android.R.anim.fade_out);
-                        reportTransaction.replace(R.id.mainFrameLayout, report);
+                        reportTransaction.replace(R.id.mainFrameLayout, reportFragment);
                         reportTransaction.commit();
                         break;
 
                     case R.id.menu_customer:
                         menuItem.setChecked(true);
-                        Customer customer  = new Customer();
+                        CustomerFragment customerFragment = new CustomerFragment();
                         FragmentTransaction customerTransaction = getSupportFragmentManager()
                                 .beginTransaction();
                         customerTransaction.setCustomAnimations(
                                 android.R.anim.fade_in, android.R.anim.fade_out);
-                        customerTransaction.replace(R.id.mainFrameLayout, customer);
+                        customerTransaction.replace(R.id.mainFrameLayout, customerFragment);
                         customerTransaction.commit();
                         break;
                 }

@@ -14,8 +14,7 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:background="@color/colorWhite"
-    tools:context=".view.fragment.modul.Dashboard">
-
+    tools:context=".view.fragment.modul.DashboardFragment">
 
     <EditText
         android:id="@+id/etSearchProduct"
@@ -94,6 +93,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view2" />
 
+    <TextView
+        android:id="@+id/tv_empty_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="32dp"
+        android:padding="8dp"
+        android:text="@string/data_product_tidak_ditemukan"
+        android:textColor="@color/colorThemeGreyDark"
+        android:background="@drawable/bg_rec_radius_5dp_grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rcProduct"
+        android:visibility="gone"/>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cvBtnCart"
         android:layout_width="250dp"
@@ -157,20 +174,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
-
-    <!--<com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginLeft="8dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginRight="8dp"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:contentDescription="@string/extended_fab_content_desc"-->
-        <!--android:text="Keranjang"-->
-        <!--app:icon="@drawable/ic_shopping_cart_black_24dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

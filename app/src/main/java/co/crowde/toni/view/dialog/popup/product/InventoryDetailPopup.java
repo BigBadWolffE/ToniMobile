@@ -27,7 +27,7 @@ import co.crowde.toni.helper.CloseSoftKeyboard;
 import co.crowde.toni.helper.DecimalFormatRupiah;
 import co.crowde.toni.model.ProductModel;
 import co.crowde.toni.network.API;
-import co.crowde.toni.view.dialog.message.product.MessageUpdateProduct;
+import co.crowde.toni.view.dialog.message.product.UpdateProductDialog;
 
 public class InventoryDetailPopup {
 
@@ -156,7 +156,7 @@ public class InventoryDetailPopup {
         cvUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MessageUpdateProduct.show(activity, model.getProductId());
+                UpdateProductDialog.showDialog(activity, model.getProductId());
             }
         });
 

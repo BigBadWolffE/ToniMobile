@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -60,7 +59,7 @@ import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.helper.volley.AppController;
 import co.crowde.toni.model.TransaksiModel;
 import co.crowde.toni.network.API;
-import co.crowde.toni.view.fragment.modul.Report;
+import co.crowde.toni.view.fragment.modul.ReportFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -146,15 +145,13 @@ public class TransactionFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(transaksiWaktuPelangganAdapter);
 
-        emptyText = (RelativeLayout)rootView.findViewById(R.id.empty_text_transaksi);
-
         btnlaporan = (ConstraintLayout)rootView.findViewById(R.id.tablaporan);
 
 
         btnlaporan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Report fragment = new Report();
+                ReportFragment fragment = new ReportFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.mainFrameLayout,fragment);

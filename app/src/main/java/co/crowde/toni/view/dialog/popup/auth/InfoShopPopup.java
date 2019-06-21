@@ -22,7 +22,7 @@ import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import co.crowde.toni.R;
-import co.crowde.toni.controller.main.UserController;
+import co.crowde.toni.controller.user.UserController;
 import co.crowde.toni.network.API;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.ShopModel;

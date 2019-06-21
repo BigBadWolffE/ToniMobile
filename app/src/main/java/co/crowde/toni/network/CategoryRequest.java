@@ -2,7 +2,6 @@ package co.crowde.toni.network;
 
 import android.app.Activity;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -18,12 +17,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import co.crowde.toni.controller.main.UserController;
+import co.crowde.toni.controller.user.UserController;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CategoryModel;
-import co.crowde.toni.view.activity.filter.CatalogFilter;
-import co.crowde.toni.view.activity.filter.DashboardFilter;
-import co.crowde.toni.view.activity.filter.InventoryFilter;
+import co.crowde.toni.view.activity.filter.CatalogFilterActivity;
+import co.crowde.toni.view.activity.filter.DashboardFilterActivity;
+import co.crowde.toni.view.activity.filter.InventoryFilterActivity;
 import co.crowde.toni.view.dialog.message.network.NetworkOfflineDialog;
 
 public class CategoryRequest {
@@ -78,14 +77,14 @@ public class CategoryRequest {
                                 for(int i=0; i<categoryModels.size();i++){
                                     String nama = categoryModels.get(i).getCategoryName();
                                     String id = categoryModels.get(i).getCategoryId();
-                                    DashboardFilter.categoryModels.add(new CategoryModel(
+                                    DashboardFilterActivity.categoryModels.add(new CategoryModel(
                                             id,nama));
-                                    DashboardFilter.progressDialog.dismiss();
+                                    DashboardFilterActivity.progressDialog.dismiss();
                                 }
 
                             } else {
                                 if(message.equals("Token tidak valid")){
-                                    DashboardFilter.progressDialog.dismiss();
+                                    DashboardFilterActivity.progressDialog.dismiss();
                                     UserController.tokenExpired(activity, message);
                                 }
                             }
@@ -148,14 +147,14 @@ public class CategoryRequest {
                                 for(int i=0; i<categoryModels.size();i++){
                                     String nama = categoryModels.get(i).getCategoryName();
                                     String id = categoryModels.get(i).getCategoryId();
-                                    InventoryFilter.categoryModels.add(new CategoryModel(
+                                    InventoryFilterActivity.categoryModels.add(new CategoryModel(
                                             id,nama));
-                                    InventoryFilter.progressDialog.dismiss();
+                                    InventoryFilterActivity.progressDialog.dismiss();
                                 }
 
                             } else {
                                 if(message.equals("Token tidak valid")){
-                                    InventoryFilter.progressDialog.dismiss();
+                                    InventoryFilterActivity.progressDialog.dismiss();
                                     UserController.tokenExpired(activity, message);
                                 }
                             }
@@ -218,14 +217,14 @@ public class CategoryRequest {
                                 for(int i=0; i<categoryModels.size();i++){
                                     String nama = categoryModels.get(i).getCategoryName();
                                     String id = categoryModels.get(i).getCategoryId();
-                                    CatalogFilter.categoryModels.add(new CategoryModel(
+                                    CatalogFilterActivity.categoryModels.add(new CategoryModel(
                                             id,nama));
-                                    CatalogFilter.progressDialog.dismiss();
+                                    CatalogFilterActivity.progressDialog.dismiss();
                                 }
 
                             } else {
                                 if(message.equals("Token tidak valid")){
-                                    CatalogFilter.progressDialog.dismiss();
+                                    CatalogFilterActivity.progressDialog.dismiss();
                                     UserController.tokenExpired(activity, message);
                                 }
                             }

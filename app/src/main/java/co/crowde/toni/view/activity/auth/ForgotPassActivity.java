@@ -32,7 +32,7 @@ public class ForgotPassActivity extends AppCompatActivity {
         cvBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                onBackPressed();
 
             }
         });
@@ -48,5 +48,6 @@ public class ForgotPassActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
+        LoginActivity.progressDialog.dismiss();
     }
 }

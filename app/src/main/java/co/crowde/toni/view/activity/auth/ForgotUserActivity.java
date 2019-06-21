@@ -32,7 +32,7 @@ public class ForgotUserActivity extends AppCompatActivity {
         cvBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                onBackPressed();
 
             }
         });

@@ -21,7 +21,7 @@ import java.util.List;
 
 import co.crowde.toni.R;
 import co.crowde.toni.model.CatalogModel;
-import co.crowde.toni.view.activity.catalog.CatalogProduct;
+import co.crowde.toni.view.activity.catalog.CatalogProductActivity;
 
 public class CatalogProductAdapter
         extends RecyclerView.Adapter<RecyclerView.ViewHolder>
@@ -29,8 +29,7 @@ public class CatalogProductAdapter
 
     private Context context;
     private Activity activity ;
-    private List<CatalogModel> productModels;
-    private List<CatalogModel> productModelsFiltered;
+    private List<CatalogModel> productModelsFiltered = new ArrayList<>();
     ArrayList<CatalogModel> arrayList = new ArrayList<>();
 
     private final int VIEW_TYPE_ITEM = 0;
@@ -59,11 +58,16 @@ public class CatalogProductAdapter
     public CatalogProductAdapter(Context context,
                                    List<CatalogModel> ProductModelList,
                                    Activity activity) {
-        this.productModels = ProductModelList;
-        this.productModelsFiltered = ProductModelList;
         this.context = context;
+        this.productModelsFiltered.clear();
+        this.productModelsFiltered.addAll(ProductModelList);
         this.activity = activity;
-//        this.listener = listener;
+    }
+
+    public void replaceItemFiltered(List<CatalogModel> ProductModelList) {
+        this.productModelsFiltered.clear();
+        this.productModelsFiltered.addAll(ProductModelList);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -110,12 +114,12 @@ public class CatalogProductAdapter
                         if (isChecked){
                             model.setChecked(true);
                             arrayList.add(model);
-                            CatalogProduct.setEnabledButton(activity, getCount());
+                            CatalogProductActivity.setEnabledButton(activity, getCount());
 
                         } else {
                             model.setChecked(false);
                             arrayList.remove(model);
-                            CatalogProduct.setEnabledButton(activity, getCount());
+                            CatalogProductActivity.setEnabledButton(activity, getCount());
                         }
                     }
                 });

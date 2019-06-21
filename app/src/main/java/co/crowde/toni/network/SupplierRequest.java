@@ -2,7 +2,6 @@ package co.crowde.toni.network;
 
 import android.app.Activity;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -18,11 +17,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import co.crowde.toni.controller.main.UserController;
+import co.crowde.toni.controller.user.UserController;
 import co.crowde.toni.helper.SavePref;
-import co.crowde.toni.model.CategoryModel;
 import co.crowde.toni.model.response.list.SupplierModel;
-import co.crowde.toni.view.activity.filter.CatalogFilter;
+import co.crowde.toni.view.activity.filter.CatalogFilterActivity;
 import co.crowde.toni.view.dialog.message.network.NetworkOfflineDialog;
 
 public class SupplierRequest {
@@ -77,7 +75,7 @@ public class SupplierRequest {
                                 for(int i=0; i<supplierModels.size();i++){
                                     String nama = supplierModels.get(i).getSupplierName();
                                     String id = supplierModels.get(i).getSupplierId();
-                                    CatalogFilter.supplierModels.add(new SupplierModel(
+                                    CatalogFilterActivity.supplierModels.add(new SupplierModel(
                                             id,nama));
                                 }
 

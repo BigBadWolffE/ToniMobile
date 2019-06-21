@@ -13,7 +13,7 @@
     android:clickable="true"
     android:focusable="true"
     android:background="@color/colorWhite"
-    tools:context=".view.fragment.modul.Inventory">
+    tools:context=".view.fragment.modul.InventoryFragment">
 
 
     <EditText
@@ -132,6 +132,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layoutTabHeader" />
+
+    <TextView
+        android:id="@+id/tv_empty_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/bg_rec_radius_5dp_grey"
+        android:padding="8dp"
+        android:text="@string/data_product_tidak_ditemukan"
+        android:textColor="@color/colorThemeGreyDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutTabHeader"
+        android:visibility="gone"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAddProduct"

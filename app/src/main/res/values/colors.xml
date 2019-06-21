@@ -32,4 +32,6 @@
     <color name="status_tersedia">#B8E986</color>
     <color name="status_persediaan_isi">#FDCB6E</color>
     <color name="status_kosong">#FF7675</color>
+
+    <color name="color_subscribe_yes">#4A934A</color>
 </resources>

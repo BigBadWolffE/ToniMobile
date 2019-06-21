@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activity.customer.SelectCustomer"
+    tools:context=".view.activity.customerFragment.SelectCustomerActivity"
     android:background="@color/colorWhite">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -68,7 +68,25 @@
             android:layout_height="match_parent"
             android:layout_margin="8dp"/>
 
+        <TextView
+            android:id="@+id/tv_empty_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/bg_rec_radius_5dp_grey"
+            android:padding="8dp"
+            android:text="@string/data_pelanggan_tidak_ditemukan"
+            android:textColor="@color/colorThemeGreyDark"
+            android:visibility="gone"
+            android:layout_gravity="top|center"
+            app:layout_constraintEnd_toEndOf="@+id/cvCustomer"
+            app:layout_constraintStart_toStartOf="@+id/cvCustomer"
+            app:layout_constraintTop_toTopOf="@id/cvCustomer" />
+
     </androidx.cardview.widget.CardView>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/footer"

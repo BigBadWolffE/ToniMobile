@@ -22,14 +22,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.crowde.toni.adapter.CatalogProductAdapter;
-import co.crowde.toni.controller.main.UserController;
+import co.crowde.toni.controller.user.UserController;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CatalogModel;
 import co.crowde.toni.model.CatalogRequestModel;
-import co.crowde.toni.view.activity.catalog.CatalogProduct;
-import co.crowde.toni.view.activity.notification.SuccessAddNewProduct;
+import co.crowde.toni.view.activity.catalog.CatalogProductActivity;
+import co.crowde.toni.view.activity.notification.SuccessAddNewProductActivity;
 import co.crowde.toni.view.dialog.message.network.NetworkOfflineDialog;
-import co.crowde.toni.view.fragment.modul.Inventory;
+import co.crowde.toni.view.dialog.message.product.ProductEmptyDialog;
+import co.crowde.toni.view.fragment.modul.InventoryFragment;
 
 public class CatalogRequest {
 
@@ -64,6 +65,7 @@ public class CatalogRequest {
 //                        Toast.makeText(
 //                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
                         NetworkOfflineDialog.showDialog(activity);
+                        CatalogProductActivity.progressDialog.dismiss();
                         Log.e("Error",e.toString());
                     }
                 });
@@ -90,19 +92,22 @@ public class CatalogRequest {
                                                 new TypeToken<List<CatalogModel>>() {
                                                 }.getType());
 
-                                CatalogProduct.updateDataProduct(productModels);
-                                CatalogProduct.progressDialog.dismiss();
+                                CatalogProductActivity.updateDataProduct(productModels, page);
+                                CatalogProductActivity.progressDialog.dismiss();
+                                CatalogProductActivity.showListField(activity);
 
                             } else if(message.equals("Data produk tidak ditemukan!")){
-                                if (CatalogProduct.productModels.size() != 0){
-                                    CatalogProduct.productModels.remove(CatalogProduct.productModels.size() - 1);
-                                    int scrollPosition = CatalogProduct.productModels.size();
-                                    CatalogProduct.catalogProductAdapter.notifyItemRemoved(scrollPosition);
+                                if (CatalogProductActivity.productModels.size() != 0){
+                                    CatalogProductActivity.productModels.remove(CatalogProductActivity.productModels.size() - 1);
+                                    int scrollPosition = CatalogProductActivity.productModels.size();
+                                    CatalogProductActivity.catalogProductAdapter.notifyItemRemoved(scrollPosition);
                                 } else {
-                                    Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
-                                    CatalogProduct.catalogProductAdapter.notifyDataSetChanged();
+                                    CatalogProductActivity.productModels.clear();
+                                    CatalogProductActivity.catalogProductAdapter.replaceItemFiltered(CatalogProductActivity.productModels);
+                                    CatalogProductActivity.catalogProductAdapter.notifyDataSetChanged();
+                                    CatalogProductActivity.progressDialog.dismiss();
+                                    CatalogProductActivity.showListField(activity);
                                 }
-                                CatalogProduct.progressDialog.dismiss();
                             } else{
                                 if(message.equals("Token tidak valid")){
                                     UserController.tokenExpired(activity, message);
@@ -122,7 +127,7 @@ public class CatalogRequest {
 
     public static void addNewProduct(final Activity activity){
         ArrayList<CatalogModel> models = ((CatalogProductAdapter)
-                CatalogProduct.rcProduct.getAdapter()).getSelectList();
+                CatalogProductActivity.rcProduct.getAdapter()).getSelectList();
         ArrayList<CatalogRequestModel> arrayList = new ArrayList<>();
         if(models.size()>0){
             for (int i=0;i<models.size();i++){
@@ -176,6 +181,7 @@ public class CatalogRequest {
             public void onFailure(Request request, IOException e) {
 //                Toast.makeText(activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
                 NetworkOfflineDialog.showDialog(activity);
+                CatalogProductActivity.progressDialog.dismiss();
                 e.printStackTrace();
             }
 
@@ -207,10 +213,10 @@ public class CatalogRequest {
                                                 "Total Failed: " +failed
                                         , Toast.LENGTH_LONG).show();
 
-                                Inventory.productModels.clear();
+                                InventoryFragment.productModels.clear();
                                 page=1;
                                 ProductRequest.getInventoryList(activity);
-                                Intent success = new Intent(activity, SuccessAddNewProduct.class);
+                                Intent success = new Intent(activity, SuccessAddNewProductActivity.class);
                                 activity.startActivity(success);
                                 activity.finish();
 

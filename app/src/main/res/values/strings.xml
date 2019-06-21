@@ -294,6 +294,9 @@
     <string name="dialog_label_connect_internet">‘KERUSAKAN JARINGAN \n INTERNET’</string>
     <string name="dialog_desc_connect_internet">Pastikan jaringan internet Anda \n sudah terkoneksi dengan benar.</string>
 
+    <string name="dialog_label_empty_data">‘DATA YANG DICARI \n TIDAK DITEMUKAN!’</string>
+    <string name="dialog_desc_empty_data">Periksa kembali data yang diminta.</string>
+
     <!-- NOTIFICATION MESSAGE -->
     <string name="notif_update_product">PERUBAHAN INFORMASI ANDA BERHASIL</string>
     <string name="notif_add_new_product">PENAMBAHAN KATALOG ANDA BERHASIL</string>
@@ -314,5 +317,12 @@
     <string name="ulang_kata_sandi">Ulang kata sandi</string>
     <string name="daftar">DAFTAR</string>
     <string name="tutup">TUTUP</string>
+    <string name="cari_pelanggan_nomor_telepon">Cari pelanggan/nomor telepon</string>
+    <string name="data_product_tidak_ditemukan">Data product tidak ditemukan</string>
+    <string name="data_pelanggan_tidak_ditemukan">Data pelanggan tidak ditemukan</string>
+    <string name="profil">Profil</string>
+    <string name="subscribe">Berlangganan</string>
+    <string name="toko_pertanian">Toko Pertanian</string>
+    <string name="pemilik_toko">Pemilik Toko</string>
 
 </resources>

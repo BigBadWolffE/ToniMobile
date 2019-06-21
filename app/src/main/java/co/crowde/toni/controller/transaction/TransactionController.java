@@ -3,19 +3,18 @@ package co.crowde.toni.controller.transaction;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.io.IOException;
 
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.network.ProductRequest;
 import co.crowde.toni.network.TransactionRequest;
-import co.crowde.toni.utils.PrinterNetwork;
+import co.crowde.toni.utils.print.PrinterNetwork;
 import co.crowde.toni.view.dialog.message.printer.PrinterConnectivityDialog;
 import co.crowde.toni.view.dialog.message.transaction.ConfirmTransactionDialog;
-import co.crowde.toni.view.fragment.modul.Dashboard;
+import co.crowde.toni.view.fragment.modul.DashboardFragment;
 
-import static co.crowde.toni.utils.PrinterNetwork.resetConnection;
+import static co.crowde.toni.utils.print.PrinterNetwork.resetConnection;
 
 public class TransactionController {
 
@@ -47,12 +46,12 @@ public class TransactionController {
     }
 
     public static void removeHistory(Activity activity){
-        Dashboard.dbCart.deleteAllItem();
-        Dashboard.cartModels.clear();
-        Dashboard.ifCartEmpty(activity);
+        DashboardFragment.dbCart.deleteAllItem();
+        DashboardFragment.cartModels.clear();
+        DashboardFragment.ifCartEmpty(activity);
 
-        Dashboard.productModels.clear();
-        Dashboard.requestFilter(activity);
+        DashboardFragment.productModels.clear();
+        DashboardFragment.requestFilter(activity);
         ProductRequest.getProductList(activity);
 
         SavePref.saveCustomer(activity, null);

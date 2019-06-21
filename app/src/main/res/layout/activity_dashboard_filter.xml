@@ -9,7 +9,7 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:id="@+id/mainLayout"
-    tools:context=".view.activity.filter.DashboardFilter">
+    tools:context=".view.activity.filter.DashboardFilterActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"

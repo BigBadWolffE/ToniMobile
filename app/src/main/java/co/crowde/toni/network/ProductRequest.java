@@ -3,7 +3,6 @@ package co.crowde.toni.network;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -20,18 +19,18 @@ import java.io.IOException;
 import java.util.List;
 
 import co.crowde.toni.constant.Const;
-import co.crowde.toni.controller.main.UserController;
+import co.crowde.toni.controller.user.UserController;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.ProductModel;
-import co.crowde.toni.model.body.post.UpdateProduct;
-import co.crowde.toni.view.activity.notification.SuccessUpdateProduct;
+import co.crowde.toni.model.body.post.UpdateProductModel;
+import co.crowde.toni.view.activity.notification.SuccessUpdateProductActivity;
 import co.crowde.toni.view.dialog.message.network.NetworkOfflineDialog;
+import co.crowde.toni.view.dialog.message.product.UpdateProductDialog;
 import co.crowde.toni.view.dialog.popup.product.InventoryDetailPopup;
-import co.crowde.toni.view.dialog.message.product.MessageUpdateProduct;
-import co.crowde.toni.view.fragment.modul.Dashboard;
-import co.crowde.toni.view.fragment.modul.Inventory;
+import co.crowde.toni.view.fragment.modul.DashboardFragment;
+import co.crowde.toni.view.fragment.modul.InventoryFragment;
 
-import static co.crowde.toni.utils.PrinterNetwork.printText;
+import static co.crowde.toni.utils.print.PrinterNetwork.printText;
 
 public class ProductRequest {
 
@@ -71,6 +70,7 @@ public class ProductRequest {
 //                        Toast.makeText(
 //                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
                         NetworkOfflineDialog.showDialog(activity);
+                        DashboardFragment.progressDialog.dismiss();
                         Log.e("Error",e.toString());
                     }
                 });
@@ -96,18 +96,22 @@ public class ProductRequest {
                                         .fromJson(data,
                                         new TypeToken<List<ProductModel>>() {
                                         }.getType());
-                                Dashboard.updateDataProduct(productModels, page);
-                                Dashboard.progressDialog.dismiss();
+                                DashboardFragment.updateDataProduct(productModels, page);
+                                DashboardFragment.progressDialog.dismiss();
+                                DashboardFragment.showListField(activity);
                             } else if(message.equals("Data produk tidak ditemukan!")){
-                                if (Dashboard.productModels.size() != 0){
-                                    Dashboard.productModels.remove(Dashboard.productModels.size() - 1);
-                                    int scrollPosition = Dashboard.productModels.size();
-                                    Dashboard.productDashboardAdapter.notifyItemRemoved(scrollPosition);
+                                if (DashboardFragment.productModels.size() != 0){
+                                    DashboardFragment.productModels.remove(DashboardFragment.productModels.size() - 1);
+                                    int scrollPosition = DashboardFragment.productModels.size();
+                                    DashboardFragment.productDashboardAdapter.notifyItemRemoved(scrollPosition);
+                                    DashboardFragment.progressDialog.dismiss();
                                 } else {
-                                    Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
-                                    Dashboard.productDashboardAdapter.notifyDataSetChanged();
+                                    DashboardFragment.productModels.clear();
+                                    DashboardFragment.productDashboardAdapter.replaceItemFiltered(DashboardFragment.productModels);
+                                    DashboardFragment.productDashboardAdapter.notifyDataSetChanged();
+                                    DashboardFragment.progressDialog.dismiss();
+                                    DashboardFragment.showListField(activity);
                                 }
-                                Dashboard.progressDialog.dismiss();
                             } else{
                                 if(message.equals("Token tidak valid")){
                                     UserController.tokenExpired(activity, message);
@@ -148,6 +152,7 @@ public class ProductRequest {
 //                        Toast.makeText(
 //                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
                         NetworkOfflineDialog.showDialog(activity);
+                        InventoryFragment.progressDialog.dismiss();
                         Log.e("Error",e.toString());
                     }
                 });
@@ -173,20 +178,22 @@ public class ProductRequest {
                                         .fromJson(data,
                                                 new TypeToken<List<ProductModel>>() {
                                                 }.getType());
-                                Inventory.updateDataProduct(productModels, page);
-                                Inventory.progressDialog.dismiss();
+                                InventoryFragment.updateDataProduct(productModels, page);
+                                InventoryFragment.progressDialog.dismiss();
+                                InventoryFragment.showListField(activity);
                             } else if(message.equals("Data produk tidak ditemukan!")){
-                                if (Inventory.productModels.size() != 0){
-                                    Inventory.productModels.remove(Inventory.productModels.size() - 1);
-                                    int scrollPosition = Inventory.productModels.size();
-                                    Inventory.inventoryAdapter.notifyItemRemoved(scrollPosition);
+                                if (InventoryFragment.productModels.size() != 0){
+                                    InventoryFragment.productModels.remove(InventoryFragment.productModels.size() - 1);
+                                    int scrollPosition = InventoryFragment.productModels.size();
+                                    InventoryFragment.inventoryAdapter.notifyItemRemoved(scrollPosition);
+                                    InventoryFragment.progressDialog.dismiss();
                                 } else {
-                                    Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
-                                    Inventory.productModels.clear();
-                                    Inventory.inventoryAdapter.replaceItemFiltered(Inventory.productModels);
-                                    Inventory.inventoryAdapter.notifyDataSetChanged();
+                                    InventoryFragment.productModels.clear();
+                                    InventoryFragment.inventoryAdapter.replaceItemFiltered(InventoryFragment.productModels);
+                                    InventoryFragment.inventoryAdapter.notifyDataSetChanged();
+                                    InventoryFragment.progressDialog.dismiss();
+                                    InventoryFragment.showListField(activity);
                                 }
-                                Inventory.progressDialog.dismiss();
                             } else{
                                 if(message.equals("Token tidak valid")){
                                     UserController.tokenExpired(activity, message);
@@ -204,7 +211,7 @@ public class ProductRequest {
         });
     }
 
-    public static void postUdapteProduct(final Activity activity, String productId){
+    public static void postUpdateProduct(final Activity activity, String productId){
 
         int qty = Integer.parseInt(InventoryDetailPopup
                 .etQty.getText().toString());
@@ -215,7 +222,7 @@ public class ProductRequest {
                 .etSelling.getText().toString()
                 .replaceAll(",",""));
 
-        final UpdateProduct update = new UpdateProduct();
+        final UpdateProductModel update = new UpdateProductModel();
         update.setShopId(SavePref.readShopId(activity));
         update.setProductId(productId);
         update.setQuantity(qty);
@@ -246,6 +253,7 @@ public class ProductRequest {
 //                        Toast.makeText(
 //                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
                         NetworkOfflineDialog.showDialog(activity);
+                        InventoryFragment.progressDialog.dismiss();
                         Log.e("Error",e.toString());
                     }
                 });
@@ -267,21 +275,21 @@ public class ProductRequest {
                             Log.e("DATA RESPONSE", data);
 
                             if(status){
-                                Inventory.productModels.clear();
+                                InventoryFragment.productModels.clear();
                                 page=1;
                                 getInventoryList(activity);
-                                MessageUpdateProduct.dialogUpdate.dismiss();
-                                MessageUpdateProduct.progressDialog.dismiss();
+                                UpdateProductDialog.dialogConfirm.dismiss();
+                                UpdateProductDialog.progressDialog.dismiss();
                                 InventoryDetailPopup.alertDialog.dismiss();
-                                Intent success = new Intent(activity, SuccessUpdateProduct.class);
+                                Intent success = new Intent(activity, SuccessUpdateProductActivity.class);
                                 activity.startActivity(success);
 
                             } else{
                                 if(message.equals("Token tidak valid")){
                                     UserController.tokenExpired(activity, message);
                                 } else {
-                                    MessageUpdateProduct.progressDialog.dismiss();
-                                    MessageUpdateProduct.dialogUpdate.dismiss();
+                                    UpdateProductDialog.progressDialog.dismiss();
+                                    UpdateProductDialog.dialogConfirm.dismiss();
                                     InventoryDetailPopup.alertDialog.dismiss();
                                 }
                             }

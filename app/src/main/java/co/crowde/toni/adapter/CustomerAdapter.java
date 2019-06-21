@@ -6,10 +6,6 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -25,17 +21,16 @@ import java.util.List;
 import co.crowde.toni.R;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CustomerModel;
-import co.crowde.toni.utils.Utils;
-import co.crowde.toni.view.fragment.cart.CartListItem;
-import co.crowde.toni.view.activity.cart.CartList;
+import co.crowde.toni.utils.print.Utils;
+import co.crowde.toni.view.fragment.cart.CartListItemFragment;
+import co.crowde.toni.view.activity.cart.CartListActivity;
 
 public class CustomerAdapter
         extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
     private Activity activity ;
-    private List<CustomerModel> customerModels;
-    private List<CustomerModel> customerModelsFiltered;
+    private List<CustomerModel> customerModelsFiltered = new ArrayList<>();
 
     private final int VIEW_TYPE_ITEM = 0;
     private final int VIEW_TYPE_LOADING = 1;
@@ -57,11 +52,16 @@ public class CustomerAdapter
     public CustomerAdapter(Context context,
                            List<CustomerModel> customerModels,
                            Activity activity) {
-        this.customerModels = customerModels;
-        this.customerModelsFiltered = customerModels;
+        this.customerModelsFiltered.clear();
+        this.customerModelsFiltered.addAll(customerModels);
         this.context = context;
         this.activity = activity;
-//        this.listener = listener;
+    }
+
+    public void replaceItemFiltered(List<CustomerModel> customerModels) {
+        this.customerModelsFiltered.clear();
+        this.customerModelsFiltered.addAll(customerModels);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -96,10 +96,10 @@ public class CustomerAdapter
                         SavePref.saveCustomer(activity, customer);
 
                         activity.finish();
-                        CartListItem.tvCustomer.setText(model.getCustomerName()+"\n"
+                        CartListItemFragment.tvCustomer.setText(model.getCustomerName()+"\n"
                                 +model.getPhone());
-                        CartListItem.imgCheck.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_check_box_white_24dp));
-                        CartList.enabledButton(activity);
+                        CartListItemFragment.imgCheck.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_check_box_white_24dp));
+                        CartListActivity.enabledButton(activity);
                     }
                 });
             }

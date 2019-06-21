@@ -24,8 +24,6 @@ import co.crowde.toni.network.LoginRequest;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.view.dialog.message.app.CloseAppsDialog;
 
-
-
 public class LoginActivity extends AppCompatActivity {
     public static TextView tvLoginHeader, tvClosedLabel, tvClosedTime,
             tvForgetPass, tvRegister;
@@ -66,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                 progressDialog.show();
 
                 if(et_username.getText().toString().equals("admin")){
+                    progressDialog.dismiss();
                     Intent wrongUser = new Intent(LoginActivity.this, ForgotUserActivity.class);
                     startActivity(wrongUser);
                 } else {

@@ -26,10 +26,9 @@ import co.crowde.toni.controller.cart.CartController;
 import co.crowde.toni.database.Cart;
 import co.crowde.toni.model.CartModel;
 import co.crowde.toni.network.API;
-import co.crowde.toni.listener.ProductListener;
 import co.crowde.toni.model.ProductModel;
 import co.crowde.toni.view.dialog.popup.product.ProductDetailDashboardPopup;
-import co.crowde.toni.view.fragment.modul.Dashboard;
+import co.crowde.toni.view.fragment.modul.DashboardFragment;
 
 public class ProductDashboardAdapter
         extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -118,7 +117,7 @@ public class ProductDashboardAdapter
                 viewHolder.tvProductUnit.setText(varian);
 
                 // TODO : init count of product
-                final CartModel cart = Dashboard.dbCart.getItem(model.getProductId());
+                final CartModel cart = DashboardFragment.dbCart.getItem(model.getProductId());
                 countProduct = 0;
                 if (cart != null)
                     countProduct = cart.getQuantity();

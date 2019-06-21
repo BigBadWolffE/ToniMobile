@@ -3,7 +3,6 @@ package co.crowde.toni.network;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.squareup.okhttp.Callback;
@@ -22,7 +21,7 @@ import co.crowde.toni.controller.auth.LoginController;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.UserModel;
 import co.crowde.toni.view.activity.auth.LoginActivity;
-import co.crowde.toni.view.activity.auth.LoginSuccess;
+import co.crowde.toni.view.activity.auth.LoginSuccessActivity;
 import co.crowde.toni.view.dialog.message.network.NetworkOfflineDialog;
 
 public class LoginRequest {
@@ -79,6 +78,7 @@ public class LoginRequest {
                             message = json.getString("message");
                             String data = json.getString("data");
 
+                            LoginActivity.progressDialog.dismiss();
                             if(status){
                                 JSONObject objDataLogin = new JSONObject(data);
                                 String username = objDataLogin.getString("username");
@@ -93,12 +93,11 @@ public class LoginRequest {
                                 SavePref.savePicture(activity, picture);
                                 SavePref.saveDetailToko(activity, data);
 
-                                Intent loginSuccess = new Intent(activity, LoginSuccess.class);
+                                Intent loginSuccess = new Intent(activity, LoginSuccessActivity.class);
                                 activity.startActivity(loginSuccess);
                                 activity.finish();
 
                             } else {
-//                                LoginActivity.progressDialog.dismiss();
                                 LoginController.loginResponse(activity, message);
                             }
 

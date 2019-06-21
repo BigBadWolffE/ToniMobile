@@ -18,24 +18,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-        <activity android:name=".intent.CustomerHutangActivity"></activity>
-        <activity android:name=".view.activity.auth.RegisterActivity"></activity>
-        <activity android:name=".view.activity.notification.SuccessAddNewProduct" />
-        <activity android:name=".view.activity.filter.CatalogFilter" />
-        <activity android:name=".view.activity.notification.SuccessUpdateProduct" />
-        <activity android:name=".view.activity.catalog.CatalogProduct" />
-        <activity android:name=".view.activity.filter.InventoryFilter" />
-        <activity android:name=".view.activity.filter.DashboardFilter" />
+        <activity android:name=".view.activity.user.InfoShopActivity"></activity>
+        <activity android:name=".intent.CustomerHutangActivity" />
+        <activity android:name=".view.activity.auth.RegisterActivity" />
+        <activity android:name=".view.activity.customer.SelectCustomerActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+        <activity android:name=".view.activity.notification.SuccessAddNewProductActivity" />
+        <activity android:name=".view.activity.filter.CatalogFilterActivity" />
+        <activity android:name=".view.activity.notification.SuccessUpdateProductActivity" />
+        <activity android:name=".view.activity.catalog.CatalogProductActivity" />
+        <activity android:name=".view.activity.filter.InventoryFilterActivity" />
+        <activity android:name=".view.activity.filter.DashboardFilterActivity" />
         <activity android:name=".view.activity.auth.ForgotUserActivity" />
         <activity android:name=".view.activity.auth.ForgotPassActivity" />
-        <activity android:name=".view.activity.print.WaitingPrint" />
+        <activity android:name=".view.activity.print.WaitingPrintActivity" />
         <activity
-            android:name=".view.activity.customer.SelectCustomer"
+            android:name=".view.activity.cart.CartListActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
-        <activity
-            android:name=".view.activity.cart.CartList"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
-        <activity android:name=".view.activity.shop.OpenShop" />
+        <activity android:name=".view.activity.shop.OpenShopActivity" />
         <activity android:name=".view.notification.TransactionSuccess" />
         <activity android:name=".view.notification.ProductAddSuccess" />
         <activity android:name=".view.notification.PrintLoading" />
@@ -44,11 +44,11 @@
         <activity
             android:name=".view.activity.home.MainActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
-        <activity android:name=".view.activity.auth.LoginSuccess" />
+        <activity android:name=".view.activity.auth.LoginSuccessActivity" />
         <activity
             android:name=".view.activity.auth.LoginActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
-        <activity android:name=".view.activity.welcoming.SplashScreen">
+        <activity android:name=".view.activity.welcoming.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

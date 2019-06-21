@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
-    tools:context=".view.fragment.modul.Report">
+    tools:context=".view.fragment.modul.ReportFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_header"

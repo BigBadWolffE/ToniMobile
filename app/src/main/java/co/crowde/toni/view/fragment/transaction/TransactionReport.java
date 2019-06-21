@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -62,7 +61,7 @@ import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.helper.volley.AppController;
 import co.crowde.toni.model.TransaksiModel;
 import co.crowde.toni.network.API;
-import co.crowde.toni.view.fragment.modul.Report;
+import co.crowde.toni.view.fragment.modul.ReportFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -76,7 +75,7 @@ public class TransactionReport extends Fragment {
     LinearLayoutManager layoutManager;
     RecyclerView detailRecycler;
     RecyclerView.LayoutManager detailLayoutManager;
-//    DetailTransaksiWaktuPelangganAdapter detailTransaksiWaktuPelangganAdapter;
+    //    DetailTransaksiWaktuPelangganAdapter detailTransaksiWaktuPelangganAdapter;
     Spinner spinnertransaksi;
     TextView todays;
     TextView weeks;
@@ -152,7 +151,7 @@ public class TransactionReport extends Fragment {
         recyclerView.setAdapter(transaksiWaktuPelangganAdapter);
         recyclerView.addItemDecoration(itemDecorator);
 
-        emptyText = (RelativeLayout)rootView.findViewById(R.id.empty_text_transaksi);
+//        emptyText = (RelativeLayout)rootView.findViewById(R.id.empty_text_transaksi);
 
         btnlaporan = (ConstraintLayout)rootView.findViewById(R.id.tablaporan);
 
@@ -160,7 +159,7 @@ public class TransactionReport extends Fragment {
         btnlaporan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Report fragment = new Report();
+                ReportFragment fragment = new ReportFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.mainFrameLayout,fragment);
@@ -269,6 +268,11 @@ public class TransactionReport extends Fragment {
         dayrange1 =tglsebelum.getText().toString();
         dayrange2 = tglsesudah.getText().toString();
 
+        pageTransaksi=1;
+        initAdapterCustomer(getActivity());
+        getData(pageTransaksi);
+        initScrollListenerCustomer(getActivity());
+
         todays.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -289,11 +293,11 @@ public class TransactionReport extends Fragment {
                 transaksiWaktuPelangganAdapter.clearModels();
                 tglsebelum.setText("");
                 tglsesudah.setText("");
-                if (transaksiWaktuPelangganAdapter != null){
-                    emptyText.setVisibility(View.GONE);
-                }else{
-                    emptyText.setVisibility(View.VISIBLE);
-                }
+//                if (transaksiWaktuPelangganAdapter != null){
+//                    emptyText.setVisibility(View.GONE);
+//                }else{
+//                    emptyText.setVisibility(View.VISIBLE);
+//                }
 //                getDataOneDay(pageTransaksi);
 
                 pageTransaksi=1;
@@ -324,11 +328,11 @@ public class TransactionReport extends Fragment {
                 tanggalLaporan2.setText(todaysDate);
                 tglsebelum.setText("");
                 tglsesudah.setText("");
-                if (transaksiWaktuPelangganAdapter != null){
-                    emptyText.setVisibility(View.GONE);
-                }else{
-                    emptyText.setVisibility(View.VISIBLE);
-                }
+//                if (transaksiWaktuPelangganAdapter != null){
+//                    emptyText.setVisibility(View.GONE);
+//                }else{
+//                    emptyText.setVisibility(View.VISIBLE);
+//                }
                 pageTransaksi=1;
                 initAdapterCustomer3days(getActivity());
                 getData3day(pageTransaksi);
@@ -356,11 +360,11 @@ public class TransactionReport extends Fragment {
                 tanggalLaporan2.setText(todaysDate);
                 tglsebelum.setText("");
                 tglsesudah.setText("");
-                if (transaksiWaktuPelangganAdapter != null){
-                    emptyText.setVisibility(View.GONE);
-                }else{
-                    emptyText.setVisibility(View.VISIBLE);
-                }
+//                if (transaksiWaktuPelangganAdapter != null){
+//                    emptyText.setVisibility(View.GONE);
+//                }else{
+//                    emptyText.setVisibility(View.VISIBLE);
+//                }
                 pageTransaksi=1;
                 initAdapterCustomerWeeks(getActivity());
                 getDataweek(pageTransaksi);
@@ -390,11 +394,11 @@ public class TransactionReport extends Fragment {
 //                transaksiWaktuPelangganAdapter.clearModels();
                 tanggalLaporan1.setText(date30);
                 tanggalLaporan2.setText(todaysDate);
-                if (transaksiWaktuPelangganAdapter != null){
-                    emptyText.setVisibility(View.GONE);
-                }else{
-                    emptyText.setVisibility(View.VISIBLE);
-                }
+//                if (transaksiWaktuPelangganAdapter != null){
+//                    emptyText.setVisibility(View.GONE);
+//                }else{
+//                    emptyText.setVisibility(View.VISIBLE);
+//                }
 
                 pageTransaksi=1;
                 initAdapterCustomerMonths(getActivity());
@@ -427,11 +431,11 @@ public class TransactionReport extends Fragment {
                 transaksiWaktuPelangganAdapter.clearModels();
                 tglsebelum.setText("");
                 tglsesudah.setText("");
-                if (transaksiWaktuPelangganAdapter != null){
-                    emptyText.setVisibility(View.GONE);
-                }else{
-                    emptyText.setVisibility(View.VISIBLE);
-                }
+//                if (transaksiWaktuPelangganAdapter != null){
+//                    emptyText.setVisibility(View.GONE);
+//                }else{
+//                    emptyText.setVisibility(View.VISIBLE);
+//                }
                 pageTransaksi=1;
                 initAdapterCustomerRange(getActivity());
                 getDataRange(pageTransaksi);
@@ -462,16 +466,15 @@ public class TransactionReport extends Fragment {
                             if(status){
                                 List<TransaksiModel> models = new Gson().fromJson(data.toString(),new TypeToken<List<TransaksiModel>>(){}.getType());
                                 updateDataCustomer(models);
-                            }else if (message.equals("Data transaksi tidak ditemukan!")){
+                            }else if(page == 1){
                                 dialogNoData();
-                                emptyText.setVisibility(View.VISIBLE);
-                            }else if (message.equals("Fetching data transaksi berhasil")){
-                                emptyText.setVisibility(View.GONE);
+                            }
+                            else{
+                                Toast.makeText(getActivity(),"Page Selanjutnya Tidak Tersedia",Toast.LENGTH_LONG).show();
                             }
 
-
-
-                        } catch (JSONException e) {
+                        }
+                        catch (JSONException e) {
                             e.printStackTrace();
                         }
 
@@ -590,11 +593,11 @@ public class TransactionReport extends Fragment {
 
                                 loadingData.dismiss();
 
-                            }else if(message.equals("Data transaksi tidak ditemukan!")){
+                            }else if(page == 1){
                                 dialogNoData();
-                                emptyText.setVisibility(View.VISIBLE);
-                            }else if (message.equals("Fetching data transaksi berhasil")){
-                                emptyText.setVisibility(View.GONE);
+                            }
+                            else{
+                                Toast.makeText(getActivity(),"Page Selanjutnya Tidak Tersedia",Toast.LENGTH_LONG).show();
                             }
 
 
@@ -659,11 +662,11 @@ public class TransactionReport extends Fragment {
 
 
 
-                            }else if (message.equals("Data transaksi tidak ditemukan!")){
+                            }else if(page == 1){
                                 dialogNoData();
-                                emptyText.setVisibility(View.VISIBLE);
-                            }else if (message.equals("Fetching data transaksi berhasil")){
-                                emptyText.setVisibility(View.GONE);
+                            }
+                            else{
+                                Toast.makeText(getActivity(),"Page Selanjutnya Tidak Tersedia",Toast.LENGTH_LONG).show();
                             }
 
 
@@ -714,11 +717,11 @@ public class TransactionReport extends Fragment {
                                 updateDataCustomerMonths(models);
                                 Log.e("Response", new Gson().toJson(models));
                                 loadingData.dismiss();
-                            }else if (message.equals("Data transaksi tidak ditemukan!")){
+                            }else if(page == 1){
                                 dialogNoData();
-                                emptyText.setVisibility(View.VISIBLE);
-                            }else if (message.equals("Fetching data transaksi berhasil")){
-                                emptyText.setVisibility(View.GONE);
+                            }
+                            else{
+                                Toast.makeText(getActivity(),"Page Selanjutnya Tidak Tersedia",Toast.LENGTH_LONG).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -824,14 +827,11 @@ public class TransactionReport extends Fragment {
 
                                 loadingData.dismiss();
 
-
-
-
-                            }else if (message.equals("Data transaksi tidak ditemukan!")){
+                            }else if(page == 1){
                                 dialogNoData();
-                                emptyText.setVisibility(View.VISIBLE);
-                            }else if (message.equals("Fetching data transaksi berhasil")){
-                                emptyText.setVisibility(View.GONE);
+                            }
+                            else{
+                                Toast.makeText(getActivity(),"Page Selanjutnya Tidak Tersedia",Toast.LENGTH_LONG).show();
                             }
 
 
@@ -1053,13 +1053,13 @@ public class TransactionReport extends Fragment {
         SimpleDateFormat datedFormat = new SimpleDateFormat(" dd MMM yyyy");
         final String todaysDate = datedFormat.format(dateString);
 
-                loadDialog();
-//                transaksiWaktuPelangganAdapter.clearModels();
-                if (transaksiWaktuPelangganAdapter!=null){
-                    emptyText.setVisibility(View.INVISIBLE);
-                }
+        loadDialog();
+////                transaksiWaktuPelangganAdapter.clearModels();
+//                if (transaksiWaktuPelangganAdapter!=null){
+//                    emptyText.setVisibility(View.INVISIBLE);
+//                }
 
-        String testUrl = API.TRANSAKSI_URL2+SavePref.readShopId(getActivity())+"?limit=5&page="+page+"&type=today";
+        String testUrl = API.TRANSAKSI_URL2+SavePref.readShopId(getActivity())+"?limit=5&page="+page;
         Log.e("res ", testUrl);
         StringRequest request = new StringRequest(
                 Request.Method.GET,
@@ -1088,11 +1088,11 @@ public class TransactionReport extends Fragment {
                                 updateDataCustomer(models);
 
                                 loadingData.dismiss();
-
-
-
-                            }else if (message.equals("Data transaksi tidak ditemukan!")){
+                            }else if(page == 1){
                                 dialogNoData();
+                            }
+                            else{
+                                Toast.makeText(getActivity(),"Page Selanjutnya Tidak Tersedia",Toast.LENGTH_LONG).show();
                             }
 
 

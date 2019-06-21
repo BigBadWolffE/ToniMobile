@@ -6,7 +6,6 @@ import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -23,7 +22,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -53,6 +51,7 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -62,16 +61,16 @@ import java.util.UUID;
 
 import co.crowde.toni.R;
 import co.crowde.toni.adapter.TransaksiBagianPelangganAdapter;
-import co.crowde.toni.controller.main.PrintController;
+import co.crowde.toni.controller.print.PrintController;
 import co.crowde.toni.helper.CloseSoftKeyboard;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.helper.volley.AppController;
 import co.crowde.toni.model.CustomerModel;
 import co.crowde.toni.model.ShopModel;
 import co.crowde.toni.network.API;
-import co.crowde.toni.utils.PrinterCommands;
-import co.crowde.toni.utils.PrinterNetwork;
-import co.crowde.toni.utils.UtilsImage;
+import co.crowde.toni.utils.print.PrinterCommands;
+import co.crowde.toni.utils.print.PrinterNetwork;
+import co.crowde.toni.utils.print.UtilsImage;
 import co.crowde.toni.view.dialog.message.printer.PrinterConnectivityDialog;
 
 public class CustomerHutangActivity extends AppCompatActivity {
@@ -134,7 +133,7 @@ public class CustomerHutangActivity extends AppCompatActivity {
 
         //date setup
         String tanggal = customerModel.getCreatedAt();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
         Date date = null;
         try {
             date = dateFormat.parse(tanggal);
@@ -373,6 +372,11 @@ public class CustomerHutangActivity extends AppCompatActivity {
         DisplayMetrics displayMetricsPW = this.getResources().getDisplayMetrics();
         dialogconfirmcetakhutang = new Dialog(CustomerHutangActivity.this);
         dialogconfirmcetakhutang.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //todays date
+        final Date currentDateTimeString = Calendar.getInstance().getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd ");
+        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd MMM yyyy");
+        final String formattedDate = dateFormat1.format(currentDateTimeString);
         dialogconfirmcetakhutang.setContentView(dialogView);
         dialogconfirmcetakhutang.setCanceledOnTouchOutside(true);
         int dialogWidth = (int) (displayMetricsPW.widthPixels * 0.9);
@@ -393,17 +397,17 @@ public class CustomerHutangActivity extends AppCompatActivity {
                         PrinterNetwork.mBluetoothSocket = PrinterNetwork.createBluetoothSocket(PrinterNetwork.mBluetoothDevice);
                         PrinterNetwork.mBluetoothSocket.connect();
                         if (PrinterNetwork.mBluetoothSocket.isConnected()){
-                            PrintController.printCustomerCredit(activity, customerModel);
+                            PrintController.printCustomerCredit(activity, customerModel, formattedDate);
                         }
                     } catch (IOException e) {
                         PrinterConnectivityDialog.showDialog(activity);
-//                                                ConfirmTransactionDialog.progressDialog.dismiss();
                         Log.e("Bluetooth","Can't Connect");
                     }
 
                 } else {
                     PrinterNetwork.pairingBluetooth(activity);
                 }
+
             }
         });
 

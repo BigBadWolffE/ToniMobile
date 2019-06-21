@@ -11,8 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 
 import co.crowde.toni.R;
-import co.crowde.toni.controller.main.UserController;
-import co.crowde.toni.network.ProductRequest;
+import co.crowde.toni.controller.user.UserController;
 
 public class CloseShopDialog {
 
