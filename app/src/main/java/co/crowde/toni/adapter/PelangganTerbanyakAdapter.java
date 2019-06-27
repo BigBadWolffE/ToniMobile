@@ -82,10 +82,10 @@ public class PelangganTerbanyakAdapter extends RecyclerView.Adapter<RecyclerView
 
 
 
-            namaPelanggan = itemView.findViewById(R.id.namappelangganlaporan);
-//            telepon = itemView.findViewById(R.id.telponlaporan);
-            frekuensi = itemView.findViewById(R.id.frekuensilaporan);
-            totalbeli = itemView.findViewById(R.id.totalbelilaporan);
+//            namaPelanggan = itemView.findViewById(R.id.namappelangganlaporan);
+////            telepon = itemView.findViewById(R.id.telponlaporan);
+//            frekuensi = itemView.findViewById(R.id.frekuensilaporan);
+//            totalbeli = itemView.findViewById(R.id.totalbelilaporan);
 
 
         }

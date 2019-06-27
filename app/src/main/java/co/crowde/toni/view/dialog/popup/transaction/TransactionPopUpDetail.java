@@ -327,7 +327,7 @@ public class TransactionPopUpDetail {
                                                 PrinterNetwork.mBluetoothSocket = PrinterNetwork.createBluetoothSocket(PrinterNetwork.mBluetoothDevice);
                                                 PrinterNetwork.mBluetoothSocket.connect();
                                                 if (PrinterNetwork.mBluetoothSocket.isConnected()){
-                                                    PrintController.printDetailTransaction(activity, model, models, formattedDate , jenisBayar);
+//                                                    PrintController.printDetailTransaction(activity, model, models, formattedDate , jenisBayar);
                                                 }
                                             } catch (IOException e) {
                                                 PrinterConnectivityDialog.showDialog(activity);

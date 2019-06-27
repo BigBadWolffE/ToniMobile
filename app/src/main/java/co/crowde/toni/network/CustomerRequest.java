@@ -1,6 +1,7 @@
 package co.crowde.toni.network;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -19,11 +20,15 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.List;
 
+import co.crowde.toni.constant.Const;
+import co.crowde.toni.controller.print.PrintController;
 import co.crowde.toni.controller.user.UserController;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CustomerModel;
-import co.crowde.toni.model.body.post.CreditPayModel;
+import co.crowde.toni.model.response.object.CreditPayModel;
 import co.crowde.toni.view.activity.customer.SelectCustomerActivity;
+import co.crowde.toni.view.activity.notification.SuccessCreditPayActivity;
+import co.crowde.toni.view.dialog.message.customer.CreditPayDialog;
 import co.crowde.toni.view.dialog.message.customer.CustomerAlreadyRegisterDialog;
 import co.crowde.toni.view.dialog.message.network.NetworkOfflineDialog;
 import co.crowde.toni.view.fragment.cart.CartPaymentFragment;
@@ -425,6 +430,89 @@ public class CustomerRequest {
                                     SelectCustomerActivity.progressDialog.dismiss();
                                     Toast.makeText(activity, "Nama Pelanggan atau Nomor Telepon sudah terdaftar.", Toast.LENGTH_SHORT).show();
                                 }
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+
+            }
+        });
+    }
+
+    public static void payCustomerCredit(final Activity activity, int credit, String customerId){
+
+        final CreditPayModel pay = new CreditPayModel();
+        pay.setShopId(SavePref.readShopId(activity));
+        pay.setCustomerId(String.valueOf(customerId));
+        pay.setAmount(String.valueOf(credit));
+
+        String postBody = new Gson().toJson(pay);
+
+        OkHttpClient client = new OkHttpClient();
+
+        RequestBody body = RequestBody.create(JSON, postBody);
+        Log.e("REQUEST BODY",body.toString());
+
+        Request requestHttp = new Request.Builder()
+                .header("Authorization", SavePref.readToken(activity))
+                .url(API.CreditPaid)
+                .post(body)
+                .build();
+
+        client.newCall(requestHttp).enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, final IOException e) {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+//                        Toast.makeText(
+//                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+                        NetworkOfflineDialog.showDialog(activity);
+                        CreditPayDialog.dialogCredit.dismiss();
+                        CreditPayDialog.progressDialog.dismiss();
+                        Log.e("Error",e.toString());
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(final Response response) throws IOException {
+                final String responseData = response.body().string();
+                Log.e("RESPONSE BODY", responseData);
+
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            JSONObject json = new JSONObject(responseData);
+                            boolean status = json.getBoolean("status");
+                            message = json.getString("message");
+                            String data = json.getString("data");
+                            Log.e("DATA RESPONSE", data);
+
+                            if(status){
+                                Log.e("Res", data);
+                                CreditPayModel model = new Gson().fromJson(data, CreditPayModel.class);
+                                PrintController.printCustomerCreditPay(activity, model, credit);
+                                CreditPayDialog.dialogCredit.dismiss();
+                                CreditPayDialog.progressDialog.dismiss();
+
+                                Intent print = new Intent(activity, SuccessCreditPayActivity.class);
+                                print.putExtra("saldo",data);
+                                activity.startActivity(print);
+//                                activity.finish();
+
+                            } else {
+                                if(message.equals("Token tidak valid")){
+                                    UserController.tokenExpired(activity, message);
+                                    CreditPayDialog.dialogCredit.dismiss();
+                                    CreditPayDialog.progressDialog.dismiss();
+                                }
+
                             }
 
                         } catch (JSONException e) {

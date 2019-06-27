@@ -17,12 +17,16 @@ import java.util.List;
 import co.crowde.toni.R;
 import co.crowde.toni.helper.DecimalFormatRupiah;
 import co.crowde.toni.helper.SavePref;
+import co.crowde.toni.model.TransactionProductModel;
+import co.crowde.toni.model.response.list.TransactionModel;
+import co.crowde.toni.view.activity.customer.CustomerHutangActivity;
 import co.crowde.toni.model.CartModel;
 import co.crowde.toni.model.CustomerModel;
 import co.crowde.toni.model.DetailTransaksiModel;
 import co.crowde.toni.model.TransaksiModel;
 import co.crowde.toni.model.UserDetailModel;
 import co.crowde.toni.model.response.object.AddNewTransactionModel;
+import co.crowde.toni.model.response.object.CreditPayModel;
 import co.crowde.toni.view.fragment.cart.CartPaymentFragment;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
 
@@ -36,6 +40,7 @@ import static co.crowde.toni.utils.print.PrinterNetwork.printText;
 
 public class PrintController {
 
+    private static String payment;
 
     public static void printCash(Activity activity, String data){
         AddNewTransactionModel model = new Gson().fromJson(data, AddNewTransactionModel.class);
@@ -209,7 +214,7 @@ public class PrintController {
                     + credit.getSaldo();
             String ubahTotal = String.valueOf(totalCredit);
             printText(String.format("%-18s %13s", "" +
-                            "Total Item : " + (DashboardFragment.totalItem + 1),
+                            "Total Item : " + DashboardFragment.totalItem,
                     formatNumber.format(Integer.parseInt(ubahTotal))) + "\n");
 
             printNewLine();
@@ -311,7 +316,7 @@ public class PrintController {
             final int totalHutangSekarang = CartPaymentFragment.totalBill;
             String ubahTotal = String.valueOf(totalHutangSekarang);
             printText(String.format("%-18s %13s", "" +
-                            "Total Item : " + (DashboardFragment.totalItem + 1),
+                            "Total Item : " + DashboardFragment.totalItem,
                     formatNumber.format(Integer.parseInt(ubahTotal))) + "\n");
 
             printNewLine();
@@ -323,8 +328,8 @@ public class PrintController {
                             .parseInt(model.get_change())))+"\n");
 
             printNewLine();
-            printText(String.format("%-18s %13s","Hutang Sebelumnya",
-                    formatNumber.format(customer.getSaldo()))+"\n");
+//            printText(String.format("%-18s %13s","Hutang Sebelumnya",
+//                    formatNumber.format(customer.getSaldo()))+"\n");
             printText(String.format("%-15s %16s","Total Hutang",(
                     formatNumber.format(customer.getSaldo()- CartPaymentFragment.creditPay)))+"\n");
 
@@ -380,7 +385,7 @@ public class PrintController {
             final int amount = customerModel.getCredit() - customerModel.getCreditPaid();
             printText("Tanggal : "+ formattedDate+"\n");
             printText("Sisa Hutang Anda : Rp."+money.format(amount)+"\n");
-            printText("--------------------------------\n");
+            printText("================================\n");
 
             printNewLine();
             printNewLine();
@@ -402,7 +407,8 @@ public class PrintController {
 
     }
 
-    public static void printDetailTransaction(Activity activity, TransaksiModel model, List<DetailTransaksiModel> models , String formattedDate, String jenisBayar){
+    public static void printDetailTransaction(Activity activity, TransactionModel model, List<TransactionProductModel> models){
+
         UserDetailModel userModels = new Gson().fromJson(SavePref.readUserDetail(activity), UserDetailModel.class);
 
         String village = userModels.getVillage();
@@ -413,6 +419,23 @@ public class PrintController {
         String regencys = regency.replaceAll("[^A-Za-z ]","");
         String province = userModels.getProvince();
         String provinces = province.replaceAll("[^A-Za-z ]","");
+
+//        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        Date date = null;
+//        try {
+//            date = dateFormat.parse(model.getCreatedAt());
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//
+//        DateFormat formatter = new SimpleDateFormat("dd-MM-YYYY HH:mm"); //If you need time just put specific format for time like 'HH:mm:ss'
+//        String ubahTanggalTransaksi = formatter.format(date);
+//
+//        if(model.getPaymentType().equals("Cash")){
+//            payment = "Tunai";
+//        } else {
+//            payment = "Hutang";
+//        }
 
         try {
             os = mBluetoothSocket.getOutputStream();
@@ -427,26 +450,23 @@ public class PrintController {
             printCustom("",0,0);
 
             printNewLine();
-            printText("Nomor Transaksi : "+ model.getTransactionId()+"\n");
-            printText("Pelanggan : "+ model.getCostumerName()+"\n");
-            printText("--------------------------------\n");
-            printText("Tanggal : "+ formattedDate+"\n");
-            printText("--------------------------------\n");
-            printText("Pembayaran: "+ jenisBayar +"\n");
-            printText("--------------------------------\n");
+//            printText("Nomor Transaksi : "+ model.getTransactionId()+"\n");
+//            printText("Pelanggan       : "+ model.getCustomerName()+"\n");
+//            printText("Tanggal         : "+ ubahTanggalTransaksi+"\n");
+//            printText("Pembayaran      : "+ payment +"\n");
+            printText("================================\n");
 
-            for(DetailTransaksiModel modelss : models  ){
-                int sellingprice = Integer.parseInt(modelss.getSellingPrice());
-                printText(modelss.getProductName()+"\n");
-                printText(String.format("%2s %1s %1s ",modelss.getQuantity(), "X","Rp."
-                        +DecimalFormatRupiah.formatNumber.format(sellingprice)+"\n"));
-
-            }
-            printText("-------------------------------\n");
-            int amount = Integer.parseInt(model.getAmount());
-            printText("Total  : "+"Rp."+DecimalFormatRupiah.formatNumber.format(amount));
+//            for(TransactionProductModel modelss : models  ){
+//                int sellingprice = modelss.getSellingPrice();
+//                printText(modelss.getProductName()+"\n");
+//                printText(String.format("%2s %1s %1s ",modelss.getQuantity(), "X","Rp."
+//                        +DecimalFormatRupiah.formatNumber.format(sellingprice)+"\n"));
+//
+//            }
+            printText("================================\n");
+//            int amount = model.getAmount();
+//            printText("Total  : "+"Rp."+DecimalFormatRupiah.formatNumber.format(amount));
             printNewLine();
-            printText("--------------------------------\n");
 
             printNewLine();
             printCustom("Terima Kasih telah membeli\nproduk pertanian di\nToko "
@@ -464,5 +484,75 @@ public class PrintController {
             os.flush();
         } catch (IOException e) {
         }
+    }
+
+    public static void printCustomerCreditPay(Activity activity, CreditPayModel model, int credit){
+
+        UserDetailModel models = new Gson().fromJson(SavePref.readUserDetail(activity), UserDetailModel.class);
+
+        String village = models.getVillage();
+        String villages = village.replaceAll("[^A-Za-z ]","");
+        String district = models.getDistrict();
+        String districts = district.replaceAll("[^A-Za-z ]","");
+        String regency = models.getRegency();
+        String regencys = regency.replaceAll("[^A-Za-z ]","");
+        String province = models.getProvince();
+        String provinces = province.replaceAll("[^A-Za-z ]","");
+
+//        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+//        Date date = null;
+//        try {
+//            date = dateFormat.parse(model.getCreatedAt());
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//
+//        DateFormat formatter = new SimpleDateFormat("dd-MM-YYYY"); //If you need time just put specific format for time like 'HH:mm:ss'
+//        String ubahTanggalTransaksi = formatter.format(date);
+
+        try {
+            os = mBluetoothSocket.getOutputStream();
+
+            printNewLine();
+            printPhoto(R.drawable.toni_black, activity);
+
+            printCustom(models.getShopName().toUpperCase(),0,1);
+            printCustom(models.getStreet(),0,1);
+            printCustom(villages+", "+districts,0,1);
+            printCustom(regencys,0,1);
+            printCustom("",0,0);
+
+            printNewLine();
+
+            printText("Kode Struk: "+model.getCreditPaidId()+"\n");
+//            printText("Tanggal   : "+ubahTanggalTransaksi+"\n");
+            printText("Pelanggan : "+model.getCustomerName()+"\n");
+            printText("================================\n");
+            printText(String.format("%-15s %16s","Total Hutang",(
+                    formatNumber.format(CustomerHutangActivity.customerModel.getSaldo())))+"\n");
+            printText(String.format("%-15s %16s","Bayar Hutang",(
+                    formatNumber.format(credit)))+"\n");
+
+            printText("================================\n");
+            printText(String.format("%-15s %16s","Sisa Hutang",(
+                    formatNumber.format(model.getSaldo())))+"\n");
+            printNewLine();
+            printNewLine();
+            printCustom("Terima Kasih telah membeli\nproduk pertanian di\nToko "
+                    + models.getShopName(), 0, 1);
+
+            printNewLine();
+            printText("--------------------------------\n");
+            printCustom("Layanan Konsumen Toko", 0, 1);
+            printCustom(models.getPhoneNumber(), 0, 1);
+            printCustom("", 0, 0);
+
+            printNewLine();
+            printNewLine();
+
+            os.flush();
+        }catch (IOException e) {
+        }
+
     }
 }

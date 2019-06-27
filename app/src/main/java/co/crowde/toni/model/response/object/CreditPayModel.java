@@ -1,8 +1,11 @@
 package co.crowde.toni.model.response.object;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class CreditPayModel {
+public class CreditPayModel implements Parcelable {
 
     @SerializedName("shopId")
     private String shopId;
@@ -45,6 +48,48 @@ public class CreditPayModel {
         this.customerName = customerName;
         this.saldo = saldo;
     }
+
+    protected CreditPayModel(Parcel in) {
+        shopId = in.readString();
+        creditPaidId = in.readString();
+        customerId = in.readString();
+        amount = in.readString();
+        createdAt = in.readString();
+        lastUpdated = in.readString();
+        createdBy = in.readString();
+        customerName = in.readString();
+        saldo = in.readInt();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(shopId);
+        dest.writeString(creditPaidId);
+        dest.writeString(customerId);
+        dest.writeString(amount);
+        dest.writeString(createdAt);
+        dest.writeString(lastUpdated);
+        dest.writeString(createdBy);
+        dest.writeString(customerName);
+        dest.writeInt(saldo);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<CreditPayModel> CREATOR = new Creator<CreditPayModel>() {
+        @Override
+        public CreditPayModel createFromParcel(Parcel in) {
+            return new CreditPayModel(in);
+        }
+
+        @Override
+        public CreditPayModel[] newArray(int size) {
+            return new CreditPayModel[size];
+        }
+    };
 
     public String getShopId() {
         return shopId;

@@ -74,6 +74,8 @@ public class PrinterNetwork {
                     Toast.makeText(activity, "Berhasil terhubung dengan Bluetooth Printer", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
 
+
+
                 } catch (IOException e) {
                     try {
 //                        Toast.makeText(activity, "Tidak dapat terhubung dengan Bluetooth Printer", Toast.LENGTH_SHORT).show();

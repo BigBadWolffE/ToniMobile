@@ -153,14 +153,6 @@ public class DashboardFragment extends Fragment {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
                     requestFilter(activity);
-//                    progressDialog.setMessage("Harap tunggu...");
-//                    progressDialog.setCanceledOnTouchOutside(false);
-//                    progressDialog.show();
-//
-//                    ProductRequest.productName = etSearch.getText().toString();
-//                    ProductRequest.page = 1;
-//                    productModels.clear();
-//                    ProductRequest.getProductList(activity);
                 }
 
             }
@@ -169,13 +161,6 @@ public class DashboardFragment extends Fragment {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 requestFilter(activity);
-//                progressDialog.setMessage("Harap tunggu...");
-//                progressDialog.setCanceledOnTouchOutside(false);
-//                progressDialog.show();
-//                ProductRequest.productName = etSearch.getText().toString();
-//                ProductRequest.page = 1;
-//                productModels.clear();
-//                ProductRequest.getProductList(activity);
                 return false;
             }
         });
@@ -192,14 +177,8 @@ public class DashboardFragment extends Fragment {
                     if(event.getRawX() >= (etSearch.getRight() -
                             etSearch.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
                         if(etSearch.length()>0){
-//                            progressDialog.setMessage("Harap tunggu...");
-//                            progressDialog.setCanceledOnTouchOutside(false);
-//                            progressDialog.show();
                             etSearch.setText("");
                             event.setAction(MotionEvent.ACTION_CANCEL);
-//                            ProductRequest.productName ="";
-//                            ProductRequest.page = 1;
-//                            ProductRequest.getProductList(activity);
                             requestFilter(activity);
                         }
 

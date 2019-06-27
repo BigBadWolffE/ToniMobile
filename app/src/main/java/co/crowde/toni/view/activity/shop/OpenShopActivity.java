@@ -36,6 +36,8 @@ public class OpenShopActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_open_shop);
 
+        SavePref.saveDeviceAddress(OpenShopActivity.this, null);
+
         //Get Id View
         tvOpenShopHeader = findViewById(R.id.tvOpenShopHeader);
         tvOpenShopLabel = findViewById(R.id.tvOpenShopLabel);

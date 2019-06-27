@@ -63,12 +63,12 @@ public class TransaksiWaktuPelangganAdapter extends RecyclerView.Adapter<Recycle
 
 
 //            recyclerView = itemView.findViewById(R.id.rc_detail_pembelian);
-            cardView = itemView.findViewById(R.id.cardview_list);
-            idtransaksi = itemView.findViewById(R.id.idtransaksipelanggan);
-            namapelanggan = itemView.findViewById(R.id.namapelanggantransaksiwaktu);
-            tanggaltransaksi = itemView.findViewById(R.id.transaksitanggalpelangganwaktu);
-//            pembayaran = itemView.findViewById(R.id.transaksipembayaranpelangganwaktu);
-            totaltransaksi = itemView.findViewById(R.id.totaltransaksipelangganwaktu);
+//            cardView = itemView.findViewById(R.id.cardview_list);
+//            idtransaksi = itemView.findViewById(R.id.idtransaksipelanggan);
+//            namapelanggan = itemView.findViewById(R.id.namapelanggantransaksiwaktu);
+//            tanggaltransaksi = itemView.findViewById(R.id.transaksitanggalpelangganwaktu);
+////            pembayaran = itemView.findViewById(R.id.transaksipembayaranpelangganwaktu);
+//            totaltransaksi = itemView.findViewById(R.id.totaltransaksipelangganwaktu);
 //            detailTransaksiFragment = new DetailTransaksiFragment();
 
             itemView.setOnClickListener(new View.OnClickListener() {

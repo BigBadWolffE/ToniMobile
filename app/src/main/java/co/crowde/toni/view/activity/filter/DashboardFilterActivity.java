@@ -251,8 +251,8 @@ public class DashboardFilterActivity extends AppCompatActivity {
                     }
                 }
 
-
                 etCategory.setText("");
+
             }
         });
     }

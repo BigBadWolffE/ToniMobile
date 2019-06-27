@@ -18,7 +18,7 @@ import java.util.List;
 
 import co.crowde.toni.R;
 import co.crowde.toni.helper.DecimalFormatRupiah;
-import co.crowde.toni.intent.CustomerHutangActivity;
+import co.crowde.toni.view.activity.customer.CustomerHutangActivity;
 import co.crowde.toni.model.CustomerModel;
 import co.crowde.toni.utils.print.Utils;
 

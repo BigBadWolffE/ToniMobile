@@ -630,7 +630,7 @@ public class TransactionReport extends Fragment {
     }
 
     private void getDataweek(int page){
-        String testUrl = API.TRANSAKSI_URL2+SavePref.readShopId(getActivity())+"?startDate="+dayweek+"&endDate="+day1+"&limit=5&page="+page;;
+        String testUrl = API.TRANSAKSI_URL2+SavePref.readShopId(getActivity())+"?startDate="+dayweek+"&endDate="+day1+"&limit=5&page="+page;
         Log.e("res ", testUrl);
         StringRequest request = new StringRequest(
                 Request.Method.GET,

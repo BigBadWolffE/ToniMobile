@@ -18,11 +18,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-        <activity android:name=".view.activity.user.InfoShopActivity"></activity>
-        <activity android:name=".intent.CustomerHutangActivity" />
+        <activity android:name=".view.activity.print.WaitingPrintTransactionActivity"></activity>
+        <activity android:name=".view.activity.transaction.DetailTransactionActivity" />
+        <activity android:name=".view.activity.notification.SuccessPaymentTransactionActivity" />
+        <activity android:name=".view.activity.notification.SuccessCreditPayActivity" />
+        <activity android:name=".view.activity.print.WaitingCreditPayActivity" />
+        <activity android:name=".view.activity.user.InfoShopActivity" />
+        <activity android:name=".view.activity.customer.CustomerHutangActivity" />
         <activity android:name=".view.activity.auth.RegisterActivity" />
-        <activity android:name=".view.activity.customer.SelectCustomerActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+        <activity
+            android:name=".view.activity.customer.SelectCustomerActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity android:name=".view.activity.notification.SuccessAddNewProductActivity" />
         <activity android:name=".view.activity.filter.CatalogFilterActivity" />
         <activity android:name=".view.activity.notification.SuccessUpdateProductActivity" />

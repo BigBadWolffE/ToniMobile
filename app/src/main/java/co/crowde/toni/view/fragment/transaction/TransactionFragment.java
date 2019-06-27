@@ -132,8 +132,8 @@ public class TransactionFragment extends Fragment {
         monthbg = rootView.findViewById(R.id.bg_btn_transaksi_sebulan);
         range = rootView.findViewById(R.id.btn_range_pilihan_transaksi);
         rangebg = rootView.findViewById(R.id.bg_btn_range_pilihan_transaksi);
-        tanggalLaporan1 = (TextView)rootView.findViewById(R.id.tanggallaporan1);
-        tanggalLaporan2 = (TextView)rootView.findViewById(R.id.tanggallaporan2);
+//        tanggalLaporan1 = (TextView)rootView.findViewById(R.id.tanggallaporan1);
+//        tanggalLaporan2 = (TextView)rootView.findViewById(R.id.tanggallaporan2);
 
         recyclerView = rootView.findViewById(R.id.rc_daftar_transaksi);
 //        pageTransaksi = 1;

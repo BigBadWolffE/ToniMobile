@@ -67,7 +67,6 @@ implements View.OnClickListener{
             @Override
             public void onClick(View v) {
                 onBackPressed();
-                show=false;
             }
         });
 
@@ -214,5 +213,13 @@ implements View.OnClickListener{
         CartListItemFragment.setTotalAmount(activity);
         SavePref.saveCustomer(activity, null);
         SavePref.saveCustomerId(activity, null );
+    }
+
+    @Override
+    public void onBackPressed() {
+        SavePref.saveCustomer(CartListActivity.this, null);
+        SavePref.saveCustomerId(CartListActivity.this, null);
+        show=false;
+        super.onBackPressed();
     }
 }

@@ -81,10 +81,10 @@ public class BarangTerlarisAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
 
 
-            namaBarang = itemView.findViewById(R.id.laporannamabarang);
-//            satuan = itemView.findViewById(R.id.laporansatuan);
-            produsen = itemView.findViewById(R.id.laporanprodusen);
-            terjual = itemView.findViewById(R.id.laporanterjual);
+//            namaBarang = itemView.findViewById(R.id.laporannamabarang);
+////            satuan = itemView.findViewById(R.id.laporansatuan);
+//            produsen = itemView.findViewById(R.id.laporanprodusen);
+//            terjual = itemView.findViewById(R.id.laporanterjual);
 
 
         }

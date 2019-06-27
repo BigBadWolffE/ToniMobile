@@ -56,7 +56,7 @@ import co.crowde.toni.R;
 import co.crowde.toni.adapter.TransaksiBagianPelangganAdapter;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.helper.volley.AppController;
-import co.crowde.toni.intent.CustomerHutangActivity;
+import co.crowde.toni.view.activity.customer.CustomerHutangActivity;
 import co.crowde.toni.listener.ChangeClickListener;
 import co.crowde.toni.model.CustomerModel;
 import co.crowde.toni.model.UserDetailModel;

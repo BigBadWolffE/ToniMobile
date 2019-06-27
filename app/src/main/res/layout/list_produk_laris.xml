@@ -1,66 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayout5"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="40dp"
+    android:background="@color/colorWhite"
+    android:orientation="horizontal">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout9"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_oval_white_30dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_conversion_wrapHeight="94"
-        tools:layout_conversion_wrapWidth="673">
+    <TextView
+        android:id="@+id/tv_product_number"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:gravity="center"
+        android:textColor="@color/TextColorDefault" />
 
-        <TextView
-            android:id="@+id/laporannamabarang"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="Nama Barang"
-            android:textColor="@color/colorBlack"
-            android:textSize="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/laporanprodusen"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/tv_product_name"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2.5"
+        android:gravity="center_vertical"
+        android:textColor="@color/TextColorDefault" />
 
-        <TextView
-            android:id="@+id/laporanprodusen"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="Produsen"
-            android:textColor="@color/colorBlack"
-            android:textSize="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/laporanterjual"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/laporannamabarang"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/tv_product_unit"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/TextColorDefault"
+        />
 
-        <TextView
-            android:id="@+id/laporanterjual"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="Terjual"
-            android:textColor="@color/colorBlack"
-            android:textSize="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/laporanprodusen"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tv_product_sold"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/TextColorDefault"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

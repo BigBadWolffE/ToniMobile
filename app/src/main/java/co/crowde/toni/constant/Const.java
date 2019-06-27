@@ -9,4 +9,7 @@ public class Const {
     //Intent Put Extras Code
     public final static String KEY_USERNAME_FROM_LOGIN = "LoginGetUsername";
     public final static String KEY_PASSWORD_FROM_LOGIN = "LoginGetPassword";
+
+    public final static int KEY_SUCCESS_CREDIT_PAY = 123;
+    public final static int KEY_SUCCESS_PAYMENT = 123;
 }

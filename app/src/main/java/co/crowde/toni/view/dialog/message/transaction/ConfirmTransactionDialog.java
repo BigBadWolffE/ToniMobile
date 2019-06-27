@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import co.crowde.toni.R;
 import co.crowde.toni.controller.transaction.TransactionController;
+import co.crowde.toni.network.TransactionRequest;
 
 public class ConfirmTransactionDialog {
     public static TextView tvHead, tvDesc, tvYes, tvNo;
@@ -65,7 +66,8 @@ public class ConfirmTransactionDialog {
                     public void run() {
 //                        activity.finish();
                         tvYes.setEnabled(true);
-                        TransactionController.printBill(activity);
+                        TransactionRequest.postNewTransaction(activity);
+//                        TransactionController.printBill(activity);
                     }
                 }, 100);
             }
