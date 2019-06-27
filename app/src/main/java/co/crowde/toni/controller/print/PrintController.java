@@ -420,27 +420,26 @@ public class PrintController {
         String province = userModels.getProvince();
         String provinces = province.replaceAll("[^A-Za-z ]","");
 
-//        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        Date date = null;
-//        try {
-//            date = dateFormat.parse(model.getCreatedAt());
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//
-//        DateFormat formatter = new SimpleDateFormat("dd-MM-YYYY HH:mm"); //If you need time just put specific format for time like 'HH:mm:ss'
-//        String ubahTanggalTransaksi = formatter.format(date);
-//
-//        if(model.getPaymentType().equals("Cash")){
-//            payment = "Tunai";
-//        } else {
-//            payment = "Hutang";
-//        }
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+        Date date = null;
+        try {
+            date = dateFormat.parse(model.getCreatedAt());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        DateFormat formatter = new SimpleDateFormat("dd-MM-YYYY HH:mm"); //If you need time just put specific format for time like 'HH:mm:ss'
+        String ubahTanggalTransaksi = formatter.format(date);
+
+        if(model.getPaymentType().equals("Cash")){
+            payment = "Tunai";
+        } else {
+            payment = "Hutang";
+        }
 
         try {
             os = mBluetoothSocket.getOutputStream();
 
-            printNewLine();
             printPhoto(R.drawable.toni_black, activity);
 
             printCustom(userModels.getShopName().toUpperCase(),0,1);
@@ -450,24 +449,34 @@ public class PrintController {
             printCustom("",0,0);
 
             printNewLine();
-//            printText("Nomor Transaksi : "+ model.getTransactionId()+"\n");
-//            printText("Pelanggan       : "+ model.getCustomerName()+"\n");
-//            printText("Tanggal         : "+ ubahTanggalTransaksi+"\n");
-//            printText("Pembayaran      : "+ payment +"\n");
+            printText("Kode Struk : "+ model.getTransactionId()+"\n");
+            printText("Pelanggan  : "+ model.getCustomerName()+"\n");
+            printText("Tanggal    : "+ ubahTanggalTransaksi+"\n");
+            printText("Pembayaran : "+ payment +"\n");
             printText("================================\n");
 
-//            for(TransactionProductModel modelss : models  ){
-//                int sellingprice = modelss.getSellingPrice();
-//                printText(modelss.getProductName()+"\n");
-//                printText(String.format("%2s %1s %1s ",modelss.getQuantity(), "X","Rp."
-//                        +DecimalFormatRupiah.formatNumber.format(sellingprice)+"\n"));
-//
-//            }
+            for(TransactionProductModel transactionProductModel : models){
+                String product = transactionProductModel.getProductName();
+                String nama;
+                if(product.contains("_")){
+                    nama = StringUtils.substringBeforeLast(product, "_")
+                            +"("+StringUtils.substringAfterLast(product, "_")+")";
+                } else {
+                    nama = product;
+                }
+
+                DecimalFormatRupiah.changeFormat(activity);
+                int qty = transactionProductModel.getQuantity();
+                String price = formatNumber.format(transactionProductModel.getSellingPrice());
+                String total = formatNumber.format(transactionProductModel.getAmount());
+                printText(nama+"\n");
+                printText(String.format("%-17s %14s",qty+" x "+price,total)+"\n");
+            }
             printText("================================\n");
-//            int amount = model.getAmount();
-//            printText("Total  : "+"Rp."+DecimalFormatRupiah.formatNumber.format(amount));
+            printText(String.format("%-15s %16s", "Total",
+                    formatNumber.format(model.getAmount())) + "\n");
+
             printNewLine();
-
             printNewLine();
             printCustom("Terima Kasih telah membeli\nproduk pertanian di\nToko "
                     + userModels.getShopName(), 0, 1);

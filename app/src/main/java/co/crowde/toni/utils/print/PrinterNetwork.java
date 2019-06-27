@@ -121,11 +121,12 @@ public class PrinterNetwork {
 
     public static void printPhoto(int img, Activity activity) {
         try {
+
             Bitmap bmp = BitmapFactory.decodeResource(activity.getResources(),
                     img);
             if(bmp!=null){
                 byte[] command = UtilsImage.decodeBitmap(bmp);
-                os.write(PrinterCommands.ESC_ALIGN_CENTER);
+
                 printText(command);
             }else{
                 Log.e("Print Photo error", "the file isn't exists");

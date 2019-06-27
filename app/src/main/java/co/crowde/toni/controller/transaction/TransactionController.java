@@ -3,6 +3,7 @@ package co.crowde.toni.controller.transaction;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
+import android.os.Handler;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -30,6 +31,8 @@ import co.crowde.toni.view.fragment.cart.CartPaymentFragment;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
 
 import static co.crowde.toni.utils.print.PrinterNetwork.resetConnection;
+import static co.crowde.toni.view.activity.transaction.DetailTransactionActivity.model;
+import static co.crowde.toni.view.activity.transaction.DetailTransactionActivity.productModelList;
 
 public class TransactionController {
 
@@ -88,6 +91,7 @@ public class TransactionController {
                 PrinterNetwork.mBluetoothSocket = PrinterNetwork.createBluetoothSocket(PrinterNetwork.mBluetoothDevice);
                 PrinterNetwork.mBluetoothSocket.connect();
                 if (PrinterNetwork.mBluetoothSocket.isConnected()){
+
                     PrintController.printDetailTransaction(activity, model, productModels);
 
                     Intent print = new Intent(activity, WaitingPrintTransactionActivity.class);

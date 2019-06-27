@@ -3,6 +3,7 @@ package co.crowde.toni.view.dialog.message.transaction;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
+
+import com.google.gson.Gson;
 
 import co.crowde.toni.R;
 import co.crowde.toni.controller.transaction.TransactionController;
@@ -52,6 +55,8 @@ public class RePrintTransactionDialog {
         imgLogo.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_print_white_24dp));
         tvHead.setText(activity.getResources().getString(R.string.dialog_label_re_print_transaction));
         tvDesc.setText(activity.getResources().getString(R.string.dialog_desc_re_print_transaction));
+
+
 
         tvYes.setOnClickListener(new View.OnClickListener() {
             @Override
