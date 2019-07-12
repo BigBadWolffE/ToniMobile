@@ -120,7 +120,7 @@
         android:gravity="center"
         android:text="@string/subscribe"
         android:textSize="@dimen/text_16_size"
-        android:textColor="@color/color_subscribe_yes"
+        android:textColor="@color/color_theme_green"
         app:layout_constraintBottom_toBottomOf="@+id/view1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/view1"

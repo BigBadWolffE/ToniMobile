@@ -57,7 +57,6 @@ public class ProductInventoryAdapter
         this.context = context;
         this.productModelsFiltered.clear();
         this.productModelsFiltered.addAll(ProductModelList);
-//        this.productModelsFiltered = ProductModelList;
         this.activity = activity;
     }
 
@@ -104,29 +103,32 @@ public class ProductInventoryAdapter
                 viewHolder.tvTabProductStock.setText(String.valueOf(model.getStock()));
                 viewHolder.tvTabProductStatus.setText(model.getStatus());
 
-                switch (model.getStatus()) {
-                    case "Habis":
-                        viewHolder.tvTabProductStatus.setTextColor(
-                                activity.getResources().getColor(R.color.status_kosong));
-                        break;
-                    case "Mulai habis":
-                        viewHolder.tvTabProductStatus.setTextColor(
-                                activity.getResources().getColor(R.color.status_persediaan_isi));
-                        break;
-                    case "Tersedia":
-                        viewHolder.tvTabProductStatus.setTextColor(
-                                activity.getResources().getColor(R.color.status_tersedia));
-                        break;
-                    default:
-                        viewHolder.tvTabProductStatus.setTextColor(
-                                activity.getResources().getColor(R.color.status_kosong));
-                        break;
+                if(model.getStatus()!=null){
+                    switch (model.getStatus()) {
+                        case "Habis":
+                            viewHolder.tvTabProductStatus.setTextColor(
+                                    activity.getResources().getColor(R.color.color_theme_red));
+                            break;
+                        case "Mulai habis":
+                            viewHolder.tvTabProductStatus.setTextColor(
+                                    activity.getResources().getColor(R.color.color_theme_yellow));
+                            break;
+                        case "Tersedia":
+                            viewHolder.tvTabProductStatus.setTextColor(
+                                    activity.getResources().getColor(R.color.color_theme_green));
+                            break;
+
+                        default:
+                            viewHolder.tvTabProductStatus.setTextColor(
+                                    activity.getResources().getColor(R.color.status_kosong));
+                            break;
+                    }
                 }
 
-                viewHolder.layoutProductInventory.setOnClickListener(new View.OnClickListener() {
+
+                viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                Toast.makeText(activity, model.getProductName(), Toast.LENGTH_SHORT).show();
                         InventoryDetailPopup.showPopup(activity, model);
                     }
                 });

@@ -42,6 +42,7 @@ import co.crowde.toni.view.fragment.modul.CustomerFragment;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
 import co.crowde.toni.view.fragment.modul.InventoryFragment;
 import co.crowde.toni.view.fragment.modul.ReportFragment;
+import co.crowde.toni.zHackaton.dialog.InputProjectKeywordDialog;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static co.crowde.toni.utils.print.PrinterNetwork.mBluetoothAdapter;
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static CircleImageView imgShop;
-    ImageView imgLogo;
+    ImageView imgLogo, imgBarcode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,14 @@ public class MainActivity extends AppCompatActivity
 //                print(MainActivity.this);
 //            }
 //        });
+
+        imgBarcode = findViewById(R.id.img_project);
+        imgBarcode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputProjectKeywordDialog.showCredit(MainActivity.this);
+            }
+        });
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

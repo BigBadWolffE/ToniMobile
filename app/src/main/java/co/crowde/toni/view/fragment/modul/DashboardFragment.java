@@ -105,16 +105,6 @@ public class DashboardFragment extends Fragment {
 
         formatNumber = new DecimalFormat("###,###,###,###,###,###");
 
-//        boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
-//        if (tabletSize) {
-//            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-//            productListLanscape(getActivity());
-//        } else {
-//            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-//            productListPotrait(getActivity());
-//            showFloatingCart();
-//        }
-
         initAdapter(getActivity());
         requestFilter(getActivity());
         initScrollListener(getActivity());
@@ -205,7 +195,6 @@ public class DashboardFragment extends Fragment {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-//            productDashboardAdapter.getFilter().filter(s);
             if (etSearch.getText().length() > 0) {
                 etSearch.setCompoundDrawablesWithIntrinsicBounds(
                         null, null, close, null);

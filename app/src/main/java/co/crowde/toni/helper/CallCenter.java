@@ -11,4 +11,10 @@ public class CallCenter {
                 Uri.fromParts("tel", "021 8765432", null));
         activity.startActivity(callIntent);
     }
+
+    public static void showDialCustomer(Activity activity, String phoneNumber){
+        Intent callIntent = new Intent(Intent.ACTION_DIAL,
+                Uri.fromParts("tel", phoneNumber, null));
+        activity.startActivity(callIntent);
+    }
 }

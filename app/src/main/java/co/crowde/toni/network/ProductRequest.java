@@ -212,15 +212,25 @@ public class ProductRequest {
     }
 
     public static void postUpdateProduct(final Activity activity, String productId){
+        int qty = 0;
+        if(InventoryDetailPopup.etQty.getText().length()>0){
+            qty = Integer.parseInt(InventoryDetailPopup
+                    .etQty.getText().toString());
+        }
 
-        int qty = Integer.parseInt(InventoryDetailPopup
-                .etQty.getText().toString());
-        int purchase = Integer.parseInt(InventoryDetailPopup
-                .etPurchase.getText().toString()
-                .replaceAll(",",""));
-        int selling = Integer.parseInt(InventoryDetailPopup
-                .etSelling.getText().toString()
-                .replaceAll(",",""));
+        int purchase = 0;
+        if(InventoryDetailPopup.etPurchase.getText().length()>0){
+            purchase = Integer.parseInt(InventoryDetailPopup
+                    .etPurchase.getText().toString()
+                    .replaceAll(",",""));
+        }
+
+        int selling = 0;
+        if(InventoryDetailPopup.etSelling.getText().length()>0){
+            selling = Integer.parseInt(InventoryDetailPopup
+                    .etSelling.getText().toString()
+                    .replaceAll(",",""));
+        }
 
         final UpdateProductModel update = new UpdateProductModel();
         update.setShopId(SavePref.readShopId(activity));

@@ -39,6 +39,8 @@ import co.crowde.toni.adapter.TransaksiBagianPelangganAdapter;
 import co.crowde.toni.helper.CloseSoftKeyboard;
 import co.crowde.toni.model.CustomerModel;
 import co.crowde.toni.network.CustomerRequest;
+import co.crowde.toni.network.ProductRequest;
+import co.crowde.toni.view.activity.filter.InventoryFilterActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -81,9 +83,6 @@ public class CustomerFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_customer, container, false);
 
         progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Harap tunggu...");
-        progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.show();
 
         tvEmptyField = rootView.findViewById(R.id.tv_empty_field);
         etSearchPelanggan = rootView.findViewById(R.id.et_search_pelanggan);
@@ -95,11 +94,8 @@ public class CustomerFragment extends Fragment {
         itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(),
                 R.drawable.divider_line_item));
 
-        CustomerRequest.page = 1;
-        CustomerRequest.namaPelanggan = "";
-
         initAdapterCustomer(getActivity());
-        CustomerRequest.getCustomerModulList(getActivity());
+        getCustomerList(getActivity());
         initScrollListenerCustomer(getActivity());
 
         //Setup Button tambah pelanggan
@@ -231,7 +227,7 @@ public class CustomerFragment extends Fragment {
         }
     }
 
-    private void initAdapterCustomer(Activity activity) {
+    public static void initAdapterCustomer(Activity activity) {
         transaksiBagianPelangganAdapter = new TransaksiBagianPelangganAdapter(activity, customerModelList, activity);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
@@ -241,7 +237,7 @@ public class CustomerFragment extends Fragment {
     }
 
     public static void updateDataCustomer(List<CustomerModel> customer, int page) {
-        if (customerModelList.size() != 0){
+        if (customerModelList.size() != 0) {
             customerModelList.remove(customerModelList.size() - 1);
             int scrollPosition = customerModelList.size();
             transaksiBagianPelangganAdapter.notifyItemRemoved(scrollPosition);
@@ -250,7 +246,7 @@ public class CustomerFragment extends Fragment {
         if (page == 1)
             customerModelList.clear();
         customerModelList.addAll(customer);
-        transaksiBagianPelangganAdapter.replaceItemFiltered(customer);
+        transaksiBagianPelangganAdapter.replaceItemFiltered(customerModelList);
         isLoadingCustomer = false;
 
         if (page == 1)
@@ -260,7 +256,7 @@ public class CustomerFragment extends Fragment {
 
     static boolean isLoadingCustomer = false;
 
-    private void initScrollListenerCustomer(final Activity activity) {
+    public static void initScrollListenerCustomer(final Activity activity) {
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -284,11 +280,23 @@ public class CustomerFragment extends Fragment {
         });
     }
 
-    private void loadMoreCustomer(Activity activity) {
+    public static void loadMoreCustomer(Activity activity) {
         customerModelList.add(null);
         transaksiBagianPelangganAdapter.notifyItemInserted(customerModelList.size() - 1);
 
         CustomerRequest.page = CustomerRequest.page + 1;
+        CustomerRequest.getCustomerModulList(activity);
+    }
+
+    public static void getCustomerList(Activity activity){
+        progressDialog.setMessage("Harap tunggu...");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+
+        CustomerRequest.page = 1;
+        CustomerRequest.namaPelanggan = etSearchPelanggan.getText().toString();
+        customerModelList.clear();
+
         CustomerRequest.getCustomerModulList(activity);
     }
 
@@ -367,4 +375,6 @@ public class CustomerFragment extends Fragment {
             }
         };
     }
+
+
 }

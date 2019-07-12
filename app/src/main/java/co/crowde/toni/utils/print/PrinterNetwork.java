@@ -63,7 +63,6 @@ public class PrinterNetwork {
 
                 int position = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
                 final String deviceAddress = bluetoothDeviceList.get(position);
-                SavePref.saveDeviceAddress(activity, deviceAddress);
 
                 mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
                 mBluetoothDevice= mBluetoothAdapter.getRemoteDevice(deviceAddress);
@@ -71,21 +70,20 @@ public class PrinterNetwork {
                 try {
                     mBluetoothSocket = createBluetoothSocket(mBluetoothDevice);
                     mBluetoothSocket.connect();
+
                     Toast.makeText(activity, "Berhasil terhubung dengan Bluetooth Printer", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
 
-
+                    SavePref.saveDeviceAddress(activity, deviceAddress);
 
                 } catch (IOException e) {
                     try {
-//                        Toast.makeText(activity, "Tidak dapat terhubung dengan Bluetooth Printer", Toast.LENGTH_SHORT).show();
                         PrinterConnectivityDialog.showDialog(activity);
                         dialog.dismiss();
                         mBluetoothSocket.close();
                         Log.e("Bluetooth","Can't Connect");
                     } catch (IOException e1) {
                         e1.printStackTrace();
-//                        Toast.makeText(activity, "Tidak dapat terhubung dengan Bluetooth Socket", Toast.LENGTH_SHORT).show();
                         PrinterConnectivityDialog.showDialog(activity);
                         Log.e("Bluetooth","Socket can't closed");
                     }

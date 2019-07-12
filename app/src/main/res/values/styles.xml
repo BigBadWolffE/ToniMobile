@@ -88,13 +88,14 @@
     </style>
 
     <style name="TextAppearance.App.TextInputLayout" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/colorThemeGreen</item>
-        <item name="android:textSize">8sp</item>
+        <item name="android:textColor">@color/color_subscribe_yes</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="EditTextTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!--<item name="colorControlNormal">@color/colorThemeGreen</item>-->
-        <item name="colorControlActivated">@color/colorThemeGreen</item>
+        <item name="colorControlActivated">@color/color_subscribe_yes</item>
+
         <!--<item name="colorControlHighlight">@color/colorThemeGreenDark</item>-->
     </style>
 

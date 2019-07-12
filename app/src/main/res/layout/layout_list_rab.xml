@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/colorWhite"
+    android:weightSum="5">
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_weight="0.5"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <CheckBox
+            android:id="@+id/check_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/product_name"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="match_parent"
+        android:textSize="14sp"
+        android:textColor="@color/TextColorBlack"
+        android:gravity="center_vertical"/>
+
+    <TextView
+        android:id="@+id/product_category"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:textSize="14sp"
+        android:textColor="@color/TextColorBlack"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1.5"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/imgDecrease"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/bg_rec_stroke_radius_5dp_grey"
+            android:gravity="center"
+            android:tint="@color/TextColorDefault"
+            app:srcCompat="@drawable/ic_remove_black_24dp" />
+
+        <TextView
+            android:id="@+id/tvQty"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:text="1"
+            android:background="@drawable/bg_rec_stroke_radius_5dp_grey"
+            android:gravity="center"
+            android:paddingLeft="4dp"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:paddingRight="4dp"
+            android:textColor="@color/colorThemeOrange"
+            android:textStyle="bold"
+            app:autoSizeTextType="uniform"/>
+
+        <ImageView
+            android:id="@+id/imgIncrease"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/bg_rec_radius_5dp_grey"
+            android:gravity="center"
+            android:tint="@color/TextColorDefault"
+            app:srcCompat="@drawable/ic_add_black_24dp" />
+    </LinearLayout>
+
+</LinearLayout>

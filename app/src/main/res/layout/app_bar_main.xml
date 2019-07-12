@@ -30,6 +30,16 @@
                 android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:src="@drawable/toni_logo" />
+
+            <ImageView
+                android:id="@+id/img_project"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="end"
+                android:layout_marginRight="12dp"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/barcode"
+                android:visibility="gone"/>
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>

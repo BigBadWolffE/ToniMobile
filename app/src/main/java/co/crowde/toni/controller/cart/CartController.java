@@ -9,6 +9,7 @@ import co.crowde.toni.database.Cart;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CartModel;
 import co.crowde.toni.model.ProductModel;
+import co.crowde.toni.view.dialog.message.product.StockInsufficientDialog;
 import co.crowde.toni.view.dialog.popup.product.ProductDetailDashboardPopup;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
 
@@ -64,8 +65,7 @@ public class CartController {
                     DashboardFragment.productDashboardAdapter.notifyDataSetChanged();
                     ProductDetailDashboardPopup.alertDialog.dismiss();
                 } else {
-
-                    Toast.makeText(activity, "Stok tidak mencukupi permintaan pelanggan.", Toast.LENGTH_SHORT).show();
+                    StockInsufficientDialog.showDialog(activity);
                 }
             } else {
                 if (stok > 0 && jumlah <= stok) {
@@ -79,7 +79,7 @@ public class CartController {
                         Toast.makeText(activity, "Error", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(activity, "Maaf stok tidak mencukupi permintaan pelanggan", Toast.LENGTH_SHORT).show();
+                    StockInsufficientDialog.showDialog(activity);
                 }
             }
         }
@@ -138,7 +138,7 @@ public class CartController {
                     DashboardFragment.ifCartEmpty(activity);
                     DashboardFragment.productDashboardAdapter.notifyDataSetChanged();
                 } else {
-                    Toast.makeText(activity, "Stok tidak mencukupi permintaan pelanggan.", Toast.LENGTH_SHORT).show();
+                    StockInsufficientDialog.showDialog(activity);
                 }
             } else {
                 if (stok > 0 && jumlah <= stok) {
@@ -151,7 +151,7 @@ public class CartController {
                         Toast.makeText(activity, "Error", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(activity, "Maaf stok tidak mencukupi permintaan pelanggan", Toast.LENGTH_SHORT).show();
+                    StockInsufficientDialog.showDialog(activity);
                 }
             }
         }

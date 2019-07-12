@@ -10,18 +10,15 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import androidx.annotation.Nullable;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.OnTextChanged;
 import co.crowde.toni.R;
+import co.crowde.toni.helper.analytics.AnalyticsApplication;
+import co.crowde.toni.helper.analytics.AnalyticsTrackers;
 import co.crowde.toni.helper.CloseSoftKeyboard;
 import co.crowde.toni.network.LoginRequest;
-import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.view.dialog.message.app.CloseAppsDialog;
 
 public class LoginActivity extends AppCompatActivity {
@@ -43,9 +40,14 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
 
-        tvLoginHeader = findViewById(R.id.tv_login_header);
-        tvClosedLabel = findViewById(R.id.tv_closed_header);
-        tvClosedTime = findViewById(R.id.tv_closed_time);
+//        AnalyticsTrackers application = (AnalyticsTrackers) getApplication();
+//        sTracker = application.getDefaultTracker();
+
+        progressDialog = new ProgressDialog(LoginActivity.this);
+
+//        tvLoginHeader = findViewById(R.id.tv_login_header);
+//        tvClosedLabel = findViewById(R.id.tv_closed_header);
+//        tvClosedTime = findViewById(R.id.tv_closed_time);
         et_username = findViewById(R.id.et_username);
         et_password = findViewById(R.id.et_password);
         btnLogin = findViewById(R.id.cv_btn_login);
@@ -58,10 +60,11 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressDialog = new ProgressDialog(LoginActivity.this);
                 progressDialog.setMessage("Harap tunggu...");
                 progressDialog.setCanceledOnTouchOutside(false);
                 progressDialog.show();
+
+                AnalyticsApplication.getInstance().trackEvent("Authentication", "Login", "Button Login Clicked");
 
                 if(et_username.getText().toString().equals("admin")){
                     progressDialog.dismiss();
@@ -78,7 +81,13 @@ public class LoginActivity extends AppCompatActivity {
         tvForgetPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent wrongPass = new Intent(LoginActivity.this, ForgotPassActivity.class);
+//                progressDialog.setMessage("Harap tunggu...");
+//                progressDialog.setCanceledOnTouchOutside(false);
+//                progressDialog.show();
+
+                AnalyticsApplication.getInstance().trackEvent("Authentication", "Login", "Button Forget Password Clicked");
+
+                Intent wrongPass = new Intent(LoginActivity.this, ResetPasswordActivity.class);
                 startActivity(wrongPass);
             }
         });
@@ -86,12 +95,13 @@ public class LoginActivity extends AppCompatActivity {
         tvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AnalyticsApplication.getInstance().trackEvent("Authentication", "Login", "Button Register Clicked");
                 Intent wrongPass = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(wrongPass);
             }
         });
 
-        setShopClosedTime(LoginActivity.this);
+//        setShopClosedTime(LoginActivity.this);
         hideKeyboard(LoginActivity.this);
     }
     public TextWatcher loginWatcher = new TextWatcher() {
@@ -134,13 +144,13 @@ public class LoginActivity extends AppCompatActivity {
         }
     };
 
-    public static void setShopClosedTime(Activity activity){
-        if(SavePref.readClosedTime(activity)==null){
-            tvClosedTime.setText(activity.getResources().getString(R.string.strips));
-        } else {
-            tvClosedTime.setText(SavePref.readClosedTime(activity));
-        }
-    }
+//    public static void setShopClosedTime(Activity activity){
+//        if(SavePref.readClosedTime(activity)==null){
+//            tvClosedTime.setText(activity.getResources().getString(R.string.strips));
+//        } else {
+//            tvClosedTime.setText(SavePref.readClosedTime(activity));
+//        }
+//    }
 
     public static void hideKeyboard(final Activity activity){
         et_username.setOnFocusChangeListener(new View.OnFocusChangeListener() {

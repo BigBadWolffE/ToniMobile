@@ -34,4 +34,7 @@
     <color name="status_kosong">#FF7675</color>
 
     <color name="color_subscribe_yes">#4A934A</color>
+    <color name="color_theme_green">#4A934A</color>
+    <color name="color_theme_yellow">#F7931D</color>
+    <color name="color_theme_red">#CF212A</color>
 </resources>

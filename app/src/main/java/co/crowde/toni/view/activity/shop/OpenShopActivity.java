@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import co.crowde.toni.R;
+import co.crowde.toni.database.Cart;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.view.activity.home.MainActivity;
 import co.crowde.toni.view.dialog.message.app.CloseAppsDialog;
@@ -22,6 +23,7 @@ public class OpenShopActivity extends AppCompatActivity {
             tvBtnOpenLabel,tvCloseShop;
     public static CardView cvBtnOpen;
     public static ProgressDialog progressDialog;
+    public static Cart cart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,8 @@ public class OpenShopActivity extends AppCompatActivity {
         setContentView(R.layout.activity_open_shop);
 
         SavePref.saveDeviceAddress(OpenShopActivity.this, null);
+        cart = new Cart(OpenShopActivity.this);
+        cart.deleteAllItem();
 
         //Get Id View
         tvOpenShopHeader = findViewById(R.id.tvOpenShopHeader);

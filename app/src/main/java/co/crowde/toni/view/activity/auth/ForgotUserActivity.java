@@ -1,5 +1,6 @@
 package co.crowde.toni.view.activity.auth;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -13,7 +14,7 @@ import co.crowde.toni.helper.CallCenter;
 public class ForgotUserActivity extends AppCompatActivity {
 
     public static TextView tvForgetUser, tvForgetUserDesc,
-            tvBtnBack;
+            tvBtnBack, tvReset;
     public static CardView cvBtnBack;
 
     @Override
@@ -25,6 +26,7 @@ public class ForgotUserActivity extends AppCompatActivity {
         tvForgetUser = findViewById(R.id.tvForgetUser);
         tvForgetUserDesc = findViewById(R.id.tvForgetUserDesc);
         cvBtnBack = findViewById(R.id.cvBtnBack);
+        tvReset = findViewById(R.id.tv_reset_password);
 
         tvBtnBack = findViewById(R.id.tvBtnBack);
 
@@ -34,6 +36,15 @@ public class ForgotUserActivity extends AppCompatActivity {
             public void onClick(View v) {
                 onBackPressed();
 
+            }
+        });
+
+        tvReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent reset = new Intent(ForgotUserActivity.this, ResetPasswordActivity.class);
+                startActivity(reset);
+                finish();
             }
         });
 

@@ -17,7 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.crowde.toni.R;
+import co.crowde.toni.helper.CallCenter;
 import co.crowde.toni.helper.DecimalFormatRupiah;
+import co.crowde.toni.view.activity.auth.ForgotPassActivity;
 import co.crowde.toni.view.activity.customer.CustomerHutangActivity;
 import co.crowde.toni.model.CustomerModel;
 import co.crowde.toni.utils.print.Utils;
@@ -32,10 +34,9 @@ public class TransaksiBagianPelangganAdapter
     private final int VIEW_TYPE_ITEM = 0;
     private final int VIEW_TYPE_LOADING = 1;
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView namapelanggan, telpon, hutang;
-
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -48,16 +49,18 @@ public class TransaksiBagianPelangganAdapter
 
     }
 
-    public TransaksiBagianPelangganAdapter(Context context, List<CustomerModel> models, Activity activity) {
+    public TransaksiBagianPelangganAdapter(Context context,
+                                           List<CustomerModel> models,
+                                           Activity activity) {
+        this.context = context;
         this.customerModelsFiltered.clear();
         this.customerModelsFiltered.addAll(models);
-        this.context = context;
         this.activity = activity;
     }
 
-    public void replaceItemFiltered(List<CustomerModel> customerModels) {
+    public void replaceItemFiltered(List<CustomerModel> models) {
         this.customerModelsFiltered.clear();
-        this.customerModelsFiltered.addAll(customerModels);
+        this.customerModelsFiltered.addAll(models);
         notifyDataSetChanged();
     }
 
@@ -96,6 +99,13 @@ public class TransaksiBagianPelangganAdapter
                     viewHolder.hutang.setTextColor(activity.getResources().getColor(R.color.TextColorBlack));
                 }
 
+                viewHolder.telpon.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        CallCenter.showDialCustomer(activity, model.getPhone());
+                    }
+                });
+
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -126,7 +136,9 @@ public class TransaksiBagianPelangganAdapter
     }
 
     @Override
-    public int getItemCount() { return customerModelsFiltered.size(); }
+    public int getItemCount(){
+        return customerModelsFiltered != null ? customerModelsFiltered.size() : 0;
+    }
 
     @Override
     public int getItemViewType(int position) {

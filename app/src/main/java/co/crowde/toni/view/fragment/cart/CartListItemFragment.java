@@ -36,6 +36,7 @@ import co.crowde.toni.listener.ItemClickListener;
 import co.crowde.toni.model.CartModel;
 import co.crowde.toni.model.CustomerModel;
 import co.crowde.toni.view.activity.cart.CartListActivity;
+import co.crowde.toni.view.dialog.message.product.StockInsufficientDialog;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
 import co.crowde.toni.view.activity.customer.SelectCustomerActivity;
 
@@ -157,7 +158,7 @@ implements View.OnClickListener{
                     DashboardFragment.ifCartEmpty(activity);
                     setTotalAmount(activity);
                 } else {
-                    Toast.makeText(activity, "Stok tidak mencukupi permintaan pelanggan", Toast.LENGTH_SHORT).show();
+                    StockInsufficientDialog.showDialog(activity);
                 }
 
             }
@@ -193,7 +194,7 @@ implements View.OnClickListener{
                             DashboardFragment.ifCartEmpty(activity);
                             setTotalAmount(activity);
                         } else {
-                            Toast.makeText(activity, "Stok tidak mencukupi permintaan pelanggan", Toast.LENGTH_SHORT).show();
+                            StockInsufficientDialog.showDialog(activity);
                         }
 
 

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:gravity="center_vertical"
+    android:background="@drawable/bg_rec_radius_5dp_green">
+
+    <TextView
+        android:id="@+id/tv_chips_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/colorWhite"
+        android:layout_marginLeft="8dp" />
+
+    <ImageView
+        android:id="@+id/img_chips_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:layout_gravity="center_vertical"
+        app:srcCompat="@drawable/ic_close_white_24dp" />
+
+</LinearLayout>

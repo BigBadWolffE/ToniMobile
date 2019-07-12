@@ -208,8 +208,8 @@
     <string name="contoh_tokotani2019">contoh: tokotani2019</string>
     <string name="masukkan_username_toko">Masukkan username toko</string>
     <string name="masukkan_password_toko">Masukkan password toko</string>
-    <string name="forget_pass">Silahkan hubungi admin kami di <b>(021) 8765432</b>\n untuk mengetahui password Toko Anda</string>
-    <string name="forget_user">Silahkan hubungi admin kami di <b>(021) 8765432</b>\n untuk mengetahui username Toko Anda</string>
+    <string name="forget_pass">Silahkan hubungi admin kami di <b>(021) 8765432</b> untuk mengetahui password Toko Anda atau \n reset kata sandi Anda.</string>
+    <string name="forget_user">Silahkan hubungi admin kami di <b>(021) 8765432</b> untuk mengetahui username Toko Anda \n reset kata sandi Anda.</string>
     <string name="coba_lagi">COBA LAGI</string>
     <string name="lupa_username">LUPA USERNAME?</string>
     <string name="anda_terdaftar_sebagai">Anda terdaftar sebagai:</string>
@@ -258,6 +258,7 @@
     <string name="periksa_dahulu_isi_transaksi_anda_sebelum_melanjutkan_ke_tahap_berikutnya">Periksa dahulu isi transaksi Anda sebelum \n  melanjutkan ke tahap berikutnya.</string>
     <string name="halaman_utama_cap">HALAMAN UTAMA</string>
     <string name="menunggu_mencetak_struk_cap">MENUNGGU \n MENCETAK STRUK</string>
+    <string name="dot">•</string>
     <string name="dots">•••</string>
     <string name="transaksi_anda_berhasil">TRANSAKSI ANDA \n BERHASIL</string>
     <string name="cari_kategori">Cari Kategori</string>
@@ -307,6 +308,9 @@
     <string name="dialog_label_re_print_transaction">“YAKIN INGIN MENCETAK \n STRUK PEMBELIAN?”</string>
     <string name="dialog_desc_re_print_transaction">Struk digunakan sebagai bukti pembayaran yang sah. \n Silahkan cetak struk apabila diperlukan.</string>
 
+    <string name="dialog_label_insufficient_stock">‘MOHON MAAF STOK \n PRODUK TIDAK CUKUP!’</string>
+    <string name="dialog_desc_insufficient_stock">Periksa kembali stok produk yang diminta.</string>
+
     <!-- NOTIFICATION MESSAGE -->
     <string name="notif_update_product">PERUBAHAN INFORMASI ANDA BERHASIL</string>
     <string name="notif_add_new_product">PENAMBAHAN KATALOG ANDA BERHASIL</string>
@@ -353,5 +357,14 @@
     <string name="number">No.</string>
     <string name="id_transaksi">ID Transaksi</string>
     <string name="metode_pembayaran">Metode Pembayaran</string>
+    <string name="id_toko_tani">ID Toko Tani</string>
+    <string name="kami_telah_mengirim_sms_otp_n_ke_nomor">Kami telah mengirim SMS OTP \n ke nomor</string>
+    <string name="sms_tidak_masuk_kirim_ulang_kode">SMS tidak masuk? Kirim ulang kode?</string>
+    <string name="reset_kata_sandi">Reset Kata Sandi.</string>
+    <string name="masukkan_nomer_ponsel_anda_untuk_mendapatkan_kode_verifikasi_otp">Masukkan nomer ponsel anda untuk \n mendapatkan kode verifikasi OTP</string>
+    <string name="kirim">KIRIM</string>
+    <string name="berhasil_silahkan_masukkan_kata_sandi_anda_yang_baru_textview">Berhasil! Silahkan masukkan \n kata sandi Anda yang baru.</string>
+    <string name="kata_sandi_baru">Kata sandi baru</string>
+    <string name="ulangi_kata_sandi">Ulangi kata sandi</string>
 
 </resources>

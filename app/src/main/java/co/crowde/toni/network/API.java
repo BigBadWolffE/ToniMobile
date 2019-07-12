@@ -43,4 +43,7 @@ public class API{
     public static final String BAYARHUTANG_URL = API+"credit/paid";
     public static final String LAPORAN_URL = API+"report/mobile/";
 
+    //Get Location
+    public static final String PROVINCE = "http://dev.farizdotid.com/api/daerahindonesia/provinsi";
+
 }

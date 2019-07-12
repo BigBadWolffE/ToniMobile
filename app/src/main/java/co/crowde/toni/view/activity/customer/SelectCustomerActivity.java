@@ -78,10 +78,7 @@ public class SelectCustomerActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_select_customer);
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Harap tunggu...");
-        progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.show();
+        progressDialog = new ProgressDialog(SelectCustomerActivity.this);
 
         tvEmptyField = findViewById(R.id.tv_empty_field);
         cvAddNewCustomer = findViewById(R.id.cvAddNewCustomer);
@@ -105,12 +102,9 @@ public class SelectCustomerActivity extends AppCompatActivity {
         itemDecorator.setDrawable(ContextCompat.getDrawable(getBaseContext(),
                 R.drawable.divider_line_item));
 
-        CustomerRequest.page = 1;
-        CustomerRequest.customerName = "";
-
-        initAdapter(this);
-        CustomerRequest.getCustomerList(this);
-        initScrollListener(this);
+        initAdapter(SelectCustomerActivity.this);
+        getCustomerList(SelectCustomerActivity.this);
+        initScrollListener(SelectCustomerActivity.this);
 
         cvAddNewCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,8 +132,8 @@ public class SelectCustomerActivity extends AppCompatActivity {
         rcCustomer.setAdapter(customerAdapter);
     }
 
-    public static void updateDataProduct(List<CustomerModel> customer, int page) {
-        if (customerModels.size() != 0){
+    public static void updateDataCustomer(List<CustomerModel> customer, int page) {
+        if (customerModels.size() != 0) {
             customerModels.remove(customerModels.size() - 1);
             int scrollPosition = customerModels.size();
             customerAdapter.notifyItemRemoved(scrollPosition);
@@ -148,7 +142,7 @@ public class SelectCustomerActivity extends AppCompatActivity {
         if (page == 1)
             customerModels.clear();
         customerModels.addAll(customer);
-        customerAdapter.replaceItemFiltered(customer);
+        customerAdapter.replaceItemFiltered(customerModels);
         isLoading = false;
 
         if (page == 1)
@@ -187,6 +181,18 @@ public class SelectCustomerActivity extends AppCompatActivity {
         customerAdapter.notifyItemInserted(customerModels.size() - 1);
 
         CustomerRequest.page = CustomerRequest.page + 1;
+        CustomerRequest.getCustomerList(activity);
+    }
+
+    public static void getCustomerList(Activity activity){
+        progressDialog.setMessage("Harap tunggu...");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+
+        CustomerRequest.page = 1;
+        CustomerRequest.customerName = etSearchCustomer.getText().toString();
+        customerModels.clear();
+
         CustomerRequest.getCustomerList(activity);
     }
 

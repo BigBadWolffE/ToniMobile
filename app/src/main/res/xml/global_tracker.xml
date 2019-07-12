@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<string name="ga_trackingId" translatable="false">UA-143616107-1</string>-->
+
+    <integer name="ga_sessionTimeout">300</integer>
+
+    <!-- Enable automatic Activity measurement -->
+    <bool name="ga_autoActivityTracking">true</bool>
+
+    <!--  The property id associated with this analytics tracker -->
+    <string name="ga_trackingId">UA-143596917-1</string>
+    <string name="ga_sampleFrequency">100.0</string>
+
+    <bool name="ga_reportUncaughtExceptions">true</bool>
+
+    <screenName name="co.crowde.toni.view.activity.welcoming.SplashScreenActivity">Splash Screen</screenName>
+    <screenName name="co.crowde.toni.view.activity.auth.LoginActivity">Login Screen</screenName>
+    <screenName name="co.crowde.toni.view.activity.auth.RegisterActivity">Register Screen</screenName>
+
+</resources>

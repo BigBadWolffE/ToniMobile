@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    tools:context=".view.fragment.reset_password.ResetNewPassFragment">
+
+    <TextView
+        android:id="@+id/tv_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="32dp"
+        android:textColor="@color/TextColorDefault"
+        android:textStyle="bold"
+        android:text="@string/berhasil_silahkan_masukkan_kata_sandi_anda_yang_baru_textview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_set_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/bg_form_login"
+        android:textColorHint="@color/colorThemeGrey"
+        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_label"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/colorThemeGrey">
+
+        <EditText
+            android:id="@+id/et_new_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/kata_sandi_baru"
+            android:imeOptions="actionNext"
+            android:inputType="textPassword"
+            android:maxLength="20"
+            android:textColor="@color/TextColorDefault"
+            android:textColorHint="@color/colorThemeGrey"
+            android:textSize="16sp"
+            android:theme="@style/EditTextTheme" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_set_retype_pass"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_form_login"
+        android:textColorHint="@color/colorThemeGrey"
+        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+        app:layout_constraintEnd_toEndOf="@+id/layout_set_password"
+        app:layout_constraintStart_toStartOf="@+id/layout_set_password"
+        app:layout_constraintTop_toBottomOf="@+id/layout_set_password"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/colorThemeGrey">
+
+        <EditText
+            android:id="@+id/et_retype_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/ulangi_kata_sandi"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:maxLength="20"
+            android:textColor="@color/TextColorDefault"
+            android:textColorHint="@color/colorThemeGrey"
+            android:textSize="16sp"
+            android:theme="@style/EditTextTheme" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_btn_confirm"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        app:cardBackgroundColor="@color/colorThemeGrey"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/layout_set_retype_pass"
+        app:layout_constraintStart_toStartOf="@+id/layout_set_retype_pass"
+        app:layout_constraintTop_toBottomOf="@+id/layout_set_retype_pass">
+
+        <TextView
+            android:id="@+id/tv_btn_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/confirm"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

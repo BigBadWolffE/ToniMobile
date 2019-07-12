@@ -91,6 +91,8 @@ public class InventoryDetailPopup {
         cvUpdate = dialogView.findViewById(R.id.cvUpdate);
         constraintLayout = dialogView.findViewById(R.id.constraintLayout);
 
+//        qty = 0;
+
         String product = model.getProductName();
         String nama;
         String varian;
@@ -107,11 +109,16 @@ public class InventoryDetailPopup {
         tvProductCategory.setText(model.getCategoryName());
         tvProductStock.setText(String.valueOf(model.getStock()));
         DecimalFormatRupiah.changeFormat(activity);
-        etQty.setText("0");
-        etPurchase.setText(String.valueOf(
-                DecimalFormatRupiah.formatNumber.format(model.getPurchasePrice())));
-        etSelling.setText(String.valueOf(
-                DecimalFormatRupiah.formatNumber.format(model.getSellingPrice())));
+//        etQty.setText("0");
+
+        if(model.getPurchasePrice()!=0){
+            etPurchase.setText(String.valueOf(
+                    DecimalFormatRupiah.formatNumber.format(model.getPurchasePrice())));
+        }
+        if(model.getSellingPrice()!=0){
+            etSelling.setText(String.valueOf(
+                    DecimalFormatRupiah.formatNumber.format(model.getSellingPrice())));
+        }
 
         Picasso.with(activity).load(API.Host+model.getPicture())
                 .into(imgProductDetail);
@@ -134,24 +141,33 @@ public class InventoryDetailPopup {
                 alertDialog.dismiss();
             }
         });
+
         imgBtnPlusQty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                qty = Integer.parseInt(etQty.getText().toString());
-                qty = qty+1;
-                etQty.setText(String.valueOf(qty));
+                if(etQty.getText().length()>0){
+                    qty = Integer.parseInt(etQty.getText().toString());
+                    qty = qty+1;
+                    etQty.setText(String.valueOf(qty));
+                }
             }
         });
         imgBtnMinQty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(qty!=0){
-                    qty = Integer.parseInt(etQty.getText().toString());
-                    qty = qty-1;
-                    etQty.setText(String.valueOf(qty));
+                    if(etQty.getText().length()>0){
+                        qty = Integer.parseInt(etQty.getText().toString());
+                        qty = qty-1;
+                        etQty.setText(String.valueOf(qty));
+                    }
                 }
             }
         });
+
+//        if(etQty.getText().toString().length()>0){
+//
+//        }
 
         cvUpdate.setOnClickListener(new View.OnClickListener() {
             @Override

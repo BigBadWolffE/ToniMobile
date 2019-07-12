@@ -87,7 +87,7 @@ public class CustomerRequest {
                                                 new TypeToken<List<CustomerModel>>() {
                                                 }.getType());
 
-                                SelectCustomerActivity.updateDataProduct(customerModels, page);
+                                SelectCustomerActivity.updateDataCustomer(customerModels, page);
                                 SelectCustomerActivity.progressDialog.dismiss();
                                 SelectCustomerActivity.showListField(activity);
 

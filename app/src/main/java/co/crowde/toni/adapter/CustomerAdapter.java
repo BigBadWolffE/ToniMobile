@@ -52,9 +52,9 @@ public class CustomerAdapter
     public CustomerAdapter(Context context,
                            List<CustomerModel> customerModels,
                            Activity activity) {
+        this.context = context;
         this.customerModelsFiltered.clear();
         this.customerModelsFiltered.addAll(customerModels);
-        this.context = context;
         this.activity = activity;
     }
 
@@ -121,8 +121,8 @@ public class CustomerAdapter
     }
 
     @Override
-    public int getItemCount() {
-        return customerModelsFiltered!=null? customerModelsFiltered.size():0;
+    public int getItemCount(){
+        return customerModelsFiltered != null ? customerModelsFiltered.size() : 0;
     }
 
     @Override

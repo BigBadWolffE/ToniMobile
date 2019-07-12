@@ -249,7 +249,6 @@ public class InventoryFragment extends Fragment {
             productModels.clear();
         productModels.addAll(productModelResponse);
         inventoryAdapter.replaceItemFiltered(productModels);
-//        inventoryAdapter.notifyDataSetChanged();
         isLoading = false;
 
         if (page == 1)

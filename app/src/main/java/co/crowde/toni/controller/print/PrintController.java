@@ -66,7 +66,7 @@ public class PrintController {
             e.printStackTrace();
         }
 
-        DateFormat formatter = new SimpleDateFormat("dd-MM-YYYY HH:mm"); //If you need time just put specific format for time like 'HH:mm:ss'
+        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm"); //If you need time just put specific format for time like 'HH:mm:ss'
         String ubahTanggalTransaksi = formatter.format(date);
         try {
             os = mBluetoothSocket.getOutputStream();
@@ -164,7 +164,7 @@ public class PrintController {
             e.printStackTrace();
         }
 
-        DateFormat formatter = new SimpleDateFormat("dd-MM-YYYY HH:mm"); //If you need time just put specific format for time like 'HH:mm:ss'
+        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm"); //If you need time just put specific format for time like 'HH:mm:ss'
         String ubahTanggalTransaksi = formatter.format(date);
         try {
             os = mBluetoothSocket.getOutputStream();
@@ -268,7 +268,7 @@ public class PrintController {
             e.printStackTrace();
         }
 
-        DateFormat formatter = new SimpleDateFormat("dd-MM-YYYY HH:mm"); //If you need time just put specific format for time like 'HH:mm:ss'
+        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm"); //If you need time just put specific format for time like 'HH:mm:ss'
         String ubahTanggalTransaksi = formatter.format(date);
         try {
             os = mBluetoothSocket.getOutputStream();
@@ -428,7 +428,7 @@ public class PrintController {
             e.printStackTrace();
         }
 
-        DateFormat formatter = new SimpleDateFormat("dd-MM-YYYY HH:mm"); //If you need time just put specific format for time like 'HH:mm:ss'
+        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm"); //If you need time just put specific format for time like 'HH:mm:ss'
         String ubahTanggalTransaksi = formatter.format(date);
 
         if(model.getPaymentType().equals("Cash")){
