@@ -30,11 +30,13 @@ import java.util.List;
 
 import co.crowde.toni.R;
 import co.crowde.toni.adapter.CartAdapter;
+import co.crowde.toni.constant.Const;
 import co.crowde.toni.database.Cart;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.listener.ItemClickListener;
 import co.crowde.toni.model.CartModel;
 import co.crowde.toni.model.CustomerModel;
+import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.view.activity.cart.CartListActivity;
 import co.crowde.toni.view.dialog.message.product.StockInsufficientDialog;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
@@ -136,6 +138,8 @@ implements View.OnClickListener{
 
             @Override
             public void onDeleteItemClick(View v, int position) {
+                AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_CART,Const.LABEL_CART_REMOVE_PRODUCT);
+
                 dbCart = new Cart(activity);
                 dbCart.deleteItem(cartModels.get(position));
                 cartModels.remove(position);
@@ -150,6 +154,8 @@ implements View.OnClickListener{
 
             @Override
             public void onIncreaseItem(View v, int position) {
+                AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_CART,Const.LABEL_CART_CHANGE_QTY_PLUS_MIN);
+
                 if(cartModels.get(position).getQuantity()<cartModels.get(position).getStok()){
                     cartModels.get(position).setQuantity(cartModels.get(position).getQuantity()+1);
                     cartModels.get(position).setAmount(cartModels.get(position).getQuantity()*cartModels.get(position).getSellingPrice());
@@ -165,6 +171,8 @@ implements View.OnClickListener{
 
             @Override
             public void onDecreaseItem(View v, int position) {
+                AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_CART,Const.LABEL_CART_CHANGE_QTY_PLUS_MIN);
+
                 if(cartModels.get(position).getQuantity()>1){
                     cartModels.get(position).setQuantity(cartModels.get(position).getQuantity()-1);
                     cartModels.get(position).setAmount(cartModels.get(position).getQuantity()*cartModels.get(position).getSellingPrice());
@@ -186,6 +194,8 @@ implements View.OnClickListener{
                 //registering popup with OnMenuItemClickListener
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
+                        AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_CART,Const.LABEL_CART_CHANGE_QTY_DROPDOWN);
+
                         if(Integer.parseInt(item.getTitle().toString())<=cartModels.get(position).getStok()){
                             cartModels.get(position).setQuantity(Integer.parseInt(item.getTitle().toString()));
                             cartModels.get(position).setAmount(cartModels.get(position).getQuantity()*cartModels.get(position).getSellingPrice());
@@ -196,7 +206,6 @@ implements View.OnClickListener{
                         } else {
                             StockInsufficientDialog.showDialog(activity);
                         }
-
 
                         return true;
                     }

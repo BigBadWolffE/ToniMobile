@@ -1,21 +1,38 @@
 package co.crowde.toni.view.activity.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.google.android.material.appbar.AppBarLayout;
+
 import co.crowde.toni.R;
+import co.crowde.toni.constant.Const;
+import co.crowde.toni.utils.SetHeader;
 import co.crowde.toni.view.fragment.cart.CartListItemFragment;
 import co.crowde.toni.view.fragment.reset_password.ResetNewPassFragment;
 import co.crowde.toni.view.fragment.reset_password.ResetPassOTPFragment;
 import co.crowde.toni.view.fragment.reset_password.ResetPassPhoneFragment;
 
 public class ResetPasswordActivity extends AppCompatActivity {
+
+    static {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
+
+    AppBarLayout appBarLayout;
+    Toolbar toolbar;
 
     public static TextView tvDot1, tvDot2, tvDot3;
     public static FrameLayout layout;
@@ -26,6 +43,18 @@ public class ResetPasswordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
+
+        appBarLayout = findViewById(R.id.appBar);
+        SetHeader.isLolipop(ResetPasswordActivity.this, appBarLayout);
+
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_white_24dp));
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         tvDot1 = findViewById(R.id.tv_dot_1);
         tvDot2 = findViewById(R.id.tv_dot_2);
@@ -87,5 +116,10 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 passTransaction.commit();
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

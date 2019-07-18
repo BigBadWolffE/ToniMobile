@@ -5,20 +5,18 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
-import com.google.android.material.chip.Chip;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -28,17 +26,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.crowde.toni.R;
-import co.crowde.toni.helper.analytics.AnalyticsApplication;
-import co.crowde.toni.model.CategoryModel;
+import co.crowde.toni.constant.Const;
 import co.crowde.toni.model.DistrictModel;
 import co.crowde.toni.model.ProvinceModel;
 import co.crowde.toni.model.RegencyModel;
 import co.crowde.toni.model.VillageModel;
 import co.crowde.toni.network.LocationRequest;
+import co.crowde.toni.utils.SetHeader;
+import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
+import co.crowde.toni.view.activity.otp.SendOtpRegisterActivity;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
+    static {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
+
+    AppBarLayout appBarLayout;
     Toolbar toolbar;
+
     EditText etShopName, etShopAddress, etShopType,
             etShopOwner, etShopPhone, etShopPass, etShopRetypePass;
     static AutoCompleteTextView etShopProvince, etShopRegency, etShopDistrict, etShopVillage;
@@ -58,6 +64,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        appBarLayout = findViewById(R.id.appBar);
+        SetHeader.isLolipop(RegisterActivity.this, appBarLayout);
 
         toolbar = findViewById(R.id.toolbar);
         etShopName = findViewById(R.id.et_shop_name);
@@ -198,53 +207,58 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        cvBtnRegister.setOnClickListener(new View.OnClickListener() {
+        switch (v.getId()){
+            case R.id.cv_btn_register:
+                register();
+                break;
+        }
+
+    }
+
+    private void register() {
+        progressDialog.setMessage("Harap tunggu...");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+
+        isEmpty = false;
+
+        if(etShopName.getText().toString().length()==0){
+            isEmpty = true;
+        } else if(etShopAddress.getText().toString().length()==0) {
+            isEmpty = true;
+        } else if(etShopType.getText().toString().length()==0) {
+            isEmpty = true;
+        } else if(etShopOwner.getText().toString().length()==0) {
+            isEmpty = true;
+        } else if(etShopPhone.getText().toString().length()==0) {
+            isEmpty = true;
+        } else if(etShopPass.getText().toString().length()==0) {
+            isEmpty = true;
+        } else if(etShopRetypePass.getText().toString().length()==0) {
+            isEmpty = true;
+        } else if(etShopProvince.getText().toString().length()==0) {
+            isEmpty = true;
+        } else if(etShopVillage.getText().toString().length()==0) {
+            isEmpty = true;
+        } else if(etShopRegency.getText().toString().length()==0) {
+            isEmpty = true;
+        } else if(etShopDistrict.getText().toString().length()==0) {
+            isEmpty = true;
+        }
+
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void onClick(View v) {
-                progressDialog.setMessage("Harap tunggu...");
-                progressDialog.setCanceledOnTouchOutside(false);
-                progressDialog.show();
+            public void run() {
+                progressDialog.dismiss();
+                if(!isEmpty){
 
-                isEmpty = false;
+                    AnalyticsToniUtils.getEvent(Const.CATEGORY_AUTHENTIFICATION, Const.MODUL_LOGIN, Const.LABEL_LOGIN_FAILED_NETWORK);
 
-                if(etShopName.getText().toString().length()==0){
-                    isEmpty = true;
-                } else if(etShopAddress.getText().toString().length()==0) {
-                    isEmpty = true;
-                } else if(etShopType.getText().toString().length()==0) {
-                    isEmpty = true;
-                } else if(etShopOwner.getText().toString().length()==0) {
-                    isEmpty = true;
-                } else if(etShopPhone.getText().toString().length()==0) {
-                    isEmpty = true;
-                } else if(etShopPass.getText().toString().length()==0) {
-                    isEmpty = true;
-                } else if(etShopRetypePass.getText().toString().length()==0) {
-                    isEmpty = true;
-                } else if(etShopProvince.getText().toString().length()==0) {
-                    isEmpty = true;
-                } else if(etShopVillage.getText().toString().length()==0) {
-                    isEmpty = true;
-                } else if(etShopRegency.getText().toString().length()==0) {
-                    isEmpty = true;
-                } else if(etShopDistrict.getText().toString().length()==0) {
-                    isEmpty = true;
+
+                    Intent register = new Intent(RegisterActivity.this, SendOtpRegisterActivity.class);
+                    startActivity(register);
                 }
-
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        progressDialog.dismiss();
-                        if(!isEmpty){
-                            Intent register = new Intent(RegisterActivity.this, SendOtpRegisterActivity.class);
-                            startActivity(register);
-                        }
-                    }
-                }, 1000);
-
-
             }
-        });
-
+        }, 1000);
     }
 }

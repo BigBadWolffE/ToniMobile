@@ -19,8 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.crowde.toni.R;
+import co.crowde.toni.constant.Const;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CustomerModel;
+import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.utils.print.Utils;
 import co.crowde.toni.view.fragment.cart.CartListItemFragment;
 import co.crowde.toni.view.activity.cart.CartListActivity;
@@ -91,7 +93,14 @@ public class CustomerAdapter
                     @Override
                     public void onClick(View v) {
 
+                        if(SavePref.readCustomerId(activity)!=null){
+                            AnalyticsToniUtils.getEvent(Const.CATEGORY_CUSTOMER,Const.MODUL_CUSTOMER,Const.LABEL_CART_CHANGE_CUSTOMER);
+                        } else {
+                            AnalyticsToniUtils.getEvent(Const.CATEGORY_CUSTOMER,Const.MODUL_CUSTOMER,Const.LABEL_CART_CHOOSE_CUSTOMER);
+                        }
+
                         String customer = new Gson().toJson(model);
+
                         SavePref.saveCustomerId(activity,model.getCustomerId());
                         SavePref.saveCustomer(activity, customer);
 

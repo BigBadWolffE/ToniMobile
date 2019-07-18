@@ -34,9 +34,11 @@ import java.util.List;
 
 import co.crowde.toni.R;
 import co.crowde.toni.adapter.ProductInventoryAdapter;
+import co.crowde.toni.constant.Const;
 import co.crowde.toni.helper.CloseSoftKeyboard;
 import co.crowde.toni.network.ProductRequest;
 import co.crowde.toni.model.ProductModel;
+import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.view.activity.catalog.CatalogProductActivity;
 import co.crowde.toni.view.activity.filter.InventoryFilterActivity;
 
@@ -300,6 +302,8 @@ public class InventoryFragment extends Fragment {
             for (String each : InventoryFilterActivity.category)
                 buffer.append(",").append(each);
             ProductRequest.categoryId = buffer.deleteCharAt(0).toString();
+
+            AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_PRODUCT,Const.LABEL_PRODUCT_FILTER_CATEGORY_INVENTORY);
         } else {
             ProductRequest.categoryId = "";
         }
@@ -309,6 +313,8 @@ public class InventoryFragment extends Fragment {
             for (String each : InventoryFilterActivity.statusList)
                 buffer1.append(",").append(each);
             ProductRequest.status = buffer1.deleteCharAt(0).toString();
+
+            AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_PRODUCT,Const.LABEL_PRODUCT_FILTER_STATUS_INVENTORY);
         } else {
             ProductRequest.status = "";
         }

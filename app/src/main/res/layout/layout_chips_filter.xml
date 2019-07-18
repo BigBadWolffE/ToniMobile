@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
     android:gravity="center_vertical"
-    android:background="@drawable/bg_rec_radius_5dp_green">
+    android:background="@drawable/bg_rec_radius_10dp_green">
 
     <TextView
         android:id="@+id/tv_chips_name"
@@ -19,7 +19,7 @@
     <ImageView
         android:id="@+id/img_chips_close"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="16dp"
         android:layout_margin="6dp"
         android:layout_gravity="center_vertical"
         app:srcCompat="@drawable/ic_close_white_24dp" />

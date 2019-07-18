@@ -26,6 +26,7 @@ import co.crowde.toni.controller.user.UserController;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CustomerModel;
 import co.crowde.toni.model.response.object.CreditPayModel;
+import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.view.activity.customer.SelectCustomerActivity;
 import co.crowde.toni.view.activity.notification.SuccessCreditPayActivity;
 import co.crowde.toni.view.dialog.message.customer.CreditPayDialog;
@@ -265,6 +266,8 @@ public class CustomerRequest {
                                 SelectCustomerActivity.progressDialog.dismiss();
                                 SelectCustomerActivity.alertDialog.dismiss();
 
+                                AnalyticsToniUtils.getEvent(Const.CATEGORY_CUSTOMER,Const.MODUL_CUSTOMER,Const.LABEL_CART_ADD_NEW_CUSTOMER);
+
                             } else {
                                 if(message.equals("Token tidak valid")){
                                     UserController.tokenExpired(activity, message);
@@ -348,6 +351,8 @@ public class CustomerRequest {
                                 getCustomerModulList(activity);
                                 CustomerFragment.progressDialog.dismiss();
                                 CustomerFragment.alertDialog.dismiss();
+
+                                AnalyticsToniUtils.getEvent(Const.CATEGORY_CUSTOMER,Const.MODUL_CUSTOMER,Const.LABEL_CUSTOMER_ADD_NEW);
 
                             } else {
                                 if(message.equals("Token tidak valid")){

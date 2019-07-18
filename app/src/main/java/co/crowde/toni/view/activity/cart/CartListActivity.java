@@ -15,9 +15,11 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentTransaction;
 
 import co.crowde.toni.R;
+import co.crowde.toni.constant.Const;
 import co.crowde.toni.database.Cart;
 import co.crowde.toni.helper.OnSwipeTouchListener;
 import co.crowde.toni.helper.SavePref;
+import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.view.fragment.cart.CartListItemFragment;
 import co.crowde.toni.view.fragment.cart.CartPaymentFragment;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
@@ -179,6 +181,7 @@ implements View.OnClickListener{
                         .setNegativeButton(android.R.string.no, null)
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface arg0, int arg1) {
+                                AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_CART,Const.LABEL_CART_REMOVE_ALL_PRODUCT);
                                 resetCart(CartListActivity.this);
                                 finish();
                             }

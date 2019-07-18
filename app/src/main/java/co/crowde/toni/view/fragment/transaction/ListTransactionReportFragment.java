@@ -32,6 +32,7 @@ import co.crowde.toni.adapter.ProductDashboardAdapter;
 import co.crowde.toni.adapter.ReportCustomerFavoriteAdapter;
 import co.crowde.toni.adapter.ReportListTransactionAdapter;
 import co.crowde.toni.adapter.ReportProductFavoriteAdapter;
+import co.crowde.toni.constant.Const;
 import co.crowde.toni.helper.DateTimeFormater;
 import co.crowde.toni.model.ProductModel;
 import co.crowde.toni.model.response.list.CustomerFavoriteModel;
@@ -40,6 +41,7 @@ import co.crowde.toni.model.response.list.TransactionModel;
 import co.crowde.toni.network.ProductRequest;
 import co.crowde.toni.network.ReportRequest;
 import co.crowde.toni.network.TransactionRequest;
+import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 
 import static co.crowde.toni.view.fragment.modul.ReportFragment.progressDialog;
 
@@ -189,6 +191,8 @@ public class ListTransactionReportFragment extends Fragment implements View.OnCl
         progressDialog.show();
 
         if(isToday){
+            AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_TRANSACTION,Const.LABEL_TRANSACTION_TODAY);
+
             cvBtnToday.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreen));
             cvBtnThreeDays.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
             cvBtnWeek.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
@@ -207,6 +211,8 @@ public class ListTransactionReportFragment extends Fragment implements View.OnCl
             endDate = DateTimeFormater.currentDate;
 
         } else if(isThreeDay){
+            AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_TRANSACTION,Const.LABEL_TRANSACTION_THREE_DAY);
+
             cvBtnToday.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
             cvBtnThreeDays.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreen));
             cvBtnWeek.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
@@ -225,6 +231,8 @@ public class ListTransactionReportFragment extends Fragment implements View.OnCl
             endDate = DateTimeFormater.currentDate;
 
         } else if(isWeek){
+            AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_TRANSACTION,Const.LABEL_TRANSACTION_WEEK);
+
             cvBtnToday.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
             cvBtnThreeDays.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
             cvBtnWeek.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreen));
@@ -243,6 +251,8 @@ public class ListTransactionReportFragment extends Fragment implements View.OnCl
             endDate = DateTimeFormater.currentDate;
 
         } else if(isMonth){
+            AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_TRANSACTION,Const.LABEL_TRANSACTION_MONTH);
+
             cvBtnToday.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
             cvBtnThreeDays.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
             cvBtnWeek.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
@@ -261,6 +271,8 @@ public class ListTransactionReportFragment extends Fragment implements View.OnCl
             endDate = DateTimeFormater.currentDate;
 
         } else if(isDateRange){
+            AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_TRANSACTION,Const.LABEL_TRANSACTION_DATE_RANGE);
+
             cvBtnToday.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
             cvBtnThreeDays.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
             cvBtnWeek.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));

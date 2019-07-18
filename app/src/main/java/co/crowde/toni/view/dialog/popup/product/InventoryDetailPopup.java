@@ -23,10 +23,12 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 import co.crowde.toni.R;
+import co.crowde.toni.constant.Const;
 import co.crowde.toni.helper.CloseSoftKeyboard;
 import co.crowde.toni.helper.DecimalFormatRupiah;
 import co.crowde.toni.model.ProductModel;
 import co.crowde.toni.network.API;
+import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.view.dialog.message.product.UpdateProductDialog;
 
 public class InventoryDetailPopup {
@@ -145,6 +147,8 @@ public class InventoryDetailPopup {
         imgBtnPlusQty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AnalyticsToniUtils.getEvent(Const.CATEGORY_PRODUCT_MANAGE,Const.MODUL_PRODUCT,Const.LABEL_PRODUCT_ADD_STOCK_PLUS_MIN);
+
                 if(etQty.getText().length()>0){
                     qty = Integer.parseInt(etQty.getText().toString());
                     qty = qty+1;
@@ -155,6 +159,8 @@ public class InventoryDetailPopup {
         imgBtnMinQty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AnalyticsToniUtils.getEvent(Const.CATEGORY_PRODUCT_MANAGE,Const.MODUL_PRODUCT,Const.LABEL_PRODUCT_ADD_STOCK_PLUS_MIN);
+
                 if(qty!=0){
                     if(etQty.getText().length()>0){
                         qty = Integer.parseInt(etQty.getText().toString());
@@ -165,14 +171,17 @@ public class InventoryDetailPopup {
             }
         });
 
-//        if(etQty.getText().toString().length()>0){
-//
-//        }
-
         cvUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 UpdateProductDialog.showDialog(activity, model.getProductId());
+            }
+        });
+
+        etQty.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                AnalyticsToniUtils.getEvent(Const.CATEGORY_PRODUCT_MANAGE,Const.MODUL_PRODUCT,Const.LABEL_PRODUCT_ADD_STOCK_COLUMN);
             }
         });
 

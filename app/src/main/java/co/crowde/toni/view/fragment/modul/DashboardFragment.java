@@ -34,12 +34,14 @@ import java.util.List;
 
 import co.crowde.toni.R;
 import co.crowde.toni.adapter.ProductDashboardAdapter;
+import co.crowde.toni.constant.Const;
 import co.crowde.toni.helper.CloseSoftKeyboard;
 import co.crowde.toni.listener.ItemClickListener;
 import co.crowde.toni.network.ProductRequest;
 import co.crowde.toni.database.Cart;
 import co.crowde.toni.model.CartModel;
 import co.crowde.toni.model.ProductModel;
+import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.view.activity.filter.DashboardFilterActivity;
 import co.crowde.toni.view.activity.cart.CartListActivity;
 
@@ -353,6 +355,14 @@ public class DashboardFragment extends Fragment {
         ProductRequest.supplierId="";
         ProductRequest.productName = etSearch.getText().toString();
         productModels.clear();
+
+        if(etSearch.getText().toString().length()>0){
+            AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_PRODUCT,Const.LABEL_PRODUCT_SEARCH_DASHBOARD);
+        }
+
+        if(ProductRequest.categoryId.length()>1 || ProductRequest.status.length()>1){
+            AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_PRODUCT,Const.LABEL_PRODUCT_FILTER_DASHBOARD);
+        }
 
         ProductRequest.getProductList(activity);
 

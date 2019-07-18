@@ -2,14 +2,18 @@ package co.crowde.toni.view.activity.filter;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,10 +21,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.gson.Gson;
+import com.nex3z.flowlayout.FlowLayout;
 import com.pchmn.materialchips.ChipsInput;
 
 import org.json.JSONException;
@@ -30,7 +37,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.crowde.toni.R;
+import co.crowde.toni.adapter.CustomerAdapter;
+import co.crowde.toni.adapter.chips.CategoryChipsFilterAdapter;
 import co.crowde.toni.helper.CloseSoftKeyboard;
+import co.crowde.toni.listener.ChipsFilterListener;
 import co.crowde.toni.model.CategoryModel;
 import co.crowde.toni.network.CategoryRequest;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
@@ -43,6 +53,8 @@ public class DashboardFilterActivity extends AppCompatActivity {
     public static ArrayList<String> statusList = new ArrayList<>();
     public static String[] status = {"Tersedia", "Mulai habis", "Habis"};
 
+    ChipsFilterListener listener;
+
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
@@ -54,13 +66,20 @@ public class DashboardFilterActivity extends AppCompatActivity {
     public static List<CategoryModel> categories = new ArrayList<>();
     public static ArrayList<CategoryModel> categoryModels = new ArrayList<>();
     public static ArrayList<String> category = new ArrayList<>();
-    public static ChipGroup chipCategory, chipHistoryCategory, chipStatus;
+    public static ChipGroup chipHistoryCategory, chipStatus;
 
     public static AutoCompleteTextView etCategory;
 
     ConstraintLayout mainLayout;
 
     ArrayList<CategoryModel> historyCategory;
+
+    //Category Filter
+    ArrayList<CategoryModel> categoryChips = new ArrayList<>();
+    RecyclerView rcCategory;
+    CategoryChipsFilterAdapter categoryChipsFilterAdapter;
+    FlowLayout flowLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +89,11 @@ public class DashboardFilterActivity extends AppCompatActivity {
         tvCategory = findViewById(R.id.tvCategoryLabel);
         tvStatus = findViewById(R.id.tvStatus);
         toolbarFilter = findViewById(R.id.toolbarFilter);
-        chipCategory = findViewById(R.id.chipCategory);
         chipHistoryCategory = findViewById(R.id.chipHistoryCategory);
         chipStatus = findViewById(R.id.chipStatus);
+
+        rcCategory = findViewById(R.id.rc_category);
+        flowLayout = findViewById(R.id.layoutSearch);
 
         etCategory = findViewById(R.id.etCategory);
         mainLayout = findViewById(R.id.mainLayout);
@@ -91,170 +112,162 @@ public class DashboardFilterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
-//                finish();
-//                DashboardFragment.requestFilter(DashboardFilterActivity.this);
             }
         });
 
         categoryModels = new ArrayList<>();
         loadCategory(this);
 
-        autoCompleteTextView(this);
-
-//        etCategory.setOnKeyListener(new View.OnKeyListener() {
-//            @Override
-//            public boolean onKey(View v, int keyCode, KeyEvent event) {
-//                if(etCategory.length()==0){
-//                    if(keyCode == KeyEvent.KEYCODE_DEL
-//                            && etCategory.length()==0
-//                            && chipCategory.getChildCount()>0) {
-//                        chipCategory.removeViewAt(chipCategory.getChildCount()-1);
-//                        //this is for backspace
-//                    }
-//                } else {
-//
-//                }
-//
-//                return false;
-//            }
-//        });
-
-        tvCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Toast.makeText(DashboardFilterActivity.this,
-//                        "Categories: "+new Gson().toJson(categories)+"\n"
-//                                +"Category: "+new Gson().toJson(category)+"\n"
-//                                +"boolean: "+new Gson().toJson(booleanCategory), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        tvStatus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(DashboardFilterActivity.this, new Gson().toJson(statusList), Toast.LENGTH_SHORT).show();
-            }
-        });
+        autoCompleteTextView(this, getBaseContext());
 
         filterStatus(DashboardFilterActivity.this);
 
     }
 
+    void setChipsCategory(Activity activity){
+        categoryChipsFilterAdapter = new CategoryChipsFilterAdapter(activity, categoryChips, activity, new ChipsFilterListener() {
+            @Override
+            public void onDeleteItemClick(View v, int position) {
+                categoryChips.remove(position);
+            }
+        });
 
+        rcCategory.setLayoutManager(new LinearLayoutManager(activity, LinearLayout.HORIZONTAL, false));
+        rcCategory.setAdapter(categoryChipsFilterAdapter);
+    }
 
-    private void autoCompleteTextView(final Activity activity) {
+    void autoCompleteTextView(final Activity activity, Context context) {
         final ArrayAdapter<CategoryModel> adapter =
                 new ArrayAdapter<CategoryModel>(this, android.R.layout.simple_list_item_1, categoryModels);
         etCategory.setAdapter(adapter);
 
-        if(categories.size()>0){
-            for (int i=0; i<categories.size();i++){
-                final Chip chip = new Chip(activity);
-                chip.setId(i);
-                chip.setTag(i);
-
-                chip.setText(categories.get(i).getCategoryName());
-                chip.setCloseIconVisible(true);
-                chip.setCheckable(false);
-
-                chip.setCloseIconTintResource(R.color.colorWhite);
-                chip.setChipBackgroundColorResource(R.color.colorThemeGreen);
-                chip.setTextColor(getResources().getColor(R.color.colorWhite));
-                chip.setOnCloseIconClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        int tag = (int) v.getTag();
-                        chipCategory.removeView(v);
-                        category.remove(tag);
-                        categories.remove(tag);
-                    }
-                });
-                chipCategory.addView(chip);
-            }
-
-        }
-
         etCategory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                if(category.size()>0){
-                    for(int i=0; i<category.size();i++){
-                        if(etCategory.getText().toString().equals(categories.get(i).getCategoryName())){
-                            Toast.makeText(activity, "Kategori sudah terpilih.", Toast.LENGTH_SHORT).show();
-                        } else {
-                            String str = new Gson().toJson(etCategory.getAdapter().getItem(position));
-                            try {
-                                JSONObject obj = new JSONObject(str);
-                                categories.add(new CategoryModel(obj.getString("categoryId"), obj.getString("categoryName")));
-                                category.add(obj.getString("categoryId"));
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String getId = null, getName = null;
+                try {
+                    JSONObject obj = new JSONObject(new Gson().toJson(etCategory.getAdapter().getItem(position)));
+                    getId = obj.getString("categoryId");
+                    getName = obj.getString("categoryName");
 
-                                final Chip chip = new Chip(activity);
-                                chip.setId(i);
-                                chip.setTag(i);
-
-                                chip.setText(categories.get(i).getCategoryName());
-                                chip.setCloseIconVisible(true);
-                                chip.setCheckable(false);
-
-                                chip.setCloseIconTintResource(R.color.colorWhite);
-                                chip.setChipBackgroundColorResource(R.color.colorThemeGreen);
-                                chip.setTextColor(getResources().getColor(R.color.colorWhite));
-                                chip.setOnCloseIconClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        int tag = (int) v.getTag();
-                                        chipCategory.removeView(v);
-                                        category.remove(tag);
-                                        categories.remove(tag);
-                                    }
-                                });
-                                chipCategory.addView(chip);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                } else {
-                    String str = new Gson().toJson(etCategory.getAdapter().getItem(position));
-                    try {
-                        JSONObject obj = new JSONObject(str);
-                        categories.add(new CategoryModel(obj.getString("categoryId"), obj.getString("categoryName")));
-                        category.add(obj.getString("categoryId"));
-
-                        for (int i=0; i<categories.size();i++){
-                            final Chip chip = new Chip(activity);
-                            chip.setId(i);
-                            chip.setTag(i);
-
-                            chip.setText(categories.get(i).getCategoryName());
-                            chip.setCloseIconVisible(true);
-                            chip.setCheckable(false);
-
-                            chip.setCloseIconTintResource(R.color.colorWhite);
-                            chip.setChipBackgroundColorResource(R.color.colorThemeGreen);
-                            chip.setTextColor(getResources().getColor(R.color.colorWhite));
-                            chip.setOnCloseIconClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    int tag = (int) v.getTag();
-                                    chipCategory.removeView(v);
-                                    category.remove(tag);
-                                    categories.remove(tag);
-                                }
-                            });
-                            chipCategory.addView(chip);
-                        }
-
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    categoryChips.add(new CategoryModel(getId,getName));
+//                    categoryChipsFilterAdapter.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-
                 etCategory.setText("");
-
+                setChipsCategory(activity);
             }
         });
+
+//        if(categories.size()>0){
+//            for (int i=0; i<categories.size();i++){
+//                final Chip chip = new Chip(activity);
+//                chip.setId(i);
+//                chip.setTag(i);
+//
+//                chip.setText(categories.get(i).getCategoryName());
+//                chip.setCloseIconVisible(true);
+//                chip.setCheckable(false);
+//
+//                chip.setCloseIconTintResource(R.color.colorWhite);
+//                chip.setChipBackgroundColorResource(R.color.colorThemeGreen);
+//                chip.setTextColor(getResources().getColor(R.color.colorWhite));
+//                chip.setOnCloseIconClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        int tag = (int) v.getTag();
+//                        chipCategory.removeView(v);
+//                        category.remove(tag);
+//                        categories.remove(tag);
+//                    }
+//                });
+//                chipCategory.addView(chip);
+//            }
+//
+//        }
+
+//        etCategory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+//                if(category.size()>0){
+//                    for(int i=0; i<category.size();i++){
+//                        if(etCategory.getText().toString().equals(categories.get(i).getCategoryName())){
+//                            Toast.makeText(activity, "Kategori sudah terpilih.", Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            String str = new Gson().toJson(etCategory.getAdapter().getItem(position));
+//                            try {
+//                                JSONObject obj = new JSONObject(str);
+//                                categories.add(new CategoryModel(obj.getString("categoryId"), obj.getString("categoryName")));
+//                                category.add(obj.getString("categoryId"));
+//
+//                                final Chip chip = new Chip(activity);
+//                                chip.setId(i);
+//                                chip.setTag(i);
+//
+//                                chip.setText(categories.get(i).getCategoryName());
+//                                chip.setCloseIconVisible(true);
+//                                chip.setCheckable(false);
+//
+//                                chip.setCloseIconTintResource(R.color.colorWhite);
+//                                chip.setChipBackgroundColorResource(R.color.colorThemeGreen);
+//                                chip.setTextColor(getResources().getColor(R.color.colorWhite));
+//                                chip.setOnCloseIconClickListener(new View.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View v) {
+//                                        int tag = (int) v.getTag();
+//                                        chipCategory.removeView(v);
+//                                        category.remove(tag);
+//                                        categories.remove(tag);
+//                                    }
+//                                });
+//                                chipCategory.addView(chip);
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                    }
+//                } else {
+//                    String str = new Gson().toJson(etCategory.getAdapter().getItem(position));
+//                    try {
+//                        JSONObject obj = new JSONObject(str);
+//                        categories.add(new CategoryModel(obj.getString("categoryId"), obj.getString("categoryName")));
+//                        category.add(obj.getString("categoryId"));
+//
+//                        for (int i=0; i<categories.size();i++){
+//                            final Chip chip = new Chip(activity);
+//                            chip.setId(i);
+//                            chip.setTag(i);
+//
+//                            chip.setText(categories.get(i).getCategoryName());
+//                            chip.setCloseIconVisible(true);
+//                            chip.setCheckable(false);
+//
+//                            chip.setCloseIconTintResource(R.color.colorWhite);
+//                            chip.setChipBackgroundColorResource(R.color.colorThemeGreen);
+//                            chip.setTextColor(getResources().getColor(R.color.colorWhite));
+//                            chip.setOnCloseIconClickListener(new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View v) {
+//                                    int tag = (int) v.getTag();
+//                                    chipCategory.removeView(v);
+//                                    category.remove(tag);
+//                                    categories.remove(tag);
+//                                }
+//                            });
+//                            chipCategory.addView(chip);
+//                        }
+//
+//
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//                etCategory.setText("");
+//
+//            }
+//        });
     }
 
     public static void loadCategory(Activity activity){

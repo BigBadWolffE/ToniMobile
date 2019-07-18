@@ -17,8 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.crowde.toni.R;
+import co.crowde.toni.constant.Const;
 import co.crowde.toni.helper.CallCenter;
 import co.crowde.toni.helper.DecimalFormatRupiah;
+import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.view.activity.auth.ForgotPassActivity;
 import co.crowde.toni.view.activity.customer.CustomerHutangActivity;
 import co.crowde.toni.model.CustomerModel;
@@ -109,6 +111,8 @@ public class TransaksiBagianPelangganAdapter
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
+                        AnalyticsToniUtils.getEvent(Const.CATEGORY_CUSTOMER,Const.MODUL_CUSTOMER,Const.LABEL_CUSTOMER_DETAIL);
 
                         Intent detailPelanggan = new Intent(activity, CustomerHutangActivity.class);
                         detailPelanggan.putExtra(CustomerModel.class.getSimpleName(), model);

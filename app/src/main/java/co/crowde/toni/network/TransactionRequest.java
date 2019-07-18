@@ -34,6 +34,7 @@ import co.crowde.toni.model.response.list.CustomerFavoriteModel;
 import co.crowde.toni.model.response.list.ProductFavoriteModel;
 import co.crowde.toni.model.response.list.TransactionModel;
 import co.crowde.toni.model.response.object.RecapTransactionModel;
+import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.view.activity.customer.SelectCustomerActivity;
 import co.crowde.toni.view.activity.notification.SuccessPaymentTransactionActivity;
 import co.crowde.toni.view.activity.print.WaitingPrintActivity;
@@ -119,16 +120,13 @@ public class TransactionRequest {
                                 ConfirmTransactionDialog.dialogConfirm.dismiss();
                                 ConfirmTransactionDialog.progressDialog.dismiss();
 
-//                                if(CartPaymentFragment.cash){
-//                                    PrintController.printCash(activity, data);
-//                                } else if(CartPaymentFragment.credit){
-//                                    PrintController.printCredit(activity, data, credit);
-//                                } else if(CartPaymentFragment.cashCredit){
-//                                    PrintController.printCashCredit(activity, data);
-//                                    CustomerRequest.payCredit(activity);
-//                                }
-
-//                                TransactionController.removeHistory(activity);
+                                if(CartPaymentFragment.cash){
+                                    AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_TRANSACTION, Const.LABEL_TRANSACTION_CASH_SUCCESS);
+                                } else if(CartPaymentFragment.credit){
+                                    AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_TRANSACTION, Const.LABEL_TRANSACTION_CASH_CREDIT_SUCCESS);
+                                } else if(CartPaymentFragment.cashCredit){
+                                    AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_TRANSACTION, Const.LABEL_TRANSACTION_CASH_CREDIT_SUCCESS);
+                                }
 
                                 Intent print = new Intent(activity, SuccessPaymentTransactionActivity.class);
                                 print.putExtra("data", data);

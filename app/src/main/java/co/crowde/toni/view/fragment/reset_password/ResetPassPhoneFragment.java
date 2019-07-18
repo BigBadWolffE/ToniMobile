@@ -1,6 +1,7 @@
 package co.crowde.toni.view.fragment.reset_password;
 
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 
@@ -12,21 +13,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import co.crowde.toni.R;
+import co.crowde.toni.constant.Const;
+import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
+import co.crowde.toni.view.activity.auth.LoginActivity;
 import co.crowde.toni.view.activity.auth.ResetPasswordActivity;
+
+import static co.crowde.toni.utils.ValidateEdittext.validateResetPass;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ResetPassPhoneFragment extends Fragment {
+public class ResetPassPhoneFragment extends Fragment implements View.OnClickListener {
 
     EditText etPhone;
     CardView cvSendOtp;
-    boolean isEmpty;
 
     ProgressDialog progressDialog;
-
 
     public ResetPassPhoneFragment() {
         // Required empty public constructor
@@ -44,31 +49,38 @@ public class ResetPassPhoneFragment extends Fragment {
         etPhone = view.findViewById(R.id.et_reset_phone);
         cvSendOtp = view.findViewById(R.id.cv_btn_send);
 
-        cvSendOtp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressDialog.setMessage("Harap tunggu...");
-                progressDialog.setCanceledOnTouchOutside(false);
-                progressDialog.show();
+        cvSendOtp.setOnClickListener(this);
 
-                isEmpty = etPhone.getText().toString().length() <= 9;
-
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        progressDialog.dismiss();
-
-                        if(!isEmpty){
-                            ResetPasswordActivity.frames = ResetPasswordActivity.dots[1];
-                            ResetPasswordActivity.changeLayout(getActivity(), etPhone.getText().toString());
-                        }
-                    }
-                }, 1000);
-
-
-            }
-        });
         return  view;
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.cv_btn_send:
+                sendOtp();
+                break;
+        }
+
+    }
+
+    void sendOtp(){
+        progressDialog.setMessage("Harap tunggu...");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+
+        validateResetPass(etPhone);
+
+        if(validateResetPass(etPhone)){
+            progressDialog.dismiss();
+
+            AnalyticsToniUtils.getEvent(Const.CATEGORY_AUTHENTIFICATION, Const.MODUL_PASS, Const.LABEL_RESET_PASS_SEND_OTP);
+
+            ResetPasswordActivity.frames = ResetPasswordActivity.dots[1];
+            ResetPasswordActivity.changeLayout(getActivity(), etPhone.getText().toString());
+        } else {
+            progressDialog.dismiss();
+            Toast.makeText(getActivity(), "Silahkan isi formulir dengan benar.", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

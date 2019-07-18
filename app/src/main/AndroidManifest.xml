@@ -19,10 +19,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+        <activity android:name=".view.dialog.popup.customer.PopUpBayarHutangTransaksi"></activity>
         <activity android:name=".view.activity.notification.SuccessRegisterActivity"></activity>
         <activity android:name=".view.activity.notification.SuccessResetPasswordActivity" />
         <activity android:name=".view.activity.auth.ResetPasswordActivity" />
-        <activity android:name=".view.activity.auth.SendOtpRegisterActivity" />
+        <activity android:name=".view.activity.otp.SendOtpRegisterActivity" />
         <activity android:name=".zHackaton.activity.ProjectInformationActivity" />
         <activity android:name=".view.activity.print.WaitingPrintTransactionActivity" />
         <activity android:name=".view.activity.transaction.DetailTransactionActivity" />

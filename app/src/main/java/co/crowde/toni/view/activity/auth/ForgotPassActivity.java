@@ -30,7 +30,6 @@ public class ForgotPassActivity extends AppCompatActivity {
 
         tvBtnBack = findViewById(R.id.tvBtnBack);
 
-        LoginActivity.btnLogin.setEnabled(true);
         cvBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,6 +58,5 @@ public class ForgotPassActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
-        LoginActivity.progressDialog.dismiss();
     }
 }

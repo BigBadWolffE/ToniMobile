@@ -88,7 +88,7 @@
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:layout_marginTop="24dp"
-        app:cardBackgroundColor="@color/colorThemeGrey"
+        app:cardBackgroundColor="@color/colorThemeOrange"
         app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="@+id/layout_set_retype_pass"
         app:layout_constraintStart_toStartOf="@+id/layout_set_retype_pass"

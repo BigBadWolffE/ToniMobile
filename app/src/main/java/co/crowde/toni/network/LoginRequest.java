@@ -1,6 +1,7 @@
 package co.crowde.toni.network;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.util.Log;
 
@@ -17,9 +18,11 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import co.crowde.toni.constant.Const;
 import co.crowde.toni.controller.auth.LoginController;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.UserModel;
+import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.view.activity.auth.LoginActivity;
 import co.crowde.toni.view.activity.auth.LoginSuccessActivity;
 import co.crowde.toni.view.dialog.message.network.NetworkOfflineDialog;
@@ -29,7 +32,7 @@ public class LoginRequest {
     public static String message = "";
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    public static void postLogin(final Activity activity, String username, String pass){
+    public static void postLogin(final Activity activity, String username, String pass, ProgressDialog progressDialog){
 
         final UserModel user = new UserModel();
         user.setUsername(username);
@@ -55,10 +58,10 @@ public class LoginRequest {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-//                        Toast.makeText(
-//                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
+                        AnalyticsToniUtils.getEvent(Const.CATEGORY_AUTHENTIFICATION, Const.MODUL_LOGIN, Const.LABEL_LOGIN_FAILED_NETWORK);
+
                         NetworkOfflineDialog.showDialog(activity);
-                        LoginActivity.progressDialog.dismiss();
+                        progressDialog.dismiss();
                         Log.e("Error",e.toString());
                     }
                 });
@@ -78,7 +81,8 @@ public class LoginRequest {
                             message = json.getString("message");
                             String data = json.getString("data");
 
-                            LoginActivity.progressDialog.dismiss();
+                            progressDialog.dismiss();
+
                             if(status){
                                 JSONObject objDataLogin = new JSONObject(data);
                                 String username = objDataLogin.getString("username");
@@ -93,12 +97,15 @@ public class LoginRequest {
                                 SavePref.savePicture(activity, picture);
                                 SavePref.saveDetailToko(activity, data);
 
+                                AnalyticsToniUtils.getEvent(Const.CATEGORY_AUTHENTIFICATION, Const.MODUL_LOGIN, Const.LABEL_LOGIN_SUCCESS);
+
                                 Intent loginSuccess = new Intent(activity, LoginSuccessActivity.class);
                                 activity.startActivity(loginSuccess);
                                 activity.finish();
 
                             } else {
                                 LoginController.loginResponse(activity, message);
+                                AnalyticsToniUtils.getEvent(Const.CATEGORY_AUTHENTIFICATION, Const.MODUL_LOGIN, Const.LABEL_LOGIN_FAILED_ACCOUNT);
                             }
 
                         } catch (JSONException e) {

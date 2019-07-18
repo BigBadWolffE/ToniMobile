@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.crowde.toni.R;
+import co.crowde.toni.listener.ChipsFilterListener;
 import co.crowde.toni.model.CategoryModel;
 
 public class CategoryChipsFilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -21,6 +22,7 @@ public class CategoryChipsFilterAdapter extends RecyclerView.Adapter<RecyclerVie
     private Context context;
     private Activity activity ;
     private List<CategoryModel> categoryModelList = new ArrayList<>();
+    private ChipsFilterListener listener;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -36,12 +38,13 @@ public class CategoryChipsFilterAdapter extends RecyclerView.Adapter<RecyclerVie
     }
 
     public CategoryChipsFilterAdapter(Context context,
-                           List<CategoryModel> categoryModels,
-                           Activity activity) {
+                                      List<CategoryModel> categoryModels,
+                                      Activity activity, ChipsFilterListener listener) {
         this.context = context;
         this.categoryModelList.clear();
         this.categoryModelList.addAll(categoryModels);
         this.activity = activity;
+        this.listener = listener;
     }
 
     @Override
@@ -56,12 +59,12 @@ public class CategoryChipsFilterAdapter extends RecyclerView.Adapter<RecyclerVie
         ViewHolder viewHolder = (ViewHolder) holder;
         if (model != null) {
             viewHolder.tvName.setText(model.getCategoryName());
-//                viewHolder.tvName.setText(model.getCustomerName());
-            viewHolder.imgClose.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                }
-            });
+//            viewHolder.imgClose.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    listener.onDeleteItemClick(v, position);
+//                }
+//            });
         }
 
     }

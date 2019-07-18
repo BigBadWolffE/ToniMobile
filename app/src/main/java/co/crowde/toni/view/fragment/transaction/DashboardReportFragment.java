@@ -49,6 +49,7 @@ import co.crowde.toni.model.response.list.CustomerFavoriteModel;
 import co.crowde.toni.model.response.list.ProductFavoriteModel;
 import co.crowde.toni.network.ProductRequest;
 import co.crowde.toni.network.ReportRequest;
+import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 
 import static co.crowde.toni.view.fragment.modul.ReportFragment.progressDialog;
 
@@ -166,6 +167,8 @@ public class DashboardReportFragment extends Fragment implements View.OnClickLis
         progressDialog.show();
 
         if(isToday){
+            AnalyticsToniUtils.getEvent(Const.CATEGORY_REPORT,Const.MODUL_REPORT,Const.LABEL_REPORT_TODAY);
+
             cvBtnToday.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreen));
             cvBtnThreeDays.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
             cvBtnWeek.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
@@ -184,6 +187,8 @@ public class DashboardReportFragment extends Fragment implements View.OnClickLis
             endDate = DateTimeFormater.currentDate;
 
         } else if(isThreeDay){
+            AnalyticsToniUtils.getEvent(Const.CATEGORY_REPORT,Const.MODUL_REPORT,Const.LABEL_REPORT_THREE_DAY);
+
             cvBtnToday.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
             cvBtnThreeDays.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreen));
             cvBtnWeek.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
@@ -202,6 +207,8 @@ public class DashboardReportFragment extends Fragment implements View.OnClickLis
             endDate = DateTimeFormater.currentDate;
 
         } else if(isWeek){
+            AnalyticsToniUtils.getEvent(Const.CATEGORY_REPORT,Const.MODUL_REPORT,Const.LABEL_REPORT_WEEK);
+
             cvBtnToday.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
             cvBtnThreeDays.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
             cvBtnWeek.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreen));
@@ -220,6 +227,8 @@ public class DashboardReportFragment extends Fragment implements View.OnClickLis
             endDate = DateTimeFormater.currentDate;
 
         } else if(isMonth){
+            AnalyticsToniUtils.getEvent(Const.CATEGORY_REPORT,Const.MODUL_REPORT,Const.LABEL_REPORT_MONTH);
+
             cvBtnToday.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
             cvBtnThreeDays.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
             cvBtnWeek.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
@@ -238,6 +247,8 @@ public class DashboardReportFragment extends Fragment implements View.OnClickLis
             endDate = DateTimeFormater.currentDate;
 
         } else if(isDateRange){
+            AnalyticsToniUtils.getEvent(Const.CATEGORY_REPORT,Const.MODUL_REPORT,Const.LABEL_REPORT_DATE_RANGE);
+
             cvBtnToday.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
             cvBtnThreeDays.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
             cvBtnWeek.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));

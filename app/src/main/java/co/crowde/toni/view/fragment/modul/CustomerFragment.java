@@ -36,10 +36,12 @@ import java.util.List;
 
 import co.crowde.toni.R;
 import co.crowde.toni.adapter.TransaksiBagianPelangganAdapter;
+import co.crowde.toni.constant.Const;
 import co.crowde.toni.helper.CloseSoftKeyboard;
 import co.crowde.toni.model.CustomerModel;
 import co.crowde.toni.network.CustomerRequest;
 import co.crowde.toni.network.ProductRequest;
+import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.view.activity.filter.InventoryFilterActivity;
 
 /**
@@ -297,6 +299,12 @@ public class CustomerFragment extends Fragment {
         CustomerRequest.namaPelanggan = etSearchPelanggan.getText().toString();
         customerModelList.clear();
 
+        if(etSearchPelanggan.getText().toString().length()>1){
+            AnalyticsToniUtils.getEvent(Const.CATEGORY_CUSTOMER,Const.MODUL_CUSTOMER,Const.LABEL_CUSTOMER_SEARCH);
+        } else {
+            AnalyticsToniUtils.getEvent(Const.CATEGORY_CUSTOMER,Const.MODUL_CUSTOMER,Const.LABEL_CUSTOMER_LIST);
+        }
+
         CustomerRequest.getCustomerModulList(activity);
     }
 
@@ -332,6 +340,7 @@ public class CustomerFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
+                AnalyticsToniUtils.getEvent(Const.CATEGORY_CUSTOMER,Const.MODUL_CUSTOMER,Const.LABEL_CUSTOMER_CANCEL_ADD);
             }
         });
 

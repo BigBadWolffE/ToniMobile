@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import co.crowde.toni.R;
+import co.crowde.toni.constant.Const;
+import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.view.activity.auth.ResetPasswordActivity;
 
 /**
@@ -55,7 +57,7 @@ public class ResetPassOTPFragment extends Fragment {
         bundle = this.getArguments();
 
         if(bundle != null){
-            tvSendMessage.setText("Kode Verifikasi telah hangus. Silahkan kirim ulang kode verifikasi ke nomor "
+            tvSendMessage.setText("Kami telah mengirim sms  OTP ke nomor ponsel anda  "
                     + getArguments().getString("phone"));
         }
 
@@ -82,8 +84,10 @@ public class ResetPassOTPFragment extends Fragment {
 
                 tvCount.setText("0");
 
-                tvSendMessage.setText("Kode Verifikasi telah hangus. Silahkan kirim ulang kode verifikasi ke nomor "
-                        + getArguments().getString("phone"));
+                if(bundle != null){
+                    tvSendMessage.setText("Kode Verifikasi telah hangus. Silahkan kirim ulang kode verifikasi ke nomor "
+                            + getArguments().getString("phone"));
+                }
                 tvResendMessage.setText("Kirim ulang kode.");
 
                 new Handler().postDelayed(new Runnable() {
@@ -97,6 +101,8 @@ public class ResetPassOTPFragment extends Fragment {
                             @Override
                             public void run() {
                                 progressDialog.dismiss();
+
+                                AnalyticsToniUtils.getEvent(Const.CATEGORY_AUTHENTIFICATION, Const.MODUL_PASS, Const.LABEL_RESET_PASS_SEND_OTP_SUCCESS);
 
                                 ResetPasswordActivity.frames = ResetPasswordActivity.dots[2];
                                 ResetPasswordActivity.changeLayout(getActivity(),"");

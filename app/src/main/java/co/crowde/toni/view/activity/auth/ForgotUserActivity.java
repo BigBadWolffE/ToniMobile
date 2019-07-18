@@ -30,7 +30,6 @@ public class ForgotUserActivity extends AppCompatActivity {
 
         tvBtnBack = findViewById(R.id.tvBtnBack);
 
-        LoginActivity.btnLogin.setEnabled(true);
         cvBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

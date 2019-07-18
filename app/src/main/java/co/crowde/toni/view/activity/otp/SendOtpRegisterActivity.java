@@ -1,6 +1,7 @@
-package co.crowde.toni.view.activity.auth;
+package co.crowde.toni.view.activity.otp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
@@ -16,6 +17,10 @@ import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.UserDetailModel;
 
 public class SendOtpRegisterActivity extends AppCompatActivity {
+
+    static {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
 
     Toolbar toolbar;
     TextView tvOTPCountDown, tvSendMessage, tvResendMessage;
@@ -45,13 +50,6 @@ public class SendOtpRegisterActivity extends AppCompatActivity {
 
             public void onTick(long millisUntilFinished) {
                 tvOTPCountDown.setText(""+millisUntilFinished/1000);
-
-//                if(millisUntilFinished/1000<21){
-//                    tvOTPCountDown.setTextColor(getResources().getColor(R.color.color_theme_yellow));
-//                }
-//                if(millisUntilFinished/1000<11){
-//                    tvOTPCountDown.setTextColor(getResources().getColor(R.color.color_theme_red));
-//                }
             }
 
             public void onFinish() {

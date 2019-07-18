@@ -5,10 +5,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
+import co.crowde.toni.constant.Const;
 import co.crowde.toni.database.Cart;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CartModel;
 import co.crowde.toni.model.ProductModel;
+import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.view.dialog.message.product.StockInsufficientDialog;
 import co.crowde.toni.view.dialog.popup.product.ProductDetailDashboardPopup;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
@@ -78,6 +80,8 @@ public class CartController {
                     } else {
                         Toast.makeText(activity, "Error", Toast.LENGTH_SHORT).show();
                     }
+
+                    AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_CART,Const.LABEL_CART_ADD_PRODUCT_POPUP);
                 } else {
                     StockInsufficientDialog.showDialog(activity);
                 }
@@ -150,6 +154,8 @@ public class CartController {
                     } else {
                         Toast.makeText(activity, "Error", Toast.LENGTH_SHORT).show();
                     }
+
+                    AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_CART,Const.LABEL_CART_ADD_PRODUCT_DASHBOARD);
                 } else {
                     StockInsufficientDialog.showDialog(activity);
                 }

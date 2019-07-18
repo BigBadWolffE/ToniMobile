@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
 
 import com.google.gson.Gson;
@@ -19,6 +20,10 @@ import co.crowde.toni.model.ShopModel;
 import co.crowde.toni.view.dialog.message.app.CloseAppsDialog;
 
 public class LoginSuccessActivity extends AppCompatActivity {
+
+    static {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
 
     public static TextView tvLogSuccessHeader, tvClosedLabel, tvClosedTime,
             tvLoginAs, tvOwnerName,

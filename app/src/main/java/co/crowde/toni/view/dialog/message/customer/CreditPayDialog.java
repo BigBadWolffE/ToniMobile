@@ -12,10 +12,12 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 
 import co.crowde.toni.R;
+import co.crowde.toni.constant.Const;
 import co.crowde.toni.controller.customer.CustomerController;
 import co.crowde.toni.controller.transaction.TransactionController;
 import co.crowde.toni.model.CustomerModel;
 import co.crowde.toni.network.CustomerRequest;
+import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 
 public class CreditPayDialog {
     public static TextView tvHead, tvDesc, tvYes, tvNo;
@@ -69,6 +71,8 @@ public class CreditPayDialog {
                     public void run() {
                         tvYes.setEnabled(true);
                         CustomerController.printCreditPay(activity, credit, customerId);
+
+                        AnalyticsToniUtils.getEvent(Const.CATEGORY_CUSTOMER,Const.MODUL_CUSTOMER,Const.LABEL_CUSTOMER_CREDIT_PAY);
                     }
                 }, 100);
 

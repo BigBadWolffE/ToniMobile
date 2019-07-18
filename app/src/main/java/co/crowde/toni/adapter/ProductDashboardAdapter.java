@@ -22,11 +22,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.crowde.toni.R;
+import co.crowde.toni.constant.Const;
 import co.crowde.toni.controller.cart.CartController;
 import co.crowde.toni.database.Cart;
 import co.crowde.toni.model.CartModel;
 import co.crowde.toni.network.API;
 import co.crowde.toni.model.ProductModel;
+import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.view.dialog.popup.product.ProductDetailDashboardPopup;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
 
@@ -134,6 +136,7 @@ public class ProductDashboardAdapter
                     @Override
                     public void onClick(View v) {
                         CartController.addFromPlus(activity, model);
+                        AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_CART,Const.LABEL_CART_CHANGE_QTY_DASHBOARD);
                     }
                 });
 
@@ -142,6 +145,7 @@ public class ProductDashboardAdapter
                     @Override
                     public void onClick(View v) {
                         CartController.minQtyCart(activity, model);
+                        AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_CART,Const.LABEL_CART_CHANGE_QTY_DASHBOARD);
                     }
                 });
 
