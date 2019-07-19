@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import co.crowde.toni.R;
 import co.crowde.toni.helper.DecimalFormatRupiah;
@@ -40,6 +41,8 @@ import static co.crowde.toni.utils.print.PrinterNetwork.printText;
 
 public class PrintController {
 
+    public static Locale lokal = new Locale("id");
+
     private static String payment;
 
     public static void printCash(Activity activity, String data){
@@ -58,7 +61,8 @@ public class PrintController {
 
         String tanggalTransaksi = model.getCreatedAt();
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", lokal);
         Date date = null;
         try {
             date = dateFormat.parse(tanggalTransaksi);
@@ -66,7 +70,8 @@ public class PrintController {
             e.printStackTrace();
         }
 
-        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm"); //If you need time just put specific format for time like 'HH:mm:ss'
+//        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm", lokal);
         String ubahTanggalTransaksi = formatter.format(date);
         try {
             os = mBluetoothSocket.getOutputStream();
@@ -156,7 +161,8 @@ public class PrintController {
 
         String tanggalTransaksi = model.getCreatedAt();
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", lokal);
         Date date = null;
         try {
             date = dateFormat.parse(tanggalTransaksi);
@@ -164,7 +170,8 @@ public class PrintController {
             e.printStackTrace();
         }
 
-        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm"); //If you need time just put specific format for time like 'HH:mm:ss'
+//        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm", lokal);
         String ubahTanggalTransaksi = formatter.format(date);
         try {
             os = mBluetoothSocket.getOutputStream();
@@ -260,7 +267,8 @@ public class PrintController {
 
         String tanggalTransaksi = model.getCreatedAt();
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", lokal);
         Date date = null;
         try {
             date = dateFormat.parse(tanggalTransaksi);
@@ -268,7 +276,8 @@ public class PrintController {
             e.printStackTrace();
         }
 
-        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm"); //If you need time just put specific format for time like 'HH:mm:ss'
+//        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm", lokal);
         String ubahTanggalTransaksi = formatter.format(date);
         try {
             os = mBluetoothSocket.getOutputStream();
@@ -420,7 +429,7 @@ public class PrintController {
         String province = userModels.getProvince();
         String provinces = province.replaceAll("[^A-Za-z ]","");
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", lokal);
         Date date = null;
         try {
             date = dateFormat.parse(model.getCreatedAt());
@@ -428,7 +437,7 @@ public class PrintController {
             e.printStackTrace();
         }
 
-        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm"); //If you need time just put specific format for time like 'HH:mm:ss'
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm", lokal);
         String ubahTanggalTransaksi = formatter.format(date);
 
         if(model.getPaymentType().equals("Cash")){

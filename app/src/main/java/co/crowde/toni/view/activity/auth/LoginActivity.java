@@ -20,6 +20,7 @@ import androidx.cardview.widget.CardView;
 import com.google.android.material.textfield.TextInputLayout;
 
 import co.crowde.toni.R;
+import co.crowde.toni.base.BaseActivity;
 import co.crowde.toni.constant.Const;
 import co.crowde.toni.helper.analytics.AnalyticsApplication;
 import co.crowde.toni.helper.analytics.AnalyticsTrackers;
@@ -30,7 +31,7 @@ import co.crowde.toni.view.dialog.message.app.CloseAppsDialog;
 
 import static co.crowde.toni.utils.ValidateEdittext.validateLogin;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -41,7 +42,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     EditText et_username, et_password;
     TextInputLayout textInputLayout;
     CardView btnLogin;
-    ProgressDialog progressDialog;
 
     boolean isShown;
 
@@ -58,7 +58,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         setContentView(R.layout.activity_login);
 
-        progressDialog = new ProgressDialog(LoginActivity.this);
 
         isShown = false;
 
@@ -128,10 +127,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void btnLoginListener() {
         AnalyticsToniUtils.getEvent(Const.CATEGORY_AUTHENTIFICATION,Const.MODUL_LOGIN,Const.LABEL_LOGIN);
-
-        progressDialog.setMessage("Harap tunggu...");
-        progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.show();
+        showDialog();
 
         if(et_username.getText().toString().equals("admin")){
             progressDialog.dismiss();
