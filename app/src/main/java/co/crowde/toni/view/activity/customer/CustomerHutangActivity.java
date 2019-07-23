@@ -28,6 +28,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
+
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -52,9 +54,11 @@ import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CustomerModel;
 import co.crowde.toni.model.ShopModel;
 import co.crowde.toni.network.CustomerRequest;
+import co.crowde.toni.utils.SetHeader;
 import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.utils.print.PrinterNetwork;
 import co.crowde.toni.view.activity.print.WaitingCreditPayActivity;
+import co.crowde.toni.view.activity.transaction.DetailTransactionActivity;
 import co.crowde.toni.view.dialog.message.customer.CreditPayDialog;
 import co.crowde.toni.view.dialog.message.printer.PrinterConnectivityDialog;
 import co.crowde.toni.view.fragment.modul.CustomerFragment;
@@ -89,10 +93,15 @@ public class CustomerHutangActivity extends AppCompatActivity {
 
     public static ProgressDialog progressDialog;
 
+    AppBarLayout appBarLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_hutang);
+
+        appBarLayout = findViewById(R.id.appBar);
+        SetHeader.isLolipop(CustomerHutangActivity.this, appBarLayout);
 
         progressDialog = new ProgressDialog(CustomerHutangActivity.this);
 

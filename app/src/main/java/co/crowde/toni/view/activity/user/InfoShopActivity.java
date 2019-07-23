@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
@@ -14,6 +15,8 @@ import co.crowde.toni.R;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.ShopModel;
 import co.crowde.toni.network.API;
+import co.crowde.toni.utils.SetHeader;
+import co.crowde.toni.view.activity.transaction.DetailTransactionActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
@@ -24,10 +27,15 @@ public class InfoShopActivity extends AppCompatActivity {
     CircleImageView imgShop;
     Toolbar toolbarShop;
 
+    AppBarLayout appBarLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_shop);
+
+        appBarLayout = findViewById(R.id.appBarLayout);
+        SetHeader.isLolipop(InfoShopActivity.this, appBarLayout);
 
         tvShopName = findViewById(R.id.tv_shop_name);
         tvOwnerName = findViewById(R.id.tv_shop_owner);

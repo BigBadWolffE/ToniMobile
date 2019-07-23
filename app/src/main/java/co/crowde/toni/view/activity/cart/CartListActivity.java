@@ -14,12 +14,16 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.material.appbar.AppBarLayout;
+
 import co.crowde.toni.R;
 import co.crowde.toni.constant.Const;
 import co.crowde.toni.database.Cart;
 import co.crowde.toni.helper.OnSwipeTouchListener;
 import co.crowde.toni.helper.SavePref;
+import co.crowde.toni.utils.SetHeader;
 import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
+import co.crowde.toni.view.activity.filter.DashboardFilterActivity;
 import co.crowde.toni.view.fragment.cart.CartListItemFragment;
 import co.crowde.toni.view.fragment.cart.CartPaymentFragment;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
@@ -33,6 +37,8 @@ implements View.OnClickListener{
     public static ImageView imgDelete;
 
     static Cart dbCart;
+
+    AppBarLayout appBarLayout;
 
 
     public static boolean show;
@@ -50,6 +56,9 @@ implements View.OnClickListener{
 //        }
 
         setContentView(R.layout.activity_cart_list);
+
+        appBarLayout = findViewById(R.id.appBar);
+        SetHeader.isLolipop(CartListActivity.this, appBarLayout);
 
         show  = false;
 

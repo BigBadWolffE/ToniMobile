@@ -61,6 +61,11 @@ public class InventoryFragment extends Fragment {
 
     Drawable close;
     Drawable search;
+    static Drawable filter, filtered;
+
+    public static String categoryId = "";
+    public static String productName = "";
+    public static String status = "";
 
     public InventoryFragment() {
         // Required empty public constructor
@@ -297,35 +302,54 @@ public class InventoryFragment extends Fragment {
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
 
-        if (InventoryFilterActivity.category.size() > 0) {
-            StringBuilder buffer = new StringBuilder();
-            for (String each : InventoryFilterActivity.category)
-                buffer.append(",").append(each);
-            ProductRequest.categoryId = buffer.deleteCharAt(0).toString();
-
-            AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_PRODUCT,Const.LABEL_PRODUCT_FILTER_CATEGORY_INVENTORY);
-        } else {
+        if(categoryId.equals("")){
             ProductRequest.categoryId = "";
-        }
-
-        if (InventoryFilterActivity.statusList.size() > 0) {
-            StringBuilder buffer1 = new StringBuilder();
-            for (String each : InventoryFilterActivity.statusList)
-                buffer1.append(",").append(each);
-            ProductRequest.status = buffer1.deleteCharAt(0).toString();
-
-            AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_PRODUCT,Const.LABEL_PRODUCT_FILTER_STATUS_INVENTORY);
         } else {
-            ProductRequest.status = "";
+            ProductRequest.categoryId = categoryId;
         }
+
+        if(status.equals("")){
+            ProductRequest.status = "";
+        } else {
+            ProductRequest.status = status;
+        }
+
+        isFiltered(activity, activity.getBaseContext());
+
         ProductRequest.page = 1;
         ProductRequest.supplierId = "";
         ProductRequest.productName = etSearch.getText().toString();
         productModels.clear();
 
-//        inventoryAdapter.replaceItemFiltered(productModels);
-//        inventoryAdapter.notifyDataSetChanged();
+        if(etSearch.getText().toString().length()>0){
+            AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_PRODUCT,Const.LABEL_PRODUCT_SEARCH_DASHBOARD);
+        }
+
+        if(ProductRequest.categoryId.length()>1 || ProductRequest.status.length()>1){
+            AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_PRODUCT,Const.LABEL_PRODUCT_FILTER_DASHBOARD);
+        }
+
         ProductRequest.getInventoryList(activity);
+
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    public static void isFiltered(final Activity activity, final Context context){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            filter = context.getDrawable(R.drawable.ic_tune_black_24dp);
+            filtered = context.getDrawable(R.drawable.ic_tune_white_24dp);
+        } else {
+            filter = activity.getResources().getDrawable(R.drawable.ic_tune_black_24dp);
+            filtered = activity.getResources().getDrawable(R.drawable.ic_tune_white_24dp);
+        }
+
+        if(!categoryId.equals("")|| !status.equals("")){
+            imgBtnFilter.setImageDrawable(filtered);
+            imgBtnFilter.setBackground(activity.getResources().getDrawable(R.drawable.bg_rec_radius_5dp_green));
+        } else {
+            imgBtnFilter.setImageDrawable(filter);
+            imgBtnFilter.setBackgroundColor(activity.getResources().getColor(R.color.colorWhite));
+        }
 
     }
 

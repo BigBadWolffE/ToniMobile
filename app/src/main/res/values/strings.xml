@@ -366,5 +366,6 @@
     <string name="berhasil_silahkan_masukkan_kata_sandi_anda_yang_baru_textview">Berhasil! Silahkan masukkan \n kata sandi Anda yang baru.</string>
     <string name="kata_sandi_baru">Kata sandi baru</string>
     <string name="ulangi_kata_sandi">Ulangi kata sandi</string>
+    <string name="mulai_habis">Mulai habis</string>
 
 </resources>

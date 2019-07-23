@@ -25,14 +25,14 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:title="Filter Product">
-            <ImageView
-                android:id="@+id/imgResetFilter"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="end"
-                android:layout_marginEnd="16dp"
-                app:srcCompat="@drawable/ic_sync_black_24dp"
-                android:layout_marginRight="16dp" />
+            <!--<ImageView-->
+            <!--android:id="@+id/imgResetFilter"-->
+            <!--android:layout_width="25dp"-->
+            <!--android:layout_height="25dp"-->
+            <!--android:layout_gravity="end"-->
+            <!--android:layout_marginEnd="16dp"-->
+            <!--app:srcCompat="@drawable/ic_sync_black_24dp"-->
+            <!--android:layout_marginRight="16dp" />-->
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -48,79 +48,56 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBar" />
 
-    <!--<android.support.v7.widget.AppCompatEditText-->
-        <!--android:id="@+id/etCategory"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginLeft="8dp"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginRight="8dp"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/tvCategoryLabel">-->
 
-    <!--</android.support.v7.widget.AppCompatEditText>-->
-
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/layoutSearch"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:orientation="vertical"
+        android:padding="6dp"
         android:background="@drawable/bg_rec_stroke_radius_5dp_grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvCategoryLabel">
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvCategoryLabel"/>
-        <AutoCompleteTextView
-            android:id="@+id/etCategory"
+        <com.nex3z.flowlayout.FlowLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="8dp"
-            android:inputType="textMultiLine"
-            android:hint="@string/cari_kategori"
-            android:background="@color/colorWhiteLight"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chipCategory"
-            tools:targetApi="m" />
+            android:gravity="center_vertical">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rc_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
-    </LinearLayout>
+            <AutoCompleteTextView
+                android:id="@+id/etCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhiteLight"
+                android:hint="@string/cari_kategori"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:dropDownWidth="fill_parent"/>
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipHistoryCategory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutSearch" />
+        </com.nex3z.flowlayout.FlowLayout>
+
+    </RelativeLayout>
+
+    <!--<com.google.android.material.chip.ChipGroup-->
+    <!--android:id="@+id/chipHistoryCategory"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginStart="16dp"-->
+    <!--android:layout_marginLeft="16dp"-->
+    <!--android:layout_marginTop="8dp"-->
+    <!--android:layout_marginEnd="16dp"-->
+    <!--android:layout_marginRight="16dp"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintStart_toStartOf="parent"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/layoutSearch" />-->
 
     <TextView
         android:id="@+id/tvStatus"
@@ -130,19 +107,161 @@
         android:text="@string/status_stok_low"
         android:textColor="@color/colorBlack"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chipHistoryCategory" />
+        app:layout_constraintTop_toBottomOf="@+id/layoutSearch" />
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipStatus"
-        android:layout_width="match_parent"
+    <com.nex3z.flowlayout.FlowLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/layoutSearch"
+        app:layout_constraintStart_toStartOf="@+id/layoutSearch"
+        app:layout_constraintTop_toBottomOf="@+id/tvStatus">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_btn_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            app:cardBackgroundColor="@color/colorThemeGreyLight"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp">
+
+            <TextView
+                android:id="@+id/tv_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/semua"
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp"
+                android:textStyle="bold"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_btn_ready"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            app:cardBackgroundColor="@color/colorThemeGreyLight"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp">
+
+            <TextView
+                android:id="@+id/tv_ready"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/tersedia_low"
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp"
+                android:textStyle="bold"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_btn_almost_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            app:cardBackgroundColor="@color/colorThemeGreyLight"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp">
+
+            <TextView
+                android:id="@+id/tv_almost_empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/mulai_habis"
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp"
+                android:textStyle="bold"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_btn_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            app:cardBackgroundColor="@color/colorThemeGreyLight"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp">
+
+            <TextView
+                android:id="@+id/tv_empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/habis"
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp"
+                android:textStyle="bold"/>
+
+        </androidx.cardview.widget.CardView>
+    </com.nex3z.flowlayout.FlowLayout>
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutFooter"
+        android:layout_width="0dp"
+        android:layout_height="?actionBarSize"
+        android:background="@color/EdittextLogin"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvStatus"/>
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_btn_set_filter"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/colorThemeOrange"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="5:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_set"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/simpan"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold" />
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

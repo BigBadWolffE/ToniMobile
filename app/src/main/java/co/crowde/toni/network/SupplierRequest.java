@@ -75,8 +75,8 @@ public class SupplierRequest {
                                 for(int i=0; i<supplierModels.size();i++){
                                     String nama = supplierModels.get(i).getSupplierName();
                                     String id = supplierModels.get(i).getSupplierId();
-                                    CatalogFilterActivity.supplierModels.add(new SupplierModel(
-                                            id,nama));
+//                                    CatalogFilterActivity.supplierModels.add(new SupplierModel(
+//                                            id,nama));
                                 }
 
                             } else {

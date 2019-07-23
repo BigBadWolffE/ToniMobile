@@ -21,7 +21,7 @@ public class CategoryChipsFilterAdapter extends RecyclerView.Adapter<RecyclerVie
 
     private Context context;
     private Activity activity ;
-    private List<CategoryModel> categoryModelList = new ArrayList<>();
+    private List<CategoryModel> categoryModelList;
     private ChipsFilterListener listener;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -39,10 +39,10 @@ public class CategoryChipsFilterAdapter extends RecyclerView.Adapter<RecyclerVie
 
     public CategoryChipsFilterAdapter(Context context,
                                       List<CategoryModel> categoryModels,
-                                      Activity activity, ChipsFilterListener listener) {
+                                      Activity activity,
+                                      ChipsFilterListener listener) {
         this.context = context;
-        this.categoryModelList.clear();
-        this.categoryModelList.addAll(categoryModels);
+        this.categoryModelList = categoryModels;
         this.activity = activity;
         this.listener = listener;
     }
@@ -59,18 +59,18 @@ public class CategoryChipsFilterAdapter extends RecyclerView.Adapter<RecyclerVie
         ViewHolder viewHolder = (ViewHolder) holder;
         if (model != null) {
             viewHolder.tvName.setText(model.getCategoryName());
-//            viewHolder.imgClose.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    listener.onDeleteItemClick(v, position);
-//                }
-//            });
+            viewHolder.imgClose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onDeleteItemClick(v, position);
+                }
+            });
         }
 
     }
 
     @Override
     public int getItemCount(){
-        return categoryModelList != null ? categoryModelList.size() : 0;
+        return categoryModelList.size();
     }
 }

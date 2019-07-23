@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.gson.Gson;
 
 import java.text.DateFormat;
@@ -33,6 +34,8 @@ import co.crowde.toni.model.TransactionProductModel;
 import co.crowde.toni.model.response.list.TransactionModel;
 import co.crowde.toni.network.CustomerRequest;
 import co.crowde.toni.network.TransactionRequest;
+import co.crowde.toni.utils.SetHeader;
+import co.crowde.toni.view.activity.catalog.CatalogProductActivity;
 import co.crowde.toni.view.dialog.message.transaction.RePrintTransactionDialog;
 import co.crowde.toni.view.fragment.modul.InventoryFragment;
 
@@ -58,6 +61,8 @@ public class DetailTransactionActivity extends AppCompatActivity {
 
     public static TransactionModel model;
 
+    AppBarLayout appBarLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +72,9 @@ public class DetailTransactionActivity extends AppCompatActivity {
         progressDialog.setMessage("Harap tunggu...");
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
+
+        appBarLayout = findViewById(R.id.appBar);
+        SetHeader.isLolipop(DetailTransactionActivity.this, appBarLayout);
 
         tvCustomerName = findViewById(R.id.tv_transaction_customer_name);
         tvTransactionDate = findViewById(R.id.tv_transaction_date);

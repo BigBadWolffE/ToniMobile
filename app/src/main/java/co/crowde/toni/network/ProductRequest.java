@@ -143,6 +143,14 @@ public class ProductRequest {
                         +"&supplierId="+supplierId)
                 .build();
 
+        Log.e("URL",API.Product+API.Slash
+                +SavePref.readShopId(activity)
+                +"?limit=20&page="+page
+                +"&filter="+productName
+                +"&categoryId="+categoryId
+                +"&status="+status
+                +"&supplierId="+supplierId);
+
         client.newCall(requestHttp).enqueue(new Callback() {
             @Override
             public void onFailure(Request request, final IOException e) {

@@ -27,6 +27,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.appbar.AppBarLayout;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +37,9 @@ import co.crowde.toni.adapter.CatalogProductAdapter;
 import co.crowde.toni.network.CatalogRequest;
 import co.crowde.toni.helper.CloseSoftKeyboard;
 import co.crowde.toni.model.CatalogModel;
+import co.crowde.toni.network.ProductRequest;
+import co.crowde.toni.utils.SetHeader;
+import co.crowde.toni.view.activity.customer.SelectCustomerActivity;
 import co.crowde.toni.view.activity.filter.CatalogFilterActivity;
 import co.crowde.toni.view.dialog.message.catalog.AddCatalogDialog;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
@@ -60,6 +65,13 @@ public class CatalogProductActivity extends AppCompatActivity {
     Drawable close;
     Drawable search;
 
+    static Drawable filter, filtered;
+
+    public static String categoryId = "";
+    public static String productName = "";
+
+    AppBarLayout appBarLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +83,9 @@ public class CatalogProductActivity extends AppCompatActivity {
 //            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 //        }
         setContentView(R.layout.activity_catalog_product);
+
+        appBarLayout = findViewById(R.id.appBarLayout);
+        SetHeader.isLolipop(CatalogProductActivity.this, appBarLayout);
 
         progressDialog = new ProgressDialog(this);
 
@@ -326,24 +341,16 @@ public class CatalogProductActivity extends AppCompatActivity {
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
 
-        if (CatalogFilterActivity.category.size() > 0) {
-            StringBuilder buffer = new StringBuilder();
-            for (String each : CatalogFilterActivity.category)
-                buffer.append(",").append(each);
-            CatalogRequest.categoryId = buffer.deleteCharAt(0).toString();
-        } else {
+        if(categoryId.equals("")){
             CatalogRequest.categoryId = "";
+        } else {
+            CatalogRequest.categoryId = categoryId;
         }
 
-        if (CatalogFilterActivity.supplier.size() > 0) {
-            StringBuilder buffer1 = new StringBuilder();
-            for (String each : CatalogFilterActivity.supplier)
-                buffer1.append(",").append(each);
-            CatalogRequest.supplierId = buffer1.deleteCharAt(0).toString();
-        } else {
-            CatalogRequest.supplierId = "";
-        }
+        isFiltered(activity, activity.getBaseContext());
+
         CatalogRequest.page = 1;
+        CatalogRequest.supplierId = "";
         CatalogRequest.productName = etSearchProduct.getText().toString();
         productModels.clear();
 
@@ -352,5 +359,26 @@ public class CatalogProductActivity extends AppCompatActivity {
         CatalogRequest.getCatalogList(activity);
 
     }
+
+    @SuppressLint("ClickableViewAccessibility")
+    public static void isFiltered(final Activity activity, final Context context){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            filter = context.getDrawable(R.drawable.ic_tune_black_24dp);
+            filtered = context.getDrawable(R.drawable.ic_tune_white_24dp);
+        } else {
+            filter = activity.getResources().getDrawable(R.drawable.ic_tune_black_24dp);
+            filtered = activity.getResources().getDrawable(R.drawable.ic_tune_white_24dp);
+        }
+
+        if(!categoryId.equals("")){
+            imgBtnFilter.setImageDrawable(filtered);
+            imgBtnFilter.setBackground(activity.getResources().getDrawable(R.drawable.bg_rec_radius_5dp_green));
+        } else {
+            imgBtnFilter.setImageDrawable(filter);
+            imgBtnFilter.setBackgroundColor(activity.getResources().getColor(R.color.colorWhite));
+        }
+
+    }
+
 
 }

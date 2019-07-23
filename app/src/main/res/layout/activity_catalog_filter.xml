@@ -7,6 +7,171 @@
     android:background="@color/colorWhite"
     tools:context=".view.activity.filter.CatalogFilterActivity">
 
+    <!--<com.google.android.material.appbar.AppBarLayout-->
+        <!--android:id="@+id/appBar"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="?actionBarSize"-->
+        <!--android:background="@color/EdittextLogin"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent">-->
+
+        <!--<androidx.appcompat.widget.Toolbar-->
+            <!--android:id="@+id/toolbarFilter"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="?attr/actionBarSize"-->
+            <!--app:title="Filter Katalog">-->
+            <!--<ImageView-->
+                <!--android:id="@+id/imgResetFilter"-->
+                <!--android:layout_width="25dp"-->
+                <!--android:layout_height="25dp"-->
+                <!--android:layout_gravity="end"-->
+                <!--android:layout_marginEnd="16dp"-->
+                <!--app:srcCompat="@drawable/ic_sync_black_24dp"-->
+                <!--android:layout_marginRight="16dp" />-->
+
+        <!--</androidx.appcompat.widget.Toolbar>-->
+
+    <!--</com.google.android.material.appbar.AppBarLayout>-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/tvSupplierLabel"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="16dp"-->
+        <!--android:text="@string/produsen_low"-->
+        <!--android:textColor="@color/colorBlack"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/appBar" />-->
+
+    <!--<LinearLayout-->
+        <!--android:id="@+id/layoutSupplierSearch"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="16dp"-->
+        <!--android:layout_marginLeft="16dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:layout_marginEnd="16dp"-->
+        <!--android:layout_marginRight="16dp"-->
+        <!--android:orientation="vertical"-->
+        <!--android:background="@drawable/bg_rec_stroke_radius_5dp_grey"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/tvSupplierLabel">-->
+
+        <!--<com.google.android.material.chip.ChipGroup-->
+            <!--android:id="@+id/chipSupplier"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="16dp"-->
+            <!--android:layout_marginLeft="16dp"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_marginEnd="16dp"-->
+            <!--android:layout_marginRight="16dp"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/tvSupplierLabel"/>-->
+        <!--<AutoCompleteTextView-->
+            <!--android:id="@+id/etSupplier"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="16dp"-->
+            <!--android:layout_marginLeft="16dp"-->
+            <!--android:layout_marginEnd="16dp"-->
+            <!--android:layout_marginRight="16dp"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:inputType="textMultiLine"-->
+            <!--android:hint="@string/cari_produsen"-->
+            <!--android:background="@color/colorWhiteLight"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/chipSupplier"-->
+            <!--tools:targetApi="m" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--<com.google.android.material.chip.ChipGroup-->
+        <!--android:id="@+id/chipHistorySupplier"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="16dp"-->
+        <!--android:layout_marginLeft="16dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:layout_marginEnd="16dp"-->
+        <!--android:layout_marginRight="16dp"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/layoutSupplierSearch" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/tvCategoryLabel"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="16dp"-->
+        <!--android:text="@string/kategori"-->
+        <!--android:textColor="@color/colorBlack"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/chipHistorySupplier" />-->
+
+    <!--<LinearLayout-->
+        <!--android:id="@+id/layoutCategorySearch"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="16dp"-->
+        <!--android:layout_marginLeft="16dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:layout_marginEnd="16dp"-->
+        <!--android:layout_marginRight="16dp"-->
+        <!--android:orientation="vertical"-->
+        <!--android:background="@drawable/bg_rec_stroke_radius_5dp_grey"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/tvCategoryLabel">-->
+
+        <!--<com.google.android.material.chip.ChipGroup-->
+            <!--android:id="@+id/chipCategory"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="16dp"-->
+            <!--android:layout_marginLeft="16dp"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_marginEnd="16dp"-->
+            <!--android:layout_marginRight="16dp"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/tvCategoryLabel"/>-->
+        <!--<AutoCompleteTextView-->
+            <!--android:id="@+id/etCategory"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="16dp"-->
+            <!--android:layout_marginLeft="16dp"-->
+            <!--android:layout_marginEnd="16dp"-->
+            <!--android:layout_marginRight="16dp"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:inputType="textMultiLine"-->
+            <!--android:hint="@string/cari_kategori"-->
+            <!--android:background="@color/colorWhiteLight"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/chipCategory"-->
+            <!--tools:targetApi="m" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--<com.google.android.material.chip.ChipGroup-->
+        <!--android:id="@+id/chipHistoryCategory"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="16dp"-->
+        <!--android:layout_marginLeft="16dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:layout_marginEnd="16dp"-->
+        <!--android:layout_marginRight="16dp"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/layoutCategorySearch" />-->
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="0dp"
@@ -20,88 +185,19 @@
             android:id="@+id/toolbarFilter"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="Filter Katalog">
-            <ImageView
-                android:id="@+id/imgResetFilter"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="end"
-                android:layout_marginEnd="16dp"
-                app:srcCompat="@drawable/ic_sync_black_24dp"
-                android:layout_marginRight="16dp" />
+            app:title="Filter Product">
+            <!--<ImageView-->
+            <!--android:id="@+id/imgResetFilter"-->
+            <!--android:layout_width="25dp"-->
+            <!--android:layout_height="25dp"-->
+            <!--android:layout_gravity="end"-->
+            <!--android:layout_marginEnd="16dp"-->
+            <!--app:srcCompat="@drawable/ic_sync_black_24dp"-->
+            <!--android:layout_marginRight="16dp" />-->
 
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
-
-    <TextView
-        android:id="@+id/tvSupplierLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/produsen_low"
-        android:textColor="@color/colorBlack"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBar" />
-
-    <LinearLayout
-        android:id="@+id/layoutSupplierSearch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:orientation="vertical"
-        android:background="@drawable/bg_rec_stroke_radius_5dp_grey"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSupplierLabel">
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipSupplier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvSupplierLabel"/>
-        <AutoCompleteTextView
-            android:id="@+id/etSupplier"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="8dp"
-            android:inputType="textMultiLine"
-            android:hint="@string/cari_produsen"
-            android:background="@color/colorWhiteLight"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chipSupplier"
-            tools:targetApi="m" />
-
-    </LinearLayout>
-
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipHistorySupplier"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutSupplierSearch" />
 
     <TextView
         android:id="@+id/tvCategoryLabel"
@@ -111,65 +207,94 @@
         android:text="@string/kategori"
         android:textColor="@color/colorBlack"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chipHistorySupplier" />
+        app:layout_constraintTop_toBottomOf="@+id/appBar" />
 
-    <LinearLayout
-        android:id="@+id/layoutCategorySearch"
-        android:layout_width="match_parent"
+
+    <RelativeLayout
+        android:id="@+id/layoutSearch"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:orientation="vertical"
+        android:padding="6dp"
         android:background="@drawable/bg_rec_stroke_radius_5dp_grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvCategoryLabel">
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvCategoryLabel"/>
-        <AutoCompleteTextView
-            android:id="@+id/etCategory"
+        <com.nex3z.flowlayout.FlowLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="8dp"
-            android:inputType="textMultiLine"
-            android:hint="@string/cari_kategori"
-            android:background="@color/colorWhiteLight"
+            android:gravity="center_vertical">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rc_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/etCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhiteLight"
+                android:hint="@string/cari_kategori"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:dropDownWidth="fill_parent"/>
+
+        </com.nex3z.flowlayout.FlowLayout>
+
+    </RelativeLayout>
+
+    <!--<com.google.android.material.chip.ChipGroup-->
+    <!--android:id="@+id/chipHistoryCategory"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginStart="16dp"-->
+    <!--android:layout_marginLeft="16dp"-->
+    <!--android:layout_marginTop="8dp"-->
+    <!--android:layout_marginEnd="16dp"-->
+    <!--android:layout_marginRight="16dp"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintStart_toStartOf="parent"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/layoutSearch" />-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutFooter"
+        android:layout_width="0dp"
+        android:layout_height="?actionBarSize"
+        android:background="@color/EdittextLogin"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_btn_set_filter"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/colorThemeOrange"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="5:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chipCategory"
-            tools:targetApi="m" />
+            app:layout_constraintTop_toTopOf="parent">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tv_set"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/simpan"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold" />
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipHistoryCategory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutCategorySearch" />
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

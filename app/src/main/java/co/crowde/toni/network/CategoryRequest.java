@@ -82,6 +82,8 @@ public class CategoryRequest {
                                     DashboardFilterActivity.progressDialog.dismiss();
                                 }
 
+                                DashboardFilterActivity.validateCategoryId(activity);
+
                             } else {
                                 if(message.equals("Token tidak valid")){
                                     DashboardFilterActivity.progressDialog.dismiss();
@@ -152,6 +154,8 @@ public class CategoryRequest {
                                     InventoryFilterActivity.progressDialog.dismiss();
                                 }
 
+                                InventoryFilterActivity.validateCategoryId(activity);
+
                             } else {
                                 if(message.equals("Token tidak valid")){
                                     InventoryFilterActivity.progressDialog.dismiss();
@@ -221,6 +225,8 @@ public class CategoryRequest {
                                             id,nama));
                                     CatalogFilterActivity.progressDialog.dismiss();
                                 }
+
+                                CatalogFilterActivity.validateCategoryId(activity);
 
                             } else {
                                 if(message.equals("Token tidak valid")){

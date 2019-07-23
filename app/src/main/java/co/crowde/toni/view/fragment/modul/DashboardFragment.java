@@ -66,6 +66,7 @@ public class DashboardFragment extends Fragment {
 
     static Drawable close;
     static Drawable search;
+    static Drawable filter, filtered;
 
     //Database Keranjang
     public static Cart dbCart;
@@ -82,6 +83,10 @@ public class DashboardFragment extends Fragment {
     private static DecimalFormat formatNumber;
 
     public static ProgressDialog progressDialog;
+
+    public static String categoryId = "";
+    public static String productName = "";
+    public static String status = "";
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -333,23 +338,19 @@ public class DashboardFragment extends Fragment {
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
 
-        if(DashboardFilterActivity.category.size()>0){
-            StringBuilder buffer = new StringBuilder();
-            for (String each : DashboardFilterActivity.category)
-                buffer.append(",").append(each);
-            ProductRequest.categoryId = buffer.deleteCharAt(0).toString();
-        } else {
+        if(categoryId.equals("")){
             ProductRequest.categoryId = "";
+        } else {
+            ProductRequest.categoryId = categoryId;
         }
 
-        if(DashboardFilterActivity.statusList.size()>0){
-            StringBuilder buffer1 = new StringBuilder();
-            for (String each : DashboardFilterActivity.statusList)
-                buffer1.append(",").append(each);
-            ProductRequest.status= buffer1.deleteCharAt(0).toString();
-        } else {
+        if(status.equals("")){
             ProductRequest.status = "";
+        } else {
+            ProductRequest.status = status;
         }
+
+        isFiltered(activity, activity.getBaseContext());
 
         ProductRequest.page=1;
         ProductRequest.supplierId="";
@@ -365,6 +366,26 @@ public class DashboardFragment extends Fragment {
         }
 
         ProductRequest.getProductList(activity);
+
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    public static void isFiltered(final Activity activity, final Context context){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            filter = context.getDrawable(R.drawable.ic_tune_black_24dp);
+            filtered = context.getDrawable(R.drawable.ic_tune_white_24dp);
+        } else {
+            filter = activity.getResources().getDrawable(R.drawable.ic_tune_black_24dp);
+            filtered = activity.getResources().getDrawable(R.drawable.ic_tune_white_24dp);
+        }
+
+        if(!categoryId.equals("")|| !status.equals("")){
+            imgBtnFilter.setImageDrawable(filtered);
+            imgBtnFilter.setBackground(activity.getResources().getDrawable(R.drawable.bg_rec_radius_5dp_green));
+        } else {
+            imgBtnFilter.setImageDrawable(filter);
+            imgBtnFilter.setBackgroundColor(activity.getResources().getColor(R.color.colorWhite));
+        }
 
     }
 

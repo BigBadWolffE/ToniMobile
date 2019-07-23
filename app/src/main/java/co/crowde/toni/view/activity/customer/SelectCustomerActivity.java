@@ -29,6 +29,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.appbar.AppBarLayout;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +39,8 @@ import co.crowde.toni.adapter.CustomerAdapter;
 import co.crowde.toni.helper.CloseSoftKeyboard;
 import co.crowde.toni.model.CustomerModel;
 import co.crowde.toni.network.CustomerRequest;
+import co.crowde.toni.utils.SetHeader;
+import co.crowde.toni.view.activity.filter.DashboardFilterActivity;
 
 public class SelectCustomerActivity extends AppCompatActivity {
 
@@ -65,6 +69,8 @@ public class SelectCustomerActivity extends AppCompatActivity {
 
     public static ProgressDialog progressDialog;
 
+    AppBarLayout appBarLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +83,9 @@ public class SelectCustomerActivity extends AppCompatActivity {
 //        }
 
         setContentView(R.layout.activity_select_customer);
+
+        appBarLayout = findViewById(R.id.appBar);
+        SetHeader.isLolipop(SelectCustomerActivity.this, appBarLayout);
 
         progressDialog = new ProgressDialog(SelectCustomerActivity.this);
 

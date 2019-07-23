@@ -20,10 +20,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.gson.Gson;
@@ -43,42 +45,39 @@ import co.crowde.toni.helper.CloseSoftKeyboard;
 import co.crowde.toni.listener.ChipsFilterListener;
 import co.crowde.toni.model.CategoryModel;
 import co.crowde.toni.network.CategoryRequest;
+import co.crowde.toni.utils.SetHeader;
+import co.crowde.toni.view.activity.auth.RegisterActivity;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
 
-public class DashboardFilterActivity extends AppCompatActivity {
-
-    public static ProgressDialog progressDialog;
-
-    public static ArrayList<Boolean> booleanArrayList = new ArrayList<>();
-    public static ArrayList<String> statusList = new ArrayList<>();
-    public static String[] status = {"Tersedia", "Mulai habis", "Habis"};
-
-    ChipsFilterListener listener;
+public class DashboardFilterActivity extends AppCompatActivity implements View.OnClickListener {
 
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
 
+    public static ProgressDialog progressDialog;
+
+    AppBarLayout appBarLayout;
+
+    //Filter
+    CardView cvSetFilter, cvAll, cvReady, cvAlmostEmpty, cvEmpty;
+    TextView tvAll, tvReady, tvAlmostEmpty, tvEmpty;
+    static String status = "";
+    static String categoryId = "";
+
     public static TextView tvCategory, tvStatus;
     public static Toolbar toolbarFilter;
-    public static ChipsInput chipsInput;
 
-    public static List<CategoryModel> categories = new ArrayList<>();
     public static ArrayList<CategoryModel> categoryModels = new ArrayList<>();
-    public static ArrayList<String> category = new ArrayList<>();
-    public static ChipGroup chipHistoryCategory, chipStatus;
 
     public static AutoCompleteTextView etCategory;
 
     ConstraintLayout mainLayout;
 
-    ArrayList<CategoryModel> historyCategory;
-
     //Category Filter
-    ArrayList<CategoryModel> categoryChips = new ArrayList<>();
-    RecyclerView rcCategory;
-    CategoryChipsFilterAdapter categoryChipsFilterAdapter;
-    FlowLayout flowLayout;
+    static ArrayList<CategoryModel> categoryChips;
+    static RecyclerView rcCategory;
+    static CategoryChipsFilterAdapter categoryChipsFilterAdapter;
 
 
     @Override
@@ -86,17 +85,39 @@ public class DashboardFilterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_filter);
 
+        appBarLayout = findViewById(R.id.appBar);
+        SetHeader.isLolipop(DashboardFilterActivity.this, appBarLayout);
+
+        categoryChips = new ArrayList<>();
+
         tvCategory = findViewById(R.id.tvCategoryLabel);
         tvStatus = findViewById(R.id.tvStatus);
         toolbarFilter = findViewById(R.id.toolbarFilter);
-        chipHistoryCategory = findViewById(R.id.chipHistoryCategory);
-        chipStatus = findViewById(R.id.chipStatus);
 
         rcCategory = findViewById(R.id.rc_category);
-        flowLayout = findViewById(R.id.layoutSearch);
 
         etCategory = findViewById(R.id.etCategory);
         mainLayout = findViewById(R.id.mainLayout);
+
+        //Status
+        cvAll = findViewById(R.id.cv_btn_all);
+        cvReady = findViewById(R.id.cv_btn_ready);
+        cvAlmostEmpty = findViewById(R.id.cv_btn_almost_empty);
+        cvEmpty = findViewById(R.id.cv_btn_empty);
+        tvAll = findViewById(R.id.tv_all);
+        tvReady = findViewById(R.id.tv_ready);
+        tvAlmostEmpty = findViewById(R.id.tv_almost_empty);
+        tvEmpty = findViewById(R.id.tv_empty);
+
+        cvAll.setOnClickListener(this);
+        cvReady.setOnClickListener(this);
+        cvAlmostEmpty.setOnClickListener(this);
+        cvEmpty.setOnClickListener(this);
+
+        validateStatus();
+
+        cvSetFilter = findViewById(R.id.cv_btn_set_filter);
+        cvSetFilter.setOnClickListener(this);
 
         setSupportActionBar(toolbarFilter);
 
@@ -120,20 +141,10 @@ public class DashboardFilterActivity extends AppCompatActivity {
 
         autoCompleteTextView(this, getBaseContext());
 
-        filterStatus(DashboardFilterActivity.this);
 
-    }
 
-    void setChipsCategory(Activity activity){
-        categoryChipsFilterAdapter = new CategoryChipsFilterAdapter(activity, categoryChips, activity, new ChipsFilterListener() {
-            @Override
-            public void onDeleteItemClick(View v, int position) {
-                categoryChips.remove(position);
-            }
-        });
+//        filterStatus(DashboardFilterActivity.this);
 
-        rcCategory.setLayoutManager(new LinearLayoutManager(activity, LinearLayout.HORIZONTAL, false));
-        rcCategory.setAdapter(categoryChipsFilterAdapter);
     }
 
     void autoCompleteTextView(final Activity activity, Context context) {
@@ -150,124 +161,39 @@ public class DashboardFilterActivity extends AppCompatActivity {
                     getId = obj.getString("categoryId");
                     getName = obj.getString("categoryName");
 
+                    categoryId = getId;
+                    DashboardFragment.categoryId = categoryId;
+
                     categoryChips.add(new CategoryModel(getId,getName));
-//                    categoryChipsFilterAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 etCategory.setText("");
                 setChipsCategory(activity);
+
+                etCategory.setEnabled(false);
             }
         });
 
-//        if(categories.size()>0){
-//            for (int i=0; i<categories.size();i++){
-//                final Chip chip = new Chip(activity);
-//                chip.setId(i);
-//                chip.setTag(i);
-//
-//                chip.setText(categories.get(i).getCategoryName());
-//                chip.setCloseIconVisible(true);
-//                chip.setCheckable(false);
-//
-//                chip.setCloseIconTintResource(R.color.colorWhite);
-//                chip.setChipBackgroundColorResource(R.color.colorThemeGreen);
-//                chip.setTextColor(getResources().getColor(R.color.colorWhite));
-//                chip.setOnCloseIconClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        int tag = (int) v.getTag();
-//                        chipCategory.removeView(v);
-//                        category.remove(tag);
-//                        categories.remove(tag);
-//                    }
-//                });
-//                chipCategory.addView(chip);
-//            }
-//
-//        }
+    }
 
-//        etCategory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-//                if(category.size()>0){
-//                    for(int i=0; i<category.size();i++){
-//                        if(etCategory.getText().toString().equals(categories.get(i).getCategoryName())){
-//                            Toast.makeText(activity, "Kategori sudah terpilih.", Toast.LENGTH_SHORT).show();
-//                        } else {
-//                            String str = new Gson().toJson(etCategory.getAdapter().getItem(position));
-//                            try {
-//                                JSONObject obj = new JSONObject(str);
-//                                categories.add(new CategoryModel(obj.getString("categoryId"), obj.getString("categoryName")));
-//                                category.add(obj.getString("categoryId"));
-//
-//                                final Chip chip = new Chip(activity);
-//                                chip.setId(i);
-//                                chip.setTag(i);
-//
-//                                chip.setText(categories.get(i).getCategoryName());
-//                                chip.setCloseIconVisible(true);
-//                                chip.setCheckable(false);
-//
-//                                chip.setCloseIconTintResource(R.color.colorWhite);
-//                                chip.setChipBackgroundColorResource(R.color.colorThemeGreen);
-//                                chip.setTextColor(getResources().getColor(R.color.colorWhite));
-//                                chip.setOnCloseIconClickListener(new View.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(View v) {
-//                                        int tag = (int) v.getTag();
-//                                        chipCategory.removeView(v);
-//                                        category.remove(tag);
-//                                        categories.remove(tag);
-//                                    }
-//                                });
-//                                chipCategory.addView(chip);
-//                            } catch (JSONException e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//                    }
-//                } else {
-//                    String str = new Gson().toJson(etCategory.getAdapter().getItem(position));
-//                    try {
-//                        JSONObject obj = new JSONObject(str);
-//                        categories.add(new CategoryModel(obj.getString("categoryId"), obj.getString("categoryName")));
-//                        category.add(obj.getString("categoryId"));
-//
-//                        for (int i=0; i<categories.size();i++){
-//                            final Chip chip = new Chip(activity);
-//                            chip.setId(i);
-//                            chip.setTag(i);
-//
-//                            chip.setText(categories.get(i).getCategoryName());
-//                            chip.setCloseIconVisible(true);
-//                            chip.setCheckable(false);
-//
-//                            chip.setCloseIconTintResource(R.color.colorWhite);
-//                            chip.setChipBackgroundColorResource(R.color.colorThemeGreen);
-//                            chip.setTextColor(getResources().getColor(R.color.colorWhite));
-//                            chip.setOnCloseIconClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    int tag = (int) v.getTag();
-//                                    chipCategory.removeView(v);
-//                                    category.remove(tag);
-//                                    categories.remove(tag);
-//                                }
-//                            });
-//                            chipCategory.addView(chip);
-//                        }
-//
-//
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//
-//                etCategory.setText("");
-//
-//            }
-//        });
+    static void setChipsCategory(Activity activity){
+        categoryChipsFilterAdapter = new CategoryChipsFilterAdapter(activity, categoryChips, activity, new ChipsFilterListener() {
+            @Override
+            public void onDeleteItemClick(View v, int position) {
+                categoryChips.remove(position);
+                categoryChipsFilterAdapter.notifyItemRemoved(position);
+                categoryChipsFilterAdapter.notifyItemRangeChanged(position, categoryChips.size());
+
+                categoryId = "";
+                DashboardFragment.categoryId = categoryId;
+
+                etCategory.setEnabled(true);
+            }
+        });
+
+        rcCategory.setLayoutManager(new LinearLayoutManager(activity, LinearLayout.HORIZONTAL, false));
+        rcCategory.setAdapter(categoryChipsFilterAdapter);
     }
 
     public static void loadCategory(Activity activity){
@@ -278,92 +204,138 @@ public class DashboardFilterActivity extends AppCompatActivity {
         CategoryRequest.getCategoryList(activity);
     }
 
-    private static void filterStatus(final Activity activity) {
-        for (int i=0;i<status.length;i++){
-            final Chip chip = new Chip(activity);
-            chip.setId(i);
-            chip.setTag(i);
-
-            chip.setText(status[i]);
-
-
-            chip.setCheckable(true);
-            booleanArrayList.add(false);
-
-            for(int j=0; j<statusList.size();j++){
-                if(chip.getText().equals(statusList.get(j))){
-                    chip.setChecked(true);
-                    chip.setChipBackgroundColor(ColorStateList
-                            .valueOf(activity.getResources()
-                                    .getColor(R.color.colorThemeGreen)));
-                    chip.setTextColor(ColorStateList
-                            .valueOf(activity.getResources()
-                                    .getColor(R.color.colorWhite)));
-                } else if(statusList.get(j).equals("Mulai%20habis")){
-                    if(chip.getText().equals("Mulai habis")){
-                        chip.setChecked(true);
-                        chip.setChipBackgroundColor(ColorStateList
-                                .valueOf(activity.getResources()
-                                        .getColor(R.color.colorThemeGreen)));
-                        chip.setTextColor(ColorStateList
-                                .valueOf(activity.getResources()
-                                        .getColor(R.color.colorWhite)));
-                    }
-
+    public static void validateCategoryId(Activity activity){
+        if(!categoryId.equals("")){
+            for(CategoryModel models : categoryModels){
+                if(models.getCategoryId().equals(categoryId)){
+                    categoryChips.add(new CategoryModel(models.getCategoryId(),models.getCategoryName()));
                 }
-
             }
-
-            chip.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
-                    int tag = (int) compoundButton.getTag();
-                    booleanArrayList.set(tag, b);
-
-                    if(b){
-                        if(chip.getText().equals("Mulai habis")){
-                            statusList.clear();
-                            statusList.add("Mulai%20habis");
-                        } else {
-                            statusList.clear();
-                            statusList.add(chip.getText().toString());
-                        }
-
-//                        ProductController.statusInventory.add(chip.getText().toString());
-                        chip.setChipBackgroundColor(ColorStateList
-                                .valueOf(activity.getResources()
-                                        .getColor(R.color.colorThemeGreen)));
-                        chip.setTextColor(ColorStateList
-                                .valueOf(activity.getResources()
-                                        .getColor(R.color.colorWhite)));
-                    } else {
-                        if(chip.getText().equals("Mulai habis")){
-                            statusList.remove("Mulai%20habis");
-                        } else {
-                            statusList.remove(chip.getText().toString());
-                        }
-//                        statusList.remove(chip.getText().toString());
-//                        ProductController.statusInventory.remove(chip.getText().toString());
-                        chip.setChipBackgroundColor(ColorStateList
-                                .valueOf(activity.getResources()
-                                        .getColor(R.color.colorThemeGreyLight)));
-                        chip.setTextColor(ColorStateList
-                                .valueOf(activity.getResources()
-                                        .getColor(R.color.colorBlack)));
-                    }
-
-                    Log.e("StatusStock",new Gson().toJson(statusList));
-                }
-            });
-            chipStatus.addView(chip);
+            setChipsCategory(activity);
         }
+
     }
+
     @Override
     public void onBackPressed() {
+        status = "";
+        categoryId = "";
+        DashboardFragment.status = status;
+        DashboardFragment.categoryId = categoryId;
         DashboardFragment.requestFilter(DashboardFilterActivity.this);
         super.onBackPressed();
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.cv_btn_all:
+                statusAll();
+                break;
+
+            case R.id.cv_btn_ready:
+                statusReady();
+                break;
+
+            case R.id.cv_btn_almost_empty:
+                statusAlmostEmpty();
+                break;
+
+            case R.id.cv_btn_empty:
+                statusEmpty();
+                break;
+
+            case R.id.cv_btn_set_filter:
+                setFilter();
+                break;
+        }
+
+    }
+
+    private void statusAll() {
+        status = "";
+        DashboardFragment.status = status;
+        validateStatus();
+    }
+
+    private void statusReady() {
+        status = tvReady.getText().toString();
+        DashboardFragment.status = status;
+        validateStatus();
+    }
+
+    private void statusAlmostEmpty() {
+        status = "Mulai%20habis";
+        DashboardFragment.status = status;
+        validateStatus();
+    }
+
+    private void statusEmpty() {
+        status = tvEmpty.getText().toString();
+        DashboardFragment.status = status;
+        validateStatus();
+    }
+
+    private void setFilter() {
+        DashboardFragment.requestFilter(DashboardFilterActivity.this);
+        finish();
+    }
+
+    private void validateStatus() {
+        switch (status) {
+            case "Tersedia":
+                cvAll.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
+                cvReady.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreen));
+                cvAlmostEmpty.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
+                cvEmpty.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
+
+                cvAll.setEnabled(true);
+                cvReady.setEnabled(false);
+                cvAlmostEmpty.setEnabled(true);
+                cvEmpty.setEnabled(true);
+
+                break;
+
+            case "Mulai%20habis":
+                cvAll.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
+                cvReady.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
+                cvAlmostEmpty.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreen));
+                cvEmpty.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
+
+                cvAll.setEnabled(true);
+                cvReady.setEnabled(true);
+                cvAlmostEmpty.setEnabled(false);
+                cvEmpty.setEnabled(true);
+
+                break;
+
+            case "Habis":
+                cvAll.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
+                cvReady.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
+                cvAlmostEmpty.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
+                cvEmpty.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreen));
+
+                cvAll.setEnabled(true);
+                cvReady.setEnabled(true);
+                cvAlmostEmpty.setEnabled(true);
+                cvEmpty.setEnabled(false);
+
+                break;
+
+            default:
+                cvAll.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreen));
+                cvReady.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
+                cvAlmostEmpty.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
+                cvEmpty.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
+
+                cvAll.setEnabled(false);
+                cvReady.setEnabled(true);
+                cvAlmostEmpty.setEnabled(true);
+                cvEmpty.setEnabled(true);
+                break;
+        }
+    }
+
 }
 
 
