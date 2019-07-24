@@ -77,7 +77,7 @@ public class DateTimeFormater {
         calendarWeek.add(Calendar.DAY_OF_YEAR,-6);
 
         SimpleDateFormat dateFormatIndo = new SimpleDateFormat("EEEE, dd MMMM yyyy", lokal);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", lokal);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", lokal);
         Date week = calendarWeek.getTime();
         currentWeek = dateFormat.format(week);
         currentWeekIndo = dateFormatIndo.format(week);
