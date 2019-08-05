@@ -236,9 +236,9 @@ public class CustomerHutangActivity extends AppCompatActivity {
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if(etAmount.getText().length()>0){
                 if (Integer.parseInt(etAmount.getText().toString()
-                        .replaceAll("[,-]",""))>999 &&
+                        .replaceAll("[,.-]",""))>999 &&
                         Integer.parseInt(etAmount.getText().toString()
-                                .replaceAll("[,-]",""))<= customerModel.getSaldo()) {
+                                .replaceAll("[,.-]",""))<= customerModel.getSaldo()) {
                     cvCreditPay.setCardBackgroundColor(getResources().getColor(R.color.colorThemeOrange));
                     cvCreditPay.setEnabled(true);
 
@@ -247,7 +247,7 @@ public class CustomerHutangActivity extends AppCompatActivity {
                         public void onClick(View v) {
                             CreditPayDialog.showDialog(CustomerHutangActivity.this,
                                     Integer.parseInt(etAmount.getText().toString()
-                                            .replaceAll("[,-]","")), customerModel.getCustomerId());
+                                            .replaceAll("[,.-]","")), customerModel.getCustomerId());
 
                         }
                     });
@@ -268,9 +268,9 @@ public class CustomerHutangActivity extends AppCompatActivity {
             try {
                 String originalString = s.toString();
 
-                Long longval;
-                if (originalString.contains(",")) {
-                    originalString = originalString.replaceAll(",", "");
+                long longval;
+                if (originalString.contains(",") || originalString.contains(".")) {
+                    originalString = originalString.replaceAll("[,.]", "");
                 }
                 longval = Long.parseLong(originalString);
 
