@@ -1,6 +1,7 @@
 package co.crowde.toni.network;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.util.Log;
 
@@ -219,26 +220,26 @@ public class ProductRequest {
         });
     }
 
-    public static void postUpdateProduct(final Activity activity, String productId){
-        int qty = 0;
-        if(InventoryDetailPopup.etQty.getText().length()>0){
-            qty = Integer.parseInt(InventoryDetailPopup
-                    .etQty.getText().toString());
-        }
-
-        int purchase = 0;
-        if(InventoryDetailPopup.etPurchase.getText().length()>0){
-            purchase = Integer.parseInt(InventoryDetailPopup
-                    .etPurchase.getText().toString()
-                    .replaceAll(",",""));
-        }
-
-        int selling = 0;
-        if(InventoryDetailPopup.etSelling.getText().length()>0){
-            selling = Integer.parseInt(InventoryDetailPopup
-                    .etSelling.getText().toString()
-                    .replaceAll(",",""));
-        }
+    public static void postUpdateProduct(final Activity activity, String productId, int qty, int purchase, int selling, ProgressDialog progressDialog){
+//        int qty = 0;
+//        if(InventoryDetailPopup.etQty.getText().length()>0){
+//            qty = Integer.parseInt(InventoryDetailPopup
+//                    .etQty.getText().toString());
+//        }
+//
+//        int purchase = 0;
+//        if(InventoryDetailPopup.etPurchase.getText().length()>0){
+//            purchase = Integer.parseInt(InventoryDetailPopup
+//                    .etPurchase.getText().toString()
+//                    .replaceAll(",",""));
+//        }
+//
+//        int selling = 0;
+//        if(InventoryDetailPopup.etSelling.getText().length()>0){
+//            selling = Integer.parseInt(InventoryDetailPopup
+//                    .etSelling.getText().toString()
+//                    .replaceAll(",",""));
+//        }
 
         final UpdateProductModel update = new UpdateProductModel();
         update.setShopId(SavePref.readShopId(activity));
@@ -271,7 +272,7 @@ public class ProductRequest {
 //                        Toast.makeText(
 //                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
                         NetworkOfflineDialog.showDialog(activity);
-                        InventoryFragment.progressDialog.dismiss();
+                        progressDialog.dismiss();
                         Log.e("Error",e.toString());
                     }
                 });
@@ -297,10 +298,10 @@ public class ProductRequest {
                                 page=1;
                                 getInventoryList(activity);
                                 UpdateProductDialog.dialogConfirm.dismiss();
-                                UpdateProductDialog.progressDialog.dismiss();
-                                InventoryDetailPopup.alertDialog.dismiss();
+                                progressDialog.dismiss();
                                 Intent success = new Intent(activity, SuccessUpdateProductActivity.class);
                                 activity.startActivity(success);
+                                activity.finish();
 
                             } else{
                                 if(message.equals("Token tidak valid")){
@@ -308,7 +309,6 @@ public class ProductRequest {
                                 } else {
                                     UpdateProductDialog.progressDialog.dismiss();
                                     UpdateProductDialog.dialogConfirm.dismiss();
-                                    InventoryDetailPopup.alertDialog.dismiss();
                                 }
                             }
 

@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -37,6 +38,7 @@ import co.crowde.toni.listener.ItemClickListener;
 import co.crowde.toni.model.CartModel;
 import co.crowde.toni.model.CustomerModel;
 import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
+import co.crowde.toni.view.activity.auth.ResetPasswordActivity;
 import co.crowde.toni.view.activity.cart.CartListActivity;
 import co.crowde.toni.view.dialog.message.product.StockInsufficientDialog;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
@@ -73,6 +75,7 @@ implements View.OnClickListener{
     }
 
     public static CardView cvBtnCustomer;
+    public static ConstraintLayout cvBtnPayment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,6 +94,7 @@ implements View.OnClickListener{
         tvCustomer = view.findViewById(R.id.tvCustomer);
         imgCheck = view.findViewById(R.id.imgCheck);
         tvAmountTotal = view.findViewById(R.id.tvAmountTotal);
+        cvBtnPayment = view.findViewById(R.id.cv_btn_payment);
         setCustomer(getActivity());
 
         formatNumber = new DecimalFormat("###,###,###,###,###,###");
@@ -106,6 +110,7 @@ implements View.OnClickListener{
         rcCart.setLayoutManager(layoutCart);
         rcCart.setAdapter(cartAdapter);
         cvBtnCustomer.setOnClickListener(this);
+        cvBtnPayment.setOnClickListener(this);
 
         setTotalAmount(getActivity());
 
@@ -119,6 +124,9 @@ implements View.OnClickListener{
             case R.id.cvBtnCustomer:
                 Intent select = new Intent(getActivity(), SelectCustomerActivity.class);
                 startActivity(select);
+                break;
+
+            case R.id.cv_btn_payment:
                 break;
 
         }
@@ -149,7 +157,6 @@ implements View.OnClickListener{
                 DashboardFragment.ifCartEmpty(activity);
                 DashboardFragment.setTotal(activity, dbCart);
                 setTotalAmount(activity);
-                CartListActivity.showOrHide(activity);
             }
 
             @Override
@@ -231,12 +238,23 @@ implements View.OnClickListener{
             CartListItemFragment.tvCustomer.setText(model.getCustomerName()+"\n"
                     +model.getPhone());
             CartListItemFragment.imgCheck.setImageDrawable(
-                    activity.getResources().getDrawable(R.drawable.ic_check_box_white_24dp));
+                    activity.getResources().getDrawable(R.drawable.ic_check_box_orange_24dp));
         } else {
             CartListItemFragment.tvCustomer.setText(
                     activity.getResources().getString(R.string.pilih_pelanggan));
             CartListItemFragment.imgCheck.setImageDrawable(
                     activity.getResources().getDrawable(R.drawable.ic_check_box_outline_blank_white_24dp));
+        }
+    }
+
+    public static void enabledPayment(Activity activity) {
+        if(SavePref.readCustomerId(activity)!=null
+                && SavePref.readCustomer(activity)!=null){
+            cvBtnPayment.setEnabled(true);
+            cvBtnPayment.setBackgroundColor(activity.getResources().getColor(R.color.colorThemeOrange));
+        } else {
+            cvBtnPayment.setEnabled(false);
+            cvBtnPayment.setBackgroundColor(activity.getResources().getColor(R.color.colorThemeGrey));
         }
     }
 }

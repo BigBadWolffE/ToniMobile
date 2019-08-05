@@ -67,6 +67,7 @@
     <string name="pembelian_berhasil_low">Pembelian Berhasil</string>
     <string name="pembelian_baru">PEMBELIAN BARU</string>
     <string name="pembelian_baru_low">Pembelian Baru</string>
+    <string name="tambah_low">Tambah</string>
 
     <!-- Nomor -->
     <string name="no">NO</string>
@@ -115,7 +116,7 @@
     <string name="kosong_low">Kosong</string>
     <string name="masukkan_stok">Masukkan penambahan Stok</string>
     <string name="stok_saat_ini">Stok saat ini:</string>
-    <string name="perbarui_harga">Perbarui Harga</string>
+    <string name="perbarui_harga">Perbaharui Harga</string>
     <string name="harga_disarankan">Harga yang disarankan:</string>
 
     <!-- Laporan -->
@@ -367,5 +368,23 @@
     <string name="kata_sandi_baru">Kata sandi baru</string>
     <string name="ulangi_kata_sandi">Ulangi kata sandi</string>
     <string name="mulai_habis">Mulai habis</string>
+    <string name="bantuan">Bantuan</string>
+    <string name="diskon_manual">Diskon Manual</string>
+    <string name="masukkan_nominal_diskon">Masukkan Nominal Diskon</string>
+    <string name="total_low">Total</string>
+    <string name="masukkan_nominal_harga_beli">Masukkan Nominal Harga Beli</string>
+    <string name="tambah_stok">Tambah Stok</string>
+    <string name="simpan_perubahan">SIMPAN PERUBAHAN</string>
+    <string name="bayar_tunai">Bayar Tunai</string>
+    <string name="cash_desc">Bayar belanjaan dengan uang tunai ke toko.</string>
+    <string name="credit_desc">Hutang untuk belanjaan sekarang ke toko.</string>
+    <string name="hutang_ke_toko">Hutang ke Toko</string>
+    <string name="bayar_tunai_hutang"><![CDATA[Bayar Tunai & Hutang]]></string>
+    <string name="cash_credit_desc">Bayar belanjaan dan hutang secara langsung.</string>
+    <string name="info_customer">Informasi Pelanggan</string>
+    <string name="subtotal_cap">SUBTOTAL</string>
+    <string name="total_cap">TOTAL</string>
+    <string name="masukkan_nominal_uang_pembayaran">Masukkan Nominal Uang Pembayaran</string>
+    <string name="tombol_isi_cepat">Tombol isi cepat</string>
 
 </resources>

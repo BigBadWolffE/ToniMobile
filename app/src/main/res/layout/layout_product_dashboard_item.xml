@@ -4,163 +4,288 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvProductItem"
+    
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="4dp"
-        app:cardBackgroundColor="@color/EdittextLogin"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="1dp"
+        android:background="@drawable/bg_rec_stroke_radius_5dp_f5f5f5"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintDimensionRatio="1:1.3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineX1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <ImageView
+            android:id="@+id/imgProductItem"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/imgDecrease"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvProductQty"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/bg_orange_circle"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone"/>
+
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layoutMain"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/imgProductItem"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_margin="16dp"
-                app:layout_constraintBottom_toTopOf="@id/view1"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="@id/layoutMain"
-                app:layout_constraintStart_toStartOf="@id/layoutMain"
-                app:layout_constraintTop_toTopOf="@id/layoutMain" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cvProductQty"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:cardBackgroundColor="@color/colorThemeOrange"
-                app:cardCornerRadius="5dp"
-                app:cardElevation="1dp"
-                app:layout_constraintBottom_toTopOf="@id/guidelineY1"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="@+id/layoutMain"
-                app:layout_constraintTop_toTopOf="@+id/layoutMain"
-                android:visibility="visible">
-
-                <TextView
-                    android:id="@+id/tvProductQty"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    app:autoSizeTextType="uniform"
-                    app:autoSizeMinTextSize="1sp"
-                    android:maxLines="1"
-                    android:layout_margin="1dp"
-                    android:text="0"
-                    android:textColor="@color/colorWhite"
-                    android:textStyle="bold" />
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guidelineY1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.2" />
-
-            <View
-                android:id="@+id/view1"
-                android:layout_width="0dp"
-                android:layout_height="0.5dp"
-                android:background="@color/colorThemeGrey"
-                app:layout_constraintBottom_toBottomOf="@+id/layoutMain"
-                app:layout_constraintEnd_toEndOf="@+id/layoutMain"
-                app:layout_constraintStart_toStartOf="@+id/layoutMain"
-                app:layout_constraintTop_toTopOf="@+id/layoutMain"
-                app:layout_constraintVertical_bias="0.75" />
-
-            <ImageView
-                android:id="@+id/imgBtnMinQty"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_margin="4dp"
-                android:background="@drawable/bg_rec_stroke_radius_5dp_grey"
-                android:gravity="center"
-                android:tint="@color/TextColorDefault"
-                app:layout_constraintBottom_toBottomOf="@id/layoutMain"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="@id/guidelineX1"
-                app:layout_constraintStart_toStartOf="@id/layoutMain"
-                app:layout_constraintTop_toBottomOf="@id/view1"
-                app:srcCompat="@drawable/ic_remove_black_24dp"
-                android:visibility="gone"/>
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guidelineX1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.2" />
+            android:id="@+id/constraintLayout9"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_grey_transparent_2dp"
+            app:layout_constraintBottom_toTopOf="@+id/imgDecrease"
+            app:layout_constraintEnd_toEndOf="@+id/imgIncrease"
+            app:layout_constraintStart_toStartOf="@+id/imgDecrease">
 
             <TextView
                 android:id="@+id/tvProductName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:textColor="@color/TextColorDefault"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toTopOf="@+id/tvProductUnit"
-                app:layout_constraintEnd_toEndOf="@id/guidelineX2"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="@id/guidelineX1"
-                app:layout_constraintTop_toBottomOf="@+id/view1"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/tvProductVarian"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="packed" />
 
-            <ImageView
-                android:id="@+id/imgBtnPlusQty"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_margin="4dp"
-                android:background="@drawable/bg_rec_radius_5dp_grey"
-                android:gravity="center"
-                android:tint="@color/TextColorDefault"
-                app:layout_constraintBottom_toBottomOf="@id/layoutMain"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="@id/layoutMain"
-                app:layout_constraintStart_toStartOf="@id/guidelineX2"
-                app:layout_constraintTop_toBottomOf="@id/view1"
-                app:srcCompat="@drawable/ic_add_black_24dp"
-                android:visibility="visible"/>
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guidelineX2"
+            <TextView
+                android:id="@+id/tvProductVarian"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.8" />
-
-            <TextView
-                android:id="@+id/tvProductUnit"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/TextColorDefault"
-                android:ellipsize="end"
-                android:maxLines="1"
+                android:layout_marginBottom="4dp"
+                android:textColor="@color/colorWhite"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/guidelineX2"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="@id/guidelineX1"
+                app:layout_constraintStart_toStartOf="@+id/tvProductName"
                 app:layout_constraintTop_toBottomOf="@+id/tvProductName" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
+        <ImageView
+            android:id="@+id/imgDecrease"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_green_dark_radius_2dp"
+            android:padding="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineX1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ic_remove_white_24dp" />
+
+        <ImageView
+            android:id="@+id/imgIncrease"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_green_dark_radius_2dp"
+            android:padding="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guidelineX1"
+            app:srcCompat="@drawable/ic_add_white_24dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--<androidx.cardview.widget.CardView-->
+        <!--android:id="@+id/cvProductItem"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_margin="4dp"-->
+        <!--app:cardBackgroundColor="@color/EdittextLogin"-->
+        <!--app:cardCornerRadius="5dp"-->
+        <!--app:cardElevation="1dp"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintDimensionRatio="1:1"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent">-->
+
+        <!--<androidx.constraintlayout.widget.ConstraintLayout-->
+            <!--android:id="@+id/layoutMain"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+
+            <!--<ImageView-->
+                <!--android:id="@+id/imgProductItem"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_margin="16dp"-->
+                <!--app:layout_constraintBottom_toTopOf="@id/view1"-->
+                <!--app:layout_constraintDimensionRatio="1:1"-->
+                <!--app:layout_constraintEnd_toEndOf="@id/layoutMain"-->
+                <!--app:layout_constraintStart_toStartOf="@id/layoutMain"-->
+                <!--app:layout_constraintTop_toTopOf="@id/layoutMain" />-->
+
+            <!--<androidx.cardview.widget.CardView-->
+                <!--android:id="@+id/cvProductQty"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="0dp"-->
+                <!--app:cardBackgroundColor="@color/colorThemeOrange"-->
+                <!--app:cardCornerRadius="5dp"-->
+                <!--app:cardElevation="1dp"-->
+                <!--app:layout_constraintBottom_toTopOf="@id/guidelineY1"-->
+                <!--app:layout_constraintDimensionRatio="1:1"-->
+                <!--app:layout_constraintEnd_toEndOf="@+id/layoutMain"-->
+                <!--app:layout_constraintTop_toTopOf="@+id/layoutMain"-->
+                <!--android:visibility="visible">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tvProductQty"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:gravity="center"-->
+                    <!--app:autoSizeTextType="uniform"-->
+                    <!--app:autoSizeMinTextSize="1sp"-->
+                    <!--android:maxLines="1"-->
+                    <!--android:layout_margin="1dp"-->
+                    <!--android:text="0"-->
+                    <!--android:textColor="@color/colorWhite"-->
+                    <!--android:textStyle="bold" />-->
+
+            <!--</androidx.cardview.widget.CardView>-->
+
+            <!--<androidx.constraintlayout.widget.Guideline-->
+                <!--android:id="@+id/guidelineY1"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal"-->
+                <!--app:layout_constraintGuide_percent="0.2" />-->
+
+            <!--<View-->
+                <!--android:id="@+id/view1"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="0.5dp"-->
+                <!--android:background="@color/colorThemeGrey"-->
+                <!--app:layout_constraintBottom_toBottomOf="@+id/layoutMain"-->
+                <!--app:layout_constraintEnd_toEndOf="@+id/layoutMain"-->
+                <!--app:layout_constraintStart_toStartOf="@+id/layoutMain"-->
+                <!--app:layout_constraintTop_toTopOf="@+id/layoutMain"-->
+                <!--app:layout_constraintVertical_bias="0.75" />-->
+
+            <!--<ImageView-->
+                <!--android:id="@+id/imgBtnMinQty"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_margin="4dp"-->
+                <!--android:background="@drawable/bg_rec_stroke_radius_5dp_grey"-->
+                <!--android:gravity="center"-->
+                <!--android:tint="@color/TextColorDefault"-->
+                <!--app:layout_constraintBottom_toBottomOf="@id/layoutMain"-->
+                <!--app:layout_constraintDimensionRatio="1:1"-->
+                <!--app:layout_constraintEnd_toEndOf="@id/guidelineX1"-->
+                <!--app:layout_constraintStart_toStartOf="@id/layoutMain"-->
+                <!--app:layout_constraintTop_toBottomOf="@id/view1"-->
+                <!--app:srcCompat="@drawable/ic_remove_black_24dp"-->
+                <!--android:visibility="gone"/>-->
+
+            <!--<androidx.constraintlayout.widget.Guideline-->
+                <!--android:id="@+id/guidelineX1"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!--app:layout_constraintGuide_percent="0.2" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/tvProductName"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:textStyle="bold"-->
+                <!--android:textColor="@color/TextColorDefault"-->
+                <!--android:ellipsize="end"-->
+                <!--android:maxLines="1"-->
+                <!--android:textSize="12sp"-->
+                <!--app:layout_constraintBottom_toTopOf="@+id/tvProductUnit"-->
+                <!--app:layout_constraintEnd_toEndOf="@id/guidelineX2"-->
+                <!--app:layout_constraintHorizontal_bias="0.5"-->
+                <!--app:layout_constraintStart_toStartOf="@id/guidelineX1"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/view1"-->
+                <!--app:layout_constraintVertical_chainStyle="packed" />-->
+
+            <!--<ImageView-->
+                <!--android:id="@+id/imgBtnPlusQty"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_margin="4dp"-->
+                <!--android:background="@drawable/bg_rec_radius_5dp_grey"-->
+                <!--android:gravity="center"-->
+                <!--android:tint="@color/TextColorDefault"-->
+                <!--app:layout_constraintBottom_toBottomOf="@id/layoutMain"-->
+                <!--app:layout_constraintDimensionRatio="1:1"-->
+                <!--app:layout_constraintEnd_toEndOf="@id/layoutMain"-->
+                <!--app:layout_constraintStart_toStartOf="@id/guidelineX2"-->
+                <!--app:layout_constraintTop_toBottomOf="@id/view1"-->
+                <!--app:srcCompat="@drawable/ic_add_black_24dp"-->
+                <!--android:visibility="visible"/>-->
+
+            <!--<androidx.constraintlayout.widget.Guideline-->
+                <!--android:id="@+id/guidelineX2"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!--app:layout_constraintGuide_percent="0.8" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/tvProductUnit"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:textColor="@color/TextColorDefault"-->
+                <!--android:ellipsize="end"-->
+                <!--android:maxLines="1"-->
+                <!--android:textSize="12sp"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintEnd_toEndOf="@id/guidelineX2"-->
+                <!--app:layout_constraintHorizontal_bias="0.5"-->
+                <!--app:layout_constraintStart_toStartOf="@id/guidelineX1"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/tvProductName" />-->
+
+        <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+
+    <!--</androidx.cardview.widget.CardView>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

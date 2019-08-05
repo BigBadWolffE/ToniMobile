@@ -2,6 +2,7 @@ package co.crowde.toni.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ import co.crowde.toni.model.CartModel;
 import co.crowde.toni.network.API;
 import co.crowde.toni.model.ProductModel;
 import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
+import co.crowde.toni.view.activity.product.ProductDashboardDetailActivity;
 import co.crowde.toni.view.dialog.popup.product.ProductDetailDashboardPopup;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
 
@@ -47,21 +49,18 @@ public class ProductDashboardAdapter
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvProductQty,
-                tvProductName, tvProductUnit, tvProductCount;
+                tvProductName, tvProductUnit;
         ImageView imgProductItem,
                 imgBtnMinQty, imgBtnPlusQty;
-        CardView cvProductItem, cvProductQty;
 
         public ViewHolder(final View itemView) {
             super(itemView);
             tvProductQty = itemView.findViewById(R.id.tvProductQty);
-            imgBtnMinQty = itemView.findViewById(R.id.imgBtnMinQty);
+            imgBtnMinQty = itemView.findViewById(R.id.imgDecrease);
             tvProductName = itemView.findViewById(R.id.tvProductName);
-            tvProductUnit = itemView.findViewById(R.id.tvProductUnit);
-            imgBtnPlusQty = itemView.findViewById(R.id.imgBtnPlusQty);
+            tvProductUnit = itemView.findViewById(R.id.tvProductVarian);
+            imgBtnPlusQty = itemView.findViewById(R.id.imgIncrease);
             imgProductItem = itemView.findViewById(R.id.imgProductItem);
-            cvProductItem = itemView.findViewById(R.id.cvProductItem);
-            cvProductQty = itemView.findViewById(R.id.cvProductQty);
 
         }
     }
@@ -126,7 +125,7 @@ public class ProductDashboardAdapter
 //                    countProduct = model.getCountItem();
 //                else
 //                    countProduct = cart.getQuantity();
-                viewHolder.cvProductQty.setVisibility(countProduct > 0 ? View.VISIBLE : View.GONE);
+                viewHolder.tvProductQty.setVisibility(countProduct > 0 ? View.VISIBLE : View.GONE);
                 viewHolder.tvProductQty.setText(countProduct + "");
 
                 Picasso.with(activity).load(API.Host + model.getPicture())
@@ -140,7 +139,10 @@ public class ProductDashboardAdapter
                     }
                 });
 
-                viewHolder.imgBtnMinQty.setVisibility(countProduct > 0 ? View.VISIBLE : View.GONE);
+                viewHolder.imgBtnMinQty.setBackground(countProduct > 0 ?
+                        activity.getResources().getDrawable(R.drawable.bg_green_dark_radius_2dp) :
+                        activity.getResources().getDrawable(R.drawable.bg_grey_cccccc_2dp));
+//                        View.VISIBLE : View.GONE);
                 viewHolder.imgBtnMinQty.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -149,37 +151,14 @@ public class ProductDashboardAdapter
                     }
                 });
 
-                viewHolder.cvProductItem.setOnClickListener(new View.OnClickListener() {
+                viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        Toast.makeText(activity, ""+nama, Toast.LENGTH_SHORT).show();
-                        ProductDetailDashboardPopup.showPopup(activity, model);
+                        Intent detail = new Intent(activity, ProductDashboardDetailActivity.class);
+                        detail.putExtra(ProductModel.class.getSimpleName(), model);
+                        activity.startActivityForResult(detail, 123);
                     }
                 });
-
-//        dbCart = new Cart(activity);
-//        if(dbCart.getItemCount()>0){
-//            CartModel cartModel = dbCart.getItem(model.getProductId());
-//            holder.tvProductQty.setText(String.valueOf(cartModel.getQuantity()));
-//        } else {
-//            holder.tvProductQty.setText("0");
-//        }
-
-//        holder.tvProductQty.setText(Qty);
-
-//        holder.imgBtnPlusQty.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                listener.onIncreaseItem(v, position);
-//            }
-//        });
-//
-//        holder.imgBtnMinQty.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                listener.onDecreaseItem(v, position);
-//            }
-//        });
             }
         } else if (holder instanceof LoadingViewHolder) {
             showLoadingView((LoadingViewHolder) holder, position);

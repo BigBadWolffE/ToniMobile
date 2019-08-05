@@ -31,6 +31,7 @@ import co.crowde.toni.R;
 import co.crowde.toni.helper.CloseSoftKeyboard;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CustomerModel;
+import co.crowde.toni.view.activity.cart.CartListActivity;
 import co.crowde.toni.view.dialog.message.transaction.ConfirmTransactionDialog;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
 
@@ -92,6 +93,8 @@ implements View.OnClickListener{
     //Confirm
     public static TextView tvYes, tvNo;
 
+    ConstraintLayout layoutCartList;
+
     public CartPaymentFragment() {
         // Required empty public constructor
     }
@@ -134,6 +137,7 @@ implements View.OnClickListener{
         cvCredit = view.findViewById(R.id.cvCredit);
         cvCashCredit = view.findViewById(R.id.cvCashCredit);
         cvConfirm = view.findViewById(R.id.cvConfirm);
+        layoutCartList = view.findViewById(R.id.layout_cart_list);
 
         cash = false;
         credit = false;
@@ -150,6 +154,7 @@ implements View.OnClickListener{
         cvCash.setOnClickListener(this);
         cvCredit.setOnClickListener(this);
         cvCashCredit.setOnClickListener(this);
+        layoutCartList.setOnClickListener(this);
 
         return view;
     }
@@ -172,6 +177,9 @@ implements View.OnClickListener{
             case R.id.cvCashCredit:
                 showCashCredit(getActivity());
                 // do your code
+                break;
+
+            case R.id.layout_cart_list:
                 break;
 
             default:
@@ -298,7 +306,7 @@ implements View.OnClickListener{
                 paymentType = "Cash";
                 enablePayBill();
                 nominal = Integer.parseInt(tvCash02.getText().toString()
-                        .replaceAll("[,-]",""));
+                        .replaceAll("[.,-]",""));
                 tvPayment.setText("Rp. "+formatNumber.format(nominal)+",-");
                 showLabel(activity);
                 dialogCash.dismiss();
@@ -315,7 +323,7 @@ implements View.OnClickListener{
                 paymentType = "Cash";
                 enablePayBill();
                 nominal = Integer.parseInt(tvCash03.getText().toString()
-                        .replaceAll("[,-]",""));
+                        .replaceAll("[.,-]",""));
                 tvPayment.setText("Rp. "+formatNumber.format(nominal)+",-");
                 showLabel(activity);
                 dialogCash.dismiss();
@@ -332,7 +340,7 @@ implements View.OnClickListener{
                 paymentType = "Cash";
                 enablePayBill();
                 nominal = Integer.parseInt(tvCash04.getText().toString()
-                        .replaceAll("[,-]",""));
+                        .replaceAll("[.,-]",""));
                 tvPayment.setText("Rp. "+formatNumber.format(nominal)+",-");
                 showLabel(activity);
                 dialogCash.dismiss();
@@ -360,7 +368,7 @@ implements View.OnClickListener{
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if(etCash.getText().length()>0){
                 if (Integer.parseInt(etCash.getText().toString()
-                        .replaceAll("[,-]",""))<= DashboardFragment.totalAmount) {
+                        .replaceAll("[.,-]",""))<= DashboardFragment.totalAmount) {
                     btnOK.setBackground(getResources().getDrawable(R.drawable.bg_rec_stroke_radius_5dp_grey));
                     btnOK.setTextColor(getResources().getColor(R.color.colorThemeGrey));
                     btnOK.setEnabled(false);
@@ -379,7 +387,7 @@ implements View.OnClickListener{
                             paymentType = "Cash";
                             enablePayBill();
                             nominal = Integer.parseInt(etCash.getText().toString()
-                                    .replaceAll("[,-]",""));
+                                    .replaceAll("[.,-]",""));
                             tvPayment.setText("Rp. "+formatNumber.format(nominal)+",-");
                             showLabel(getActivity());
                             dialogCash.dismiss();
@@ -399,9 +407,9 @@ implements View.OnClickListener{
             try {
                 String originalString = s.toString();
 
-                Long longval;
-                if (originalString.contains(",")) {
-                    originalString = originalString.replaceAll(",", "");
+                long longval;
+                if (originalString.contains(",")|| originalString.contains(".")) {
+                    originalString = originalString.replaceAll("[.,]", "");
                 }
                 longval = Long.parseLong(originalString);
 
@@ -563,7 +571,7 @@ implements View.OnClickListener{
                 paymentType = "Cash";
                 enablePayBill();
                 nominal = Integer.parseInt(tvCashCredit02.getText().toString()
-                        .replaceAll("[,-]",""));
+                        .replaceAll("[.,-]",""));
 
                 showLabel(activity);
                 dialogCashCredit.dismiss();
@@ -580,7 +588,7 @@ implements View.OnClickListener{
                 paymentType = "Cash";
                 enablePayBill();
                 nominal = Integer.parseInt(tvCashCredit03.getText().toString()
-                        .replaceAll("[,-]",""));
+                        .replaceAll("[,.-]",""));
 
                 showLabel(activity);
                 dialogCashCredit.dismiss();
@@ -597,7 +605,7 @@ implements View.OnClickListener{
                 paymentType = "Cash";
                 enablePayBill();
                 nominal = Integer.parseInt(tvCashCredit04.getText().toString()
-                        .replaceAll("[,-]",""));
+                        .replaceAll("[,.-]",""));
 
                 showLabel(activity);
                 dialogCashCredit.dismiss();
@@ -684,7 +692,7 @@ implements View.OnClickListener{
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if(etCashCreditNominal.getText().length()>0){
                 if (Integer.parseInt(etCashCreditNominal.getText().toString()
-                        .replaceAll("[,-]",""))<=900) {
+                        .replaceAll("[.,-]",""))<=900) {
                     btnNominalOK.setBackground(getResources().getDrawable(R.drawable.bg_rec_stroke_radius_5dp_grey));
                     btnNominalOK.setTextColor(getResources().getColor(R.color.colorThemeGrey));
                     btnNominalOK.setEnabled(false);
@@ -703,7 +711,7 @@ implements View.OnClickListener{
                             paymentType = "Cash";
                             enablePayBill();
                             nominal = Integer.parseInt(etCashCreditNominal.getText().toString()
-                                    .replaceAll("[,-]",""));
+                                    .replaceAll("[.,-]",""));
                             tvPayment.setText("Rp. "+formatNumber.format(nominal)+",-");
                             showLabel(getActivity());
                             dialogCashCredit.dismiss();
@@ -723,9 +731,9 @@ implements View.OnClickListener{
             try {
                 String originalString = s.toString();
 
-                Long longval;
-                if (originalString.contains(",")) {
-                    originalString = originalString.replaceAll(",", "");
+                long longval;
+                if (originalString.contains(",")|| originalString.contains(".")) {
+                    originalString = originalString.replaceAll("[,.]", "");
                 }
                 longval = Long.parseLong(originalString);
 

@@ -174,7 +174,7 @@ public class InventoryDetailPopup {
         cvUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UpdateProductDialog.showDialog(activity, model.getProductId());
+//                UpdateProductDialog.showDialog(activity, model.getProductId());
             }
         });
 

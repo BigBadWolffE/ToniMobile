@@ -105,10 +105,10 @@ public class CustomerAdapter
                         SavePref.saveCustomer(activity, customer);
 
                         activity.finish();
-                        CartListItemFragment.tvCustomer.setText(model.getCustomerName()+"\n"
+                        CartListActivity.tvCustomer.setText(model.getCustomerName()+"\n"
                                 +model.getPhone());
-                        CartListItemFragment.imgCheck.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_check_box_white_24dp));
-                        CartListActivity.enabledButton(activity);
+                        CartListActivity.imgCheck.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_check_box_orange_24dp));
+                        CartListActivity.enabledPayment(activity);
                     }
                 });
             }

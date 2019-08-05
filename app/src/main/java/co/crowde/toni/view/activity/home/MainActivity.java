@@ -34,6 +34,7 @@ import co.crowde.toni.network.API;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.ShopModel;
 import co.crowde.toni.utils.print.PrinterNetwork;
+import co.crowde.toni.view.activity.app.HelpAppsActivity;
 import co.crowde.toni.view.activity.user.InfoShopActivity;
 import co.crowde.toni.view.dialog.message.app.CloseAppsDialog;
 import co.crowde.toni.view.dialog.message.shop.CloseShopDialog;
@@ -63,12 +64,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         ImageView imgLogo = findViewById(R.id.imgLogo);
-//        imgLogo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                print(MainActivity.this);
-//            }
-//        });
 
         imgBarcode = findViewById(R.id.img_project);
         imgBarcode.setOnClickListener(new View.OnClickListener() {
@@ -131,15 +126,6 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-//            new AlertDialog.Builder(this)
-//                    .setTitle("Tutup Aplikasi TONI")
-//                    .setMessage("Apakah Anda ingin menutup aplikasi TONI?")
-//                    .setNegativeButton(android.R.string.no, null)
-//                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//                        public void onClick(DialogInterface arg0, int arg1) {
-//                            MainActivity.super.onBackPressed();
-//                        }
-//                    }).create().show();
             CloseAppsDialog.showDialog(MainActivity.this);
         }
     }
@@ -164,8 +150,9 @@ public class MainActivity extends AppCompatActivity
 //        } else if (id == R.id.nav_sync) {
 //            Toast.makeText(this, "Sinkronisasi", Toast.LENGTH_SHORT).show();
 
-        } else if (id == R.id.nav_about) {
-//            Toast.makeText(this, "Tentang Aplikasi", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_help) {
+            Intent help = new Intent(MainActivity.this, HelpAppsActivity.class);
+            startActivity(help);
 
         } else if (id == R.id.nav_logout) {
 //            Toast.makeText(this, "Tutup Toko", Toast.LENGTH_SHORT).show();
@@ -230,113 +217,6 @@ public class MainActivity extends AppCompatActivity
                 return false;
             }
         });
-    }
-
-    public void print(Activity activity){
-        PrinterNetwork.resetConnection();
-        if(SavePref.readDeviceAddress(activity)!=null){
-            PrinterNetwork.bluetoothAddress = SavePref.readDeviceAddress(activity);
-            mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-            mBluetoothDevice= mBluetoothAdapter.getRemoteDevice(PrinterNetwork.bluetoothAddress);
-            try {
-                mBluetoothSocket = PrinterNetwork.createBluetoothSocket(mBluetoothDevice);
-                mBluetoothSocket.connect();
-                if (mBluetoothSocket.isConnected()){
-                    testPrint(activity);
-                }
-            } catch (IOException e) {
-                try {
-                    Toast.makeText(activity, "Tidak dapat terhubung dengan Bluetooth Printer", Toast.LENGTH_SHORT).show();
-                    mBluetoothSocket.close();
-                    Log.e("Bluetooth","Can't Connect");
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                    Toast.makeText(activity, "Tidak dapat terhubung dengan Bluetooth Socket", Toast.LENGTH_SHORT).show();
-                    Log.e("Bluetooth","Socket can't closed");
-                }
-            }
-
-        } else {
-            PrinterNetwork.pairingBluetooth(activity);
-        }
-    }
-
-    private void testPrint(Activity activity) {
-        try {
-            PrinterNetwork.os = mBluetoothSocket.getOutputStream();
-            printNewLine();
-
-            PrinterNetwork.printPhoto(R.drawable.toni_black, activity);
-
-            PrinterNetwork.printCustom("BERNARD TANI", 0, 1);
-            PrinterNetwork.printCustom("JL. Jalan Tokonya Bernard Tani No. 69,", 0, 1);
-            PrinterNetwork.printCustom("Pangalengan, Panglengan", 0, 1);
-            PrinterNetwork.printCustom("KOTA BANDUNG", 0, 1);
-            PrinterNetwork.printCustom("", 0, 0);
-
-            printNewLine();
-            PrinterNetwork.printText("Kode Struk: " + "TR123" + "\n");
-            PrinterNetwork.printText("Tanggal   : " + "30-05-2019 12:10" + "\n");
-            PrinterNetwork.printText("Pelanggan : " + "Muhammad Sulaiman" + "\n");
-            PrinterNetwork.printText("--------------------------------\n");
-
-            String product = "Nama Product Panjang _40 X 300 Gram";
-            String name = StringUtils.substringBeforeLast(product, "_")
-                    + "(" + StringUtils.substringAfterLast(product, "_") + ")";
-
-            PrinterNetwork.printText(name + "\n");
-            PrinterNetwork.printText(String.format("%-17s %14s", "1 x 999,999,999", "999,999,999") + "\n");
-            PrinterNetwork.printText(name + "\n");
-            PrinterNetwork.printText(String.format("%-17s %14s", "10 x 999,999,999", "999,999,999") + "\n");
-            PrinterNetwork.printText(name + "\n");
-            PrinterNetwork.printText(String.format("%-17s %14s", "50 x 999,999,999", "999,999,999") + "\n");
-            PrinterNetwork.printText(name + "\n");
-            PrinterNetwork.printText(String.format("%-17s %14s", "100 x 999,999,999", "999,999,999") + "\n");
-            PrinterNetwork.printText(name + "\n");
-            PrinterNetwork.printText(String.format("%-17s %14s", "999 x 999,999,999", "999,999,999") + "\n");
-            PrinterNetwork.printText("Hutang Sebelumnya\n");
-            PrinterNetwork.printText(String.format("%-17s %14s", "1 x 999,999,999", "999,999,999") + "\n");
-            PrinterNetwork.printText("--------------------------------\n");
-            PrinterNetwork.printText(String.format("%-18s %13s", "Total Item : 100", "999,999,999") + "\n");
-
-            printNewLine();
-            PrinterNetwork.printText(String.format("%-10s %21s", "Tunai", "999,999,999") + "\n");
-            PrinterNetwork.printText(String.format("%-10s %21s", "Kembalian", "999,999,999") + "\n");
-
-            printNewLine();
-            PrinterNetwork.printText(String.format("%-15s %16s", "Hutang", "999,999,999") + "\n");
-            PrinterNetwork.printText(String.format("%-15s %16s", "Total Hutang", "999,999,999") + "\n");
-
-            printNewLine();
-            PrinterNetwork.printText(String.format("%-10s %21s", "Tunai", "999,999,999") + "\n");
-            PrinterNetwork.printText(String.format("%-10s %21s", "Hutang", "999,999,999") + "\n");
-            PrinterNetwork.printText(String.format("%-10s %21s", "Kembalian", "999,999,999") + "\n");
-
-            printNewLine();
-            printNewLine();
-            PrinterNetwork.printCustom("Terima Kasih telah membeli\nproduk pertanian di\nToko " + "BERNARD TANI", 0, 1);
-
-            printNewLine();
-            PrinterNetwork.printText("--------------------------------\n");
-            PrinterNetwork.printCustom("Layanan Konsumen Toko", 0, 1);
-            PrinterNetwork.printCustom("081278524651", 0, 1);
-            PrinterNetwork.printCustom("", 0, 0);
-
-            printNewLine();
-            printNewLine();
-
-            PrinterNetwork.os.flush();
-        } catch (IOException e) {
-            try {
-                Toast.makeText(activity, "Tidak dapat terhubung dengan Bluetooth Printer", Toast.LENGTH_SHORT).show();
-                mBluetoothSocket.close();
-                Log.e("Bluetooth", "Can't Connect");
-            } catch (IOException e1) {
-                e1.printStackTrace();
-                Toast.makeText(activity, "Tidak dapat terhubung dengan Bluetooth Socket", Toast.LENGTH_SHORT).show();
-                Log.e("Bluetooth", "Socket can't closed");
-            }
-        }
     }
 
 }

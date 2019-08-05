@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".helper.analytics.AnalyticsApplication"
@@ -17,10 +17,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-        <activity android:name=".view.dialog.popup.customer.PopUpBayarHutangTransaksi"></activity>
-        <activity android:name=".view.activity.notification.SuccessRegisterActivity"></activity>
+        android:theme="@style/AppTheme">
+        <activity android:name=".base.BaseActivity" />
+        <activity android:name=".view.activity.payment.PaymentCashActivity"></activity>
+        <activity android:name=".view.activity.cart.CartPaymentActivity" />
+        <activity
+            android:name=".view.activity.product.InventoryDetailActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity
+            android:name=".view.activity.product.ProductDashboardDetailActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".view.activity.app.PrivacyPolicyAppsActivity" />
+        <activity android:name=".view.activity.app.HelpAppsActivity" />
+        <activity android:name=".view.activity.app.AboutAppsActivity" />
+        <activity android:name=".view.activity.notification.SuccessRegisterActivity" />
         <activity android:name=".view.activity.notification.SuccessResetPasswordActivity" />
         <activity android:name=".view.activity.auth.ResetPasswordActivity" />
         <activity android:name=".view.activity.otp.SendOtpRegisterActivity" />
@@ -61,8 +71,7 @@
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity android:name=".view.activity.auth.LoginSuccessActivity" />
         <activity
-            android:name=".view.activity.auth.LoginActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+            android:name=".view.activity.auth.LoginActivity"/>
         <activity android:name=".view.activity.welcoming.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -83,7 +92,6 @@
             android:name="com.google.android.gms.analytics.AnalyticsService"
             android:enabled="true"
             android:exported="false" />
-
         <!--
              Optionally, register CampaignTrackingReceiver and CampaignTrackingService to enable
              installation campaign reporting

@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MotionEvent;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
@@ -33,33 +35,16 @@ import static co.crowde.toni.utils.ValidateEdittext.validateLogin;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
-    static {
-        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
-    }
-
     TextView tvLoginHeader, tvClosedLabel, tvClosedTime,
             tvForgetPass, tvRegister;
     EditText et_username, et_password;
     TextInputLayout textInputLayout;
     CardView btnLogin;
 
-    boolean isShown;
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-//        boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
-//        if (tabletSize) {
-//            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-//        } else {
-//            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-//        }
-
         setContentView(R.layout.activity_login);
-
-
-        isShown = false;
 
         textInputLayout = findViewById(R.id.layout_set_password);
         et_username = findViewById(R.id.et_username);
@@ -68,22 +53,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         tvForgetPass = findViewById(R.id.tv_forgot_password);
         tvRegister = findViewById(R.id.tv_register);
 
-//        et_username.addTextChangedListener(loginWatcher);
-//        et_password.addTextChangedListener(loginWatcher);
-
         btnLogin.setOnClickListener(this);
         tvForgetPass.setOnClickListener(this);
         tvRegister.setOnClickListener(this);
 
-        textInputLayout.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                Toast.makeText(LoginActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
-
-        hideKeyboard(LoginActivity.this);
     }
 
     @Override
@@ -108,29 +81,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     }
 
-//    private void togglePasswordListener() {
-//        View togglePasswordButton = findTogglePasswordButton(textInputLayout);
-//        if (togglePasswordButton != null) {
-//            togglePasswordButton.setOnTouchListener(new View.OnTouchListener() {
-//                @Override
-//                public boolean onTouch(View view, MotionEvent motionEvent) {
-//                    // implementation
-//                    return false;
-//                }
-//            });
-//        }
-//    }
-//
-//    private View findTogglePasswordButton() {
-//        return findViewById(R.id.text_input_password_toggle);
-//    }
-
     private void btnLoginListener() {
         AnalyticsToniUtils.getEvent(Const.CATEGORY_AUTHENTIFICATION,Const.MODUL_LOGIN,Const.LABEL_LOGIN);
-        showDialog();
 
         if(et_username.getText().toString().equals("admin")){
-            progressDialog.dismiss();
 
             Intent wrongUser = new Intent(LoginActivity.this, ForgotUserActivity.class);
             startActivity(wrongUser);
@@ -139,81 +93,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
         } else {
             validateLogin(et_username, et_password);
-
             if(validateLogin(et_username, et_password)){
+                showLoading();
                 String username = et_username.getText().toString();
                 String pass = et_password.getText().toString();
 
-                LoginRequest.postLogin(LoginActivity.this, username, pass, progressDialog);
-            } else {
-                progressDialog.dismiss();
-                Toast.makeText(LoginActivity.this, "Silahkan isi formulir dengan benar.", Toast.LENGTH_SHORT).show();
+                LoginRequest.postLogin(LoginActivity.this, username, pass);
             }
 
         }
-    }
-
-//    public TextWatcher loginWatcher = new TextWatcher() {
-//        @Override
-//        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//        }
-//        @Override
-//        public void onTextChanged(CharSequence s, int start, int before, int count) {
-//            if (et_username.getText().length() > 0) {
-//                btnLogin.setCardBackgroundColor(
-//                        getResources().getColor(R.color.colorThemeGrey));
-//                btnLogin.setEnabled(false);
-//
-//                if (et_password.getText().length() > 0){
-//                    btnLogin.setCardBackgroundColor(
-//                            getResources().getColor(R.color.colorThemeOrange));
-//                    btnLogin.setEnabled(true);
-//                } else {
-//                    btnLogin.setCardBackgroundColor(
-//                            getResources().getColor(R.color.colorThemeGrey));
-//                    btnLogin.setEnabled(false);
-//                }
-//            } else {
-//                btnLogin.setCardBackgroundColor(
-//                        getResources().getColor(R.color.colorThemeGrey));
-//                btnLogin.setEnabled(false);
-//                if (et_password.getText().length() > 0){
-//                    btnLogin.setCardBackgroundColor(
-//                            getResources().getColor(R.color.colorThemeGrey));
-//                    btnLogin.setEnabled(false);
-//                } else {
-//                    btnLogin.setCardBackgroundColor(
-//                            getResources().getColor(R.color.colorThemeGrey));
-//                    btnLogin.setEnabled(false);
-//                }
-//            }
-//        }
-//        @Override
-//        public void afterTextChanged(Editable s) {
-//        }
-//    };
-//
-//    public static void setShopClosedTime(Activity activity){
-//        if(SavePref.readClosedTime(activity)==null){
-//            tvClosedTime.setText(activity.getResources().getString(R.string.strips));
-//        } else {
-//            tvClosedTime.setText(SavePref.readClosedTime(activity));
-//        }
-//    }
-
-    public void hideKeyboard(final Activity activity){
-        et_username.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                CloseSoftKeyboard.hideSoftKeyboard(v, activity);
-            }
-        });
-        et_password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                CloseSoftKeyboard.hideSoftKeyboard(v, activity);
-            }
-        });
     }
 
     @Override

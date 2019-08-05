@@ -1,8 +1,11 @@
 package co.crowde.toni.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class ProductModel {
+public class ProductModel implements Parcelable {
     @SerializedName("shopId")
     private String shopId;
 
@@ -140,6 +143,43 @@ public class ProductModel {
         this.categoryName = categoryName;
         this.qty = qty;
     }
+
+    protected ProductModel(Parcel in) {
+        shopId = in.readString();
+        productId = in.readString();
+        categoryId = in.readString();
+        productName = in.readString();
+        description = in.readString();
+        picture = in.readString();
+        status = in.readString();
+        purchasePrice = in.readInt();
+        sellingPrice = in.readInt();
+        unit = in.readString();
+        supplierId = in.readString();
+        createdAt = in.readString();
+        lastUpdated = in.readString();
+        createdBy = in.readString();
+        province = in.readString();
+        regency = in.readString();
+        district = in.readString();
+        village = in.readString();
+        stock = in.readInt();
+        supplierName = in.readString();
+        categoryName = in.readString();
+        qty = in.readInt();
+    }
+
+    public static final Creator<ProductModel> CREATOR = new Creator<ProductModel>() {
+        @Override
+        public ProductModel createFromParcel(Parcel in) {
+            return new ProductModel(in);
+        }
+
+        @Override
+        public ProductModel[] newArray(int size) {
+            return new ProductModel[size];
+        }
+    };
 
     public String getShopId() {
         return shopId;
@@ -315,5 +355,36 @@ public class ProductModel {
 
     public void setQty(int qty) {
         this.qty = qty;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(shopId);
+        dest.writeString(productId);
+        dest.writeString(categoryId);
+        dest.writeString(productName);
+        dest.writeString(description);
+        dest.writeString(picture);
+        dest.writeString(status);
+        dest.writeInt(purchasePrice);
+        dest.writeInt(sellingPrice);
+        dest.writeString(unit);
+        dest.writeString(supplierId);
+        dest.writeString(createdAt);
+        dest.writeString(lastUpdated);
+        dest.writeString(createdBy);
+        dest.writeString(province);
+        dest.writeString(regency);
+        dest.writeString(district);
+        dest.writeString(village);
+        dest.writeInt(stock);
+        dest.writeString(supplierName);
+        dest.writeString(categoryName);
+        dest.writeInt(qty);
     }
 }

@@ -18,6 +18,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import co.crowde.toni.base.BaseActivity;
 import co.crowde.toni.constant.Const;
 import co.crowde.toni.controller.auth.LoginController;
 import co.crowde.toni.helper.SavePref;
@@ -27,12 +28,12 @@ import co.crowde.toni.view.activity.auth.LoginActivity;
 import co.crowde.toni.view.activity.auth.LoginSuccessActivity;
 import co.crowde.toni.view.dialog.message.network.NetworkOfflineDialog;
 
-public class LoginRequest {
+public class LoginRequest extends BaseActivity {
 
     public static String message = "";
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    public static void postLogin(final Activity activity, String username, String pass, ProgressDialog progressDialog){
+    public static void postLogin(final Activity activity, String username, String pass){
 
         final UserModel user = new UserModel();
         user.setUsername(username);
@@ -59,9 +60,8 @@ public class LoginRequest {
                     @Override
                     public void run() {
                         AnalyticsToniUtils.getEvent(Const.CATEGORY_AUTHENTIFICATION, Const.MODUL_LOGIN, Const.LABEL_LOGIN_FAILED_NETWORK);
-
                         NetworkOfflineDialog.showDialog(activity);
-                        progressDialog.dismiss();
+                        dismissLoading();
                         Log.e("Error",e.toString());
                     }
                 });
@@ -80,8 +80,7 @@ public class LoginRequest {
                             boolean status = json.getBoolean("status");
                             message = json.getString("message");
                             String data = json.getString("data");
-
-                            progressDialog.dismiss();
+                            dismissLoading();
 
                             if(status){
                                 JSONObject objDataLogin = new JSONObject(data);
