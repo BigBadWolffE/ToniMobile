@@ -210,9 +210,9 @@ public class InventoryDetailPopup {
                 try {
                     String originalString = s.toString();
 
-                    Long longval;
-                    if (originalString.contains(",")) {
-                        originalString = originalString.replaceAll(",", "");
+                    long longval;
+                    if (originalString.contains(",") || originalString.contains(".")) {
+                        originalString = originalString.replaceAll("[,.]", "");
                     }
                     longval = Long.parseLong(originalString);
 
@@ -252,9 +252,9 @@ public class InventoryDetailPopup {
                 try {
                     String originalString = s.toString();
 
-                    Long longval;
-                    if (originalString.contains(",")) {
-                        originalString = originalString.replaceAll(",", "");
+                    long longval;
+                    if (originalString.contains(",") || originalString.contains(".")) {
+                        originalString = originalString.replaceAll("[,.]", "");
                     }
                     longval = Long.parseLong(originalString);
 

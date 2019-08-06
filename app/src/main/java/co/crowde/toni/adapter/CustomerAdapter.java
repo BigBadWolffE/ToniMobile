@@ -99,16 +99,8 @@ public class CustomerAdapter
                             AnalyticsToniUtils.getEvent(Const.CATEGORY_CUSTOMER,Const.MODUL_CUSTOMER,Const.LABEL_CART_CHOOSE_CUSTOMER);
                         }
 
-                        String customer = new Gson().toJson(model);
-
-                        SavePref.saveCustomerId(activity,model.getCustomerId());
-                        SavePref.saveCustomer(activity, customer);
-
                         activity.finish();
-                        CartListActivity.tvCustomer.setText(model.getCustomerName()+"\n"
-                                +model.getPhone());
-                        CartListActivity.imgCheck.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_check_box_orange_24dp));
-                        CartListActivity.enabledPayment(activity);
+                        CartListActivity.setCustomer(activity, model);
                     }
                 });
             }

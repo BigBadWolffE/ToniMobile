@@ -43,6 +43,7 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/tv_info_cart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +51,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp">
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/line_x1"
@@ -70,7 +72,7 @@
                 android:id="@+id/tvPaymentMethod"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:gravity="center"
                 android:text="@string/pilih_metode_pembayaran"
                 android:textColor="@color/colorBlack"
@@ -248,7 +250,7 @@
                 android:id="@+id/tv_info_customer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:gravity="center"
                 android:text="@string/info_customer"
                 android:textColor="@color/colorBlack"
@@ -272,7 +274,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Firman Syah"
                 android:textColor="@color/colorBlack"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toStartOf="@+id/tv_customer_phone"
@@ -285,7 +286,6 @@
                 android:id="@+id/tv_customer_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="081278524651"
                 android:textColor="@color/colorBlack"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_customer_name"
@@ -312,8 +312,7 @@
                 android:id="@+id/tv_customer_credit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tidak ada hutang"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorThemeOrange"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/label_credit"
                 app:layout_constraintEnd_toStartOf="@+id/line_x2"
@@ -366,7 +365,6 @@
         android:id="@+id/tv_sub_total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rp. 000,000"
         android:textColor="@color/colorBlack"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/label_subtotal"
@@ -391,18 +389,19 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="@string/total_cap"
+        android:textStyle="bold"
         android:textColor="@color/colorBlack"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/line_x1a" />
 
     <TextView
-        android:id="@+id/tv__total_amount"
+        android:id="@+id/tv_total_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rp. 000,000"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorThemeOrange"
         android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/label_amount_cart"
         app:layout_constraintEnd_toStartOf="@+id/line_x2a"
         app:layout_constraintTop_toTopOf="@+id/label_amount_cart" />

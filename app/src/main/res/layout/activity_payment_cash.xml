@@ -7,19 +7,7 @@
     android:background="@color/colorWhite"
     tools:context=".view.activity.payment.PaymentCashActivity">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/line_x1a"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="16dp" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/line_x2a"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="16dp" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
@@ -40,367 +28,399 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <TextView
-        android:id="@+id/tv_label_nominal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/masukkan_nominal_uang_pembayaran"
-        android:textColor="@color/colorBlack"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/line_x1a"
-        app:layout_constraintTop_toBottomOf="@+id/appBar" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_input_nominal"
+    <ScrollView
         android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/bg_rec_radius_5dp_f5f5f5"
-        android:padding="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/line_x2a"
-        app:layout_constraintStart_toStartOf="@+id/line_x1a"
-        app:layout_constraintTop_toBottomOf="@+id/tv_label_nominal">
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_payment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBar">
 
-        <TextView
-            android:id="@+id/label_rp"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:gravity="center"
-            android:text="Rp. "
-            android:textColor="@color/colorBlack"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/et_nominal"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp">
 
-        <EditText
-            android:id="@+id/et_nominal"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@color/colorF5F5F5"
-            android:cursorVisible="false"
-            android:hint="@string/masukkan_nominal_uang_pembayaran"
-            android:imeOptions="actionDone"
-            android:inputType="number"
-            android:maxLines="1"
-            android:textColor="@color/colorBlack"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/label_rp"
-            app:layout_constraintTop_toTopOf="parent" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/line_x1a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/line_x2a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
 
-    <TextView
-        android:id="@+id/textView32"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/tombol_isi_cepat"
-        app:layout_constraintStart_toStartOf="@+id/line_x1a"
-        app:layout_constraintTop_toBottomOf="@+id/layout_input_nominal" />
+            <TextView
+                android:id="@+id/tv_label_nominal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:text="@string/masukkan_nominal_uang_pembayaran"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/line_x2a"
+                app:layout_constraintStart_toStartOf="@+id/line_x1a"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/layout_nominal_1"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        android:weightSum="4"
-        app:layout_constraintEnd_toStartOf="@+id/line_x2a"
-        app:layout_constraintStart_toStartOf="@+id/line_x1a"
-        app:layout_constraintTop_toBottomOf="@+id/textView32">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_input_nominal"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_rec_radius_5dp_f5f5f5"
+                android:padding="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/line_x2a"
+                app:layout_constraintStart_toStartOf="@+id/line_x1a"
+                app:layout_constraintTop_toBottomOf="@+id/tv_label_nominal">
 
-        <TextView
-            android:id="@+id/tv_cash_all"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginEnd="4dp"
-            android:layout_marginRight="4dp"
-            android:gravity="center"
-            android:padding="4dp"
-            android:textStyle="bold"
-            android:textColor="@color/colorWhite"
-            android:background="@drawable/bg_green_dark_radius_2dp"
-            android:text="@string/uang_pas"
-            app:autoSizeTextType="uniform"
-            app:autoSizeMaxTextSize="14sp"
-            />
+                <TextView
+                    android:id="@+id/label_rp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:gravity="center"
+                    android:text="Rp. "
+                    android:textColor="@color/colorBlack"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/et_nominal"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_cash_1000"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginRight="4dp"
-            android:gravity="center"
-            android:padding="4dp"
-            android:textStyle="bold"
-            android:textColor="@color/colorWhite"
-            android:background="@drawable/bg_green_dark_radius_2dp" />
+                <EditText
+                    android:id="@+id/et_nominal"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@color/colorF5F5F5"
+                    android:cursorVisible="false"
+                    android:hint="@string/masukkan_nominal_uang_pembayaran"
+                    android:imeOptions="actionDone"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/label_rp"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_cash_2000"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginRight="4dp"
-            android:gravity="center"
-            android:padding="4dp"
-            android:textStyle="bold"
-            android:textColor="@color/colorWhite"
-            android:background="@drawable/bg_green_dark_radius_2dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/tombol_isi_cepat"
+                app:layout_constraintStart_toStartOf="@+id/line_x1a"
+                app:layout_constraintTop_toBottomOf="@+id/layout_input_nominal" />
 
-        <TextView
-            android:id="@+id/tv_cash_5000"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
-            android:gravity="center"
-            android:padding="4dp"
-            android:textStyle="bold"
-            android:textColor="@color/colorWhite"
-            android:background="@drawable/bg_green_dark_radius_2dp" />
+            <LinearLayout
+                android:id="@+id/layout_nominal_1"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:weightSum="4"
+                app:layout_constraintEnd_toStartOf="@+id/line_x2a"
+                app:layout_constraintStart_toStartOf="@+id/line_x1a"
+                app:layout_constraintTop_toBottomOf="@+id/textView32">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_cash_all"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_green_dark_radius_2dp"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:text="@string/uang_pas"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"
+                    app:autoSizeMaxTextSize="14sp"
+                    app:autoSizeTextType="uniform" />
 
-    <LinearLayout
-        android:id="@+id/layout_nominal_2"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        android:weightSum="4"
-        app:layout_constraintEnd_toStartOf="@+id/line_x2a"
-        app:layout_constraintStart_toStartOf="@+id/line_x1a"
-        app:layout_constraintTop_toBottomOf="@+id/layout_nominal_1">
+                <TextView
+                    android:id="@+id/tv_cash_1000"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_green_dark_radius_2dp"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tv_cash_10000"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginEnd="4dp"
-            android:layout_marginRight="4dp"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textColor="@color/colorWhite"
-            android:background="@drawable/bg_green_dark_radius_2dp" />
-
-        <TextView
-            android:id="@+id/tv_cash_20000"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginRight="4dp"
-            android:gravity="center"
-            android:padding="4dp"
-            android:textStyle="bold"
-            android:textColor="@color/colorWhite"
-            android:background="@drawable/bg_green_dark_radius_2dp" />
-
-        <TextView
-            android:id="@+id/tv_cash_50000"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginRight="4dp"
-            android:gravity="center"
-            android:padding="4dp"
-            android:textStyle="bold"
-            android:textColor="@color/colorWhite"
-            android:background="@drawable/bg_green_dark_radius_2dp" />
+                <TextView
+                    android:id="@+id/tv_cash_2000"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_green_dark_radius_2dp"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold" />
 
 
-        <TextView
-            android:id="@+id/tv_cash_100000"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
-            android:gravity="center"
-            android:padding="4dp"
-            android:textStyle="bold"
-            android:textColor="@color/colorWhite"
-            android:background="@drawable/bg_green_dark_radius_2dp" />
+                <TextView
+                    android:id="@+id/tv_cash_5000"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_green_dark_radius_2dp"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold" />
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_info_cart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="Informasi Pembayaran"
-        android:textColor="@color/colorBlack"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/line_x1a"
-        app:layout_constraintTop_toBottomOf="@+id/layout_nominal_2" />
+            <LinearLayout
+                android:id="@+id/layout_nominal_2"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:weightSum="4"
+                app:layout_constraintEnd_toStartOf="@+id/line_x2a"
+                app:layout_constraintStart_toStartOf="@+id/line_x1a"
+                app:layout_constraintTop_toBottomOf="@+id/layout_nominal_1">
 
-    <View
-        android:id="@+id/view_info_cart"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorF5F5F5"
-        app:layout_constraintEnd_toStartOf="@+id/line_x2a"
-        app:layout_constraintStart_toStartOf="@+id/line_x1a"
-        app:layout_constraintTop_toBottomOf="@+id/tv_info_cart" />
+                <TextView
+                    android:id="@+id/tv_cash_10000"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_green_dark_radius_2dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/label_subtotal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/subtotal_cap"
-        android:textColor="@color/colorBlack"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toStartOf="@+id/tv_sub_total"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="@+id/line_x1a"
-        app:layout_constraintTop_toBottomOf="@+id/view_info_cart" />
+                <TextView
+                    android:id="@+id/tv_cash_20000"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_green_dark_radius_2dp"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tv_sub_total"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rp. 000,000"
-        android:textColor="@color/colorBlack"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/label_subtotal"
-        app:layout_constraintEnd_toStartOf="@+id/line_x2a"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/label_subtotal"
-        app:layout_constraintTop_toTopOf="@+id/label_subtotal" />
+                <TextView
+                    android:id="@+id/tv_cash_50000"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_green_dark_radius_2dp"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold" />
 
-    <View
-        android:id="@+id/view_info_cart_amount"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorF5F5F5"
-        app:layout_constraintEnd_toStartOf="@+id/line_x2a"
-        app:layout_constraintStart_toStartOf="@+id/line_x1a"
-        app:layout_constraintTop_toBottomOf="@+id/label_subtotal" />
 
-    <TextView
-        android:id="@+id/label_amount_cart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/total_cap"
-        android:textColor="@color/colorBlack"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/line_x1a"
-        app:layout_constraintTop_toBottomOf="@+id/view_info_cart_amount" />
+                <TextView
+                    android:id="@+id/tv_cash_100000"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_green_dark_radius_2dp"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tv_total_amount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rp. 000,000"
-        android:textColor="@color/colorBlack"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/label_amount_cart"
-        app:layout_constraintEnd_toStartOf="@+id/line_x2a"
-        app:layout_constraintTop_toTopOf="@+id/label_amount_cart" />
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/label_amount_payment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="@string/total_pembayaran"
-        android:textColor="@color/colorBlack"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/line_x1a"
-        app:layout_constraintTop_toBottomOf="@+id/label_amount_cart" />
+            <TextView
+                android:id="@+id/tv_info_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="Informasi Pembayaran"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/line_x1a"
+                app:layout_constraintTop_toBottomOf="@+id/layout_nominal_2" />
 
-    <TextView
-        android:id="@+id/tv_total_amount_payment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rp. 000,000"
-        android:textColor="@color/colorBlack"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/label_amount_payment"
-        app:layout_constraintEnd_toStartOf="@+id/line_x2a"
-        app:layout_constraintTop_toTopOf="@+id/label_amount_payment" />
+            <View
+                android:id="@+id/view_info_cart"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/colorF5F5F5"
+                app:layout_constraintEnd_toStartOf="@+id/line_x2a"
+                app:layout_constraintStart_toStartOf="@+id/line_x1a"
+                app:layout_constraintTop_toBottomOf="@+id/tv_info_cart" />
 
-    <View
-        android:id="@+id/view_info_amount_payment"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorF5F5F5"
-        app:layout_constraintEnd_toStartOf="@+id/line_x2a"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/line_x1a"
-        app:layout_constraintTop_toBottomOf="@+id/label_amount_payment" />
+            <TextView
+                android:id="@+id/label_subtotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/subtotal_cap"
+                android:textColor="@color/colorBlack"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_sub_total"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="@+id/line_x1a"
+                app:layout_constraintTop_toBottomOf="@+id/view_info_cart" />
 
-    <TextView
-        android:id="@+id/tv_amount_change"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rp. 000,000"
-        android:textColor="@color/colorBlack"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/label_cash_change"
-        app:layout_constraintEnd_toStartOf="@+id/line_x2a"
-        app:layout_constraintTop_toTopOf="@+id/label_cash_change" />
+            <TextView
+                android:id="@+id/tv_sub_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/label_subtotal"
+                app:layout_constraintEnd_toStartOf="@+id/line_x2a"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/label_subtotal"
+                app:layout_constraintTop_toTopOf="@+id/label_subtotal" />
 
-    <TextView
-        android:id="@+id/label_cash_change"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/kembalian"
-        android:textColor="@color/colorBlack"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/line_x1a"
-        app:layout_constraintTop_toBottomOf="@+id/view_info_amount_payment" />
+            <View
+                android:id="@+id/view_info_cart_amount"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/colorF5F5F5"
+                app:layout_constraintEnd_toStartOf="@+id/line_x2a"
+                app:layout_constraintStart_toStartOf="@+id/line_x1a"
+                app:layout_constraintTop_toBottomOf="@+id/label_subtotal" />
 
-    <TextView
+            <TextView
+                android:id="@+id/label_amount_payment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/pembayaran"
+                android:textColor="@color/colorBlack"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/line_x1a"
+                app:layout_constraintTop_toBottomOf="@+id/view_info_cart_amount" />
+
+            <TextView
+                android:id="@+id/tv_total_amount_payment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/label_amount_payment"
+                app:layout_constraintEnd_toStartOf="@+id/line_x2a"
+                app:layout_constraintTop_toTopOf="@+id/label_amount_payment" />
+
+            <TextView
+                android:id="@+id/label_amount_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/total_cap"
+                android:textColor="@color/colorBlack"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/line_x1a"
+                app:layout_constraintTop_toBottomOf="@+id/label_amount_payment" />
+
+            <TextView
+                android:id="@+id/tv_total_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorThemeOrange"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/label_amount_cart"
+                app:layout_constraintEnd_toStartOf="@+id/line_x2a"
+                app:layout_constraintTop_toTopOf="@+id/label_amount_cart" />
+
+            <View
+                android:id="@+id/view_info_amount_payment"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/colorF5F5F5"
+                app:layout_constraintEnd_toStartOf="@+id/line_x2a"
+                app:layout_constraintStart_toStartOf="@+id/line_x1a"
+                app:layout_constraintTop_toBottomOf="@+id/label_amount_cart" />
+
+            <TextView
+                android:id="@+id/label_cash_change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/kembalian"
+                android:textColor="@color/colorBlack"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/line_x1a"
+                app:layout_constraintTop_toBottomOf="@+id/view_info_amount_payment" />
+
+            <TextView
+                android:id="@+id/tv_amount_change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/label_cash_change"
+                app:layout_constraintEnd_toStartOf="@+id/line_x2a"
+                app:layout_constraintTop_toTopOf="@+id/label_cash_change" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_payment"
         android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@color/color61000000"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="14sp"
-        android:textColor="@color/color61000000"
         android:text="BAYAR BELANJAAN"
+        android:textStyle="bold"
+        android:shadowColor="@color/colorWhite"
+        android:textColor="@color/color61000000"
+        android:background="@drawable/bg_grey_transparent_2dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/line_x2a"
-        app:layout_constraintStart_toStartOf="@+id/line_x1a" />
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

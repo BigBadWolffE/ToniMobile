@@ -50,6 +50,7 @@ import co.crowde.toni.view.fragment.cart.CartListItemFragment;
 import co.crowde.toni.view.fragment.cart.CartPaymentFragment;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
 import co.crowde.toni.view.fragment.reset_password.ResetPassPhoneFragment;
+import co.crowde.toni.view.fragment.transaction.DashboardReportFragment;
 
 public class CartListActivity extends AppCompatActivity
 implements View.OnClickListener{
@@ -82,8 +83,8 @@ implements View.OnClickListener{
 
     AppBarLayout appBarLayout;
 
-    public static String frames;
-    public static String[] layout = {"cartList", "cartPayment"};
+    public static CustomerModel customerModel;
+
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -112,7 +113,7 @@ implements View.OnClickListener{
         imgCheck = findViewById(R.id.imgCheck);
         tvAmountTotal = findViewById(R.id.tvAmountTotal);
         cvBtnPayment = findViewById(R.id.cv_btn_payment);
-        setCustomer(this);
+        cvBtnPayment.setEnabled(false);
 
         formatNumber = new DecimalFormat("###,###,###,###,###,###");
 
@@ -121,6 +122,7 @@ implements View.OnClickListener{
         itemDecorator.setDrawable(ContextCompat.getDrawable(getBaseContext(),
                 R.drawable.divider_line_item));
         rcCart = findViewById(R.id.rcCartList);
+
         itemCartListener(this);
         layoutCart = new LinearLayoutManager(getApplicationContext());
         rcCart.addItemDecoration(itemDecorator);
@@ -160,6 +162,10 @@ implements View.OnClickListener{
                 break;
 
             case R.id.cv_btn_payment:
+                Intent payment = new Intent(CartListActivity.this, CartPaymentActivity.class);
+                payment.putExtra(CustomerModel.class.getSimpleName(), customerModel);
+                payment.putExtra("total_amount", ""+DashboardFragment.totalAmount);
+                startActivityForResult(payment, 123);
                 break;
         }
     }
@@ -172,14 +178,10 @@ implements View.OnClickListener{
         DashboardFragment.productDashboardAdapter.notifyDataSetChanged();
         DashboardFragment.setTotal(activity, dbCart);
         setTotalAmount(activity);
-        SavePref.saveCustomer(activity, null);
-        SavePref.saveCustomerId(activity, null );
     }
 
     @Override
     public void onBackPressed() {
-        SavePref.saveCustomer(CartListActivity.this, null);
-        SavePref.saveCustomerId(CartListActivity.this, null);
         super.onBackPressed();
     }
 
@@ -280,11 +282,9 @@ implements View.OnClickListener{
 
     }
 
-    public static void setCustomer(Activity activity){
-        if(SavePref.readCustomerId(activity)!=null
-                && SavePref.readCustomer(activity)!=null){
-            CustomerModel model = new Gson().fromJson(SavePref.readCustomer(activity), CustomerModel.class);
-
+    public static void setCustomer(Activity activity, CustomerModel model){
+        customerModel = model;
+        if(model!=null){
             tvCustomer.setText(model.getCustomerName()+"\n"
                     +model.getPhone());
             imgCheck.setImageDrawable(
@@ -295,11 +295,11 @@ implements View.OnClickListener{
             imgCheck.setImageDrawable(
                     activity.getResources().getDrawable(R.drawable.ic_check_box_outline_blank_white_24dp));
         }
+        enabledPayment(activity, model);
     }
 
-    public static void enabledPayment(Activity activity) {
-        if(SavePref.readCustomerId(activity)!=null
-                && SavePref.readCustomer(activity)!=null){
+    public static void enabledPayment(Activity activity, CustomerModel model) {
+        if(model!=null){
             cvBtnPayment.setEnabled(true);
             cvBtnPayment.setBackgroundColor(activity.getResources().getColor(R.color.colorThemeOrange));
         } else {

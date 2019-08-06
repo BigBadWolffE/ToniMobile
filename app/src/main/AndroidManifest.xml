@@ -18,8 +18,11 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".view.activity.payment.PaymentCreditActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity android:name=".base.BaseActivity" />
-        <activity android:name=".view.activity.payment.PaymentCashActivity"></activity>
+        <activity android:name=".view.activity.payment.PaymentCashActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity android:name=".view.activity.cart.CartPaymentActivity" />
         <activity
             android:name=".view.activity.product.InventoryDetailActivity"
@@ -70,8 +73,7 @@
             android:name=".view.activity.home.MainActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity android:name=".view.activity.auth.LoginSuccessActivity" />
-        <activity
-            android:name=".view.activity.auth.LoginActivity"/>
+        <activity android:name=".view.activity.auth.LoginActivity" />
         <activity android:name=".view.activity.welcoming.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
