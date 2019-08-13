@@ -15,8 +15,6 @@ import co.crowde.toni.R;
 import co.crowde.toni.helper.OnSwipeTouchListener;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.view.activity.cart.CartListActivity;
-import co.crowde.toni.view.fragment.cart.CartListItemFragment;
-import co.crowde.toni.view.fragment.cart.CartPaymentFragment;
 import co.crowde.toni.zHackaton.fragment.ProjectDescriptionFragment;
 import co.crowde.toni.zHackaton.fragment.ProjectOwnerFragment;
 

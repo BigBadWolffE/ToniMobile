@@ -72,54 +72,13 @@ public class ProductModel implements Parcelable {
     @SerializedName("qty")
     private int qty;
 
+    @SerializedName("discount")
+    private int discount;
+
     public ProductModel() {
     }
 
-    public ProductModel(String shopId,
-                        String productId,
-                        String categoryId,
-                        String productName,
-                        String description,
-                        String picture,
-                        String status,
-                        int purchasePrice,
-                        int sellingPrice,
-                        String unit,
-                        String supplierId,
-                        String createdAt,
-                        String lastUpdated,
-                        String createdBy,
-                        String province,
-                        String regency,
-                        String district,
-                        String village,
-                        int stock,
-                        String supplierName,
-                        String categoryName) {
-        this.shopId = shopId;
-        this.productId = productId;
-        this.categoryId = categoryId;
-        this.productName = productName;
-        this.description = description;
-        this.picture = picture;
-        this.status = status;
-        this.purchasePrice = purchasePrice;
-        this.sellingPrice = sellingPrice;
-        this.unit = unit;
-        this.supplierId = supplierId;
-        this.createdAt = createdAt;
-        this.lastUpdated = lastUpdated;
-        this.createdBy = createdBy;
-        this.province = province;
-        this.regency = regency;
-        this.district = district;
-        this.village = village;
-        this.stock = stock;
-        this.supplierName = supplierName;
-        this.categoryName = categoryName;
-    }
-
-    public ProductModel(String shopId, String productId, String categoryId, String productName, String description, String picture, String status, int purchasePrice, int sellingPrice, String unit, String supplierId, String createdAt, String lastUpdated, String createdBy, String province, String regency, String district, String village, int stock, String supplierName, String categoryName, int qty) {
+    public ProductModel(String shopId, String productId, String categoryId, String productName, String description, String picture, String status, int purchasePrice, int sellingPrice, String unit, String supplierId, String createdAt, String lastUpdated, String createdBy, String province, String regency, String district, String village, int stock, String supplierName, String categoryName, int qty, int discount) {
         this.shopId = shopId;
         this.productId = productId;
         this.categoryId = categoryId;
@@ -142,6 +101,7 @@ public class ProductModel implements Parcelable {
         this.supplierName = supplierName;
         this.categoryName = categoryName;
         this.qty = qty;
+        this.discount = discount;
     }
 
     protected ProductModel(Parcel in) {
@@ -167,6 +127,7 @@ public class ProductModel implements Parcelable {
         supplierName = in.readString();
         categoryName = in.readString();
         qty = in.readInt();
+        discount = in.readInt();
     }
 
     public static final Creator<ProductModel> CREATOR = new Creator<ProductModel>() {
@@ -357,6 +318,14 @@ public class ProductModel implements Parcelable {
         this.qty = qty;
     }
 
+    public int getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(int discount) {
+        this.discount = discount;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -386,5 +355,6 @@ public class ProductModel implements Parcelable {
         dest.writeString(supplierName);
         dest.writeString(categoryName);
         dest.writeInt(qty);
+        dest.writeInt(discount);
     }
 }

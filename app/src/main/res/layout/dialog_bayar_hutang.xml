@@ -44,7 +44,7 @@
                 android:layout_weight="1.7"
                 android:weightSum="2"
                 android:orientation="vertical"
-                android:background="@color/colorThemeGreen">
+                android:background="@color/colorThemeGreenDark02">
                 <TextView
                     android:id="@+id/tvTotalBill"
                     android:layout_width="match_parent"

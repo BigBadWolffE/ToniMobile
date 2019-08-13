@@ -216,48 +216,44 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void register() {
-        progressDialog.setMessage("Harap tunggu...");
-        progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.show();
 
         isEmpty = false;
 
         if(etShopName.getText().toString().length()==0){
             isEmpty = true;
-        } else if(etShopAddress.getText().toString().length()==0) {
+        } else if(etShopAddress.getText().toString().isEmpty()) {
             isEmpty = true;
-        } else if(etShopType.getText().toString().length()==0) {
+        } else if(etShopType.getText().toString().isEmpty()) {
             isEmpty = true;
-        } else if(etShopOwner.getText().toString().length()==0) {
+        } else if(etShopOwner.getText().toString().isEmpty()) {
             isEmpty = true;
-        } else if(etShopPhone.getText().toString().length()==0) {
+        } else if(etShopPhone.getText().toString().isEmpty()) {
             isEmpty = true;
-        } else if(etShopPass.getText().toString().length()==0) {
+        } else if(etShopPass.getText().toString().isEmpty()) {
             isEmpty = true;
-        } else if(etShopRetypePass.getText().toString().length()==0) {
+        } else if(etShopRetypePass.getText().toString().isEmpty()) {
             isEmpty = true;
-        } else if(etShopProvince.getText().toString().length()==0) {
+        } else if(etShopProvince.getText().toString().isEmpty()) {
             isEmpty = true;
-        } else if(etShopVillage.getText().toString().length()==0) {
+        } else if(etShopVillage.getText().toString().isEmpty()) {
             isEmpty = true;
-        } else if(etShopRegency.getText().toString().length()==0) {
+        } else if(etShopRegency.getText().toString().isEmpty()) {
             isEmpty = true;
-        } else if(etShopDistrict.getText().toString().length()==0) {
+        } else if(etShopDistrict.getText().toString().isEmpty()) {
             isEmpty = true;
         }
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
+        new Handler().postDelayed(() -> {
+            if(!isEmpty){
+                progressDialog.setMessage("Harap tunggu...");
+                progressDialog.setCanceledOnTouchOutside(false);
+                progressDialog.show();
+
+                AnalyticsToniUtils.getEvent(Const.CATEGORY_AUTHENTIFICATION, Const.MODUL_LOGIN, Const.LABEL_LOGIN_FAILED_NETWORK);
+
+                Intent register = new Intent(RegisterActivity.this, SendOtpRegisterActivity.class);
+                startActivity(register);
                 progressDialog.dismiss();
-                if(!isEmpty){
-
-                    AnalyticsToniUtils.getEvent(Const.CATEGORY_AUTHENTIFICATION, Const.MODUL_LOGIN, Const.LABEL_LOGIN_FAILED_NETWORK);
-
-
-                    Intent register = new Intent(RegisterActivity.this, SendOtpRegisterActivity.class);
-                    startActivity(register);
-                }
             }
         }, 1000);
     }

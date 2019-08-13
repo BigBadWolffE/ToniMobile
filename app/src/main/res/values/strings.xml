@@ -200,7 +200,6 @@
         <item>Tutup Toko</item>
     </string-array>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="lupa_sandi">LUPA SANDI?</string>
     <string name="masuk">MASUK</string>
@@ -273,8 +272,8 @@
     <string name="info_shop">Informasi Toko Tani</string>
 
     <!-- DIALOG MESSAGE -->
-    <string name="dialog_label_close_app">“YAKIN KELUAR \n DARI APLIKASI TONI?”</string>
-    <string name="dialog_desc_close_app">Aplikasi TONI akan ditutup \n silahkan klik Ya untuk melanjutkan.</string>
+    <string name="dialog_label_close_app">Konfirmasi Keluar</string>
+    <string name="dialog_desc_close_app">Aplikasi TONI akan ditutup. silahkan klik Tutup untuk melanjutkan.</string>
 
     <string name="dialog_label_close_shop">“YAKIN INGIN \n MENUTUP TOKO?”</string>
     <string name="dialog_desc_close_shop">Toko akan ditutup \n silahkan klik Ya untuk melanjutkan.</string>
@@ -362,9 +361,9 @@
     <string name="kami_telah_mengirim_sms_otp_n_ke_nomor">Kami telah mengirim SMS OTP \n ke nomor</string>
     <string name="sms_tidak_masuk_kirim_ulang_kode">SMS tidak masuk? Kirim ulang kode?</string>
     <string name="reset_kata_sandi">Reset Kata Sandi.</string>
-    <string name="masukkan_nomer_ponsel_anda_untuk_mendapatkan_kode_verifikasi_otp">Masukkan nomer ponsel anda untuk \n mendapatkan kode verifikasi OTP</string>
+    <string name="masukkan_nomer_ponsel_anda_untuk_mendapatkan_kode_verifikasi_otp">Masukkan nomer ponsel anda untuk \nmendapatkan kode verifikasi OTP</string>
     <string name="kirim">KIRIM</string>
-    <string name="berhasil_silahkan_masukkan_kata_sandi_anda_yang_baru_textview">Berhasil! Silahkan masukkan \n kata sandi Anda yang baru.</string>
+    <string name="berhasil_silahkan_masukkan_kata_sandi_anda_yang_baru_textview">Berhasil! Silahkan masukkan \nkata sandi Anda yang baru.</string>
     <string name="kata_sandi_baru">Kata sandi baru</string>
     <string name="ulangi_kata_sandi">Ulangi kata sandi</string>
     <string name="mulai_habis">Mulai habis</string>
@@ -386,5 +385,16 @@
     <string name="total_cap">TOTAL</string>
     <string name="masukkan_nominal_uang_pembayaran">Masukkan Nominal Uang Pembayaran</string>
     <string name="tombol_isi_cepat">Tombol isi cepat</string>
+    <string name="bayar_belanjaan_cap">BAYAR BELANJAAN</string>
+    <string name="tambah_diskon_cap">TAMBAH DISKON</string>
+    <string name="ubah_cap">UBAH</string>
+    <string name="hapus_diskon">HAPUS DISKON</string>
+    <string name="batalkan_cap">BATALKAN</string>
+    <string name="batal_cap">BATAL</string>
+    <string name="confirm_payment_desc">Pastikan detail transaksi anda benar sebelum menekan tombol bayar.</string>
+    <string name="konfirmasi_transaksi">Konfirmasi Transaksi</string>
+    <string name="kembali_low">Kembali</string>
+    <string name="hutang_ke_toko_cap">HUTANG KE TOKO</string>
+    <string name="masukkan_nominal_pembayaran_hutang">Masukkan Nominal Pembayaran Hutang</string>
 
 </resources>

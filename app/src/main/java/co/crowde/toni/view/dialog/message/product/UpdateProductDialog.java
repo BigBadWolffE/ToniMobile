@@ -61,7 +61,7 @@ public class UpdateProductDialog {
                 progressDialog.setCanceledOnTouchOutside(false);
                 progressDialog.show();
 
-                ProductRequest.postUpdateProduct(activity, productId, qty, purchase, selling, progressDialogs);
+                ProductRequest.postUpdateProduct(activity, productId, qty, purchase, selling, progressDialog);
             }
         });
 
@@ -70,6 +70,7 @@ public class UpdateProductDialog {
             public void onClick(View v) {
                 tvNo.setTextColor(activity.getResources().getColor(R.color.colorThemeOrange));
                 dialogConfirm.dismiss();
+                progressDialogs.dismiss();
             }
         });
 

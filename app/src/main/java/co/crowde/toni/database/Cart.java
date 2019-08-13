@@ -26,7 +26,7 @@ public class Cart extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "dbToni";
 
     // table name
-    private static final String TABLE_KERANJANG = "tbKeranjang";
+    private static final String TABLE_KERANJANG = "table_cart";
 
     public Cart(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -58,6 +58,7 @@ public class Cart extends SQLiteOpenHelper {
         values.put(CartModel.KEY_QUANTITY, model.getQuantity());
         values.put(CartModel.KEY_SELLING_PRICE, model.getSellingPrice());
         values.put(CartModel.KEY_AMOUNT, model.getAmount());
+        values.put(CartModel.KEY_DISCOUNT, model.getDiscount());
 
         long id = db.insert(TABLE_KERANJANG, null, values);
         db.close();
@@ -78,7 +79,8 @@ public class Cart extends SQLiteOpenHelper {
                         CartModel.KEY_STOK,
                         CartModel.KEY_QUANTITY,
                         CartModel.KEY_SELLING_PRICE,
-                        CartModel.KEY_AMOUNT },
+                        CartModel.KEY_AMOUNT,
+                        CartModel.KEY_DISCOUNT},
                 CartModel.KEY_ID+"=?",
                 new String[]{ String.valueOf(id)}, null, null,null,null);
         try {
@@ -93,7 +95,8 @@ public class Cart extends SQLiteOpenHelper {
                         cursor.getString(cursor.getColumnIndex(CartModel.KEY_PICTURE)),
                         cursor.getInt(cursor.getColumnIndex(CartModel.KEY_QUANTITY)),
                         cursor.getInt(cursor.getColumnIndex(CartModel.KEY_SELLING_PRICE)),
-                        cursor.getInt(cursor.getColumnIndex(CartModel.KEY_AMOUNT)));
+                        cursor.getInt(cursor.getColumnIndex(CartModel.KEY_AMOUNT)),
+                        cursor.getInt(cursor.getColumnIndex(CartModel.KEY_DISCOUNT)));
             }
         }
         finally {
@@ -130,6 +133,7 @@ public class Cart extends SQLiteOpenHelper {
             models.setQuantity(cursor.getInt(cursor.getColumnIndex(CartModel.KEY_QUANTITY)));
             models.setSellingPrice(cursor.getInt(cursor.getColumnIndex(CartModel.KEY_SELLING_PRICE)));
             models.setAmount(cursor.getInt(cursor.getColumnIndex(CartModel.KEY_AMOUNT)));
+            models.setDiscount(cursor.getInt(cursor.getColumnIndex(CartModel.KEY_DISCOUNT)));
         }
 
         db.close();
@@ -159,6 +163,7 @@ public class Cart extends SQLiteOpenHelper {
                 model.setQuantity(cursor.getInt(cursor.getColumnIndex(CartModel.KEY_QUANTITY)));
                 model.setSellingPrice(cursor.getInt(cursor.getColumnIndex(CartModel.KEY_SELLING_PRICE)));
                 model.setAmount(cursor.getInt(cursor.getColumnIndex(CartModel.KEY_AMOUNT)));
+                model.setDiscount(cursor.getInt(cursor.getColumnIndex(CartModel.KEY_DISCOUNT)));
 
                 modelList.add(model);
             } while (cursor.moveToNext());
@@ -195,6 +200,7 @@ public class Cart extends SQLiteOpenHelper {
             models.setQuantity(cursor.getInt(cursor.getColumnIndex(CartModel.KEY_QUANTITY)));
             models.setSellingPrice(cursor.getInt(cursor.getColumnIndex(CartModel.KEY_SELLING_PRICE)));
             models.setAmount(cursor.getInt(cursor.getColumnIndex(CartModel.KEY_AMOUNT)));
+            models.setDiscount(cursor.getInt(cursor.getColumnIndex(CartModel.KEY_DISCOUNT)));
         }
 
         db.close();
@@ -241,6 +247,7 @@ public class Cart extends SQLiteOpenHelper {
         values.put(CartModel.KEY_QUANTITY, model.getQuantity());
         values.put(CartModel.KEY_SELLING_PRICE, model.getSellingPrice());
         values.put(CartModel.KEY_AMOUNT, model.getAmount());
+        values.put(CartModel.KEY_DISCOUNT, model.getDiscount());
 
         // updating row
         return db.update(CartModel.TABLE_NAME, values, CartModel.KEY_ID + "=?",

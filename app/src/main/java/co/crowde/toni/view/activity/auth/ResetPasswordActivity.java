@@ -20,7 +20,6 @@ import com.google.android.material.appbar.AppBarLayout;
 import co.crowde.toni.R;
 import co.crowde.toni.constant.Const;
 import co.crowde.toni.utils.SetHeader;
-import co.crowde.toni.view.fragment.cart.CartListItemFragment;
 import co.crowde.toni.view.fragment.reset_password.ResetNewPassFragment;
 import co.crowde.toni.view.fragment.reset_password.ResetPassOTPFragment;
 import co.crowde.toni.view.fragment.reset_password.ResetPassPhoneFragment;
@@ -48,7 +47,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         SetHeader.isLolipop(ResetPasswordActivity.this, appBarLayout);
 
         toolbar = findViewById(R.id.toolbar);
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_white_24dp));
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_black_24dp));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,8 +68,8 @@ public class ResetPasswordActivity extends AppCompatActivity {
     public static void changeLayout(Activity activity, String phoneNumber) {
         switch (frames) {
             case "one":
-                tvDot1.setTextColor(activity.getResources().getColor(R.color.colorThemeGreen));
-                tvDot2.setTextColor(activity.getResources().getColor(R.color.TextColorLight));
+                tvDot1.setTextColor(activity.getResources().getColor(R.color.colorThemeGreenDark02));
+                tvDot2.setTextColor(activity.getResources().getColor(R.color.color99000000));
                 tvDot3.setTextColor(activity.getResources().getColor(R.color.TextColorLight));
 
                 ResetPassPhoneFragment phone = new ResetPassPhoneFragment();
@@ -85,7 +84,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 break;
             case "two":
                 tvDot1.setTextColor(activity.getResources().getColor(R.color.TextColorLight));
-                tvDot2.setTextColor(activity.getResources().getColor(R.color.colorThemeGreen));
+                tvDot2.setTextColor(activity.getResources().getColor(R.color.colorThemeGreenDark02));
                 tvDot3.setTextColor(activity.getResources().getColor(R.color.TextColorLight));
 
                 Bundle bundle = new Bundle();
@@ -105,7 +104,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
             case "three":
                 tvDot1.setTextColor(activity.getResources().getColor(R.color.TextColorLight));
                 tvDot2.setTextColor(activity.getResources().getColor(R.color.TextColorLight));
-                tvDot3.setTextColor(activity.getResources().getColor(R.color.colorThemeGreen));
+                tvDot3.setTextColor(activity.getResources().getColor(R.color.colorThemeGreenDark02));
 
                 ResetNewPassFragment pass = new ResetNewPassFragment();
                 FragmentTransaction passTransaction = ((FragmentActivity) activity).getSupportFragmentManager()

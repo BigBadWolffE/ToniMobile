@@ -24,7 +24,6 @@ import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CustomerModel;
 import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.utils.print.Utils;
-import co.crowde.toni.view.fragment.cart.CartListItemFragment;
 import co.crowde.toni.view.activity.cart.CartListActivity;
 
 public class CustomerAdapter

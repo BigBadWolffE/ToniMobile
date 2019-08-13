@@ -35,7 +35,7 @@ public class HelpAppsActivity extends AppCompatActivity implements View.OnClickL
         SetHeader.isLolipop(HelpAppsActivity.this, appBarLayout);
 
         toolbar = findViewById(R.id.toolbar);
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_white_24dp));
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_black_24dp));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

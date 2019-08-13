@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@drawable/bg_rec_gradient_down_green_light_dark"
     tools:context=".view.activity.app.AboutAppsActivity"
     tools:ignore="SmallSp">
 
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="TONI POS"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorWhite"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Mesin Kasir Toko Pertanian"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="@+id/tv_apps_name"
         app:layout_constraintStart_toStartOf="@+id/tv_apps_name"
         app:layout_constraintTop_toBottomOf="@+id/tv_apps_name" />
@@ -52,6 +52,7 @@
         android:layout_marginBottom="4dp"
         android:text="Version"
         android:textSize="10sp"
+        android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toTopOf="@+id/tv_copyright"
         app:layout_constraintEnd_toEndOf="@+id/tv_copyright"
         app:layout_constraintStart_toStartOf="@+id/img_cc" />
@@ -63,6 +64,7 @@
         android:layout_marginBottom="8dp"
         android:text="2019 PT. CROWDE Membangun Bangsa"
         android:textSize="10sp"
+        android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

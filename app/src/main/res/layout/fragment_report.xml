@@ -25,7 +25,7 @@
             app:tabTextColor="@color/TextColorDefault"
             app:tabSelectedTextColor="@color/TextColorBlack"
             app:tabTextAppearance="@android:style/TextAppearance"
-            app:tabIndicatorColor="@color/TextColorBlack"/>
+            app:tabIndicatorColor="@color/TextColorBlack" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager

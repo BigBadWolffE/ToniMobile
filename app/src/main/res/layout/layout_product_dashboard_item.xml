@@ -107,7 +107,7 @@
             android:maxLines="1"
             android:textColor="@color/colorBlack"
             android:textAlignment="center"
-            android:textSize="14sp"
+            android:textSize="13sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/tvProductVarian"
             app:layout_constraintEnd_toStartOf="@+id/imgIncrease"

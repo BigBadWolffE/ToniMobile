@@ -38,7 +38,6 @@ import co.crowde.toni.view.activity.app.HelpAppsActivity;
 import co.crowde.toni.view.activity.user.InfoShopActivity;
 import co.crowde.toni.view.dialog.message.app.CloseAppsDialog;
 import co.crowde.toni.view.dialog.message.shop.CloseShopDialog;
-import co.crowde.toni.view.dialog.popup.auth.ShopDetailPopup;
 import co.crowde.toni.view.fragment.modul.CustomerFragment;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
 import co.crowde.toni.view.fragment.modul.InventoryFragment;

@@ -51,18 +51,6 @@
         app:layout_constraintTop_toBottomOf="@+id/tvStock" />
 
     <TextView
-        android:id="@+id/tvDiscount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:textColor="@color/colorBlack"
-        app:layout_constraintBottom_toBottomOf="@+id/tvPrice"
-        app:layout_constraintStart_toEndOf="@+id/tvPrice"
-        app:layout_constraintTop_toTopOf="@+id/tvPrice"
-        android:visibility="gone"/>
-
-    <TextView
         android:id="@+id/tvDelete"
         android:layout_width="60dp"
         android:layout_height="24dp"
@@ -71,25 +59,32 @@
         android:background="@drawable/bg_grey_radius_2dp"
         android:gravity="center"
         android:text="HAPUS"
-        android:textColor="@color/colorThemeOrange"
+        android:textColor="@color/color_theme_red"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tvName"
         app:layout_constraintTop_toBottomOf="@+id/tvPrice" />
 
     <TextView
-        android:id="@+id/tvEdit"
-        android:layout_width="45dp"
+        android:id="@+id/tv_edit_discount"
+        android:layout_width="wrap_content"
         android:layout_height="24dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:background="@drawable/bg_grey_radius_2dp"
         android:gravity="center"
-        android:text="EDIT"
-        android:textColor="@color/color429FF4"
+        android:paddingStart="8dp"
+        android:paddingLeft="8dp"
+        android:paddingEnd="8dp"
+        android:paddingRight="8dp"
+        android:text="@string/tambah_diskon_cap"
+        android:textColor="@color/colorThemeGreenDark02"
         app:layout_constraintBottom_toBottomOf="@+id/tvDelete"
+        app:layout_constraintEnd_toStartOf="@+id/lineX05"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/tvDelete"
-        app:layout_constraintTop_toTopOf="@+id/tvDelete"
-        android:visibility="gone"/>
+        app:layout_constraintTop_toTopOf="@+id/tvDelete" />
 
     <LinearLayout
         android:id="@+id/layout_qty"
@@ -138,6 +133,29 @@
         app:layout_constraintEnd_toEndOf="@+id/layout_qty"
         app:layout_constraintStart_toStartOf="@+id/lineX05"
         app:layout_constraintTop_toBottomOf="@+id/layout_qty" />
+
+    <TextView
+        android:id="@+id/tvDiscount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:textColor="@color/color_theme_red"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/tvAmount"
+        app:layout_constraintStart_toStartOf="@+id/lineX05"
+        app:layout_constraintTop_toBottomOf="@+id/tvAmount" />
+
+    <TextView
+        android:id="@+id/tvTotal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:textColor="@color/colorDE000000"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/tvAmount"
+        app:layout_constraintStart_toStartOf="@+id/lineX05"
+        app:layout_constraintTop_toBottomOf="@+id/tvDiscount" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/lineX05"

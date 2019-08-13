@@ -379,47 +379,4 @@ public class CustomerHutangActivity extends AppCompatActivity {
         dialogSaldo.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
     }
-
-    private void cetakHutang(Activity activity){
-
-        final LayoutInflater inflaterUser = LayoutInflater.from(CustomerHutangActivity.this);
-        final View dialogView = inflaterUser.inflate(R.layout.layout_konfirmasi_cetak_hutang, null);
-        DisplayMetrics displayMetricsPW = this.getResources().getDisplayMetrics();
-        dialogconfirmcetakhutang = new Dialog(CustomerHutangActivity.this);
-        dialogconfirmcetakhutang.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //todays date
-        final Date currentDateTimeString = Calendar.getInstance().getTime();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd ");
-        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd MMM yyyy");
-        final String formattedDate = dateFormat1.format(currentDateTimeString);
-        dialogconfirmcetakhutang.setContentView(dialogView);
-        dialogconfirmcetakhutang.setCanceledOnTouchOutside(true);
-        int dialogWidth = (int) (displayMetricsPW.widthPixels * 0.9);
-        int dialogHeight = (int) (displayMetricsPW.heightPixels * 0.5);
-        dialogconfirmcetakhutang.getWindow().setLayout(dialogWidth, dialogHeight);
-        final String detailToko = SavePref.readDetailToko(CustomerHutangActivity.this);
-        final ShopModel shopModel = new Gson().fromJson(detailToko, ShopModel.class);
-        konfirmyacetak = (TextView) dialogView.findViewById(R.id.confirmyacetakhutang);
-        konfirmyacetak.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                resetConnection();
-
-
-            }
-        });
-
-        konfirmtidakcetak = (TextView)dialogView.findViewById(R.id.confirmtidakcetakhutang);
-        konfirmtidakcetak.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        dialogconfirmcetakhutang.show();
-        dialogconfirmcetakhutang.getWindow().setBackgroundDrawableResource(android.R.color.white);
-
-
-    }
 }

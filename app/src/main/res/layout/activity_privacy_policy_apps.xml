@@ -11,7 +11,7 @@
         android:id="@+id/appBar"
         android:layout_width="0dp"
         android:layout_height="?actionBarSize"
-        android:background="@color/colorThemeGreen"
+        android:background="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -20,7 +20,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:titleTextColor="@color/colorWhite"
+            app:titleTextColor="@color/colorBlack"
             app:title="Kebijakan Privasi">
 
             <ImageView

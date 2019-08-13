@@ -24,7 +24,6 @@ import co.crowde.toni.model.ProductModel;
 import co.crowde.toni.utils.print.Utils;
 import co.crowde.toni.view.activity.product.InventoryDetailActivity;
 import co.crowde.toni.view.activity.product.ProductDashboardDetailActivity;
-import co.crowde.toni.view.dialog.popup.product.InventoryDetailPopup;
 
 public class ProductInventoryAdapter
         extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

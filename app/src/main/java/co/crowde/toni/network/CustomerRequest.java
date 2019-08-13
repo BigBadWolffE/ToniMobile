@@ -25,6 +25,7 @@ import co.crowde.toni.controller.print.PrintController;
 import co.crowde.toni.controller.user.UserController;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CustomerModel;
+import co.crowde.toni.model.response.object.AddNewTransactionModel;
 import co.crowde.toni.model.response.object.CreditPayModel;
 import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.view.activity.customer.SelectCustomerActivity;
@@ -32,7 +33,6 @@ import co.crowde.toni.view.activity.notification.SuccessCreditPayActivity;
 import co.crowde.toni.view.dialog.message.customer.CreditPayDialog;
 import co.crowde.toni.view.dialog.message.customer.CustomerAlreadyRegisterDialog;
 import co.crowde.toni.view.dialog.message.network.NetworkOfflineDialog;
-import co.crowde.toni.view.fragment.cart.CartPaymentFragment;
 import co.crowde.toni.view.fragment.modul.CustomerFragment;
 
 public class CustomerRequest {
@@ -375,19 +375,22 @@ public class CustomerRequest {
         });
     }
 
-    public static void payCredit(final Activity activity){
+    public static void payCredit(final Activity activity, int credit, String data){
+        AddNewTransactionModel model = new Gson().fromJson(data, AddNewTransactionModel.class);
 
         final CreditPayModel pay = new CreditPayModel();
         pay.setShopId(SavePref.readShopId(activity));
-        pay.setCustomerId(SavePref.readCustomerId(activity));
-        pay.setAmount(String.valueOf(CartPaymentFragment.creditPay));
+        pay.setCustomerId(model.getCustomerId());
+        pay.setAmount(String.valueOf(credit));
+
+        Log.e("CREDIT PAY",new Gson().toJson(pay));
 
         String postBody = new Gson().toJson(pay);
 
         OkHttpClient client = new OkHttpClient();
 
         RequestBody body = RequestBody.create(JSON, postBody);
-        Log.e("REQUEST BODY",body.toString());
+        Log.e("CREDIT PAY",new Gson().toJson(body));
 
         Request requestHttp = new Request.Builder()
                 .header("Authorization", SavePref.readToken(activity))
@@ -412,7 +415,7 @@ public class CustomerRequest {
             @Override
             public void onResponse(final Response response) throws IOException {
                 final String responseData = response.body().string();
-                Log.e("RESPONSE BODY", responseData);
+                Log.e("CREDIT PAY RESPONSE", responseData);
 
                 activity.runOnUiThread(new Runnable() {
                     @Override
@@ -422,7 +425,7 @@ public class CustomerRequest {
                             boolean status = json.getBoolean("status");
                             message = json.getString("message");
                             String data = json.getString("data");
-                            Log.e("DATA RESPONSE", data);
+                            Log.e("DATA RESPONSE CREDIT", data);
 
                             if(status){
                                 Log.e("Res", data);

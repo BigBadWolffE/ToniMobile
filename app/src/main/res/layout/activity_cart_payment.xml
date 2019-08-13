@@ -86,7 +86,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/bg_rec_stroke_radius_5dp_f5f5f5"
+                android:background="@drawable/bg_rec_stroke_radius_5dp_grey"
                 app:elevation="5dp"
                 app:layout_constraintEnd_toStartOf="@+id/line_x2"
                 app:layout_constraintStart_toStartOf="@+id/line_x1"
@@ -97,7 +97,7 @@
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:layout_margin="16dp"
-                    android:background="@color/color61F5F5F5"
+                    app:srcCompat="@drawable/ic_cash"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -141,7 +141,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/bg_rec_stroke_radius_5dp_f5f5f5"
+                android:background="@drawable/bg_rec_stroke_radius_5dp_grey"
                 app:elevation="5dp"
                 app:layout_constraintEnd_toStartOf="@+id/line_x2"
                 app:layout_constraintStart_toStartOf="@+id/line_x1"
@@ -152,7 +152,7 @@
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:layout_margin="16dp"
-                    android:background="@color/color61F5F5F5"
+                    app:srcCompat="@drawable/ic_credit"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -196,7 +196,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/bg_rec_stroke_radius_5dp_f5f5f5"
+                android:background="@drawable/bg_rec_stroke_radius_5dp_grey"
                 app:elevation="5dp"
                 app:layout_constraintEnd_toStartOf="@+id/line_x2"
                 app:layout_constraintStart_toStartOf="@+id/line_x1"
@@ -207,7 +207,7 @@
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:layout_margin="16dp"
-                    android:background="@color/color61F5F5F5"
+                    app:srcCompat="@drawable/ic_pocket"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -250,7 +250,7 @@
                 android:id="@+id/tv_info_customer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:gravity="center"
                 android:text="@string/info_customer"
                 android:textColor="@color/colorBlack"
@@ -355,7 +355,7 @@
         android:text="@string/subtotal_cap"
         android:textColor="@color/colorBlack"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/view_info_cart_amount"
+        app:layout_constraintBottom_toTopOf="@+id/label_amount_discount"
         app:layout_constraintEnd_toStartOf="@+id/tv_sub_total"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -367,11 +367,41 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorBlack"
         android:textSize="14sp"
+        android:text="Rp. 0"
         app:layout_constraintBottom_toBottomOf="@+id/label_subtotal"
         app:layout_constraintEnd_toStartOf="@+id/line_x2a"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/label_subtotal"
         app:layout_constraintTop_toTopOf="@+id/label_subtotal" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_discount_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="tv_amount_discount,label_amount_discount" />
+
+    <TextView
+        android:id="@+id/label_amount_discount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="DISKON"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintBottom_toTopOf="@+id/view_info_cart_amount"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="@+id/line_x1a" />
+
+    <TextView
+        android:id="@+id/tv_amount_discount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:text="- Rp. 0"
+        android:textColor="@color/color_theme_red"
+        app:layout_constraintBottom_toBottomOf="@+id/label_amount_discount"
+        app:layout_constraintEnd_toStartOf="@+id/line_x2a"
+        app:layout_constraintTop_toTopOf="@+id/label_amount_discount" />
 
     <View
         android:id="@+id/view_info_cart_amount"
@@ -391,7 +421,7 @@
         android:text="@string/total_cap"
         android:textStyle="bold"
         android:textColor="@color/colorBlack"
-        android:textSize="14sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/line_x1a" />
 
@@ -400,8 +430,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorThemeOrange"
-        android:textSize="14sp"
+        android:textSize="18sp"
         android:textStyle="bold"
+        android:text="Rp. 0"
         app:layout_constraintBottom_toBottomOf="@+id/label_amount_cart"
         app:layout_constraintEnd_toStartOf="@+id/line_x2a"
         app:layout_constraintTop_toTopOf="@+id/label_amount_cart" />

@@ -117,8 +117,6 @@ public class InventoryDetailActivity extends AppCompatActivity implements View.O
         String dataString = String.format(Locale.US, description, "my html with text justification");
         webView.loadDataWithBaseURL("", dataString, "text/html", "UTF-8", "");
 
-        etQty.setText("0");
-
         if(productModel.getPurchasePrice()!=0){
             etPurchase.setText(String.valueOf(
                     DecimalFormatRupiah.formatNumber.format(productModel.getPurchasePrice())));
@@ -139,6 +137,7 @@ public class InventoryDetailActivity extends AppCompatActivity implements View.O
 
         etPurchase.addTextChangedListener(purchaseWatcher());
         etSelling.addTextChangedListener(sellingWatcher());
+        etQty.addTextChangedListener(qtyWatcher);
     }
 
     private void showRpPurchase() {
@@ -161,57 +160,15 @@ public class InventoryDetailActivity extends AppCompatActivity implements View.O
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.imgDecrease:
-                if(etQty.getText().length()>0){
-                    qty = Integer.parseInt(etQty.getText().toString());
+                if(qty!=0){
                     qty = qty-1;
-                    if(qty>0){
-                        etQty.setText(""+qty);
-                        etQty.setSelection(etQty.getText().length());
-                    } else {
-                        qty=0;
-                        etQty.setText("0");
-                        etQty.setSelection(etQty.getText().length());
-                    }
-                } else if(etQty.getText().length()==0){
-                    etQty.setText("0");
-                    qty = Integer.parseInt(etQty.getText().toString());
-                    qty = qty-1;
-                    if(qty>0){
-                        etQty.setText(""+qty);
-                        etQty.setSelection(etQty.getText().length());
-                    } else {
-                        qty=0;
-                        etQty.setText("0");
-                        etQty.setSelection(etQty.getText().length());
-                    }
                 }
+                setQty();
                 break;
 
             case R.id.imgIncrease:
-                if(etQty.getText().length()>0){
-                    qty = Integer.parseInt(etQty.getText().toString());
-                    qty = qty+1;
-                    if(qty>0){
-                        etQty.setText(""+qty);
-                        etQty.setSelection(etQty.getText().length());
-                    } else {
-                        qty=0;
-                        etQty.setText("0");
-                        etQty.setSelection(etQty.getText().length());
-                    }
-                } else if(etQty.getText().length()==0){
-                    etQty.setText("0");
-                    qty = Integer.parseInt(etQty.getText().toString());
-                    qty = qty+1;
-                    if(qty>0){
-                        etQty.setText(""+qty);
-                        etQty.setSelection(etQty.getText().length());
-                    } else {
-                        qty=0;
-                        etQty.setText("0");
-                        etQty.setSelection(etQty.getText().length());
-                    }
-                }
+                qty=qty+1;
+                setQty();
                 break;
 
             case R.id.et_selling_price:
@@ -230,14 +187,43 @@ public class InventoryDetailActivity extends AppCompatActivity implements View.O
                 break;
 
             case R.id.cv_btn_save_product:
-                purchase = Integer.parseInt(etPurchase.getText().toString().replaceAll("[,.]",""));
-                selling = Integer.parseInt(etSelling.getText().toString().replaceAll("[,.]",""));
-
+                if(etPurchase.getText().length()>0){
+                    purchase = Integer.parseInt(etPurchase.getText().toString().replaceAll("[,.]",""));
+                } else {
+                    purchase = 0;
+                }
+                if(etSelling.getText().length()>0){
+                    selling = Integer.parseInt(etSelling.getText().toString().replaceAll("[,.]",""));
+                } else {
+                    selling = 0;
+                }
                 progressDialog.show();
                 UpdateProductDialog.showDialog(this, productModel.getProductId(), qty, purchase, selling, progressDialog);
                 break;
         }
     }
+
+    private void setQty() {
+        etQty.setText(String.valueOf(qty));
+        etQty.setSelection(etQty.getText().length());
+    }
+
+    public TextWatcher qtyWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if(etQty.getText().length()==0) {
+                qty = 0;
+            } else if (etQty.getText().length() > 0){
+                qty = Integer.parseInt(etQty.getText().toString());
+            }
+        }
+        @Override
+        public void afterTextChanged(Editable s) {
+        }
+    };
 
     public TextWatcher purchaseWatcher() {
         return new TextWatcher() {
@@ -248,7 +234,7 @@ public class InventoryDetailActivity extends AppCompatActivity implements View.O
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (etPurchase.getText().length() > 3) {
+                if (etPurchase.getText().length() > 0) {
                     tvRpPurchase.setVisibility(View.VISIBLE);
                 } else {
                     tvRpPurchase.setVisibility(View.GONE);
