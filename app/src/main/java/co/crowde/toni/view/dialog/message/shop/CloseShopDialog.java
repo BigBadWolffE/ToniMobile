@@ -9,11 +9,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import co.crowde.toni.R;
 import co.crowde.toni.controller.user.UserController;
 
 public class CloseShopDialog {
+
+    static {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
 
     public static TextView tvHead, tvDesc, tvYes, tvNo;
 

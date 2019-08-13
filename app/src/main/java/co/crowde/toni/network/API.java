@@ -9,12 +9,13 @@ public class API{
     public static final String Slash = "/";
     public static final String Count = "?count=9999";
 
-//    public static final String Host = "https://apitoni-staging.crowde.co/";
-    public static final String Host = "https://toni-api.crowde.co/";
+    public static final String Host = "https://apitoni-staging.crowde.co/";
+//    public static final String Host = "https://toni-api.crowde.co/";
     public static final String API = Host+"api/";
 
     public static final String User = API+"user";
     public static final String Product = API+"product";
+    public static final String Product_Discount = API+"product/add-discount";
     public static final String Catalog = API+"catalog";
     public static final String Shop = API+"shop";
     public static final String Customer = API+"customer";

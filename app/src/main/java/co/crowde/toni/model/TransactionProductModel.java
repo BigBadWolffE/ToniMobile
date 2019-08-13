@@ -58,6 +58,9 @@ public class TransactionProductModel {
     @SerializedName("unit")
     private String unit;
 
+    @SerializedName("discount")
+    private int discount;
+
     public TransactionProductModel() {
     }
 
@@ -80,6 +83,28 @@ public class TransactionProductModel {
         this.village = village;
         this.supplierName = supplierName;
         this.unit = unit;
+    }
+
+    public TransactionProductModel(String shopId, String transactionId, String productId, String productName, int quantity, int sellingPrice, int amount, String picture, int _order, String createdAt, String lastUpdated, String createdBy, String province, String regency, String district, String village, String supplierName, String unit, int discount) {
+        this.shopId = shopId;
+        this.transactionId = transactionId;
+        this.productId = productId;
+        this.productName = productName;
+        this.quantity = quantity;
+        this.sellingPrice = sellingPrice;
+        this.amount = amount;
+        this.picture = picture;
+        this._order = _order;
+        this.createdAt = createdAt;
+        this.lastUpdated = lastUpdated;
+        this.createdBy = createdBy;
+        this.province = province;
+        this.regency = regency;
+        this.district = district;
+        this.village = village;
+        this.supplierName = supplierName;
+        this.unit = unit;
+        this.discount = discount;
     }
 
     public String getShopId() {
@@ -224,5 +249,13 @@ public class TransactionProductModel {
 
     public void setUnit(String unit) {
         this.unit = unit;
+    }
+
+    public int getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(int discount) {
+        this.discount = discount;
     }
 }

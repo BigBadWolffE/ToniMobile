@@ -33,7 +33,6 @@ import co.crowde.toni.model.response.list.TransactionModel;
 import co.crowde.toni.utils.print.Utils;
 import co.crowde.toni.view.activity.customer.CustomerHutangActivity;
 import co.crowde.toni.view.activity.transaction.DetailTransactionActivity;
-import co.crowde.toni.view.dialog.popup.product.InventoryDetailPopup;
 
 public class ReportListTransactionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

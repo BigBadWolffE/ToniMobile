@@ -302,6 +302,12 @@ public class InventoryFragment extends Fragment {
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
 
+        isFiltered(activity, activity.getBaseContext());
+
+
+        ProductRequest.page = 1;
+        ProductRequest.supplierId = "";
+        ProductRequest.productName = etSearch.getText().toString();
         if(categoryId.equals("")){
             ProductRequest.categoryId = "";
         } else {
@@ -313,12 +319,6 @@ public class InventoryFragment extends Fragment {
         } else {
             ProductRequest.status = status;
         }
-
-        isFiltered(activity, activity.getBaseContext());
-
-        ProductRequest.page = 1;
-        ProductRequest.supplierId = "";
-        ProductRequest.productName = etSearch.getText().toString();
         productModels.clear();
 
         if(etSearch.getText().toString().length()>0){
@@ -345,7 +345,7 @@ public class InventoryFragment extends Fragment {
 
         if(!categoryId.equals("")|| !status.equals("")){
             imgBtnFilter.setImageDrawable(filtered);
-            imgBtnFilter.setBackground(activity.getResources().getDrawable(R.drawable.bg_rec_radius_5dp_green));
+            imgBtnFilter.setBackground(activity.getResources().getDrawable(R.drawable.bg_green_dark_radius_5dp));
         } else {
             imgBtnFilter.setImageDrawable(filter);
             imgBtnFilter.setBackgroundColor(activity.getResources().getColor(R.color.colorWhite));

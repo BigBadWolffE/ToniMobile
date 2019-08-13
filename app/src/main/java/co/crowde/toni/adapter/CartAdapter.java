@@ -35,7 +35,7 @@ public class CartAdapter
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvName, tvVarian, tvStock, tvPrice,
-                tvDelete, tvAmount, tvQty;
+                tvDelete, tvAmount, tvQty, tvDiscount, tvTotal, tvEditDiscount;
         ImageView imgDecrease, imgIncrease;
         ConstraintLayout layout;
 
@@ -50,6 +50,9 @@ public class CartAdapter
             imgDecrease = itemView.findViewById(R.id.imgDecrease);
             imgIncrease = itemView.findViewById(R.id.imgIncrease);
             tvQty = itemView.findViewById(R.id.tvQty);
+            tvDiscount = itemView.findViewById(R.id.tvDiscount);
+            tvTotal = itemView.findViewById(R.id.tvTotal);
+            tvEditDiscount = itemView.findViewById(R.id.tv_edit_discount);
 
             layout = itemView.findViewById(R.id.layout);
 
@@ -99,9 +102,28 @@ public class CartAdapter
         holder.tvName.setText(nama);
         holder.tvVarian.setText("Kemasan "+varian);
         holder.tvStock.setText("Stok : "+model.getStok()+" "+model.getUnit());
-        holder.tvPrice.setText("Rp. "+String.valueOf(formatNumber.format(model.getSellingPrice()))+",-");
+        holder.tvPrice.setText("Rp. "+formatNumber.format(model.getSellingPrice()));
         holder.tvQty.setText(String.valueOf(model.getQuantity()));
-        holder.tvAmount.setText("Rp. "+String.valueOf(formatNumber.format(model.getAmount()))+",-");
+
+        holder.tvDiscount.setText("- Rp. "+formatNumber.format(model.getDiscount()));
+
+        holder.tvTotal.setText("TOTAL: Rp. "+formatNumber.format(model.getAmount()));
+
+        if(model.getAmount()!=(model.getQuantity()*model.getSellingPrice())){
+            holder.tvDiscount.setVisibility(View.VISIBLE);
+            holder.tvEditDiscount.setText("UBAH DISKON");
+        } else {
+            holder.tvDiscount.setVisibility(View.GONE);
+            holder.tvEditDiscount.setText("TAMBAH DISKON");
+        }
+//        holder.tvEditDiscount.setText(model.getDiscount() > 0 ? "UBAH DISKON" : "TAMBAH DISKON");
+
+        holder.tvEditDiscount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onDiscount(v, position);
+            }
+        });
 
         holder.tvDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,6 +153,13 @@ public class CartAdapter
             public void onClick(View v) {
                 listener.onChangeQty(v, position, holder.tvQty);
                 DashboardFragment.productDashboardAdapter.notifyDataSetChanged();
+            }
+        });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClick(v, position);
             }
         });
 

@@ -55,18 +55,17 @@ public class DashboardFragment extends Fragment {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
 
-    public static TextView tvEmptyField;
-    public static EditText etSearch;
-    public static ImageView imgBtnFilter;
-    public static RecyclerView rcProduct;
+    private static TextView tvEmptyField;
+    private static EditText etSearch;
+    private static ImageView imgBtnFilter;
+    private static RecyclerView rcProduct;
     public static ProductDashboardAdapter productDashboardAdapter;
     public static List<ProductModel> productModels = new ArrayList<>();
 
-    public  static CardView cvBtnCart;
+    private static CardView cvBtnCart;
 
-    static Drawable close;
-    static Drawable search;
-    static Drawable filter, filtered;
+    private static Drawable close;
+    private static Drawable search;
 
     //Database Keranjang
     public static Cart dbCart;
@@ -78,7 +77,7 @@ public class DashboardFragment extends Fragment {
     public static CartModel cartModel_;
     public static CartModel cartModel;
 
-    public static TextView tvQty, tvAmount;
+    private static TextView tvQty, tvAmount;
 
     private static DecimalFormat formatNumber;
 
@@ -94,7 +93,7 @@ public class DashboardFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
@@ -121,12 +120,9 @@ public class DashboardFragment extends Fragment {
         searchProduct(getActivity(), getContext());
 
         //Filter Product
-        imgBtnFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent filter = new Intent(getActivity(), DashboardFilterActivity.class);
-                startActivity(filter);
-            }
+        imgBtnFilter.setOnClickListener(v -> {
+            Intent filter = new Intent(getActivity(), DashboardFilterActivity.class);
+            startActivity(filter);
         });
 
         ifCartEmpty(getActivity());
@@ -135,7 +131,7 @@ public class DashboardFragment extends Fragment {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    public void searchProduct(final Activity activity, final Context context){
+    private void searchProduct(final Activity activity, final Context context){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             close = context.getDrawable(R.drawable.ic_close_black_24dp);
             search = context.getDrawable(R.drawable.ic_search_black_24dp);
@@ -145,56 +141,38 @@ public class DashboardFragment extends Fragment {
         }
         etSearch.setCompoundDrawablesWithIntrinsicBounds(null,null,search,null);
         etSearch.addTextChangedListener(searchWatcher);
-        etSearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    requestFilter(activity);
-                }
-
-            }
-        });
-        etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        etSearch.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
                 requestFilter(activity);
-                return false;
-            }
-        });
-
-        etSearch.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                final int DRAWABLE_LEFT = 0;
-                final int DRAWABLE_TOP = 1;
-                final int DRAWABLE_RIGHT = 2;
-                final int DRAWABLE_BOTTOM = 3;
-
-                if(event.getAction() == MotionEvent.ACTION_UP) {
-                    if(event.getRawX() >= (etSearch.getRight() -
-                            etSearch.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                        if(etSearch.length()>0){
-                            etSearch.setText("");
-                            event.setAction(MotionEvent.ACTION_CANCEL);
-                            requestFilter(activity);
-                        }
-
-                        return false;
-                    }
-                }
-                return false;
-            }
-        });
-
-        etSearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
                 CloseSoftKeyboard.hideSoftKeyboard(v, activity);
             }
+
+        });
+        etSearch.setOnEditorActionListener((v, actionId, event) -> {
+            requestFilter(activity);
+            return false;
+        });
+
+        etSearch.setOnTouchListener((v, event) -> {
+            final int DRAWABLE_RIGHT = 2;
+
+            if(event.getAction() == MotionEvent.ACTION_UP) {
+                if(event.getRawX() >= (etSearch.getRight() -
+                        etSearch.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                    if(etSearch.length()>0){
+                        etSearch.setText("");
+                        event.setAction(MotionEvent.ACTION_CANCEL);
+                        requestFilter(activity);
+                    }
+
+                    return false;
+                }
+            }
+            return false;
         });
     }
 
-    public TextWatcher searchWatcher = new TextWatcher() {
+    private TextWatcher searchWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -218,7 +196,7 @@ public class DashboardFragment extends Fragment {
         }
     };
 
-    public static void showListField(Activity activity){
+    public static void showListField(){
         if(DashboardFragment.productModels.size()!=0){
             tvEmptyField.setVisibility(View.GONE);
         } else {
@@ -228,12 +206,9 @@ public class DashboardFragment extends Fragment {
 
     private void showFloatingCart() {
         //Show Cart List
-        cvBtnCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent cart = new Intent(getActivity(), CartListActivity.class);
-                startActivity(cart);
-            }
+        cvBtnCart.setOnClickListener(v -> {
+            Intent cart = new Intent(getActivity(), CartListActivity.class);
+            startActivity(cart);
         });
     }
 
@@ -262,10 +237,8 @@ public class DashboardFragment extends Fragment {
                 totalAmount = totalAmount +(cartModels.get(i).getAmount());
             }
 
-            tvQty.setText(String.valueOf(totalItem)
-                    +" Produk");
-            tvAmount.setText("TOTAL : Rp. "
-                    +String.valueOf(formatNumber.format(totalAmount))+",-");
+            tvQty.setText(totalItem +" Produk");
+            tvAmount.setText("TOTAL : Rp. "+formatNumber.format(totalAmount)+",-");
         } else {
             totalItem =0;
             totalAmount=0;
@@ -273,7 +246,7 @@ public class DashboardFragment extends Fragment {
         }
     }
 
-    public static void initAdapter(Activity activity) {
+    private static void initAdapter(Activity activity) {
         productDashboardAdapter = new ProductDashboardAdapter(activity, productModels, activity);
 
         rcProduct.setLayoutManager(new GridLayoutManager(activity, 2));
@@ -299,9 +272,9 @@ public class DashboardFragment extends Fragment {
                 rcProduct.scrollToPosition(0);
     }
 
-    static boolean isLoading = false;
+    private static boolean isLoading = false;
 
-    public static void initScrollListener(final Activity activity) {
+    private static void initScrollListener(final Activity activity) {
         rcProduct.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -325,7 +298,7 @@ public class DashboardFragment extends Fragment {
         });
     }
 
-    public static void loadMoreProduct(Activity activity) {
+    private static void loadMoreProduct(Activity activity) {
         productModels.add(null);
         productDashboardAdapter.notifyItemInserted(productModels.size() - 1);
 
@@ -370,7 +343,9 @@ public class DashboardFragment extends Fragment {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    public static void isFiltered(final Activity activity, final Context context){
+    private static void isFiltered(final Activity activity, final Context context){
+        Drawable filter;
+        Drawable filtered;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             filter = context.getDrawable(R.drawable.ic_tune_black_24dp);
             filtered = context.getDrawable(R.drawable.ic_tune_white_24dp);
@@ -381,7 +356,7 @@ public class DashboardFragment extends Fragment {
 
         if(!categoryId.equals("")|| !status.equals("")){
             imgBtnFilter.setImageDrawable(filtered);
-            imgBtnFilter.setBackground(activity.getResources().getDrawable(R.drawable.bg_rec_radius_5dp_green));
+            imgBtnFilter.setBackground(activity.getResources().getDrawable(R.drawable.bg_green_dark_radius_5dp));
         } else {
             imgBtnFilter.setImageDrawable(filter);
             imgBtnFilter.setBackgroundColor(activity.getResources().getColor(R.color.colorWhite));

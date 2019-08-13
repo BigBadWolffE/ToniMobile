@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class CartModel {
 
     // table name
-    public static final String TABLE_NAME = "tbKeranjang";
+    public static final String TABLE_NAME = "table_cart";
 
     // column tables
     public static final String KEY_ID = "id";
@@ -18,6 +18,7 @@ public class CartModel {
     public static final String KEY_QUANTITY = "quantity";
     public static final String KEY_SELLING_PRICE = "sellingPrice";
     public static final String KEY_AMOUNT = "amount";
+    public static final String KEY_DISCOUNT = "discount";
 
     @SerializedName("id")
     private int id;
@@ -49,6 +50,9 @@ public class CartModel {
     @SerializedName("amount")
     private int amount;
 
+    @SerializedName("discount")
+    private int discount;
+
     public static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME+ "(" +
             KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             KEY_SHOP_ID + " TEXT," +
@@ -59,9 +63,10 @@ public class CartModel {
             KEY_PICTURE + " TEXT," +
             KEY_QUANTITY + " INTEGER," +
             KEY_SELLING_PRICE + " INTEGER," +
-            KEY_AMOUNT + " INTEGER, UNIQUE("+KEY_PRODUCT_ID+") ON CONFLICT FAIL);";
+            KEY_AMOUNT + " INTEGER,"+
+            KEY_DISCOUNT + " INTEGER, UNIQUE("+KEY_PRODUCT_ID+") ON CONFLICT FAIL);";
 
-    public CartModel(int id, String shopId, String productId, String productName, String unit, int stok, String picture, int quantity, int sellingPrice, int amount) {
+    public CartModel(int id, String shopId, String productId, String productName, String unit, int stok, String picture, int quantity, int sellingPrice, int amount, int discount) {
         this.id = id;
         this.shopId = shopId;
         this.productId = productId;
@@ -72,6 +77,7 @@ public class CartModel {
         this.quantity = quantity;
         this.sellingPrice = sellingPrice;
         this.amount = amount;
+        this.discount = discount;
     }
 
     public CartModel() {
@@ -155,5 +161,13 @@ public class CartModel {
 
     public void setStok(int stok) {
         this.stok = stok;
+    }
+
+    public int getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(int discount) {
+        this.discount = discount;
     }
 }

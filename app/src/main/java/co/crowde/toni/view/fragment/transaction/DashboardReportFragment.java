@@ -41,7 +41,6 @@ import co.crowde.toni.R;
 import co.crowde.toni.adapter.ReportCustomerFavoriteAdapter;
 import co.crowde.toni.adapter.ReportListTransactionAdapter;
 import co.crowde.toni.adapter.ReportProductFavoriteAdapter;
-import co.crowde.toni.adapter.TransaksiWaktuPelangganAdapter;
 import co.crowde.toni.constant.Const;
 import co.crowde.toni.helper.CloseSoftKeyboard;
 import co.crowde.toni.helper.DateTimeFormater;
@@ -169,7 +168,7 @@ public class DashboardReportFragment extends Fragment implements View.OnClickLis
         if(isToday){
             AnalyticsToniUtils.getEvent(Const.CATEGORY_REPORT,Const.MODUL_REPORT,Const.LABEL_REPORT_TODAY);
 
-            cvBtnToday.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreen));
+            cvBtnToday.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreenDark02));
             cvBtnThreeDays.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
             cvBtnWeek.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
             cvBtnMonth.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
@@ -190,7 +189,7 @@ public class DashboardReportFragment extends Fragment implements View.OnClickLis
             AnalyticsToniUtils.getEvent(Const.CATEGORY_REPORT,Const.MODUL_REPORT,Const.LABEL_REPORT_THREE_DAY);
 
             cvBtnToday.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
-            cvBtnThreeDays.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreen));
+            cvBtnThreeDays.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreenDark02));
             cvBtnWeek.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
             cvBtnMonth.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
             cvBtnRange.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
@@ -211,7 +210,7 @@ public class DashboardReportFragment extends Fragment implements View.OnClickLis
 
             cvBtnToday.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
             cvBtnThreeDays.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
-            cvBtnWeek.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreen));
+            cvBtnWeek.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreenDark02));
             cvBtnMonth.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
             cvBtnRange.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
 
@@ -232,7 +231,7 @@ public class DashboardReportFragment extends Fragment implements View.OnClickLis
             cvBtnToday.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
             cvBtnThreeDays.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
             cvBtnWeek.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
-            cvBtnMonth.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreen));
+            cvBtnMonth.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreenDark02));
             cvBtnRange.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
 
             labelSelectedDate.setText(DateTimeFormater.currentMonthIndo+" - "+DateTimeFormater.currentDateIndo);

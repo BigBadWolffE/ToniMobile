@@ -1,6 +1,7 @@
 package co.crowde.toni.network;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.util.Log;
 
@@ -21,12 +22,12 @@ import java.util.List;
 import co.crowde.toni.constant.Const;
 import co.crowde.toni.controller.user.UserController;
 import co.crowde.toni.helper.SavePref;
+import co.crowde.toni.model.ProductDiscountModel;
 import co.crowde.toni.model.ProductModel;
 import co.crowde.toni.model.body.post.UpdateProductModel;
 import co.crowde.toni.view.activity.notification.SuccessUpdateProductActivity;
 import co.crowde.toni.view.dialog.message.network.NetworkOfflineDialog;
 import co.crowde.toni.view.dialog.message.product.UpdateProductDialog;
-import co.crowde.toni.view.dialog.popup.product.InventoryDetailPopup;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
 import co.crowde.toni.view.fragment.modul.InventoryFragment;
 
@@ -98,7 +99,7 @@ public class ProductRequest {
                                         }.getType());
                                 DashboardFragment.updateDataProduct(productModels, page);
                                 DashboardFragment.progressDialog.dismiss();
-                                DashboardFragment.showListField(activity);
+                                DashboardFragment.showListField();
                             } else if(message.equals("Data produk tidak ditemukan!")){
                                 if (DashboardFragment.productModels.size() != 0){
                                     DashboardFragment.productModels.remove(DashboardFragment.productModels.size() - 1);
@@ -110,7 +111,7 @@ public class ProductRequest {
                                     DashboardFragment.productDashboardAdapter.replaceItemFiltered(DashboardFragment.productModels);
                                     DashboardFragment.productDashboardAdapter.notifyDataSetChanged();
                                     DashboardFragment.progressDialog.dismiss();
-                                    DashboardFragment.showListField(activity);
+                                    DashboardFragment.showListField();
                                 }
                             } else{
                                 if(message.equals("Token tidak valid")){
@@ -219,26 +220,26 @@ public class ProductRequest {
         });
     }
 
-    public static void postUpdateProduct(final Activity activity, String productId){
-        int qty = 0;
-        if(InventoryDetailPopup.etQty.getText().length()>0){
-            qty = Integer.parseInt(InventoryDetailPopup
-                    .etQty.getText().toString());
-        }
-
-        int purchase = 0;
-        if(InventoryDetailPopup.etPurchase.getText().length()>0){
-            purchase = Integer.parseInt(InventoryDetailPopup
-                    .etPurchase.getText().toString()
-                    .replaceAll(",",""));
-        }
-
-        int selling = 0;
-        if(InventoryDetailPopup.etSelling.getText().length()>0){
-            selling = Integer.parseInt(InventoryDetailPopup
-                    .etSelling.getText().toString()
-                    .replaceAll(",",""));
-        }
+    public static void postUpdateProduct(final Activity activity, String productId, int qty, int purchase, int selling, ProgressDialog progressDialog){
+//        int qty = 0;
+//        if(InventoryDetailPopup.etQty.getText().length()>0){
+//            qty = Integer.parseInt(InventoryDetailPopup
+//                    .etQty.getText().toString());
+//        }
+//
+//        int purchase = 0;
+//        if(InventoryDetailPopup.etPurchase.getText().length()>0){
+//            purchase = Integer.parseInt(InventoryDetailPopup
+//                    .etPurchase.getText().toString()
+//                    .replaceAll(",",""));
+//        }
+//
+//        int selling = 0;
+//        if(InventoryDetailPopup.etSelling.getText().length()>0){
+//            selling = Integer.parseInt(InventoryDetailPopup
+//                    .etSelling.getText().toString()
+//                    .replaceAll(",",""));
+//        }
 
         final UpdateProductModel update = new UpdateProductModel();
         update.setShopId(SavePref.readShopId(activity));
@@ -271,7 +272,7 @@ public class ProductRequest {
 //                        Toast.makeText(
 //                                activity, "HTTP Request Failure", Toast.LENGTH_SHORT).show();
                         NetworkOfflineDialog.showDialog(activity);
-                        InventoryFragment.progressDialog.dismiss();
+                        progressDialog.dismiss();
                         Log.e("Error",e.toString());
                     }
                 });
@@ -297,10 +298,10 @@ public class ProductRequest {
                                 page=1;
                                 getInventoryList(activity);
                                 UpdateProductDialog.dialogConfirm.dismiss();
-                                UpdateProductDialog.progressDialog.dismiss();
-                                InventoryDetailPopup.alertDialog.dismiss();
+                                progressDialog.dismiss();
                                 Intent success = new Intent(activity, SuccessUpdateProductActivity.class);
                                 activity.startActivity(success);
+                                activity.finish();
 
                             } else{
                                 if(message.equals("Token tidak valid")){
@@ -308,13 +309,61 @@ public class ProductRequest {
                                 } else {
                                     UpdateProductDialog.progressDialog.dismiss();
                                     UpdateProductDialog.dialogConfirm.dismiss();
-                                    InventoryDetailPopup.alertDialog.dismiss();
                                 }
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+                    }
+                });
+
+            }
+        });
+    }
+
+    public static void putProductDiscount(final Activity activity, String productId, int discount){
+
+        final ProductDiscountModel discountModel = new ProductDiscountModel();
+        discountModel.setShopId(SavePref.readShopId(activity));
+        discountModel.setProductId(productId);
+        discountModel.setDiscount(discount);
+
+        String postBody = new Gson().toJson(discountModel);
+        Log.e("POST BODY", postBody);
+
+        OkHttpClient client = new OkHttpClient();
+
+        RequestBody body = RequestBody.create(Const.JSON, postBody);
+        Log.e("REQUEST BODY",body.toString());
+
+        Request requestHttp = new Request.Builder()
+                .header("Authorization", SavePref.readToken(activity))
+                .url(API.Product_Discount)
+                .put(body)
+                .build();
+
+        client.newCall(requestHttp).enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, final IOException e) {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        NetworkOfflineDialog.showDialog(activity);
+                        Log.e("Error",e.toString());
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                final String responseData = response.body().string();
+                Log.e("RESPONSE BODY", responseData);
+
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
 
                     }
                 });

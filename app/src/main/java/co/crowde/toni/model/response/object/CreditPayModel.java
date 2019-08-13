@@ -37,6 +37,12 @@ public class CreditPayModel implements Parcelable {
     public CreditPayModel() {
     }
 
+    public CreditPayModel(String shopId, String customerId, String amount) {
+        this.shopId = shopId;
+        this.customerId = customerId;
+        this.amount = amount;
+    }
+
     public CreditPayModel(String shopId, String creditPaidId, String customerId, String amount, String createdAt, String lastUpdated, String createdBy, String customerName, int saldo) {
         this.shopId = shopId;
         this.creditPaidId = creditPaidId;

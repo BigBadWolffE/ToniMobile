@@ -1,72 +1,17 @@
 package co.crowde.toni.view.fragment.modul;
 
-
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.view.animation.LinearInterpolator;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.evolve.backdroplibrary.BackdropContainer;
 import com.google.android.material.tabs.TabLayout;
-import com.google.gson.Gson;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.StringTokenizer;
 
 import co.crowde.toni.R;
-import co.crowde.toni.adapter.BarangTerlarisAdapter;
-import co.crowde.toni.adapter.PelangganTerbanyakAdapter;
 import co.crowde.toni.adapter.menu.ReportTabAdapter;
-import co.crowde.toni.helper.SavePref;
-import co.crowde.toni.helper.volley.AppController;
-import co.crowde.toni.model.LaporanAmbilModel;
-import co.crowde.toni.model.LaporanBestProductModel;
-import co.crowde.toni.model.LaporanTopCustomer;
-import co.crowde.toni.network.API;
-import co.crowde.toni.view.fragment.transaction.TransactionReport;
 
 /**
  * A simple {@link Fragment} subclass.

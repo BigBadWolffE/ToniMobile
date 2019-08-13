@@ -25,7 +25,7 @@ public class UpdateProductDialog {
 
     public static ProgressDialog progressDialog;
 
-    public static void showDialog(final Activity activity, String productId) {
+    public static void showDialog(final Activity activity, String productId, int qty, int purchase, int selling, ProgressDialog progressDialogs) {
         ViewGroup viewGroup = activity.findViewById(android.R.id.content);
         //then we will inflate the custom alert dialog xml that we created
         View dialogView = LayoutInflater.from(activity)
@@ -61,7 +61,7 @@ public class UpdateProductDialog {
                 progressDialog.setCanceledOnTouchOutside(false);
                 progressDialog.show();
 
-                ProductRequest.postUpdateProduct(activity, productId);
+                ProductRequest.postUpdateProduct(activity, productId, qty, purchase, selling, progressDialog);
             }
         });
 
@@ -70,6 +70,7 @@ public class UpdateProductDialog {
             public void onClick(View v) {
                 tvNo.setTextColor(activity.getResources().getColor(R.color.colorThemeOrange));
                 dialogConfirm.dismiss();
+                progressDialogs.dismiss();
             }
         });
 

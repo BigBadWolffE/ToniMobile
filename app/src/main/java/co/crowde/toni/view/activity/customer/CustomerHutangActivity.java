@@ -236,9 +236,9 @@ public class CustomerHutangActivity extends AppCompatActivity {
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if(etAmount.getText().length()>0){
                 if (Integer.parseInt(etAmount.getText().toString()
-                        .replaceAll("[,-]",""))>999 &&
+                        .replaceAll("[,.-]",""))>999 &&
                         Integer.parseInt(etAmount.getText().toString()
-                                .replaceAll("[,-]",""))<= customerModel.getSaldo()) {
+                                .replaceAll("[,.-]",""))<= customerModel.getSaldo()) {
                     cvCreditPay.setCardBackgroundColor(getResources().getColor(R.color.colorThemeOrange));
                     cvCreditPay.setEnabled(true);
 
@@ -247,7 +247,7 @@ public class CustomerHutangActivity extends AppCompatActivity {
                         public void onClick(View v) {
                             CreditPayDialog.showDialog(CustomerHutangActivity.this,
                                     Integer.parseInt(etAmount.getText().toString()
-                                            .replaceAll("[,-]","")), customerModel.getCustomerId());
+                                            .replaceAll("[,.-]","")), customerModel.getCustomerId());
 
                         }
                     });
@@ -268,9 +268,9 @@ public class CustomerHutangActivity extends AppCompatActivity {
             try {
                 String originalString = s.toString();
 
-                Long longval;
-                if (originalString.contains(",")) {
-                    originalString = originalString.replaceAll(",", "");
+                long longval;
+                if (originalString.contains(",") || originalString.contains(".")) {
+                    originalString = originalString.replaceAll("[,.]", "");
                 }
                 longval = Long.parseLong(originalString);
 
@@ -377,49 +377,6 @@ public class CustomerHutangActivity extends AppCompatActivity {
 
         dialogSaldo.show();
         dialogSaldo.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-
-    }
-
-    private void cetakHutang(Activity activity){
-
-        final LayoutInflater inflaterUser = LayoutInflater.from(CustomerHutangActivity.this);
-        final View dialogView = inflaterUser.inflate(R.layout.layout_konfirmasi_cetak_hutang, null);
-        DisplayMetrics displayMetricsPW = this.getResources().getDisplayMetrics();
-        dialogconfirmcetakhutang = new Dialog(CustomerHutangActivity.this);
-        dialogconfirmcetakhutang.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //todays date
-        final Date currentDateTimeString = Calendar.getInstance().getTime();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd ");
-        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd MMM yyyy");
-        final String formattedDate = dateFormat1.format(currentDateTimeString);
-        dialogconfirmcetakhutang.setContentView(dialogView);
-        dialogconfirmcetakhutang.setCanceledOnTouchOutside(true);
-        int dialogWidth = (int) (displayMetricsPW.widthPixels * 0.9);
-        int dialogHeight = (int) (displayMetricsPW.heightPixels * 0.5);
-        dialogconfirmcetakhutang.getWindow().setLayout(dialogWidth, dialogHeight);
-        final String detailToko = SavePref.readDetailToko(CustomerHutangActivity.this);
-        final ShopModel shopModel = new Gson().fromJson(detailToko, ShopModel.class);
-        konfirmyacetak = (TextView) dialogView.findViewById(R.id.confirmyacetakhutang);
-        konfirmyacetak.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                resetConnection();
-
-
-            }
-        });
-
-        konfirmtidakcetak = (TextView)dialogView.findViewById(R.id.confirmtidakcetakhutang);
-        konfirmtidakcetak.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        dialogconfirmcetakhutang.show();
-        dialogconfirmcetakhutang.getWindow().setBackgroundDrawableResource(android.R.color.white);
-
 
     }
 }

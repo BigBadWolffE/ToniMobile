@@ -24,7 +24,6 @@ import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CustomerModel;
 import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.utils.print.Utils;
-import co.crowde.toni.view.fragment.cart.CartListItemFragment;
 import co.crowde.toni.view.activity.cart.CartListActivity;
 
 public class CustomerAdapter
@@ -99,16 +98,8 @@ public class CustomerAdapter
                             AnalyticsToniUtils.getEvent(Const.CATEGORY_CUSTOMER,Const.MODUL_CUSTOMER,Const.LABEL_CART_CHOOSE_CUSTOMER);
                         }
 
-                        String customer = new Gson().toJson(model);
-
-                        SavePref.saveCustomerId(activity,model.getCustomerId());
-                        SavePref.saveCustomer(activity, customer);
-
                         activity.finish();
-                        CartListItemFragment.tvCustomer.setText(model.getCustomerName()+"\n"
-                                +model.getPhone());
-                        CartListItemFragment.imgCheck.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_check_box_white_24dp));
-                        CartListActivity.enabledButton(activity);
+                        CartListActivity.setCustomer(activity, model);
                     }
                 });
             }

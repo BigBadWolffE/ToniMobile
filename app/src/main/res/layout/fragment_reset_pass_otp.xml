@@ -3,15 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.fragment.reset_password.ResetPassOTPFragment">
-
 
     <View
         android:id="@+id/view4"
         android:layout_width="0dp"
         android:layout_height="150dp"
-        android:background="@color/colorThemeGreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -23,7 +22,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:text="60"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/color99000000"
         android:textSize="50sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/cardView6"

@@ -6,6 +6,7 @@ import androidx.cardview.widget.CardView;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
@@ -21,7 +22,7 @@ import co.crowde.toni.view.fragment.modul.CustomerFragment;
 
 public class SuccessCreditPayActivity extends AppCompatActivity {
 
-    CardView cvBtnBack;
+    TextView tvHome;
     DecimalFormat formatNumber;
 
     @Override
@@ -35,9 +36,9 @@ public class SuccessCreditPayActivity extends AppCompatActivity {
 
         Log.e("Saldo", getIntent().getStringExtra("saldo"));
 
-        cvBtnBack = findViewById(R.id.cvBtnBack);
+        tvHome = findViewById(R.id.tv_back_home);
 
-        cvBtnBack.setOnClickListener(new View.OnClickListener() {
+        tvHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CustomerHutangActivity.tv_totalpelangganhutang.setText("Rp. "+

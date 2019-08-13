@@ -67,7 +67,7 @@ public class ConfirmPrintTransactionDialog {
 //                        activity.finish();
                         tvYes.setEnabled(true);
 //                        TransactionRequest.postNewTransaction(activity);
-                        TransactionController.printBill(activity, data);
+//                        TransactionController.printBill(activity, data, progressDialog);
                     }
                 }, 100);
             }

@@ -66,7 +66,7 @@ public class ConfirmTransactionDialog {
                     public void run() {
 //                        activity.finish();
                         tvYes.setEnabled(true);
-                        TransactionRequest.postNewTransaction(activity);
+//                        TransactionRequest.postNewTransaction(activity);
 //                        TransactionController.printBill(activity);
                     }
                 }, 100);

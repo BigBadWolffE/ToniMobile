@@ -6,6 +6,8 @@
 
     <color name="colorThemeGreenDark">#0F3032</color>
     <color name="colorThemeGreen">#398689</color>
+    <color name="colorThemeGreen02">#317257</color>
+    <color name="colorThemeGreenDark02">#0E3033</color>
     <color name="colorThemeOrange">#F7931D</color>
     <color name="colorThemeCream">#F9F8F0</color>
     <color name="colorThemeWhite">#F9F9F9</color>
@@ -36,5 +38,14 @@
     <color name="color_subscribe_yes">#4A934A</color>
     <color name="color_theme_green">#4A934A</color>
     <color name="color_theme_yellow">#F7931D</color>
-    <color name="color_theme_red">#CF212A</color>
+    <color name="color_theme_red">#CF212A</color>DEFF3D3D
+
+    <color name="colorF5F5F5">#F5F5F5</color>
+    <color name="colorFAFAFA">#FAFAFA</color>
+    <color name="color429FF4">#429FF4</color>
+    <color name="colorDE000000">#DE000000</color>
+    <color name="color61000000">#61000000</color>
+    <color name="color99000000">#99000000</color>
+    <color name="color61F5F5F5">#61F5F5F5</color>
+    <color name="color_DEFF3D3D">#DEFF3D3D</color>
 </resources>

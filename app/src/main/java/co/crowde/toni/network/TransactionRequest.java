@@ -33,6 +33,7 @@ import co.crowde.toni.model.body.post.AddTransactionModel;
 import co.crowde.toni.model.response.list.CustomerFavoriteModel;
 import co.crowde.toni.model.response.list.ProductFavoriteModel;
 import co.crowde.toni.model.response.list.TransactionModel;
+import co.crowde.toni.model.response.object.AddNewTransactionModel;
 import co.crowde.toni.model.response.object.RecapTransactionModel;
 import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.view.activity.customer.SelectCustomerActivity;
@@ -40,8 +41,8 @@ import co.crowde.toni.view.activity.notification.SuccessPaymentTransactionActivi
 import co.crowde.toni.view.activity.print.WaitingPrintActivity;
 import co.crowde.toni.view.activity.transaction.DetailTransactionActivity;
 import co.crowde.toni.view.dialog.message.network.NetworkOfflineDialog;
+import co.crowde.toni.view.dialog.message.transaction.ConfirmPaymentDialog;
 import co.crowde.toni.view.dialog.message.transaction.ConfirmTransactionDialog;
-import co.crowde.toni.view.fragment.cart.CartPaymentFragment;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
 import co.crowde.toni.view.fragment.modul.InventoryFragment;
 import co.crowde.toni.view.fragment.transaction.ListTransactionReportFragment;
@@ -58,20 +59,7 @@ public class TransactionRequest {
     public static String message;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    public static void postNewTransaction(final Activity activity) {
-
-        final CustomerModel credit = new Gson().fromJson(SavePref.readCustomer(activity), CustomerModel.class);
-        String tambahKeranjang = new Gson().toJson(DashboardFragment.cartModels);
-        Log.e("KeranjangList", tambahKeranjang);
-
-        final AddTransactionModel add = new AddTransactionModel();
-        add.setShopId(SavePref.readShopId(activity));
-        add.setCustomerId(credit.getCustomerId());
-        add.setPaymentType(CartPaymentFragment.paymentType);
-        add.setAmount(String.valueOf(DashboardFragment.totalAmount));
-        add.setPaid(String.valueOf(CartPaymentFragment.nominal).replaceAll(",",""));
-        add.set_change(String.valueOf(CartPaymentFragment.change));
-        add.setDetails(DashboardFragment.cartModels);
+    public static void postNewTransaction(final Activity activity, AddTransactionModel add, int saldo, int credit) {
 
         String postBody = new Gson().toJson(add);
         Log.e("POST BODY", postBody);
@@ -117,19 +105,30 @@ public class TransactionRequest {
                             Log.e("DATA RESPONSE", data);
 
                             if(status){
-                                ConfirmTransactionDialog.dialogConfirm.dismiss();
-                                ConfirmTransactionDialog.progressDialog.dismiss();
-
-                                if(CartPaymentFragment.cash){
-                                    AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_TRANSACTION, Const.LABEL_TRANSACTION_CASH_SUCCESS);
-                                } else if(CartPaymentFragment.credit){
-                                    AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_TRANSACTION, Const.LABEL_TRANSACTION_CASH_CREDIT_SUCCESS);
-                                } else if(CartPaymentFragment.cashCredit){
-                                    AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_TRANSACTION, Const.LABEL_TRANSACTION_CASH_CREDIT_SUCCESS);
-                                }
+                                ConfirmPaymentDialog.dialogConfirm.dismiss();
+                                ConfirmPaymentDialog.progressDialog.dismiss();
 
                                 Intent print = new Intent(activity, SuccessPaymentTransactionActivity.class);
                                 print.putExtra("data", data);
+
+                                switch (add.getPaymentType()) {
+                                    case "Cash":
+                                        if(credit>0){
+                                            AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_TRANSACTION, Const.LABEL_TRANSACTION_CASH_CREDIT_SUCCESS);
+                                            print.putExtra("payment_type", "CashCredit");
+                                        } else {
+                                            AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_TRANSACTION, Const.LABEL_TRANSACTION_CASH_SUCCESS);
+                                            print.putExtra("payment_type", add.getPaymentType());
+                                        }
+                                        break;
+                                    case "Credit":
+                                        AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_TRANSACTION, Const.LABEL_TRANSACTION_CASH_CREDIT_SUCCESS);
+                                        print.putExtra("payment_type", add.getPaymentType());
+                                        break;
+                                }
+
+                                print.putExtra("credit", ""+credit);
+                                print.putExtra("saldo", ""+saldo);
                                 activity.startActivityForResult(print, Const.KEY_SUCCESS_PAYMENT);
                                 activity.finish();
 
