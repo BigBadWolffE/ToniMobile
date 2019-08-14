@@ -2,18 +2,23 @@ package co.crowde.toni.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import org.apache.commons.lang3.StringUtils;
@@ -29,7 +34,7 @@ import co.crowde.toni.model.CartModel;
 import co.crowde.toni.network.API;
 import co.crowde.toni.model.ProductModel;
 import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
-import co.crowde.toni.view.dialog.popup.product.ProductDetailDashboardPopup;
+import co.crowde.toni.view.activity.product.ProductDashboardDetailActivity;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
 
 public class ProductDashboardAdapter
@@ -47,21 +52,18 @@ public class ProductDashboardAdapter
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvProductQty,
-                tvProductName, tvProductUnit, tvProductCount;
+                tvProductName, tvProductUnit;
         ImageView imgProductItem,
                 imgBtnMinQty, imgBtnPlusQty;
-        CardView cvProductItem, cvProductQty;
 
         public ViewHolder(final View itemView) {
             super(itemView);
             tvProductQty = itemView.findViewById(R.id.tvProductQty);
-            imgBtnMinQty = itemView.findViewById(R.id.imgBtnMinQty);
+            imgBtnMinQty = itemView.findViewById(R.id.imgDecrease);
             tvProductName = itemView.findViewById(R.id.tvProductName);
-            tvProductUnit = itemView.findViewById(R.id.tvProductUnit);
-            imgBtnPlusQty = itemView.findViewById(R.id.imgBtnPlusQty);
+            tvProductUnit = itemView.findViewById(R.id.tvProductVarian);
+            imgBtnPlusQty = itemView.findViewById(R.id.imgIncrease);
             imgProductItem = itemView.findViewById(R.id.imgProductItem);
-            cvProductItem = itemView.findViewById(R.id.cvProductItem);
-            cvProductQty = itemView.findViewById(R.id.cvProductQty);
 
         }
     }
@@ -123,10 +125,7 @@ public class ProductDashboardAdapter
                 countProduct = 0;
                 if (cart != null)
                     countProduct = cart.getQuantity();
-//                    countProduct = model.getCountItem();
-//                else
-//                    countProduct = cart.getQuantity();
-                viewHolder.cvProductQty.setVisibility(countProduct > 0 ? View.VISIBLE : View.GONE);
+                viewHolder.tvProductQty.setVisibility(countProduct > 0 ? View.VISIBLE : View.GONE);
                 viewHolder.tvProductQty.setText(countProduct + "");
 
                 Picasso.with(activity).load(API.Host + model.getPicture())
@@ -135,51 +134,67 @@ public class ProductDashboardAdapter
                 viewHolder.imgBtnPlusQty.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        CartController.addFromPlus(activity, model);
-                        AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_CART,Const.LABEL_CART_CHANGE_QTY_DASHBOARD);
+                        CartController.addFromPlus(activity, model, ProductDashboardAdapter.this);
+                        AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_CART, Const.LABEL_CART_CHANGE_QTY_DASHBOARD);
                     }
                 });
 
-                viewHolder.imgBtnMinQty.setVisibility(countProduct > 0 ? View.VISIBLE : View.GONE);
+                viewHolder.imgBtnMinQty.setBackground(countProduct > 0 ?
+                        activity.getResources().getDrawable(R.drawable.bg_green_dark_radius_2dp) :
+                        activity.getResources().getDrawable(R.drawable.bg_grey_cccccc_2dp));
                 viewHolder.imgBtnMinQty.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        CartController.minQtyCart(activity, model);
-                        AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_CART,Const.LABEL_CART_CHANGE_QTY_DASHBOARD);
+                        String querySelect = "SELECT * FROM " + CartModel.TABLE_NAME + " WHERE productId='" + model.getProductId() + "'";
+                        DashboardFragment.dbCart = new Cart(activity);
+                        SQLiteDatabase db = DashboardFragment.dbCart.getWritableDatabase();
+
+                        try (Cursor cursor = db.rawQuery(querySelect, null)) {
+                            if (cursor != null && cursor.moveToFirst()) {
+                                DashboardFragment.cartModel = new CartModel(
+                                        cursor.getInt(cursor.getColumnIndex(CartModel.KEY_ID)),
+                                        cursor.getString(cursor.getColumnIndex(CartModel.KEY_SHOP_ID)),
+                                        cursor.getString(cursor.getColumnIndex(CartModel.KEY_PRODUCT_ID)),
+                                        cursor.getString(cursor.getColumnIndex(CartModel.KEY_PRODUCT_NAME)),
+                                        cursor.getString(cursor.getColumnIndex(CartModel.KEY_UNIT)),
+                                        cursor.getInt(cursor.getColumnIndex(CartModel.KEY_STOK)),
+                                        cursor.getString(cursor.getColumnIndex(CartModel.KEY_PICTURE)),
+                                        cursor.getInt(cursor.getColumnIndex(CartModel.KEY_QUANTITY)),
+                                        cursor.getInt(cursor.getColumnIndex(CartModel.KEY_SELLING_PRICE)),
+                                        cursor.getInt(cursor.getColumnIndex(CartModel.KEY_AMOUNT)),
+                                        cursor.getInt(cursor.getColumnIndex(CartModel.KEY_DISCOUNT)));
+
+                                if (DashboardFragment.cartModel.getAmount() >= DashboardFragment.cartModel.getSellingPrice()) {
+                                    if (DashboardFragment.cartModel.getAmount() < (DashboardFragment.cartModel.getQuantity() * DashboardFragment.cartModel.getSellingPrice())) {
+                                        DashboardFragment.cartModel.setQuantity(DashboardFragment.cartModel.getQuantity() - 1);
+                                        DashboardFragment.cartModel.setAmount(
+                                                (DashboardFragment.cartModel.getQuantity() * DashboardFragment.cartModel.getSellingPrice()) - DashboardFragment.cartModel.getDiscount());
+                                    } else {
+                                        DashboardFragment.cartModel.setQuantity(DashboardFragment.cartModel.getQuantity() - 1);
+                                        DashboardFragment.cartModel.setAmount(DashboardFragment.cartModel.getQuantity() * DashboardFragment.cartModel.getSellingPrice());
+                                    }
+                                    CartController.minQtyCart(activity, model);
+
+                                    AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_CART, Const.LABEL_CART_CHANGE_QTY_DASHBOARD);
+                                } else if(DashboardFragment.cartModel.getQuantity()==1) {
+                                    DashboardFragment.dbCart.deleteAllItem();
+                                    DashboardFragment.ifCartEmpty(activity);
+                                    DashboardFragment.productDashboardAdapter.notifyDataSetChanged();
+                                }
+
+                            }
+                        }
                     }
                 });
 
-                viewHolder.cvProductItem.setOnClickListener(new View.OnClickListener() {
+                viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        Toast.makeText(activity, ""+nama, Toast.LENGTH_SHORT).show();
-                        ProductDetailDashboardPopup.showPopup(activity, model);
+                        Intent detail = new Intent(activity, ProductDashboardDetailActivity.class);
+                        detail.putExtra(ProductModel.class.getSimpleName(), model);
+                        activity.startActivityForResult(detail, 123);
                     }
                 });
-
-//        dbCart = new Cart(activity);
-//        if(dbCart.getItemCount()>0){
-//            CartModel cartModel = dbCart.getItem(model.getProductId());
-//            holder.tvProductQty.setText(String.valueOf(cartModel.getQuantity()));
-//        } else {
-//            holder.tvProductQty.setText("0");
-//        }
-
-//        holder.tvProductQty.setText(Qty);
-
-//        holder.imgBtnPlusQty.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                listener.onIncreaseItem(v, position);
-//            }
-//        });
-//
-//        holder.imgBtnMinQty.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                listener.onDecreaseItem(v, position);
-//            }
-//        });
             }
         } else if (holder instanceof LoadingViewHolder) {
             showLoadingView((LoadingViewHolder) holder, position);

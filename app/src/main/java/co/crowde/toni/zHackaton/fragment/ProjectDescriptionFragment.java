@@ -99,6 +99,11 @@ public class ProjectDescriptionFragment extends Fragment {
             }
 
             @Override
+            public void onDiscount(View v, int position) {
+
+            }
+
+            @Override
             public void onIncreaseItem(View v, int position) {
                 int qty = productRabModels.get(position).getQty();
                 productRabModels.get(position).setQty(qty+1);

@@ -29,7 +29,6 @@ import co.crowde.toni.model.CatalogRequestModel;
 import co.crowde.toni.view.activity.catalog.CatalogProductActivity;
 import co.crowde.toni.view.activity.notification.SuccessAddNewProductActivity;
 import co.crowde.toni.view.dialog.message.network.NetworkOfflineDialog;
-import co.crowde.toni.view.dialog.message.product.ProductEmptyDialog;
 import co.crowde.toni.view.fragment.modul.InventoryFragment;
 
 public class CatalogRequest {

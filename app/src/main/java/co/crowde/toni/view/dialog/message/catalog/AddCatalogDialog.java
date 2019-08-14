@@ -28,7 +28,7 @@ public class AddCatalogDialog {
         ViewGroup viewGroup = activity.findViewById(android.R.id.content);
         //then we will inflate the custom alert dialog xml that we created
         View dialogView = LayoutInflater.from(activity)
-                .inflate(R.layout.layout_custom_dialog_two_action,
+                .inflate(R.layout.custom_dialog_confirm_two_button,
                         viewGroup,
                         false);
 
@@ -41,15 +41,15 @@ public class AddCatalogDialog {
         dialogConfirm = builder.create();
 
         //Get View Id
-        imgLogo = dialogView.findViewById(R.id.img_logo);
-        tvHead = dialogView.findViewById(R.id.tvHead);
-        tvDesc = dialogView.findViewById(R.id.tvDesc);
-        tvYes = dialogView.findViewById(R.id.tvYes);
-        tvNo = dialogView.findViewById(R.id.tvNo);
+        tvHead = dialogView.findViewById(R.id.tv_dialog_label);
+        tvDesc = dialogView.findViewById(R.id.tv_dialog_desc);
+        tvYes = dialogView.findViewById(R.id.tv_yes);
+        tvNo = dialogView.findViewById(R.id.tv_no);
 
-        imgLogo.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_playlist_add_white_24dp));
         tvHead.setText(activity.getResources().getString(R.string.dialog_label_add_new_product));
         tvDesc.setText(activity.getResources().getString(R.string.dialog_desc_add_new_product));
+        tvYes.setText(activity.getResources().getString(R.string.tambah_cap));
+        tvNo.setText(activity.getResources().getString(R.string.batal_cap));
 
         tvYes.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -285,7 +285,7 @@ public class DashboardFilterActivity extends AppCompatActivity implements View.O
         switch (status) {
             case "Tersedia":
                 cvAll.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
-                cvReady.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreen));
+                cvReady.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreenDark02));
                 cvAlmostEmpty.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
                 cvEmpty.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
 
@@ -299,7 +299,7 @@ public class DashboardFilterActivity extends AppCompatActivity implements View.O
             case "Mulai%20habis":
                 cvAll.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
                 cvReady.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
-                cvAlmostEmpty.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreen));
+                cvAlmostEmpty.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreenDark02));
                 cvEmpty.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
 
                 cvAll.setEnabled(true);
@@ -313,7 +313,7 @@ public class DashboardFilterActivity extends AppCompatActivity implements View.O
                 cvAll.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
                 cvReady.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
                 cvAlmostEmpty.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
-                cvEmpty.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreen));
+                cvEmpty.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreenDark02));
 
                 cvAll.setEnabled(true);
                 cvReady.setEnabled(true);
@@ -323,7 +323,7 @@ public class DashboardFilterActivity extends AppCompatActivity implements View.O
                 break;
 
             default:
-                cvAll.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreen));
+                cvAll.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreenDark02));
                 cvReady.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
                 cvAlmostEmpty.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));
                 cvEmpty.setCardBackgroundColor(getResources().getColor(R.color.colorThemeGreyLight));

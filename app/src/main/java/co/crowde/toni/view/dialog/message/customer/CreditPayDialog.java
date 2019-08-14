@@ -13,9 +13,6 @@ import androidx.appcompat.app.AlertDialog;
 
 import co.crowde.toni.R;
 import co.crowde.toni.constant.Const;
-import co.crowde.toni.controller.customer.CustomerController;
-import co.crowde.toni.controller.transaction.TransactionController;
-import co.crowde.toni.model.CustomerModel;
 import co.crowde.toni.network.CustomerRequest;
 import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 
@@ -32,7 +29,7 @@ public class CreditPayDialog {
         ViewGroup viewGroup = activity.findViewById(android.R.id.content);
         //then we will inflate the custom alert dialog xml that we created
         View dialogView = LayoutInflater.from(activity)
-                .inflate(R.layout.layout_custom_dialog_two_action,
+                .inflate(R.layout.custom_dialog_confirm_two_button,
                         viewGroup,
                         false);
 
@@ -45,20 +42,20 @@ public class CreditPayDialog {
         dialogCredit = builder.create();
 
         //Get View Id
-        imgLogo = dialogView.findViewById(R.id.img_logo);
-        tvHead = dialogView.findViewById(R.id.tvHead);
-        tvDesc = dialogView.findViewById(R.id.tvDesc);
-        tvYes = dialogView.findViewById(R.id.tvYes);
-        tvNo = dialogView.findViewById(R.id.tvNo);
 
-        imgLogo.setImageDrawable(activity.getResources().getDrawable(R.drawable.icon_edit_white));
+        tvHead = dialogView.findViewById(R.id.tv_dialog_label);
+        tvDesc = dialogView.findViewById(R.id.tv_dialog_desc);
+        tvYes = dialogView.findViewById(R.id.tv_yes);
+        tvNo = dialogView.findViewById(R.id.tv_no);
+
         tvHead.setText(activity.getResources().getString(R.string.dialog_label_credit_pay));
         tvDesc.setText(activity.getResources().getString(R.string.dialog_desc_credit_pay));
+        tvYes.setText(activity.getResources().getString(R.string.bayar));
+        tvNo.setText(activity.getResources().getString(R.string.batal_cap));
 
         tvYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvYes.setTextColor(activity.getResources().getColor(R.color.colorThemeOrange));
 
                 progressDialog = new ProgressDialog(activity);
                 progressDialog.setMessage("Harap tunggu...");
@@ -70,7 +67,8 @@ public class CreditPayDialog {
                     @Override
                     public void run() {
                         tvYes.setEnabled(true);
-                        CustomerController.printCreditPay(activity, credit, customerId);
+                        CustomerRequest.payCustomerCredit(activity, credit, customerId);
+//                        CustomerController.printCreditPay(activity, credit, customerId);
 
                         AnalyticsToniUtils.getEvent(Const.CATEGORY_CUSTOMER,Const.MODUL_CUSTOMER,Const.LABEL_CUSTOMER_CREDIT_PAY);
                     }
@@ -84,7 +82,6 @@ public class CreditPayDialog {
         tvNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvNo.setTextColor(activity.getResources().getColor(R.color.colorThemeOrange));
                 dialogCredit.dismiss();
             }
         });

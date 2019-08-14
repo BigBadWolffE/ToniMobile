@@ -1,8 +1,11 @@
 package co.crowde.toni.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class ProductModel {
+public class ProductModel implements Parcelable {
     @SerializedName("shopId")
     private String shopId;
 
@@ -69,54 +72,13 @@ public class ProductModel {
     @SerializedName("qty")
     private int qty;
 
+    @SerializedName("discount")
+    private int discount;
+
     public ProductModel() {
     }
 
-    public ProductModel(String shopId,
-                        String productId,
-                        String categoryId,
-                        String productName,
-                        String description,
-                        String picture,
-                        String status,
-                        int purchasePrice,
-                        int sellingPrice,
-                        String unit,
-                        String supplierId,
-                        String createdAt,
-                        String lastUpdated,
-                        String createdBy,
-                        String province,
-                        String regency,
-                        String district,
-                        String village,
-                        int stock,
-                        String supplierName,
-                        String categoryName) {
-        this.shopId = shopId;
-        this.productId = productId;
-        this.categoryId = categoryId;
-        this.productName = productName;
-        this.description = description;
-        this.picture = picture;
-        this.status = status;
-        this.purchasePrice = purchasePrice;
-        this.sellingPrice = sellingPrice;
-        this.unit = unit;
-        this.supplierId = supplierId;
-        this.createdAt = createdAt;
-        this.lastUpdated = lastUpdated;
-        this.createdBy = createdBy;
-        this.province = province;
-        this.regency = regency;
-        this.district = district;
-        this.village = village;
-        this.stock = stock;
-        this.supplierName = supplierName;
-        this.categoryName = categoryName;
-    }
-
-    public ProductModel(String shopId, String productId, String categoryId, String productName, String description, String picture, String status, int purchasePrice, int sellingPrice, String unit, String supplierId, String createdAt, String lastUpdated, String createdBy, String province, String regency, String district, String village, int stock, String supplierName, String categoryName, int qty) {
+    public ProductModel(String shopId, String productId, String categoryId, String productName, String description, String picture, String status, int purchasePrice, int sellingPrice, String unit, String supplierId, String createdAt, String lastUpdated, String createdBy, String province, String regency, String district, String village, int stock, String supplierName, String categoryName, int qty, int discount) {
         this.shopId = shopId;
         this.productId = productId;
         this.categoryId = categoryId;
@@ -139,7 +101,46 @@ public class ProductModel {
         this.supplierName = supplierName;
         this.categoryName = categoryName;
         this.qty = qty;
+        this.discount = discount;
     }
+
+    protected ProductModel(Parcel in) {
+        shopId = in.readString();
+        productId = in.readString();
+        categoryId = in.readString();
+        productName = in.readString();
+        description = in.readString();
+        picture = in.readString();
+        status = in.readString();
+        purchasePrice = in.readInt();
+        sellingPrice = in.readInt();
+        unit = in.readString();
+        supplierId = in.readString();
+        createdAt = in.readString();
+        lastUpdated = in.readString();
+        createdBy = in.readString();
+        province = in.readString();
+        regency = in.readString();
+        district = in.readString();
+        village = in.readString();
+        stock = in.readInt();
+        supplierName = in.readString();
+        categoryName = in.readString();
+        qty = in.readInt();
+        discount = in.readInt();
+    }
+
+    public static final Creator<ProductModel> CREATOR = new Creator<ProductModel>() {
+        @Override
+        public ProductModel createFromParcel(Parcel in) {
+            return new ProductModel(in);
+        }
+
+        @Override
+        public ProductModel[] newArray(int size) {
+            return new ProductModel[size];
+        }
+    };
 
     public String getShopId() {
         return shopId;
@@ -315,5 +316,45 @@ public class ProductModel {
 
     public void setQty(int qty) {
         this.qty = qty;
+    }
+
+    public int getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(int discount) {
+        this.discount = discount;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(shopId);
+        dest.writeString(productId);
+        dest.writeString(categoryId);
+        dest.writeString(productName);
+        dest.writeString(description);
+        dest.writeString(picture);
+        dest.writeString(status);
+        dest.writeInt(purchasePrice);
+        dest.writeInt(sellingPrice);
+        dest.writeString(unit);
+        dest.writeString(supplierId);
+        dest.writeString(createdAt);
+        dest.writeString(lastUpdated);
+        dest.writeString(createdBy);
+        dest.writeString(province);
+        dest.writeString(regency);
+        dest.writeString(district);
+        dest.writeString(village);
+        dest.writeInt(stock);
+        dest.writeString(supplierName);
+        dest.writeString(categoryName);
+        dest.writeInt(qty);
+        dest.writeInt(discount);
     }
 }

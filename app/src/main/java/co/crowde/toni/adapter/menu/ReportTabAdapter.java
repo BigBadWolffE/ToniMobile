@@ -7,7 +7,6 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import co.crowde.toni.view.fragment.transaction.DashboardReportFragment;
 import co.crowde.toni.view.fragment.transaction.ListTransactionReportFragment;
-import co.crowde.toni.view.fragment.transaction.TransactionReport;
 
 
 public class ReportTabAdapter extends FragmentStatePagerAdapter {

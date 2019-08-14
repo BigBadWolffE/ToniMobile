@@ -2,6 +2,7 @@ package co.crowde.toni.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +22,8 @@ import java.util.List;
 import co.crowde.toni.R;
 import co.crowde.toni.model.ProductModel;
 import co.crowde.toni.utils.print.Utils;
-import co.crowde.toni.view.dialog.popup.product.InventoryDetailPopup;
+import co.crowde.toni.view.activity.product.InventoryDetailActivity;
+import co.crowde.toni.view.activity.product.ProductDashboardDetailActivity;
 
 public class ProductInventoryAdapter
         extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -129,7 +131,10 @@ public class ProductInventoryAdapter
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        InventoryDetailPopup.showPopup(activity, model);
+//                        InventoryDetailPopup.showPopup(activity, model);
+                        Intent detail = new Intent(activity, InventoryDetailActivity.class);
+                        detail.putExtra(ProductModel.class.getSimpleName(), model);
+                        activity.startActivityForResult(detail, 123);
                     }
                 });
 

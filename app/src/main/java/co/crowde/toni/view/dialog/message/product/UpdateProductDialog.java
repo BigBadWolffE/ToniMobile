@@ -25,11 +25,11 @@ public class UpdateProductDialog {
 
     public static ProgressDialog progressDialog;
 
-    public static void showDialog(final Activity activity, String productId) {
+    public static void showDialog(final Activity activity, String productId, int qty, int purchase, int selling, ProgressDialog progressDialogs) {
         ViewGroup viewGroup = activity.findViewById(android.R.id.content);
         //then we will inflate the custom alert dialog xml that we created
         View dialogView = LayoutInflater.from(activity)
-                .inflate(R.layout.layout_custom_dialog_two_action,
+                .inflate(R.layout.custom_dialog_confirm_two_button,
                         viewGroup,
                         false);
 
@@ -42,15 +42,15 @@ public class UpdateProductDialog {
         dialogConfirm = builder.create();
 
         //Get View Id
-        imgLogo = dialogView.findViewById(R.id.img_logo);
-        tvHead = dialogView.findViewById(R.id.tvHead);
-        tvDesc = dialogView.findViewById(R.id.tvDesc);
-        tvYes = dialogView.findViewById(R.id.tvYes);
-        tvNo = dialogView.findViewById(R.id.tvNo);
+        tvHead = dialogView.findViewById(R.id.tv_dialog_label);
+        tvDesc = dialogView.findViewById(R.id.tv_dialog_desc);
+        tvYes = dialogView.findViewById(R.id.tv_yes);
+        tvNo = dialogView.findViewById(R.id.tv_no);
 
-        imgLogo.setImageDrawable(activity.getResources().getDrawable(R.drawable.icon_edit_white));
         tvHead.setText(activity.getResources().getString(R.string.dialog_label_update_product));
         tvDesc.setText(activity.getResources().getString(R.string.dialog_desc_update_product));
+        tvYes.setText(activity.getResources().getString(R.string.bayar));
+        tvNo.setText(activity.getResources().getString(R.string.batal_cap));
 
         tvYes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +61,7 @@ public class UpdateProductDialog {
                 progressDialog.setCanceledOnTouchOutside(false);
                 progressDialog.show();
 
-                ProductRequest.postUpdateProduct(activity, productId);
+                ProductRequest.postUpdateProduct(activity, productId, qty, purchase, selling, progressDialog);
             }
         });
 
@@ -70,6 +70,7 @@ public class UpdateProductDialog {
             public void onClick(View v) {
                 tvNo.setTextColor(activity.getResources().getColor(R.color.colorThemeOrange));
                 dialogConfirm.dismiss();
+                progressDialogs.dismiss();
             }
         });
 

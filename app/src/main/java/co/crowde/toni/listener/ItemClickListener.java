@@ -12,6 +12,8 @@ public interface ItemClickListener {
 
     void onDeleteItemClick(View v, int position);
 
+    void onDiscount(View v, int position);
+
     void onIncreaseItem(View v, int position);
 
     void onDecreaseItem(View v, int position);

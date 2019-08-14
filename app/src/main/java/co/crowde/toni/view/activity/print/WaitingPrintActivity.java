@@ -1,5 +1,6 @@
 package co.crowde.toni.view.activity.print;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -11,6 +12,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import co.crowde.toni.R;
 import co.crowde.toni.controller.transaction.TransactionController;
+import co.crowde.toni.view.activity.home.MainActivity;
+import co.crowde.toni.view.activity.notification.SuccessPaymentTransactionActivity;
 import co.crowde.toni.view.fragment.print.PrintDoneFragment;
 import co.crowde.toni.view.fragment.print.PrintWaitFragment;
 
@@ -37,7 +40,7 @@ public class WaitingPrintActivity extends AppCompatActivity {
         cvBtnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                onBackPressed();
             }
         });
 
@@ -86,6 +89,10 @@ public class WaitingPrintActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Intent home = new Intent(WaitingPrintActivity.this, MainActivity.class);
+        home.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(home);
         finish();
     }
 }

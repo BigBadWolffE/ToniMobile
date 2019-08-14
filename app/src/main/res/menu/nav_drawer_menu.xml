@@ -23,8 +23,8 @@
     <!--</item>-->
 
     <group android:id="@+id/group2">
-        <item android:id="@+id/nav_about"
-            android:title="@string/tentang_aplikasi" />
+        <item android:id="@+id/nav_help"
+            android:title="@string/bantuan" />
         <item android:id="@+id/nav_logout"
             android:title="@string/tutup_toko_low" />
     </group>

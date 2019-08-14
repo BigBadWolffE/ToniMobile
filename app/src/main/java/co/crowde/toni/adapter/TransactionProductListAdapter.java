@@ -96,8 +96,15 @@ public class TransactionProductListAdapter
                 viewHolder.tvTabProductQty.setText(String.valueOf(model.getQuantity()));
                 viewHolder.tvTabProductUnit.setText(model.getUnit());
                 DecimalFormatRupiah.changeFormat(activity);
-                viewHolder.tvTabProductPrice.setText("Rp. "+
-                        DecimalFormatRupiah.formatNumber.format(model.getAmount())+",-");
+                if(model.getAmount()!=(model.getQuantity()*model.getSellingPrice())){
+                    viewHolder.tvTabProductPrice.setText(
+                            "Rp. "+DecimalFormatRupiah.formatNumber.format(model.getQuantity()*model.getSellingPrice())+"\n"
+                                    + "(-"+DecimalFormatRupiah.formatNumber.format((model.getQuantity()*model.getSellingPrice())-model.getAmount())+")");
+                } else {
+                    viewHolder.tvTabProductPrice.setText("Rp. "+
+                            DecimalFormatRupiah.formatNumber.format(model.getAmount())+",-");
+                }
+
             }
         } else if (holder instanceof LoadingViewHolder) {
             showLoadingView((LoadingViewHolder) holder, position);

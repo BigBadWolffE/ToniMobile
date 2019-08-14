@@ -1,173 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
     android:background="@color/colorWhite">
 
-    <LinearLayout
-        android:id="@+id/llName"
+    <TextView
+        android:id="@+id/tvName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="vertical"
-        android:weightSum="5"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="12dp"
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvVarian"
         app:layout_constraintEnd_toStartOf="@+id/lineX05"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread" />
 
-        <TextView
-            android:id="@+id/tvName"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:textStyle="bold"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="6dp"
-            android:textColor="@color/colorBlack"
-            app:autoSizeTextType="uniform"
-            app:autoSizeMaxTextSize="20sp"
-            app:autoSizeMinTextSize="14sp"/>
-        <TextView
-            android:id="@+id/tvVarian"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:textColor="@color/colorThemeGrey"
-            app:autoSizeTextType="uniform"
-            app:autoSizeMaxTextSize="12sp"
-            app:autoSizeMinTextSize="10sp"/>
-        <TextView
-            android:id="@+id/tvStock"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:textColor="@color/colorThemeGrey"
-            app:autoSizeTextType="uniform"
-            app:autoSizeMaxTextSize="12sp"
-            app:autoSizeMinTextSize="10sp"/>
-        <TextView
-            android:id="@+id/tvPrice"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            android:textColor="@color/colorThemeGrey"
-            app:autoSizeTextType="uniform"
-            app:autoSizeMaxTextSize="12sp"
-            app:autoSizeMinTextSize="10sp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/llPrice"
+    <TextView
+        android:id="@+id/tvVarian"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color61000000"
+        app:layout_constraintBottom_toTopOf="@+id/tvStock"
+        app:layout_constraintEnd_toEndOf="@+id/tvName"
+        app:layout_constraintStart_toStartOf="@+id/tvName"
+        app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+    <TextView
+        android:id="@+id/tvStock"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color61000000"
+        app:layout_constraintBottom_toTopOf="@+id/tvPrice"
+        app:layout_constraintEnd_toEndOf="@+id/tvName"
+        app:layout_constraintStart_toStartOf="@+id/tvName"
+        app:layout_constraintTop_toBottomOf="@+id/tvVarian" />
+
+    <TextView
+        android:id="@+id/tvPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintBottom_toTopOf="@+id/tvDelete"
+        app:layout_constraintStart_toStartOf="@+id/tvName"
+        app:layout_constraintTop_toBottomOf="@+id/tvStock" />
+
+    <TextView
+        android:id="@+id/tvDelete"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/bg_grey_radius_2dp"
+        android:gravity="center"
+        android:text="HAPUS"
+        android:textColor="@color/color_theme_red"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvName"
+        app:layout_constraintTop_toBottomOf="@+id/tvPrice" />
+
+    <TextView
+        android:id="@+id/tv_edit_discount"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="vertical"
-        android:weightSum="5"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/bg_grey_radius_2dp"
+        android:gravity="center"
+        android:paddingStart="8dp"
+        android:paddingLeft="8dp"
+        android:paddingEnd="8dp"
+        android:paddingRight="8dp"
+        android:text="@string/tambah_diskon_cap"
+        android:textColor="@color/colorThemeGreenDark02"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDelete"
+        app:layout_constraintEnd_toStartOf="@+id/lineX05"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/tvDelete"
+        app:layout_constraintTop_toTopOf="@+id/tvDelete" />
+
+    <LinearLayout
+        android:id="@+id/layout_qty"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/lineX05"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tvDelete"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1.5"
-            android:text="@string/hapus"
-            android:gravity="end"
-            android:textStyle="bold"
-            android:textColor="@color/colorThemeOrange"
-            app:autoSizeTextType="uniform"
-            app:autoSizeMaxTextSize="12sp"
-            app:autoSizeMinTextSize="10sp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:orientation="horizontal"
-            android:weightSum="5"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            android:gravity="center|end">
-
-            <ImageView
-                android:id="@+id/imgDecrease"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@drawable/bg_rec_stroke_radius_5dp_grey"
-                android:gravity="center"
-                android:tint="@color/TextColorDefault"
-                app:srcCompat="@drawable/ic_remove_black_24dp" />
-
-            <TextView
-                android:id="@+id/tvQty"
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="2dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginLeft="4dp"
-                android:background="@drawable/bg_rec_stroke_radius_5dp_grey"
-                android:gravity="center"
-                android:paddingLeft="4dp"
-                android:paddingStart="4dp"
-                android:paddingEnd="4dp"
-                android:paddingRight="4dp"
-                android:textColor="@color/colorThemeOrange"
-                android:textStyle="bold"
-                app:autoSizeTextType="uniform"/>
-
-            <ImageView
-                android:id="@+id/imgIncrease"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@drawable/bg_rec_radius_5dp_grey"
-                android:gravity="center"
-                android:tint="@color/TextColorDefault"
-                app:srcCompat="@drawable/ic_add_black_24dp" />
-
-
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/imgDecrease"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_green_radius_left_5dp"
+            android:padding="8dp"
+            app:srcCompat="@drawable/ic_remove_white_24dp" />
 
         <TextView
-            android:id="@+id/tvAmount"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1.5"
-            android:textStyle="bold"
-            android:gravity="bottom|end"
+            android:id="@+id/tvQty"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/colorFAFAFA"
+            android:gravity="center"
+            android:text="1"
             android:textColor="@color/colorBlack"
-            app:autoSizeTextType="uniform"
-            app:autoSizeMaxTextSize="16sp"
-            app:autoSizeMinTextSize="10sp"/>
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/imgIncrease"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_green_radius_right_5dp"
+            android:padding="8dp"
+            app:srcCompat="@drawable/ic_add_white_24dp" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvAmount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="end"
+        android:textColor="@color/colorDE000000"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/layout_qty"
+        app:layout_constraintStart_toStartOf="@+id/lineX05"
+        app:layout_constraintTop_toBottomOf="@+id/layout_qty" />
+
+    <TextView
+        android:id="@+id/tvDiscount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:textColor="@color/color_theme_red"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/tvAmount"
+        app:layout_constraintStart_toStartOf="@+id/lineX05"
+        app:layout_constraintTop_toBottomOf="@+id/tvAmount" />
+
+    <TextView
+        android:id="@+id/tvTotal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:textColor="@color/colorDE000000"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/tvAmount"
+        app:layout_constraintStart_toStartOf="@+id/lineX05"
+        app:layout_constraintTop_toBottomOf="@+id/tvDiscount" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/lineX05"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.6"/>
+        app:layout_constraintGuide_percent="0.6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
