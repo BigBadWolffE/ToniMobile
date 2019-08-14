@@ -46,8 +46,8 @@
     <string name="cari_barang">Cari barang</string>
     <string name="kategori">Kategori</string>
     <string name="pilih_pelanggan">PILIH PELANGGAN</string>
-    <string name="blm_ada_barang">BELUM ADA BARANG</string>
-    <string name="ket_blm_ada_barang">Tambahkan barang setelah memilih nama pelanggan</string>
+    <string name="blm_ada_barang">BELUM ADA PRODUK</string>
+    <string name="ket_blm_ada_barang">Tambahkan produk setelah memilih nama pelanggan</string>
     <string name="total_kapital">TOTAL</string>
     <string name="total_lowcast">Total</string>
     <string name="rp">Rp.</string>
@@ -150,7 +150,7 @@
     <string name="transaksi_low">Transaksi</string>
     <string name="tanggal_transaksi">TANGGAL TRANSAKSI</string>
     <string name="tanggal_transaksi_low">Tanggal Transaksi</string>
-    <string name="belum_ada_barang">BELUM ADA BARANG</string>
+    <string name="belum_ada_barang">BELUM ADA PRODUK</string>
     <string name="ket_blm_ada_transaksi">Pilih transaksi yang ingin dilihat</string>
     <string name="cetak_ulang_struk">CETAK ULANG STRUK</string>
     <string name="cetak_ulang_struk_low">Cetak Ulang Struk</string>
@@ -216,7 +216,7 @@
     <string name="strips">-</string>
     <string name="anggap_aja_ini_splash_screen_karena_desainnya_belum_ada">Anggap aja ini Splash Screen. Karena Desainnya belum ada.</string>
     <string name="pos_dashboard_low">Pos Dashboard</string>
-    <string name="daftar_barang_low">Daftar Barang</string>
+    <string name="daftar_barang_low">Daftar Produk</string>
     <string name="kata_sandi">Kata Sandi</string>
     <string name="lupa_kata_sandi">Lupa kata sandi?</string>
     <string name="lupa_kata_sandi_capt">LUPA KATA SANDI?</string>
@@ -245,6 +245,7 @@
     <string name="pilih_metode_pembayaran">Pilih Metode Pembayaran</string>
     <string name="tunai">TUNAI</string>
     <string name="hapus">Hapus</string>
+    <string name="hapus_cap">HAPUS</string>
     <string name="masukkan_nama_pelanggan">Masukkan Nama Pelanggan</string>
     <string name="nomor_telepon">Nomor Telepon</string>
     <string name="ok">OK</string>
@@ -273,43 +274,43 @@
 
     <!-- DIALOG MESSAGE -->
     <string name="dialog_label_close_app">Konfirmasi Keluar</string>
-    <string name="dialog_desc_close_app">Aplikasi TONI akan ditutup. silahkan klik Tutup untuk melanjutkan.</string>
+    <string name="dialog_desc_close_app">Aplikasi TONI akan ditutup. Silahkan pilih TUTUP untuk melanjutkan.</string>
 
-    <string name="dialog_label_close_shop">“YAKIN INGIN \n MENUTUP TOKO?”</string>
-    <string name="dialog_desc_close_shop">Toko akan ditutup \n silahkan klik Ya untuk melanjutkan.</string>
+    <string name="dialog_label_close_shop">Tutup Toko</string>
+    <string name="dialog_desc_close_shop">Toko akan ditutup. Silahkan pilih TUTUP untuk melanjutkan.</string>
 
-    <string name="dialog_label_update_product">“YAKIN PERUBAHAN \n DATA ANDA BENAR?”</string>
-    <string name="dialog_desc_update_product">Periksa dahulu perubahan data informasi Anda \n sebelum melanjutkan ke tahap berikutnya.</string>
+    <string name="dialog_label_update_product">Konfirmasi Perubahan</string>
+    <string name="dialog_desc_update_product">Pastikan data perubahan / penambahan produk sudah benar.</string>
 
-    <string name="dialog_label_add_new_product">“YAKIN PENAMBAHAN \n KATALOG ANDA BENAR?”</string>
-    <string name="dialog_desc_add_new_product">Periksa dahulu penambahan katalog Anda \n sebelum melanjutkan ke tahap berikutnya.</string>
+    <string name="dialog_label_add_new_product">Konfirmasi Penambahan</string>
+    <string name="dialog_desc_add_new_product">Data penambahan produk sudah benar? Silahkan pilih TAMBAH untuk melanjutkan.</string>
 
-    <string name="dialog_label_confirm_transaction">“YAKIN TRANSAKSI \n ANDA BENAR?”</string>
-    <string name="dialog_desc_confirm_transaction">Periksa dahulu isi transaksi Anda sebelum \n melanjutkan ke tahap berikutnya.</string>
+    <string name="dialog_label_add_new_customer">Pelanggan Sudah Terdaftar</string>
+    <string name="dialog_desc_add_new_customer">Periksa kembali pengisian penambahan data pelanggan.</string>
 
-    <string name="dialog_label_add_new_customer">‘DATA ANDA SUDAH \n TERDAFTAR’</string>
-    <string name="dialog_desc_add_new_customer">Periksa kembali dahulu isi detail data \n Anda untuk menghindari kesamaan informasi.</string>
+    <string name="dialog_label_connect_printer">Koneksi Gagal</string>
+    <string name="dialog_desc_connect_printer">Pastikan Bluetooth sudah aktif dan Printer sudah terkoneksi dengan ponsel.</string>
 
-    <string name="dialog_label_connect_printer">‘KONEKSI KE PRINTER \n GAGAL’</string>
-    <string name="dialog_desc_connect_printer">Periksa kembali dahulu koneksi Bluetooth \n dan Printer Anda lalu coba lagi.</string>
+    <string name="dialog_label_connect_internet">Kesalahan Jaringan</string>
+    <string name="dialog_desc_connect_internet">Pastikan jaringan internet sudah terkoneksi dengan benar.</string>
 
-    <string name="dialog_label_connect_internet">‘KERUSAKAN JARINGAN \n INTERNET’</string>
-    <string name="dialog_desc_connect_internet">Pastikan jaringan internet Anda \n sudah terkoneksi dengan benar.</string>
+    <string name="dialog_label_credit_pay">Konfirmasi Pembayaran</string>
+    <string name="dialog_desc_credit_pay">Pastikan data pembayaran hutang pelanggan sudah benar sebelum menekan tombol bayar.</string>
 
-    <string name="dialog_label_empty_data">‘DATA YANG DICARI \n TIDAK DITEMUKAN!’</string>
-    <string name="dialog_desc_empty_data">Periksa kembali data yang diminta.</string>
+    <string name="dialog_label_re_print_transaction">Konfirmasi Cetak Struk</string>
+    <string name="dialog_desc_re_print_transaction">Struk digunakan sebagai bukti pembayaran yang sah. Silahkan pilih CETAK untuk mencetak struk pembelian.</string>
 
-    <string name="dialog_label_credit_pay">“YAKIN PEMBAYARAN \n ANDA BENAR?”</string>
-    <string name="dialog_desc_credit_pay">Periksa dahulu pembayaran hutang Anda \n sebelum melanjutkan ke tahap berikutnya.</string>
+    <string name="dialog_label_insufficient_stock">Stok Kurang</string>
+    <string name="dialog_desc_insufficient_stock">Stok produk kurang / sedang kosong. Silahkan periksa kembali persediaan di menu Produk.</string>
 
-    <string name="dialog_label_print_transaction">“PEMBELIAN PRODUK BERHASIL. \n INGIN CETAK STRUK PEMBELIAN?”</string>
-    <string name="dialog_desc_print_transaction">Struk digunakan sebagai bukti pembayaran yang sah. \n Silahkan cetak struk apabila diperlukan.</string>
+    <string name="dialog_label_delete_cart">Hapus Produk</string>
+    <string name="dialog_desc_delete_cart">Semua produk di keranjang akan dihapus. Silahkan pilih HAPUS untuk melanjutkan.</string>
 
-    <string name="dialog_label_re_print_transaction">“YAKIN INGIN MENCETAK \n STRUK PEMBELIAN?”</string>
-    <string name="dialog_desc_re_print_transaction">Struk digunakan sebagai bukti pembayaran yang sah. \n Silahkan cetak struk apabila diperlukan.</string>
+    <string name="dialog_label_confirm_new_customer">Konfirmasi Penambahan</string>
+    <string name="dialog_desc_confirm_new_customer">Data yang terisi sudah benar? Silahkan pilih TAMBAH untuk melanjutkan.</string>
 
-    <string name="dialog_label_insufficient_stock">‘MOHON MAAF STOK \n PRODUK TIDAK CUKUP!’</string>
-    <string name="dialog_desc_insufficient_stock">Periksa kembali stok produk yang diminta.</string>
+    <string name="confirm_payment_desc">Pastikan detail transaksi anda benar sebelum menekan tombol bayar.</string>
+    <string name="konfirmasi_transaksi">Konfirmasi Transaksi</string>
 
     <!-- NOTIFICATION MESSAGE -->
     <string name="notif_update_product">PERUBAHAN INFORMASI ANDA BERHASIL</string>
@@ -334,7 +335,7 @@
     <string name="daftar">DAFTAR</string>
     <string name="tutup">TUTUP</string>
     <string name="cari_pelanggan_nomor_telepon">Cari pelanggan/nomor telepon</string>
-    <string name="data_product_tidak_ditemukan">Data product tidak ditemukan</string>
+    <string name="data_product_tidak_ditemukan">Data produk tidak ditemukan</string>
     <string name="data_pelanggan_tidak_ditemukan">Data pelanggan tidak ditemukan</string>
     <string name="data_transaksi_tidak_ditemukan">Data transaksi tidak ditemukan</string>
     <string name="profil">Profil</string>
@@ -391,8 +392,7 @@
     <string name="hapus_diskon">HAPUS DISKON</string>
     <string name="batalkan_cap">BATALKAN</string>
     <string name="batal_cap">BATAL</string>
-    <string name="confirm_payment_desc">Pastikan detail transaksi anda benar sebelum menekan tombol bayar.</string>
-    <string name="konfirmasi_transaksi">Konfirmasi Transaksi</string>
+    <string name="cetak_cap">CETAK</string>
     <string name="kembali_low">Kembali</string>
     <string name="hutang_ke_toko_cap">HUTANG KE TOKO</string>
     <string name="masukkan_nominal_pembayaran_hutang">Masukkan Nominal Pembayaran Hutang</string>

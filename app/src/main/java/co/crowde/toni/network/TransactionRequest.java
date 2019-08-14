@@ -1,6 +1,7 @@
 package co.crowde.toni.network;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.util.Log;
 
@@ -42,13 +43,9 @@ import co.crowde.toni.view.activity.print.WaitingPrintActivity;
 import co.crowde.toni.view.activity.transaction.DetailTransactionActivity;
 import co.crowde.toni.view.dialog.message.network.NetworkOfflineDialog;
 import co.crowde.toni.view.dialog.message.transaction.ConfirmPaymentDialog;
-import co.crowde.toni.view.dialog.message.transaction.ConfirmTransactionDialog;
-import co.crowde.toni.view.fragment.modul.DashboardFragment;
-import co.crowde.toni.view.fragment.modul.InventoryFragment;
 import co.crowde.toni.view.fragment.transaction.ListTransactionReportFragment;
 
 import static co.crowde.toni.view.fragment.modul.ReportFragment.progressDialog;
-import static co.crowde.toni.view.fragment.transaction.DashboardReportFragment.customerFavoriteAdapter;
 import static co.crowde.toni.view.fragment.transaction.ListTransactionReportFragment.transactionModels;
 import static co.crowde.toni.view.fragment.transaction.ListTransactionReportFragment.reportListTransactionAdapter;
 import static co.crowde.toni.view.fragment.transaction.ListTransactionReportFragment.updateDataTransaction;
@@ -59,7 +56,7 @@ public class TransactionRequest {
     public static String message;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    public static void postNewTransaction(final Activity activity, AddTransactionModel add, int saldo, int credit) {
+    public static void postNewTransaction(final Activity activity, AddTransactionModel add, int saldo, int credit, ProgressDialog progressDialog) {
 
         String postBody = new Gson().toJson(add);
         Log.e("POST BODY", postBody);
@@ -106,7 +103,7 @@ public class TransactionRequest {
 
                             if(status){
                                 ConfirmPaymentDialog.dialogConfirm.dismiss();
-                                ConfirmPaymentDialog.progressDialog.dismiss();
+                                progressDialog.dismiss();
 
                                 Intent print = new Intent(activity, SuccessPaymentTransactionActivity.class);
                                 print.putExtra("data", data);
@@ -114,6 +111,7 @@ public class TransactionRequest {
                                 switch (add.getPaymentType()) {
                                     case "Cash":
                                         if(credit>0){
+                                            CustomerRequest.payCredit(activity, credit, data);
                                             AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_TRANSACTION, Const.LABEL_TRANSACTION_CASH_CREDIT_SUCCESS);
                                             print.putExtra("payment_type", "CashCredit");
                                         } else {
@@ -136,8 +134,8 @@ public class TransactionRequest {
                                 if(message.equals("Token tidak valid")){
                                     UserController.tokenExpired(activity, message);
                                 } else {
-                                    ConfirmTransactionDialog.dialogConfirm.dismiss();
-                                    ConfirmTransactionDialog.progressDialog.dismiss();
+                                    ConfirmPaymentDialog.dialogConfirm.dismiss();
+                                    progressDialog.dismiss();
                                 }
                             }
 

@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_rec_gradient_down_green_light_dark"
     tools:context=".view.activity.notification.SuccessCreditPayActivity">
-
     <ImageView
         android:id="@+id/img_success"
         android:layout_width="100dp"
@@ -37,24 +36,20 @@
 
     <TextView
         android:id="@+id/textView8"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
         android:gravity="center"
-        android:text="Hutang Pelanggan selesai dibayarkan. Silahkan kembali ke Menu Awal."
+        android:text="Belanjaan selesai dibayar. \nSilahkan Cetak Struk untuk bukti pembayaran"
         android:textColor="@color/colorWhite"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_back_home"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tv_print_transaction"
+        app:layout_constraintEnd_toEndOf="@+id/img_success"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/img_success"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <TextView
-        android:id="@+id/tv_back_home"
+        android:id="@+id/tv_print_transaction"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="50dp"
@@ -64,7 +59,7 @@
         android:layout_marginTop="100dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/bg_rec_orange_radius_2dp"
-        android:text="@string/kembali"
+        android:text="@string/cetak_struk"
         android:textColor="@color/colorWhite"
         android:textStyle="bold"
         android:gravity="center"
@@ -79,107 +74,15 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:gravity="center"
-        android:text="@string/kembali_low"
+        android:text="@string/kembali"
         android:background="@drawable/bg_rec_transparent_stroke_radius_2dp_orange"
         android:textColor="@color/colorThemeOrange"
         android:textSize="14sp"
-        android:visibility="gone"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/tv_back_home"
+        app:layout_constraintEnd_toEndOf="@+id/tv_print_transaction"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/tv_back_home"
-        app:layout_constraintTop_toBottomOf="@+id/tv_back_home" />
-
-
-    <!--<ImageView-->
-        <!--android:id="@+id/imageView2"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginRight="8dp"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--app:layout_constraintBottom_toTopOf="@+id/guideline1"-->
-        <!--app:layout_constraintEnd_toEndOf="@+id/textView"-->
-        <!--app:layout_constraintStart_toStartOf="@+id/textView"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:srcCompat="@drawable/ic_check_circle_yellow_100dp" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/textView"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_marginTop="16dp"-->
-        <!--android:layout_marginBottom="16dp"-->
-        <!--android:gravity="center"-->
-        <!--android:textStyle="bold"-->
-        <!--android:textColor="@color/colorBlack"-->
-        <!--app:autoSizeTextType="uniform"-->
-        <!--app:autoSizeMaxTextSize="30sp"-->
-        <!--android:maxLines="2"-->
-        <!--android:text="@string/notif_credit_pay"-->
-        <!--app:layout_constraintBottom_toTopOf="@+id/guideline7"-->
-        <!--app:layout_constraintEnd_toEndOf="@+id/layoutLoginFooter"-->
-        <!--app:layout_constraintStart_toStartOf="@+id/layoutLoginFooter"-->
-        <!--app:layout_constraintTop_toTopOf="@+id/guideline1" />-->
-
-    <!--<androidx.constraintlayout.widget.Guideline-->
-        <!--android:id="@+id/guideline1"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="horizontal"-->
-        <!--app:layout_constraintGuide_percent="0.4" />-->
-
-    <!--<androidx.constraintlayout.widget.Guideline-->
-        <!--android:id="@+id/guideline7"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="horizontal"-->
-        <!--app:layout_constraintGuide_percent="0.7" />-->
-
-    <!--<androidx.constraintlayout.widget.ConstraintLayout-->
-        <!--android:id="@+id/layoutLoginFooter"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_marginStart="32dp"-->
-        <!--android:layout_marginLeft="32dp"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--android:layout_marginEnd="32dp"-->
-        <!--android:layout_marginRight="32dp"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintDimensionRatio="16:9"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--app:layout_constraintRight_toRightOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@id/guideline7">-->
-
-        <!--<androidx.cardview.widget.CardView-->
-            <!--android:id="@+id/cvBtnBack"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="40dp"-->
-            <!--android:layout_marginStart="16dp"-->
-            <!--android:layout_marginLeft="16dp"-->
-            <!--android:layout_marginEnd="16dp"-->
-            <!--android:layout_marginRight="16dp"-->
-            <!--app:cardElevation="0dp"-->
-            <!--app:cardBackgroundColor="@color/colorThemeOrange"-->
-            <!--app:cardCornerRadius="20dp"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--app:layout_constraintTop_toTopOf="parent">-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/tvBack"-->
-                <!--style="@style/TextButtonWhiteBold"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:text="@string/kembali" />-->
-
-        <!--</androidx.cardview.widget.CardView>-->
-
-    <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+        app:layout_constraintStart_toStartOf="@+id/tv_print_transaction"
+        app:layout_constraintTop_toBottomOf="@+id/tv_print_transaction" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

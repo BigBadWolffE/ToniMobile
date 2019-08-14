@@ -52,7 +52,7 @@ public class InfoShopActivity extends AppCompatActivity {
                 .load(API.Host+SavePref.readPicture(InfoShopActivity.this))
                 .into(imgShop);
 
-        toolbarShop.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_white_24dp));
+        toolbarShop.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_black_24dp));
         toolbarShop.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

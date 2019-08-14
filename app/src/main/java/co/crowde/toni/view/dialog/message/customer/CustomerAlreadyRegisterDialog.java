@@ -26,7 +26,7 @@ public class CustomerAlreadyRegisterDialog {
         ViewGroup viewGroup = activity.findViewById(android.R.id.content);
         //then we will inflate the custom alert dialog xml that we created
         View dialogView = LayoutInflater.from(activity)
-                .inflate(R.layout.layout_custom_dialog_one_action,
+                .inflate(R.layout.custom_dialog_confirm_one_button,
                         viewGroup,
                         false);
 
@@ -39,14 +39,13 @@ public class CustomerAlreadyRegisterDialog {
         dialogCustomer = builder.create();
 
         //Get View Id
-        imgLogo = dialogView.findViewById(R.id.img_logo);
-        tvHead = dialogView.findViewById(R.id.tvHead);
-        tvDesc = dialogView.findViewById(R.id.tvDesc);
-        tvClose = dialogView.findViewById(R.id.tvClose);
+        tvHead = dialogView.findViewById(R.id.tv_dialog_label);
+        tvDesc = dialogView.findViewById(R.id.tv_dialog_desc);
+        tvClose = dialogView.findViewById(R.id.tv_close);
 
-        imgLogo.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_person_add_white_24dp));
         tvHead.setText(activity.getResources().getString(R.string.dialog_label_add_new_customer));
         tvDesc.setText(activity.getResources().getString(R.string.dialog_desc_add_new_customer));
+        tvClose.setText(activity.getResources().getString(R.string.tutup));
 
         tvClose.setOnClickListener(new View.OnClickListener() {
             @Override

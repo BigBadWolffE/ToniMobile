@@ -1,26 +1,20 @@
-package co.crowde.toni.view.dialog.message.catalog;
+package co.crowde.toni.view.dialog.message.cart;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
 import co.crowde.toni.R;
-import co.crowde.toni.network.CatalogRequest;
-import co.crowde.toni.network.ProductRequest;
 
-public class AddCatalogDialog {
-
+public class DeleteProductCartDialog {
     public static TextView tvHead, tvDesc, tvYes, tvNo;
 
-    public static ImageView imgLogo;
-
-    public static AlertDialog dialogConfirm;
+    public static AlertDialog dialogClose;
 
     public static ProgressDialog progressDialog;
 
@@ -38,7 +32,7 @@ public class AddCatalogDialog {
         builder.setView(dialogView);
 
         //finally creating the alert dialog and displaying it
-        dialogConfirm = builder.create();
+        dialogClose = builder.create();
 
         //Get View Id
         tvHead = dialogView.findViewById(R.id.tv_dialog_label);
@@ -46,35 +40,30 @@ public class AddCatalogDialog {
         tvYes = dialogView.findViewById(R.id.tv_yes);
         tvNo = dialogView.findViewById(R.id.tv_no);
 
-        tvHead.setText(activity.getResources().getString(R.string.dialog_label_add_new_product));
-        tvDesc.setText(activity.getResources().getString(R.string.dialog_desc_add_new_product));
-        tvYes.setText(activity.getResources().getString(R.string.tambah_cap));
+        tvHead.setText(activity.getResources().getString(R.string.dialog_label_delete_cart));
+        tvDesc.setText(activity.getResources().getString(R.string.dialog_desc_delete_cart));
+        tvYes.setText(activity.getResources().getString(R.string.hapus_cap));
         tvNo.setText(activity.getResources().getString(R.string.batal_cap));
 
         tvYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvYes.setTextColor(activity.getResources().getColor(R.color.colorThemeOrange));
-                progressDialog = new ProgressDialog(activity);
-                progressDialog.setMessage("Harap tunggu...");
-                progressDialog.setCanceledOnTouchOutside(false);
-                progressDialog.show();
-
-                CatalogRequest.addNewProduct(activity);
+                activity.finish();
             }
         });
 
         tvNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvNo.setTextColor(activity.getResources().getColor(R.color.colorThemeOrange));
-                dialogConfirm.dismiss();
+                dialogClose.dismiss();
             }
         });
 
 
-        dialogConfirm.show();
-        dialogConfirm.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialogClose.show();
+        dialogClose.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
     }
+
+
 }
