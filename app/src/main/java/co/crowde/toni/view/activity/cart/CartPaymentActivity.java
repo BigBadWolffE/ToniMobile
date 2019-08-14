@@ -88,7 +88,9 @@ public class CartPaymentActivity extends AppCompatActivity implements View.OnCli
 
         for(CartModel cartModel : DashboardFragment.cartModels){
             sub_total = sub_total+(cartModel.getQuantity()*cartModel.getSellingPrice());
-            discount = discount+cartModel.getDiscount();
+            if(cartModel.getAmount()!= cartModel.getQuantity()*cartModel.getSellingPrice()){
+                discount = discount+cartModel.getDiscount();
+            }
         }
 
         group_discount_amount.setVisibility(total_amount<sub_total ? View.VISIBLE : View.GONE);

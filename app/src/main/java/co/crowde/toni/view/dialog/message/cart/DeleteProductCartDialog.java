@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 
 import co.crowde.toni.R;
+import co.crowde.toni.view.activity.cart.CartListActivity;
 
 public class DeleteProductCartDialog {
     public static TextView tvHead, tvDesc, tvYes, tvNo;
@@ -49,6 +50,7 @@ public class DeleteProductCartDialog {
             @Override
             public void onClick(View v) {
                 activity.finish();
+                CartListActivity.resetCart(activity);
             }
         });
 
