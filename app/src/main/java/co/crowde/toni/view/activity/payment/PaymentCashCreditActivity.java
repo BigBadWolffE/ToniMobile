@@ -345,6 +345,9 @@ public class PaymentCashCreditActivity extends BaseActivity implements View.OnCl
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(et_nominal_payment.length()>0){
+                    nominal = Integer.parseInt(et_nominal_payment.getText().toString().replaceAll("[,.]",""));
+                }
                 setNominal();
                 validateChange();
                 img_reset_payment.setVisibility(et_nominal_payment.getText().length() > 0 ? View.VISIBLE : View.GONE);

@@ -48,6 +48,7 @@ import co.crowde.toni.view.activity.customer.SelectCustomerActivity;
 import co.crowde.toni.view.activity.filter.DashboardFilterActivity;
 import co.crowde.toni.view.activity.product.CartProductDetailActivity;
 import co.crowde.toni.view.activity.product.ProductDashboardDetailActivity;
+import co.crowde.toni.view.dialog.message.cart.DeleteProductCartDialog;
 import co.crowde.toni.view.dialog.message.product.StockInsufficientDialog;
 import co.crowde.toni.view.dialog.popup.product.ProductDiscountDialog;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
@@ -148,17 +149,7 @@ public class CartListActivity extends AppCompatActivity
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.imgDeleteCart:
-                new AlertDialog.Builder(this)
-                        .setTitle("Hapus Keranjang Belanja")
-                        .setMessage("Apakah Anda ingin menghapus Keranjang Belanja?")
-                        .setNegativeButton(android.R.string.no, null)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface arg0, int arg1) {
-                                AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_CART, Const.LABEL_CART_REMOVE_ALL_PRODUCT);
-                                resetCart(CartListActivity.this);
-                                finish();
-                            }
-                        }).create().show();
+                DeleteProductCartDialog.showDialog(this);
                 break;
             case R.id.cvBtnCustomer:
                 Intent select = new Intent(CartListActivity.this, SelectCustomerActivity.class);

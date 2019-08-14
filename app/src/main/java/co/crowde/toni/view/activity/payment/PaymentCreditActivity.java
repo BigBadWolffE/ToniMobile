@@ -62,7 +62,7 @@ public class PaymentCreditActivity extends AppCompatActivity {
         total_amount = Integer.parseInt(getIntent().getStringExtra("total_amount"));
         discount = Integer.parseInt(getIntent().getStringExtra("discount"));
 
-        total_credit = customerModel.getCredit() + total_amount;
+        total_credit = customerModel.getSaldo() + total_amount;
 
         tv_customer_name = findViewById(R.id.tv_customer_name);
         tv_customer_phone = findViewById(R.id.tv_customer_phone);

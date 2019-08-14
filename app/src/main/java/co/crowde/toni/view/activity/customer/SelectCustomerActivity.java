@@ -41,6 +41,7 @@ import co.crowde.toni.model.CustomerModel;
 import co.crowde.toni.network.CustomerRequest;
 import co.crowde.toni.utils.SetHeader;
 import co.crowde.toni.view.activity.filter.DashboardFilterActivity;
+import co.crowde.toni.view.dialog.message.customer.AddNewCustomerDialog;
 
 public class SelectCustomerActivity extends AppCompatActivity {
 
@@ -336,6 +337,8 @@ public class SelectCustomerActivity extends AppCompatActivity {
         etPhone = dialogView.findViewById(R.id.etPhone);
         cvBtnAddNew = dialogView.findViewById(R.id.cvBtnAddNew);
 
+        cvBtnAddNew.setEnabled(false);
+
         etName.addTextChangedListener(addWatcher(activity));
         etPhone.addTextChangedListener(addWatcher(activity));
 
@@ -349,10 +352,7 @@ public class SelectCustomerActivity extends AppCompatActivity {
         cvBtnAddNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressDialog.setMessage("Harap tunggu...");
-                progressDialog.setCanceledOnTouchOutside(false);
-                progressDialog.show();
-                CustomerRequest.addNewCustomer(activity);
+                AddNewCustomerDialog.showDialog(activity);
             }
         });
 

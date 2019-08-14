@@ -6,19 +6,20 @@ import android.util.Log;
 
 import java.io.IOException;
 
+import co.crowde.toni.controller.print.PrintController;
 import co.crowde.toni.helper.SavePref;
+import co.crowde.toni.model.response.object.CreditPayModel;
 import co.crowde.toni.network.CustomerRequest;
 import co.crowde.toni.network.TransactionRequest;
 import co.crowde.toni.utils.print.PrinterNetwork;
 import co.crowde.toni.view.dialog.message.customer.CreditPayDialog;
 import co.crowde.toni.view.dialog.message.printer.PrinterConnectivityDialog;
-import co.crowde.toni.view.dialog.message.transaction.ConfirmTransactionDialog;
 
 import static co.crowde.toni.utils.print.PrinterNetwork.resetConnection;
 
 public class CustomerController {
 
-    public static void printCreditPay(Activity activity, int credit, String customerId){
+    public static void printCreditPay(Activity activity, int credit, CreditPayModel model){
         resetConnection();
         if(SavePref.readDeviceAddress(activity)!=null){
             PrinterNetwork.bluetoothAddress = SavePref.readDeviceAddress(activity);
@@ -28,11 +29,9 @@ public class CustomerController {
                 PrinterNetwork.mBluetoothSocket = PrinterNetwork.createBluetoothSocket(PrinterNetwork.mBluetoothDevice);
                 PrinterNetwork.mBluetoothSocket.connect();
                 if (PrinterNetwork.mBluetoothSocket.isConnected()){
-                    CustomerRequest.payCustomerCredit(activity, credit, customerId);
-
+                    PrintController.printCustomerCreditPay(activity, model, credit);
                 }
             } catch (IOException e) {
-//                Toast.makeText(activity, "Tidak dapat terhubung dengan Bluetooth Printer.", Toast.LENGTH_SHORT).show();
                 PrinterConnectivityDialog.showDialog(activity);
                 CreditPayDialog.progressDialog.dismiss();
                 Log.e("Bluetooth","Can't Connect");

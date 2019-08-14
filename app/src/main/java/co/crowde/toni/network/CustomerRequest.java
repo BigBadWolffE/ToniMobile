@@ -1,6 +1,7 @@
 package co.crowde.toni.network;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
@@ -30,6 +31,7 @@ import co.crowde.toni.model.response.object.CreditPayModel;
 import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.view.activity.customer.SelectCustomerActivity;
 import co.crowde.toni.view.activity.notification.SuccessCreditPayActivity;
+import co.crowde.toni.view.dialog.message.customer.AddNewCustomerDialog;
 import co.crowde.toni.view.dialog.message.customer.CreditPayDialog;
 import co.crowde.toni.view.dialog.message.customer.CustomerAlreadyRegisterDialog;
 import co.crowde.toni.view.dialog.message.network.NetworkOfflineDialog;
@@ -203,7 +205,7 @@ public class CustomerRequest {
         });
     }
 
-    public static void addNewCustomer(final Activity activity){
+    public static void addNewCustomer(final Activity activity, ProgressDialog progressDialog){
         String username = SelectCustomerActivity.etName.getText().toString();
         String phone = SelectCustomerActivity.etPhone.getText().toString();
 
@@ -258,12 +260,14 @@ public class CustomerRequest {
                             String data = json.getString("data");
                             Log.e("DATA RESPONSE", data);
 
+                            AddNewCustomerDialog.dialog.dismiss();
+
                             if(status){
                                 Toast.makeText(activity, "Penambahan data pelanggan berhasil", Toast.LENGTH_SHORT).show();
                                 SelectCustomerActivity.customerModels.clear();
                                 page=1;
                                 getCustomerList(activity);
-                                SelectCustomerActivity.progressDialog.dismiss();
+                                progressDialog.dismiss();
                                 SelectCustomerActivity.alertDialog.dismiss();
 
                                 AnalyticsToniUtils.getEvent(Const.CATEGORY_CUSTOMER,Const.MODUL_CUSTOMER,Const.LABEL_CART_ADD_NEW_CUSTOMER);
@@ -273,7 +277,7 @@ public class CustomerRequest {
                                     UserController.tokenExpired(activity, message);
 
                                 } else if(message.equals("Internal server error!")){
-                                    SelectCustomerActivity.progressDialog.dismiss();
+                                    progressDialog.dismiss();
                                     CustomerAlreadyRegisterDialog.showDialog(activity);
                                 }
                             }
@@ -375,8 +379,8 @@ public class CustomerRequest {
         });
     }
 
-    public static void payCredit(final Activity activity, int credit, String data){
-        AddNewTransactionModel model = new Gson().fromJson(data, AddNewTransactionModel.class);
+    public static void payCredit(final Activity activity, int credit, String dataResponse){
+        AddNewTransactionModel model = new Gson().fromJson(dataResponse, AddNewTransactionModel.class);
 
         final CreditPayModel pay = new CreditPayModel();
         pay.setShopId(SavePref.readShopId(activity));
@@ -505,7 +509,7 @@ public class CustomerRequest {
                             if(status){
                                 Log.e("Res", data);
                                 CreditPayModel model = new Gson().fromJson(data, CreditPayModel.class);
-                                PrintController.printCustomerCreditPay(activity, model, credit);
+//                                PrintController.printCustomerCreditPay(activity, model, credit);
                                 CreditPayDialog.dialogCredit.dismiss();
                                 CreditPayDialog.progressDialog.dismiss();
 

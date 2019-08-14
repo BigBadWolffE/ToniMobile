@@ -50,7 +50,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:text="@string/total_hutang"
+                    android:text="Sisa Hutang"
                     android:paddingTop="8dp"
                     app:autoSizeTextType="uniform"
                     app:autoSizeMaxTextSize="20sp"
@@ -67,7 +67,7 @@
                     app:autoSizeTextType="uniform"
                     app:autoSizeMaxTextSize="24sp"
                     android:paddingBottom="8dp"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorThemeOrange"
                     android:gravity="center|top"/>
 
             </LinearLayout>

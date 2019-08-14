@@ -1,4 +1,4 @@
-package co.crowde.toni.view.dialog.message.catalog;
+package co.crowde.toni.view.dialog.message.customer;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -9,24 +9,30 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import co.crowde.toni.R;
-import co.crowde.toni.network.CatalogRequest;
-import co.crowde.toni.network.ProductRequest;
+import co.crowde.toni.controller.user.UserController;
+import co.crowde.toni.network.CustomerRequest;
 
-public class AddCatalogDialog {
+public class AddNewCustomerDialog {
+
+    static {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
 
     public static TextView tvHead, tvDesc, tvYes, tvNo;
 
     public static ImageView imgLogo;
 
-    public static AlertDialog dialogConfirm;
+    public static AlertDialog dialog;
 
     public static ProgressDialog progressDialog;
 
     public static void showDialog(final Activity activity) {
         ViewGroup viewGroup = activity.findViewById(android.R.id.content);
         //then we will inflate the custom alert dialog xml that we created
+
         View dialogView = LayoutInflater.from(activity)
                 .inflate(R.layout.custom_dialog_confirm_two_button,
                         viewGroup,
@@ -38,7 +44,9 @@ public class AddCatalogDialog {
         builder.setView(dialogView);
 
         //finally creating the alert dialog and displaying it
-        dialogConfirm = builder.create();
+        dialog = builder.create();
+
+        progressDialog = new ProgressDialog(activity);
 
         //Get View Id
         tvHead = dialogView.findViewById(R.id.tv_dialog_label);
@@ -46,35 +54,31 @@ public class AddCatalogDialog {
         tvYes = dialogView.findViewById(R.id.tv_yes);
         tvNo = dialogView.findViewById(R.id.tv_no);
 
-        tvHead.setText(activity.getResources().getString(R.string.dialog_label_add_new_product));
-        tvDesc.setText(activity.getResources().getString(R.string.dialog_desc_add_new_product));
+        tvHead.setText(activity.getResources().getString(R.string.dialog_label_confirm_new_customer));
+        tvDesc.setText(activity.getResources().getString(R.string.dialog_desc_confirm_new_customer));
         tvYes.setText(activity.getResources().getString(R.string.tambah_cap));
         tvNo.setText(activity.getResources().getString(R.string.batal_cap));
 
         tvYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvYes.setTextColor(activity.getResources().getColor(R.color.colorThemeOrange));
-                progressDialog = new ProgressDialog(activity);
                 progressDialog.setMessage("Harap tunggu...");
                 progressDialog.setCanceledOnTouchOutside(false);
                 progressDialog.show();
-
-                CatalogRequest.addNewProduct(activity);
+                CustomerRequest.addNewCustomer(activity, progressDialog);
             }
         });
 
         tvNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvNo.setTextColor(activity.getResources().getColor(R.color.colorThemeOrange));
-                dialogConfirm.dismiss();
+                dialog.dismiss();
             }
         });
 
 
-        dialogConfirm.show();
-        dialogConfirm.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.show();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
     }
 }

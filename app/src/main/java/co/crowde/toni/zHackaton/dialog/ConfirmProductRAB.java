@@ -52,8 +52,8 @@ public class ConfirmProductRAB {
         tvNo = dialogView.findViewById(R.id.tvNo);
 
         imgLogo.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_add_shopping_cart_white_24dp));
-        tvHead.setText(activity.getResources().getString(R.string.dialog_label_confirm_transaction));
-        tvDesc.setText(activity.getResources().getString(R.string.dialog_desc_confirm_transaction));
+//        tvHead.setText(activity.getResources().getString(R.string.dialog_label_confirm_transaction));
+//        tvDesc.setText(activity.getResources().getString(R.string.dialog_desc_confirm_transaction));
 
         tvYes.setOnClickListener(new View.OnClickListener() {
             @Override

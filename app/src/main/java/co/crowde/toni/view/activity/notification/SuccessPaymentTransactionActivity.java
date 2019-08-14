@@ -13,8 +13,6 @@ import android.widget.TextView;
 import co.crowde.toni.R;
 import co.crowde.toni.controller.transaction.TransactionController;
 import co.crowde.toni.view.activity.home.MainActivity;
-import co.crowde.toni.view.activity.print.WaitingPrintActivity;
-import co.crowde.toni.view.dialog.message.transaction.ConfirmPrintTransactionDialog;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
 
 public class SuccessPaymentTransactionActivity extends AppCompatActivity {

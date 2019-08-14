@@ -70,10 +70,8 @@ public class ConfirmPaymentDialog {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-//                        activity.finish();
                         tv_yes.setEnabled(true);
-                        TransactionRequest.postNewTransaction(activity, add, saldo, credit);
-//                        TransactionController.printBill(activity);
+                        TransactionRequest.postNewTransaction(activity, add, saldo, credit, progressDialog);
                     }
                 }, 100);
             }

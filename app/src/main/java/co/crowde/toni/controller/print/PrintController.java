@@ -165,7 +165,7 @@ public class PrintController {
 
             os.flush();
 
-        } catch (IOException e) {
+        } catch (IOException ignored) {
         }
 
     }
@@ -292,7 +292,7 @@ public class PrintController {
             printNewLine();
 
             os.flush();
-        } catch (IOException e) {
+        } catch (IOException ignored) {
         }
     }
 
@@ -425,7 +425,7 @@ public class PrintController {
             printNewLine();
 
             os.flush();
-        } catch (IOException e) {
+        } catch (IOException ignored) {
         }
 
     }
@@ -479,7 +479,7 @@ public class PrintController {
             printNewLine();
 
             os.flush();
-        } catch (IOException e) {
+        } catch (IOException ignored) {
         }
 
     }
@@ -579,7 +579,7 @@ public class PrintController {
             printNewLine();
 
             os.flush();
-        } catch (IOException e) {
+        } catch (IOException ignored) {
         }
     }
 
@@ -648,7 +648,7 @@ public class PrintController {
             printNewLine();
 
             os.flush();
-        } catch (IOException e) {
+        } catch (IOException ignored) {
         }
 
     }
