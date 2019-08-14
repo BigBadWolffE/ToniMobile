@@ -149,7 +149,7 @@ tools:context=".view.activity.auth.LoginActivity">
                 android:text="@string/masuk"
                 android:textStyle="bold"
                 android:textColor="@color/colorWhite"
-                android:textSize="16sp"/>
+                android:textSize="18sp"/>
 
         </androidx.cardview.widget.CardView>
 
