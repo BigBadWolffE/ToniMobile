@@ -21,8 +21,8 @@ android {
         applicationId "co.crowde.toni"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 3
-        versionName "1.2.45"
+        versionCode 4
+        versionName "1.2.47"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
