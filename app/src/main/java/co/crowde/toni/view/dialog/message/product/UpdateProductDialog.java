@@ -49,7 +49,7 @@ public class UpdateProductDialog {
 
         tvHead.setText(activity.getResources().getString(R.string.dialog_label_update_product));
         tvDesc.setText(activity.getResources().getString(R.string.dialog_desc_update_product));
-        tvYes.setText(activity.getResources().getString(R.string.bayar));
+        tvYes.setText(activity.getResources().getString(R.string.simpan));
         tvNo.setText(activity.getResources().getString(R.string.batal_cap));
 
         tvYes.setOnClickListener(new View.OnClickListener() {

@@ -197,7 +197,6 @@ public class InventoryDetailActivity extends AppCompatActivity implements View.O
                 } else {
                     selling = 0;
                 }
-                progressDialog.show();
                 UpdateProductDialog.showDialog(this, productModel.getProductId(), qty, purchase, selling, progressDialog);
                 break;
         }

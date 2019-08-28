@@ -125,6 +125,7 @@ public class PaymentCashActivity extends BaseActivity implements View.OnClickLis
         img_reset.setOnClickListener(this);
 
         et_nominal.addTextChangedListener(nominalWatcher());
+        setButtonEnabled();
 
     }
 
