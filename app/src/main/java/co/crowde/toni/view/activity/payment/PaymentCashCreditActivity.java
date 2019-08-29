@@ -150,6 +150,8 @@ public class PaymentCashCreditActivity extends BaseActivity implements View.OnCl
         et_nominal_credit.addTextChangedListener(creditWatcher());
         et_nominal_payment.addTextChangedListener(paymentWatcher());
 
+        setButtonEnabled();
+
     }
 
     @Override
