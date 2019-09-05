@@ -87,7 +87,7 @@ public class CartController {
                         Toast.makeText(activity, "Error", Toast.LENGTH_SHORT).show();
                     }
 
-                    AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_CART, Const.LABEL_CART_ADD_PRODUCT_POPUP);
+                    AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_CART, Const.LABEL_CART_ADD_PRODUCT_DETAIL);
                 } else {
                     StockInsufficientDialog.showDialog(activity);
                 }

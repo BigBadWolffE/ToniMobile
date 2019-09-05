@@ -36,6 +36,7 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 import co.crowde.toni.R;
+import co.crowde.toni.constant.Const;
 import co.crowde.toni.controller.cart.CartController;
 import co.crowde.toni.database.Cart;
 import co.crowde.toni.helper.CloseSoftKeyboard;
@@ -46,6 +47,7 @@ import co.crowde.toni.network.API;
 import co.crowde.toni.network.ProductRequest;
 import co.crowde.toni.utils.InputFilterMinMax;
 import co.crowde.toni.utils.SetHeader;
+import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.view.activity.filter.InventoryFilterActivity;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
 
@@ -64,6 +66,10 @@ public class ProductDashboardDetailActivity extends AppCompatActivity implements
     EditText etQty, etDiscount;
     ConstraintLayout layoutDiscount;
     WebView webView;
+
+    boolean isDiscountFromCart;
+
+    int discountFromCart;
 
     ProductModel productModel;
     CartModel cartModel;
@@ -109,6 +115,8 @@ public class ProductDashboardDetailActivity extends AppCompatActivity implements
         amount = 0;
         sub_total = 0;
         discount = 0;
+
+        isDiscountFromCart = false;
         getProductCart();
 //        showDiscount();
 
@@ -213,6 +221,8 @@ public class ProductDashboardDetailActivity extends AppCompatActivity implements
                 setQty();
                 setPrice();
                 if (amount != sub_total) {
+                    discountFromCart = cursor.getInt(cursor.getColumnIndex(CartModel.KEY_DISCOUNT));
+                    isDiscountFromCart = true;
                     discount = cursor.getInt(cursor.getColumnIndex(CartModel.KEY_DISCOUNT));
                     groupAmountDiscount.setVisibility(View.GONE);
                     setTotal();
@@ -269,10 +279,18 @@ public class ProductDashboardDetailActivity extends AppCompatActivity implements
             case R.id.cv_btn_add_cart:
                 if (amount != sub_total) {
                     if (discount != productModel.getDiscount()) {
+                        if(productModel.getDiscount()==0){
+                            AnalyticsToniUtils.getEvent(Const.CATEGORY_PRODUCT, Const.MODUL_DISCOUNT, Const.LABEL_DISCOUNT_PRODUCT_DETAIL_ADD);
+                        } else {
+                            AnalyticsToniUtils.getEvent(Const.CATEGORY_PRODUCT, Const.MODUL_DISCOUNT, Const.LABEL_DISCOUNT_PRODUCT_DETAIL_UPDATE);
+                        }
                         ProductRequest.putProductDiscount(this, productModel.getProductId(), discount);
                     }
                     CartController.addFromDetail(ProductDashboardDetailActivity.this, productModel, qty, discount);
                 } else {
+                    if(productModel.getDiscount()!=0){
+                        AnalyticsToniUtils.getEvent(Const.CATEGORY_PRODUCT, Const.MODUL_DISCOUNT, Const.LABEL_DISCOUNT_PRODUCT_DETAIL_REMOVE);
+                    }
                     ProductRequest.putProductDiscount(this, productModel.getProductId(), 0);
                     CartController.addFromDetail(ProductDashboardDetailActivity.this, productModel, qty, 0);
                 }
