@@ -1,58 +1,26 @@
 package co.crowde.toni.view.activity.auth;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
 
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.gson.Gson;
-import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.RequestBody;
-import com.squareup.okhttp.Response;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 
 import co.crowde.toni.R;
 import co.crowde.toni.base.BaseActivity;
 import co.crowde.toni.constant.Const;
-import co.crowde.toni.controller.auth.LoginController;
-import co.crowde.toni.helper.SavePref;
-import co.crowde.toni.helper.analytics.AnalyticsApplication;
-import co.crowde.toni.helper.analytics.AnalyticsTrackers;
-import co.crowde.toni.helper.CloseSoftKeyboard;
-import co.crowde.toni.listener.ResponseListener;
+import co.crowde.toni.model.AdminModel;
 import co.crowde.toni.model.UserModel;
-import co.crowde.toni.network.API;
-import co.crowde.toni.network.LoginRequest;
 import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.view.dialog.message.app.CloseAppsDialog;
-import co.crowde.toni.view.dialog.message.network.NetworkOfflineDialog;
 
-import static co.crowde.toni.network.LoginRequest.JSON;
+import static co.crowde.toni.network.LocationRequest.generateToken;
 import static co.crowde.toni.network.LoginRequest.postLogin;
-import static co.crowde.toni.network.LoginRequest.postLoginRequest;
-import static co.crowde.toni.utils.ValidateEdittext.validateLogin;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
@@ -61,6 +29,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     EditText et_username, et_password;
     TextInputLayout textInputLayout;
     CardView btnLogin;
+
+    String usernameAdmin,passwordAdmin;
 
     boolean status;
     String username, password;
@@ -86,7 +56,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.cv_btn_login:
                 btnLoginListener();
                 break;
@@ -111,23 +81,24 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         LoginActivity.this,
                         RegisterActivity.class);
                 startActivity(register);
+                generatetoken();
                 break;
         }
 
     }
 
     private void btnLoginListener() {
-        AnalyticsToniUtils.getEvent(Const.CATEGORY_AUTHENTIFICATION,Const.MODUL_LOGIN,Const.LABEL_LOGIN);
+        AnalyticsToniUtils.getEvent(Const.CATEGORY_AUTHENTIFICATION, Const.MODUL_LOGIN, Const.LABEL_LOGIN);
 
         username = et_username.getText().toString();
         password = et_password.getText().toString();
 
-        if(username.equals("admin")){
+        if (username.equals("admin")) {
             Intent wrongUser = new Intent(LoginActivity.this, ForgotUserActivity.class);
             startActivity(wrongUser);
             et_password.setText("");
         } else {
-            if(validateLogin()){
+            if (validateLogin()) {
                 showLoading();
 
                 UserModel user = new UserModel();
@@ -150,6 +121,21 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             }
         }
     }
+
+    private void generatetoken(){
+
+        usernameAdmin = "admin";
+        passwordAdmin = "4dm1n_toko_tani";
+
+        AdminModel adminModel = new AdminModel();
+        adminModel.setUsername(usernameAdmin);
+        adminModel.setPassword(passwordAdmin);
+
+        generateToken(LoginActivity.this,adminModel);
+//        gantitombol();
+
+    }
+
 
 //    public void postLogin(){
 //        final UserModel user = new UserModel();

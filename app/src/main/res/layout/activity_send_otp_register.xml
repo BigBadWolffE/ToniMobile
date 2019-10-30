@@ -61,71 +61,90 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
+            <EditText
+
                 android:id="@+id/tv_otp_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="_"
-                android:textSize="32sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/tv_otp_2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_otp_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="_"
-                android:textSize="32sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/tv_otp_3"
-                app:layout_constraintStart_toEndOf="@+id/tv_otp_1"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_otp_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="_"
-                android:textSize="32sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/tv_otp_4"
-                app:layout_constraintStart_toEndOf="@+id/tv_otp_2"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_otp_4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="_"
-                android:textSize="32sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/tv_otp_5"
-                app:layout_constraintStart_toEndOf="@+id/tv_otp_3"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_otp_5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="_"
-                android:textSize="32sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/tv_otp_6"
-                app:layout_constraintStart_toEndOf="@+id/tv_otp_4"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_otp_6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="_"
+                android:inputType="number"
+                android:letterSpacing="0.4"
+                android:singleLine="true"
+                android:text="______"
                 android:textSize="32sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tv_otp_5"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <!--<EditText-->
+            <!--android:imeOptions="actionNext"-->
+            <!--android:maxLength="1"-->
+            <!--android:maxLines="1"                android:inputType="number"-->
+            <!--android:id="@+id/tv_otp_2"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="_"-->
+            <!--android:textSize="32sp"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/tv_otp_3"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/tv_otp_1"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--<EditText-->
+            <!--android:imeOptions="actionNext"-->
+            <!--android:maxLength="1"-->
+            <!--android:maxLines="1"                android:inputType="number"-->
+            <!--android:id="@+id/tv_otp_3"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="_"-->
+            <!--android:textSize="32sp"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/tv_otp_4"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/tv_otp_2"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--<EditText-->
+            <!--android:imeOptions="actionNext"-->
+            <!--android:maxLength="1"-->
+            <!--android:maxLines="1"                android:inputType="number"-->
+            <!--android:id="@+id/tv_otp_4"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="_"-->
+            <!--android:textSize="32sp"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/tv_otp_5"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/tv_otp_3"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--<EditText-->
+            <!--android:imeOptions="actionNext"-->
+            <!--android:maxLength="1"-->
+            <!--android:maxLines="1"                android:inputType="number"-->
+            <!--android:id="@+id/tv_otp_5"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="_"-->
+            <!--android:textSize="32sp"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/tv_otp_6"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/tv_otp_4"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--<EditText-->
+            <!--android:imeOptions="actionNext"-->
+            <!--android:maxLength="1"-->
+            <!--android:maxLines="1"                android:inputType="number"-->
+            <!--android:id="@+id/tv_otp_6"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="_"-->
+            <!--android:textSize="32sp"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/tv_otp_5"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -135,8 +154,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:gravity="center"
-        android:textColor="@color/TextColorDefault"
         android:text="@string/kami_telah_mengirim_sms_otp_n_ke_nomor"
+        android:textColor="@color/TextColorDefault"
         app:layout_constraintEnd_toEndOf="@+id/cardView6"
         app:layout_constraintStart_toStartOf="@+id/cardView6"
         app:layout_constraintTop_toBottomOf="@+id/cardView6" />
@@ -145,11 +164,64 @@
         android:id="@+id/tv_resend_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:textColor="@color/TextColorDefault"
         android:text="@string/sms_tidak_masuk_kirim_ulang_kode"
+        android:textColor="@color/TextColorDefault"
+        app:layout_constraintBottom_toTopOf="@+id/btn_resend_otp"
         app:layout_constraintEnd_toEndOf="@+id/tv_notification_send_message"
         app:layout_constraintStart_toStartOf="@+id/tv_notification_send_message"
-        app:layout_constraintTop_toBottomOf="@+id/tv_notification_send_message" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_notification_send_message"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <androidx.cardview.widget.CardView
+
+        android:id="@+id/btn_resend_otp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:visibility="gone"
+        app:cardBackgroundColor="@color/colorThemeOrange"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_verifikasi_otp"
+        app:layout_constraintEnd_toEndOf="@+id/btn_verifikasi_otp"
+        app:layout_constraintStart_toStartOf="@+id/btn_verifikasi_otp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_resend_message">
+
+        <TextView
+            android:id="@+id/label_resend_otp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:text="KIRIM ULANG OTP"
+            android:textColor="@color/colorWhite"
+            android:textSize="12sp" />
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btn_verifikasi_otp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="@color/colorThemeOrange"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_resend_otp">
+
+        <TextView
+
+            android:id="@+id/label_verifikasi_otp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:text="VERIFIKASI"
+            android:textColor="@color/colorWhite"
+            android:textSize="12sp" />
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
