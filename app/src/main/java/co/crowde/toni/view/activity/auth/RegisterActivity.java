@@ -660,7 +660,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
 
 
-            AnalyticsToniUtils.getEvent(Const.CATEGORY_AUTHENTIFICATION, Const.MODUL_LOGIN, Const.LABEL_LOGIN_FAILED_NETWORK);
 
         }
 

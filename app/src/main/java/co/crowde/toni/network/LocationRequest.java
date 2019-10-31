@@ -439,8 +439,12 @@ public class LocationRequest extends BaseActivity {
                                     Intent register = new Intent(activity, SendOtpRegisterActivity.class);
                                     activity.startActivity(register);
                                     activity.finish();
+                                AnalyticsToniUtils.getEvent(Const.CATEGORY_AUTHENTIFICATION, Const.MODUL_REGISTER, Const.LABEL_REGISTER_SEND_OTP);
+
                             }else {
                                 RegisterActivity.alertInvalid(activity);
+                                AnalyticsToniUtils.getEvent(Const.CATEGORY_AUTHENTIFICATION, Const.MODUL_REGISTER, Const.LABEL_RESET_PASS_SEND_OTP_FAILED);
+
 //                                Intent register = new Intent(activity, LoginActivity.class);
 //                                activity.startActivity(register);
 //                                activity.finish();
@@ -452,7 +456,6 @@ public class LocationRequest extends BaseActivity {
 //                                    activity.finish();
 //                                }
 //                            }
-                            AnalyticsToniUtils.getEvent(Const.CATEGORY_AUTHENTIFICATION, Const.MODUL_LOGIN, Const.LABEL_LOGIN);
 //                            if(status){
 //
 //
@@ -547,11 +550,14 @@ public class LocationRequest extends BaseActivity {
                                 activity.startActivity(beres);
                                 activity.finish();
                                 Toast.makeText(activity,"REGISTRASI BERHASIL!!!",Toast.LENGTH_LONG).show();
+                                AnalyticsToniUtils.getEvent(Const.CATEGORY_AUTHENTIFICATION, Const.MODUL_REGISTER, Const.LABEL_REGISTER_SUCCESS);
+
 
                             }else if (message.equals("otp is not found")){
                                 SendOtpRegisterActivity.otp1.setText(" ");
                                 alertInvalidOtp(activity);
                                 SendOtpRegisterActivity.progressDialog.dismiss();
+                                AnalyticsToniUtils.getEvent(Const.CATEGORY_AUTHENTIFICATION, Const.MODUL_REGISTER, Const.LABEL_REGISTER_SEND_OTP_FAILED);
                             }else{
                                 resendOtp(activity);
                             }
@@ -635,6 +641,7 @@ public class LocationRequest extends BaseActivity {
                                 Log.e("Tag Resend",otpResend);
                                 RegisterActivity.alertSuccessResendOtp(activity);
                                 alertViewOtp(activity);
+                                AnalyticsToniUtils.getEvent(Const.CATEGORY_AUTHENTIFICATION, Const.MODUL_REGISTER, Const.LABEL_REGISTER_SEND_OTP);
                             }else {
                                 RegisterActivity.alertInvalidOtp(activity);
                                 alertViewOtp(activity);

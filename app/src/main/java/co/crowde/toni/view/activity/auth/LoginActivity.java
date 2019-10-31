@@ -81,7 +81,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         LoginActivity.this,
                         RegisterActivity.class);
                 startActivity(register);
-                generatetoken();
+//                generatetoken();
                 break;
         }
 
