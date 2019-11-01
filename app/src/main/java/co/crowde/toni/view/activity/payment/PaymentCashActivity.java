@@ -1,17 +1,15 @@
 package co.crowde.toni.view.activity.payment;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.Group;
-
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.Group;
 
 import com.google.android.material.appbar.AppBarLayout;
 
@@ -124,7 +122,8 @@ public class PaymentCashActivity extends BaseActivity implements View.OnClickLis
         tv_btn_payment.setOnClickListener(this);
         img_reset.setOnClickListener(this);
 
-        et_nominal.addTextChangedListener(nominalWatcher());
+//        et_nominal.addTextChangedListener(nominalWatcher());
+        et_nominal.addTextChangedListener(paymentWatcher());
         setButtonEnabled();
 
     }
@@ -266,6 +265,57 @@ public class PaymentCashActivity extends BaseActivity implements View.OnClickLis
             }
         };
     }
+
+    public TextWatcher paymentWatcher() {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(et_nominal.length()>0){
+                    nominal = Integer.parseInt(et_nominal.getText().toString().replaceAll("[,.]",""));
+                }
+                setNominal();
+                validateChange();
+                img_reset.setVisibility(et_nominal.getText().length() > 0 ? View.VISIBLE : View.GONE);
+                setButtonEnabled();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                et_nominal.removeTextChangedListener(this);
+                try {
+                    String originalString = s.toString();
+
+                    long longval;
+                    if (originalString.contains(",") || originalString.contains(".")) {
+                        originalString = originalString.replaceAll("[.,]", "");
+                    }
+                    longval = Long.parseLong(originalString);
+
+                    DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+                    formatter.applyPattern("###,###,###,###,###,###,###");
+                    String formattedString = formatter.format(longval);
+
+                    //setting text after format to EditText
+                    et_nominal.setText(formattedString);
+                    et_nominal.setSelection(et_nominal.getText().length());
+
+                } catch (NumberFormatException nfe) {
+                    nfe.printStackTrace();
+                }
+
+                et_nominal.addTextChangedListener(this);
+
+            }
+        };
+    }
+
+
+
 
     private void setButtonEnabled() {
         if (nominal >= total_amount) {

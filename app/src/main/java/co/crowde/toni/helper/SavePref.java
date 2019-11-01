@@ -19,6 +19,18 @@ public class SavePref {
         SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
         return sharedPref.getString("token", null);
     }
+    //Token Admin
+
+    public static void saveTokenAdmin(Activity activity, String tokenAdmin) {
+        SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("token", tokenAdmin);
+        editor.commit();
+    }
+    public static String readTokenAdmin(Activity activity) {
+        SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
+        return sharedPref.getString("token", null);
+    }
 
     //ShopId
     public static void saveShopId(Activity activity, String shopId) {
@@ -138,5 +150,39 @@ public class SavePref {
     public static String readDeviceAddress(Activity activity) {
         SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
         return sharedPref.getString("deviceAddress", null);
+    }
+
+    //Save Paper Size
+    public static void savePaperSize(Activity activity, String paperSize) {
+        SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("paperSize", paperSize);
+        editor.commit();
+    }
+    public static String readPaperSize(Activity activity) {
+        SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
+        return sharedPref.getString("paperSize", null);
+    }
+
+    public static void saveOtpCode(Activity activity, String otpCode) {
+        SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("otpCode", otpCode);
+        editor.commit();
+    }
+    public static String readReadOtp(Activity activity) {
+        SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
+        return sharedPref.getString("otpCode", null);
+    }
+
+    public static void saveMessageOtp(Activity activity, String messageOtp) {
+        SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("message", messageOtp);
+        editor.commit();
+    }
+    public static String readMessageOtp(Activity activity) {
+        SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
+        return sharedPref.getString("message", null);
     }
 }

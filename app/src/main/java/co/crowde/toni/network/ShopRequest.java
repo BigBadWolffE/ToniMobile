@@ -64,7 +64,7 @@ public class ShopRequest {
                         try {
                             JSONObject json = new JSONObject(responseData);
                             boolean status = json.getBoolean("status");
-                            message = json.getString("message");
+                                message = json.getString("message");
                             String data = json.getString("data");
                             Log.e("DATA RESPONSE", data);
 

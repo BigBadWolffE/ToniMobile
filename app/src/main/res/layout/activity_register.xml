@@ -120,21 +120,52 @@
                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
 
                 <AutoCompleteTextView
-                    android:id="@+id/et_shop_province"
+                    android:id="@+id/act_province"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/pilih_provinsi"
-                    android:imeOptions="actionNext"
+                    android:hint="Pilih Provinsi"
+                    android:imeOptions="actionDone"
                     android:inputType="text"
-                    android:maxLength="20"
-                    android:textColor="@color/TextColorDefault"
-                    android:textColorHint="@color/colorThemeGrey"
-                    android:textSize="16sp"
-                    android:theme="@style/EditTextTheme" />
+                    android:textSize="14sp"
+                    android:dropDownWidth="fill_parent"
+                    android:visibility="visible"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_province"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/label_selected_province"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorBlack"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/img_label_province_remove"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/img_label_province_remove"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/label_selected_province"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_close_black_24dp"
+                        tools:ignore="ContentDescription" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layout_set_regency"
+                android:id="@+id/layout_set_city"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -143,17 +174,48 @@
                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
 
                 <AutoCompleteTextView
-                    android:id="@+id/et_shop_regency"
+                    android:id="@+id/act_city"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/pilih_kabupaten_kota"
-                    android:imeOptions="actionNext"
+                    android:hint="Pilih Kabupaten / Kota"
+                    android:imeOptions="actionDone"
                     android:inputType="text"
-                    android:maxLength="20"
-                    android:textColor="@color/TextColorDefault"
-                    android:textColorHint="@color/colorThemeGrey"
-                    android:textSize="16sp"
-                    android:theme="@style/EditTextTheme" />
+                    android:textSize="14sp"
+                    android:dropDownWidth="fill_parent"
+                    android:visibility="visible"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_city"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/label_selected_city"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorBlack"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/img_label_city_remove"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/img_label_city_remove"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/label_selected_city"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_close_black_24dp"
+                        tools:ignore="ContentDescription" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -166,18 +228,48 @@
                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
 
                 <AutoCompleteTextView
-                    android:id="@+id/et_shop_district"
+                    android:id="@+id/act_district"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/pilih_kecamatan"
-                    android:imeOptions="actionNext"
+                    android:hint="Pilih Kecamatan"
+                    android:imeOptions="actionDone"
                     android:inputType="text"
-                    android:maxLength="20"
-                    android:textColor="@color/TextColorDefault"
-                    android:textColorHint="@color/colorThemeGrey"
-                    android:textSize="16sp"
-                    android:theme="@style/EditTextTheme" />
+                    android:textSize="14sp"
+                    android:dropDownWidth="fill_parent"
+                    android:visibility="visible"/>
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_district"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/label_selected_district"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorBlack"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/img_label_district_remove"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/img_label_district_remove"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/label_selected_district"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_close_black_24dp"
+                        tools:ignore="ContentDescription" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -190,20 +282,52 @@
                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
 
                 <AutoCompleteTextView
-                    android:id="@+id/et_shop_village"
+                    android:id="@+id/act_village"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/pilih_kelurahan"
-                    android:imeOptions="actionNext"
-                    android:inputType="textPersonName"
-                    android:maxLength="20"
-                    android:textColor="@color/TextColorDefault"
-                    android:textColorHint="@color/colorThemeGrey"
-                    android:textSize="16sp"
-                    android:theme="@style/EditTextTheme" />
+                    android:hint="Pilih Desa / Kelurahan"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:textSize="14sp"
+                    android:dropDownWidth="fill_parent"
+                    android:visibility="visible"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_village"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/label_selected_village"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorBlack"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/img_label_village_remove"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/img_label_village_remove"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/label_selected_village"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_close_black_24dp"
+                        tools:ignore="ContentDescription" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                app:helperText="JENIS BISNIS"
                 android:id="@+id/layout_set_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -212,7 +336,7 @@
                 android:textColorHint="@color/colorThemeGrey"
                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
 
-                <EditText
+                <Spinner
                     android:id="@+id/et_shop_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -282,12 +406,61 @@
                     android:hint="@string/nomor_ponsel"
                     android:imeOptions="actionNext"
                     android:inputType="phone"
-                    android:maxLength="20"
+                    android:maxLength="13"
                     android:textColor="@color/TextColorDefault"
                     android:textColorHint="@color/colorThemeGrey"
                     android:textSize="16sp"
                     android:theme="@style/EditTextTheme" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_set_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_form_login"
+                android:textColorHint="@color/colorThemeGrey"
+                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
+
+                <EditText
+                    android:id="@+id/et_user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="User Name"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLength="20"
+                    android:textColor="@color/TextColorDefault"
+                    android:textColorHint="@color/colorThemeGrey"
+                    android:textSize="14sp"
+                    android:theme="@style/EditTextTheme" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_set_email_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_form_login"
+                android:textColorHint="@color/colorThemeGrey"
+                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
+
+                <EditText
+                    android:id="@+id/et_email_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Email User(Optional)"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/TextColorDefault"
+                    android:textColorHint="@color/colorThemeGrey"
+                    android:textSize="14sp"
+                    android:theme="@style/EditTextTheme" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/layout_set_password"
@@ -339,27 +512,66 @@
                     android:theme="@style/EditTextTheme" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cv_btn_register"
-                android:layout_width="250dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="32dp"
-                app:cardBackgroundColor="@color/colorThemeOrange"
-                app:cardCornerRadius="20dp">
 
-                <TextView
-                    android:id="@+id/tv_btn_register_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:text="@string/daftar"
-                    android:textSize="16sp"
-                    android:textColor="@color/colorWhite"
-                    android:textStyle="bold"/>
 
-            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:visibility="visible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/view_register"
+                android:orientation="vertical"
+                >
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_btn_register"
+                    android:layout_width="250dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="32dp"
+                    app:cardBackgroundColor="@color/colorThemeOrange"
+                    app:cardCornerRadius="20dp">
+
+                    <TextView
+                        android:id="@+id/tv_btn_register_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:text="@string/daftar"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorWhite"
+                        android:textStyle="bold"/>
+
+                </androidx.cardview.widget.CardView>
+
+                <!--<androidx.cardview.widget.CardView-->
+                    <!--android:id="@+id/cv_btn_generate_token"-->
+                    <!--android:layout_width="250dp"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:layout_marginTop="24dp"-->
+                    <!--android:layout_marginBottom="32dp"-->
+                    <!--app:cardBackgroundColor="@color/colorThemeOrange"-->
+                    <!--app:cardCornerRadius="20dp">-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/tv_btn_token_label"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:gravity="center"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:text="@string/token"-->
+                        <!--android:textSize="16sp"-->
+                        <!--android:textColor="@color/colorWhite"-->
+                        <!--android:textStyle="bold"/>-->
+
+                <!--</androidx.cardview.widget.CardView>-->
+
+
+
+
+            </LinearLayout>
+
 
         </LinearLayout>
 

@@ -4,101 +4,55 @@ import com.google.gson.annotations.SerializedName;
 
 public class VillageModel {
 
-    @SerializedName("id")
-    private String id;
+    @SerializedName("idkel")
+    private String idkel;
 
-    @SerializedName("id_kecamatan")
-    private String id_kecamatan;
+    @SerializedName("idkec")
+    private String idkec;
 
-    @SerializedName("nama")
-    private String nama;
-
-    @SerializedName("createdAt")
-    private String createdAt;
-
-    @SerializedName("lastUpdated")
-    private String lastUpdated;
-
-    @SerializedName("createdBy")
-    private String createdBy;
+    @SerializedName("urban_village")
+    private String urban_village;
 
     public VillageModel() {
     }
 
-    public VillageModel(String nama) {
-        this.nama = nama;
+    public VillageModel(String idkel, String urban_village) {
+        this.idkel = idkel;
+        this.urban_village = urban_village;
     }
 
-    public VillageModel(String id, String nama) {
-        this.id = id;
-        this.nama = nama;
+    public VillageModel(String idkel, String idkec, String urban_village) {
+        this.idkel = idkel;
+        this.idkec = idkec;
+        this.urban_village = urban_village;
     }
 
-    public VillageModel(String id, String id_kecamatan, String nama) {
-        this.id = id;
-        this.id_kecamatan = id_kecamatan;
-        this.nama = nama;
+    public String getIdkel() {
+        return idkel;
     }
 
-    public VillageModel(String id, String id_kecamatan, String nama, String createdAt, String lastUpdated, String createdBy) {
-        this.id = id;
-        this.id_kecamatan = id_kecamatan;
-        this.nama = nama;
-        this.createdAt = createdAt;
-        this.lastUpdated = lastUpdated;
-        this.createdBy = createdBy;
+    public void setIdkel(String idkel) {
+        this.idkel = idkel;
     }
 
-    public String getId() {
-        return id;
+    public String getIdkec() {
+        return idkec;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdkec(String idkec) {
+        this.idkec = idkec;
     }
 
-    public String getId_kecamatan() {
-        return id_kecamatan;
+    public String getUrban_village() {
+        return urban_village;
     }
 
-    public void setId_kecamatan(String id_kecamatan) {
-        this.id_kecamatan = id_kecamatan;
-    }
-
-    public String getNama() {
-        return nama;
-    }
-
-    public void setNama(String nama) {
-        this.nama = nama;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getLastUpdated() {
-        return lastUpdated;
-    }
-
-    public void setLastUpdated(String lastUpdated) {
-        this.lastUpdated = lastUpdated;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
+    public void setUrban_village(String urban_village) {
+        this.urban_village = urban_village;
     }
 
     @Override
     public String toString() {
-        return nama;
+        return urban_village;
     }
 }

@@ -349,7 +349,7 @@ public class CartProductDetailActivity extends AppCompatActivity implements View
         tvAmountDiscount.setText("- Rp. " + DecimalFormatRupiah.formatNumber.format(discount));
     }
 
-    public TextWatcher discountWatcher() {
+    public TextWatcher discountWatcher()  {
         return new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
