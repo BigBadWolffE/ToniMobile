@@ -640,19 +640,42 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             actProvince.setError("Data Provinsi Anda Harus Di isi");
             isEmpty = true;
             Toast.makeText(this,"Lengkapi Data Provinsi",Toast.LENGTH_SHORT).show();
-        }else if (actCity.getText().toString().trim().length() == 0){
+        } else if (paramsProvince.trim().length() == 0){
+            actProvince.setError("Data Provinsi Anda Tidak Sesuai");
+            isEmpty = true;
+            Toast.makeText(this,"Lengkapi Data Provinsi",Toast.LENGTH_SHORT).show();
+        }
+        else if (actCity.getText().toString().trim().length() == 0){
             actCity.setError("Data Kota/Kabupaten Anda Harus Di isi");
             isEmpty = true;
             Toast.makeText(this,"Lengkapi Data Kota/Kabupaten",Toast.LENGTH_SHORT).show();
-        }else if (actDistrict.getText().toString().trim().length() == 0){
-            actDistrict.setError("Data Kelurahan Anda Harus Di isi");
+        }else if (paramsCity.trim().length() == 0){
+            actCity.setError("Data Kota/Kabupaten Anda Tidak Sesuai");
             isEmpty = true;
-            Toast.makeText(this,"Lengkapi Data Kelurahan",Toast.LENGTH_SHORT).show();
-        }else if (actVillage.getText().toString().trim().length() == 0) {
-            actVillage.setError("Data Kecamatan Anda Harus Di isi ");
+            Toast.makeText(this,"Lengkapi Data Kota/Kabupaten",Toast.LENGTH_SHORT).show();
+        }
+        else if (paramsDistrict.trim().length() == 0){
+            actDistrict.setError("Data Kecamatan Anda Tidak Sesuai");
             isEmpty = true;
             Toast.makeText(this,"Lengkapi Data Kecamatan",Toast.LENGTH_SHORT).show();
-        } else if(etUserName.getText().toString().trim().length() == 0){
+        }else if (actDistrict.getText().toString().trim().length() == 0){
+            actDistrict.setError("Data Kecamatan Anda Harus Di isi");
+            isEmpty = true;
+            Toast.makeText(this,"Lengkapi Data Kecamatan",Toast.LENGTH_SHORT).show();
+        }else if (paramsVillage.trim().length() == 0) {
+            actVillage.setError("Data Kelurahan Anda Harus Di isi ");
+            isEmpty = true;
+            Toast.makeText(this,"Lengkapi Data Kelurahan",Toast.LENGTH_SHORT).show();
+        }
+        else if (actVillage.getText().toString().trim().length() == 0) {
+            actVillage.setError("Data Kelurahan Anda Harus Di isi ");
+            isEmpty = true;
+            Toast.makeText(this,"Lengkapi Data Kelurahan",Toast.LENGTH_SHORT).show();
+        }else if (etShopOwner.getText().toString().trim().length()==0){
+            isEmpty = true;
+            etShopOwner.setError("Nama Pemilik Harus Sesuai KTP");
+        }
+        else if(etUserName.getText().toString().trim().length() == 0){
             etUserName.setError("User Name Harus Di isi");
             isEmpty = true;
             Toast.makeText(this,"Lengkapi Data User Name",Toast.LENGTH_SHORT).show();
