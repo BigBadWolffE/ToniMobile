@@ -367,21 +367,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 actProvince.setText("");
                 actProvince.setVisibility(View.VISIBLE);
                 clProvince.setVisibility(View.GONE);
-                idCity = "";
-                paramsCity = "";
-                actCity.setText("");
-                actCity.setVisibility(View.VISIBLE);
-                clCity.setVisibility(View.GONE);
-                idDistrict = "";
-                paramsDistrict = "";
-                actDistrict.setText("");
-                actDistrict.setVisibility(View.VISIBLE);
-                clDistrict.setVisibility(View.GONE);
-                idVillage = "";
-                paramsVillage = "";
-                actVillage.setText("");
-                actVillage.setVisibility(View.VISIBLE);
-                clVillage.setVisibility(View.GONE);
             }
         });
     }
@@ -399,9 +384,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus)
-                    if(actProvince.getText().toString().trim().length()!=0){
-                        actCity.showDropDown();
-                    }
+                    actCity.showDropDown();
 
             }
         });
@@ -409,9 +392,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         actCity.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(actProvince.getText().toString().trim().length()!=0){
-                    actCity.showDropDown();
-                }
+                actCity.showDropDown();
                 return false;
             }
         });
@@ -443,16 +424,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 actCity.setText("");
                 actCity.setVisibility(View.VISIBLE);
                 clCity.setVisibility(View.GONE);
-                idDistrict = "";
-                paramsDistrict = "";
-                actDistrict.setText("");
-                actDistrict.setVisibility(View.VISIBLE);
-                clDistrict.setVisibility(View.GONE);
-                idVillage = "";
-                paramsVillage = "";
-                actVillage.setText(" ");
-                actVillage.setVisibility(View.VISIBLE);
-                clVillage.setVisibility(View.GONE);
             }
         });
     }
@@ -471,18 +442,15 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus)
-                    if(actCity.getText().toString().trim().length()!=0){
-                        actDistrict.showDropDown();
-                    }
+                    actDistrict.showDropDown();
+
             }
         });
 
         actDistrict.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(actCity.getText().toString().trim().length()!=0){
-                    actDistrict.showDropDown();
-                }
+                actDistrict.showDropDown();
                 return false;
             }
         });
@@ -515,11 +483,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 actDistrict.setText("");
                 actDistrict.setVisibility(View.VISIBLE);
                 clDistrict.setVisibility(View.GONE);
-                idVillage = "";
-                paramsVillage = "";
-                actVillage.setText(" ");
-                actVillage.setVisibility(View.VISIBLE);
-                clVillage.setVisibility(View.GONE);
             }
         });
 
@@ -538,18 +501,15 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus)
-                    if(actDistrict.getText().toString().trim().length()!=0){
-                        actVillage.showDropDown();
-                    }
+                    actVillage.showDropDown();
+
             }
         });
 
         actVillage.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(actDistrict.getText().toString().trim().length()!=0){
-                    actVillage.showDropDown();
-                }
+                actVillage.showDropDown();
                 return false;
             }
         });
@@ -578,7 +538,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             public void onClick(View v) {
                 idVillage = "";
                 paramsVillage = "";
-                actVillage.setText(" ");
+                actVillage.setText("");
                 actVillage.setVisibility(View.VISIBLE);
                 clVillage.setVisibility(View.GONE);
             }
@@ -630,30 +590,25 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     public void regist(){
         isEmpty = false;
         AnalyticsToniUtils.getEvent(Const.CATEGORY_AUTHENTIFICATION, Const.MODUL_LOGIN, Const.LABEL_LOGIN);
-        if (etShopName.getText().toString().trim().length() == 0){
+        if (etShopName.getText().toString().length() == 0){
             isEmpty = true;
             Toast.makeText(this,"Lengkapi Data",Toast.LENGTH_SHORT).show();
-        }else if (etShopAddress.getText().toString().trim().length() == 0){
+        }else if (etShopAddress.getText().toString().length() == 0){
             isEmpty = true;
             Toast.makeText(this,"Lengkapi Data",Toast.LENGTH_SHORT).show();
-        } else if (actProvince.getText().toString().trim().length() == 0){
-            actProvince.setError("Data Provinsi Anda Harus Di isi");
+        }else if (actProvince == null){
             isEmpty = true;
             Toast.makeText(this,"Lengkapi Data Provinsi",Toast.LENGTH_SHORT).show();
-        }else if (actCity.getText().toString().trim().length() == 0){
-            actCity.setError("Data Kota/Kabupaten Anda Harus Di isi");
+        }else  if (actDistrict == null){
             isEmpty = true;
-            Toast.makeText(this,"Lengkapi Data Kota/Kabupaten",Toast.LENGTH_SHORT).show();
-        }else if (actDistrict.getText().toString().trim().length() == 0){
-            actDistrict.setError("Data Kelurahan Anda Harus Di isi");
+            Toast.makeText(this,"Lengkapi Data Kabupaten/Kota",Toast.LENGTH_SHORT).show();
+        }else if (actCity == null){
             isEmpty = true;
             Toast.makeText(this,"Lengkapi Data Kelurahan",Toast.LENGTH_SHORT).show();
-        }else if (actVillage.getText().toString().trim().length() == 0) {
-            actVillage.setError("Data Kecamatan Anda Harus Di isi ");
+        }else if (actVillage == null){
             isEmpty = true;
             Toast.makeText(this,"Lengkapi Data Kecamatan",Toast.LENGTH_SHORT).show();
-        } else if(etUserName.getText().toString().trim().length() == 0){
-            etUserName.setError("User Name Harus Di isi");
+        } else if(etUserName.getText().toString().length() == 0){
             isEmpty = true;
             Toast.makeText(this,"Lengkapi Data User Name",Toast.LENGTH_SHORT).show();
         }else if (etShopType.getSelectedItem().equals("Pilih Jenis Bisnis")){
@@ -680,6 +635,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     NewAccountModel newAccountModel = new NewAccountModel();
 
                     LocationRequest.postShopData(RegisterActivity.this,newShopModel,newAccountModel);
+
                 }
             },1000);
 //            NewShopModel newShopModel = new NewShopModel();
@@ -701,6 +657,9 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 //                Toast.makeText(RegisterActivity.this,"Nomor Telpon atau Data Tidak Valid",Toast.LENGTH_SHORT).show();
 //
 //            }
+
+
+
 
         }
 

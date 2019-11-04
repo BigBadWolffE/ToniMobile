@@ -194,8 +194,12 @@ public class SendOtpRegisterActivity extends BaseActivity implements View.OnClic
                 tvResendMessage.setText("Kirim ulang kode.");
             }
 
+
         }.start();
     }
+
+
+
 
     @Override
     public void onBackPressed() {
