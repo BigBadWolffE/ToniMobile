@@ -24,4 +24,20 @@ public class LoginController {
                 break;
         }
     }
+
+    public static void OtpResponse(Activity activity, String message){
+        switch (message) {
+            case "Nomor Telpon atau Data Anda Sudah Terdaftar!":
+                Intent wrongPass = new Intent(activity, ForgotPassActivity.class);
+                activity.startActivity(wrongPass);
+                break;
+            case "OTP Yang Anda Masukan Salah!":
+                Intent wrongUser = new Intent(activity, ForgotUserActivity.class);
+                activity.startActivity(wrongUser);
+                break;
+            default:
+                Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
 }

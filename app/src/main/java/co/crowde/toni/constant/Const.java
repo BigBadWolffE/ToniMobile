@@ -41,6 +41,8 @@ public class Const {
     public final static String LABEL_LOGIN = "Try to Login";
     public final static String LABEL_LOGIN_SUCCESS = "Login Success";
     public final static String LABEL_LOGIN_FAILED_ACCOUNT = "Login Failed - Wrong Username / Password";
+    public final static String LABEL_LOGIN_ADMIN_FAILED = "GENERATE TOKEN FAILED";
+    public final static String LABEL_LOGIN_ADMIN_SUCCESS= "GENERATE TOKEN SUCCESS";
     public final static String LABEL_LOGIN_FAILED_NETWORK = "Login Failed - Network Trouble";
     //Password
     public final static String LABEL_SHOW_PASS = "Show Password";

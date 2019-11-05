@@ -333,6 +333,8 @@
     <string name="atur_kata_sandi">Atur kata sandi</string>
     <string name="ulang_kata_sandi">Ulang kata sandi</string>
     <string name="daftar">DAFTAR</string>
+    <string name="token">GENERATE TOKEN</string>
+    <string name="spinnerkosong">Pilih </string>
     <string name="tutup">TUTUP</string>
     <string name="cari_pelanggan_nomor_telepon">Cari pelanggan/nomor telepon</string>
     <string name="data_product_tidak_ditemukan">Data produk tidak ditemukan</string>
