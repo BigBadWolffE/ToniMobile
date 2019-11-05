@@ -101,8 +101,9 @@ public class TransactionRequest {
                             String data = json.getString("data");
                             Log.e("DATA RESPONSE", data);
 
+                            ConfirmPaymentDialog.dialogConfirm.dismiss();
+
                             if(status){
-                                ConfirmPaymentDialog.dialogConfirm.dismiss();
                                 progressDialog.dismiss();
 
                                 Intent print = new Intent(activity, SuccessPaymentTransactionActivity.class);
@@ -120,7 +121,7 @@ public class TransactionRequest {
                                         }
                                         break;
                                     case "Credit":
-                                        AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_TRANSACTION, Const.LABEL_TRANSACTION_CASH_CREDIT_SUCCESS);
+                                        AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_TRANSACTION, Const.LABEL_TRANSACTION_CREDIT_SUCCESS);
                                         print.putExtra("payment_type", add.getPaymentType());
                                         break;
                                 }
@@ -131,10 +132,24 @@ public class TransactionRequest {
                                 activity.finish();
 
                             } else{
+
+                                switch (add.getPaymentType()) {
+                                    case "Cash":
+                                        if(credit>0){
+                                            CustomerRequest.payCredit(activity, credit, data);
+                                            AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_TRANSACTION, Const.LABEL_TRANSACTION_CASH_CREDIT_FAILED);
+                                        } else {
+                                            AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_TRANSACTION, Const.LABEL_TRANSACTION_CASH_FAILED);
+                                        }
+                                        break;
+                                    case "Credit":
+                                        AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_TRANSACTION, Const.LABEL_TRANSACTION_CREDIT_FAILED);
+                                        break;
+                                }
+
                                 if(message.equals("Token tidak valid")){
                                     UserController.tokenExpired(activity, message);
                                 } else {
-                                    ConfirmPaymentDialog.dialogConfirm.dismiss();
                                     progressDialog.dismiss();
                                 }
                             }

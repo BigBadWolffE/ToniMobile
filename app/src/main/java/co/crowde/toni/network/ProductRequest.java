@@ -25,6 +25,7 @@ import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.ProductDiscountModel;
 import co.crowde.toni.model.ProductModel;
 import co.crowde.toni.model.body.post.UpdateProductModel;
+import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.view.activity.notification.SuccessUpdateProductActivity;
 import co.crowde.toni.view.dialog.message.network.NetworkOfflineDialog;
 import co.crowde.toni.view.dialog.message.product.UpdateProductDialog;
@@ -294,6 +295,8 @@ public class ProductRequest {
                             Log.e("DATA RESPONSE", data);
 
                             if(status){
+                                AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_PRODUCT,Const.LABEL_PRODUCT_UPDATE);
+
                                 InventoryFragment.productModels.clear();
                                 page=1;
                                 getInventoryList(activity);

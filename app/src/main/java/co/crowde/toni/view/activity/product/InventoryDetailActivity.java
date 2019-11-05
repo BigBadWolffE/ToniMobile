@@ -27,10 +27,12 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 import co.crowde.toni.R;
+import co.crowde.toni.constant.Const;
 import co.crowde.toni.helper.DecimalFormatRupiah;
 import co.crowde.toni.model.ProductModel;
 import co.crowde.toni.network.API;
 import co.crowde.toni.utils.SetHeader;
+import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.utils.print.Utils;
 import co.crowde.toni.view.dialog.message.product.UpdateProductDialog;
 
@@ -160,6 +162,7 @@ public class InventoryDetailActivity extends AppCompatActivity implements View.O
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.imgDecrease:
+                AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_PRODUCT,Const.LABEL_PRODUCT_ADD_STOCK_COLUMN);
                 if(qty!=0){
                     qty = qty-1;
                 }
@@ -167,6 +170,7 @@ public class InventoryDetailActivity extends AppCompatActivity implements View.O
                 break;
 
             case R.id.imgIncrease:
+                AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_PRODUCT,Const.LABEL_PRODUCT_ADD_STOCK_PLUS_MIN);
                 qty=qty+1;
                 setQty();
                 break;

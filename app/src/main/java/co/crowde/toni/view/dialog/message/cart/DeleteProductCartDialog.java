@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 
 import co.crowde.toni.R;
+import co.crowde.toni.constant.Const;
+import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.view.activity.cart.CartListActivity;
 
 public class DeleteProductCartDialog {
@@ -49,6 +51,8 @@ public class DeleteProductCartDialog {
         tvYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_CART, Const.LABEL_CART_REMOVE_ALL_PRODUCT);
+
                 activity.finish();
                 CartListActivity.resetCart(activity);
             }

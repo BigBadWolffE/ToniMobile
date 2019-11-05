@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.List;
 
+import co.crowde.toni.constant.Const;
 import co.crowde.toni.controller.print.PrintController;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CustomerModel;
@@ -20,6 +21,7 @@ import co.crowde.toni.model.response.list.TransactionModel;
 import co.crowde.toni.network.CustomerRequest;
 import co.crowde.toni.network.ProductRequest;
 import co.crowde.toni.network.TransactionRequest;
+import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.utils.print.PrinterNetwork;
 import co.crowde.toni.view.activity.home.MainActivity;
 import co.crowde.toni.view.activity.print.WaitingPrintTransactionActivity;
@@ -44,12 +46,21 @@ public class TransactionController {
                 if (PrinterNetwork.mBluetoothSocket.isConnected()){
 //                    TransactionRequest.postNewTransaction(activity);
 
-                    if(payment_type.equals("Cash")){
-                        PrintController.printCash(activity, data);
-                    } else if (payment_type.equals("Credit")) {
-                        PrintController.printCredit(activity, data, Integer.parseInt(credit));
-                    } else if (payment_type.equals("CashCredit")) {
-                        PrintController.printCashCredit(activity, data, Integer.parseInt(saldo),Integer.parseInt(credit));
+                    switch (payment_type) {
+                        case "Cash":
+                            PrintController.printCash(activity, data);
+                            AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_TRANSACTION, Const.LABEL_TRANSACTION_CASH_CREDIT_PRINT);
+
+                            break;
+                        case "Credit":
+                            PrintController.printCredit(activity, data, Integer.parseInt(credit));
+                            AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_TRANSACTION, Const.LABEL_TRANSACTION_CASH_PRINT);
+
+                            break;
+                        case "CashCredit":
+                            PrintController.printCashCredit(activity, data, Integer.parseInt(saldo), Integer.parseInt(credit));
+                            AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_TRANSACTION, Const.LABEL_TRANSACTION_CREDIT_PRINT);
+                            break;
                     }
 
                     DashboardFragment.dbCart.deleteAllItem();
