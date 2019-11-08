@@ -2,12 +2,10 @@ package co.crowde.toni.network;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
@@ -32,7 +30,6 @@ import java.net.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 
-import co.crowde.toni.R;
 import co.crowde.toni.base.BaseActivity;
 import co.crowde.toni.constant.Const;
 import co.crowde.toni.helper.SavePref;
@@ -640,11 +637,11 @@ public class LocationRequest extends BaseActivity {
                                 String otpResend = json.getString("otp");
                                 Log.e("Tag Resend",otpResend);
                                 RegisterActivity.alertSuccessResendOtp(activity);
-                                alertViewOtp(activity);
+//                                alertViewOtp(activity);
                                 AnalyticsToniUtils.getEvent(Const.CATEGORY_AUTHENTIFICATION, Const.MODUL_REGISTER, Const.LABEL_REGISTER_SEND_OTP);
                             }else {
                                 RegisterActivity.alertInvalidOtp(activity);
-                                alertViewOtp(activity);
+//                                alertViewOtp(activity);
                             }
 
 //                            if (message.equals("success")){
@@ -683,21 +680,6 @@ public class LocationRequest extends BaseActivity {
     }
 
 
-    public static void openDialog(final Activity context) {
-        final Dialog dialog = new Dialog(context); // Context, this, etc.
-        dialog.setContentView(R.layout.dialog_register_gagal);
-        dialog.setTitle("Alert!");
-        dialog.show();
-        dialog.setCanceledOnTouchOutside(true);
-        cvBtnCancelDialog = dialog.findViewById(R.id.btnCancel);
-        cvBtnCancelDialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-    }
 
     public static void alertViewOtp(final Context activity ){
         AlertDialog.Builder builder1 = new AlertDialog.Builder(activity);
