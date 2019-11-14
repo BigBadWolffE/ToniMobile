@@ -19,6 +19,7 @@ public class Const {
     public final static String CATEGORY_AUTHENTIFICATION = "Authentication";
     public final static String CATEGORY_PRODUCT_MANAGE = "Product Management";
     public final static String CATEGORY_CUSTOMER = "Customer";
+    public final static String CATEGORY_PRODUCT = "Product";
     public final static String CATEGORY_TRANSACTION = "Transaction";
     public final static String CATEGORY_REPORT = "Report";
 
@@ -29,6 +30,7 @@ public class Const {
     public final static String MODUL_PRODUCT = "Product";
     public final static String MODUL_CART = "Cart";
     public final static String MODUL_CUSTOMER = "Customer";
+    public final static String MODUL_DISCOUNT = "Discount";
     public final static String MODUL_TRANSACTION = "Transaction";
     public final static String MODUL_REPORT= "Report";
 
@@ -66,15 +68,28 @@ public class Const {
     //Product - Stock
     public final static String LABEL_PRODUCT_ADD_STOCK_PLUS_MIN = "Product - Add stock from Plus Minus";
     public final static String LABEL_PRODUCT_ADD_STOCK_COLUMN = "Product - Add stock from Column";
+    public final static String LABEL_PRODUCT_UPDATE = "Product - Update Product Detail";
+    // Product - Discount
+    public final static String LABEL_DISCOUNT_PRODUCT_DETAIL_ADD = "Product - Add Product Discount from Product Detail";
+    public final static String LABEL_DISCOUNT_PRODUCT_DETAIL_UPDATE = "Product - Update Product Discount from Product Detail";
+    public final static String LABEL_DISCOUNT_PRODUCT_DETAIL_REMOVE = "Product - Remove Product Discount from Product Detail";
+    public final static String LABEL_DISCOUNT_CART_ADD = "Product - Add Product Discount from Cart List";
+    public final static String LABEL_DISCOUNT_CART_UPDATE = "Product - Update Product Discount from Cart List";
+    public final static String LABEL_DISCOUNT_CART_REMOVE = "Product - Remove Product Discount from Cart List";
     //Transaction
     public final static String LABEL_TRANSACTION_CASH_SUCCESS = "Transaction - Payment Cash Success";
     public final static String LABEL_TRANSACTION_CASH_FAILED = "Transaction - Payment Cash Failed";
+    public final static String LABEL_TRANSACTION_CASH_PRINT = "Transaction - Print Payment Cash";
     public final static String LABEL_TRANSACTION_CREDIT_SUCCESS = "Transaction - Payment Credit Success";
     public final static String LABEL_TRANSACTION_CREDIT_FAILED = "Transaction - Payment Credit Failed";
+    public final static String LABEL_TRANSACTION_CREDIT_PRINT = "Transaction - Print Payment Credit";
     public final static String LABEL_TRANSACTION_CASH_CREDIT_SUCCESS = "Transaction - Payment Cash+Credit Success";
     public final static String LABEL_TRANSACTION_CASH_CREDIT_FAILED = "Transaction - Payment Cash+Credit Failed";
+    public final static String LABEL_TRANSACTION_CASH_CREDIT_PRINT = "Transaction - Print Payment Cash+Credit";
+    public final static String LABEL_TRANSACTION_NOT_PRINTED = "Transaction - Payment Struct not Print";
     //Cart - Product
-    public final static String LABEL_CART_ADD_PRODUCT_POPUP = "Cart - Add Product via Popup Product";
+//    public final static String LABEL_CART_ADD_PRODUCT_POPUP = "Cart - Add Product via Popup Product";
+    public final static String LABEL_CART_ADD_PRODUCT_DETAIL = "Cart - Add Product via Product Detail";
     public final static String LABEL_CART_ADD_PRODUCT_DASHBOARD = "Cart - Add Product via Dashboard";
     public final static String LABEL_CART_REMOVE_PRODUCT = "Cart - Remove Product";
     public final static String LABEL_CART_REMOVE_ALL_PRODUCT = "Cart - Remove All Product";
