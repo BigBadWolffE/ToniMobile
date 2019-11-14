@@ -15,7 +15,6 @@ public class CallCenter {
     public static void showDialCustomer(Activity activity, String phoneNumber){
         Intent callIntent = new Intent(Intent.ACTION_DIAL,
                 Uri.fromParts("tel", phoneNumber, null));
-        activity.startActivity
-                (callIntent);
+        activity.startActivity(callIntent);
     }
 }

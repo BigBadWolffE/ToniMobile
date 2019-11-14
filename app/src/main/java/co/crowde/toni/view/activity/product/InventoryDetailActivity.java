@@ -1,21 +1,18 @@
 package co.crowde.toni.view.activity.product;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
-
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.Html;
 import android.text.TextWatcher;
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.squareup.picasso.Picasso;
@@ -31,7 +28,6 @@ import co.crowde.toni.helper.DecimalFormatRupiah;
 import co.crowde.toni.model.ProductModel;
 import co.crowde.toni.network.API;
 import co.crowde.toni.utils.SetHeader;
-import co.crowde.toni.utils.print.Utils;
 import co.crowde.toni.view.dialog.message.product.UpdateProductDialog;
 
 public class InventoryDetailActivity extends AppCompatActivity implements View.OnClickListener {
@@ -42,7 +38,7 @@ public class InventoryDetailActivity extends AppCompatActivity implements View.O
     TextView tvProductName, tvProductCategory, tvProductStock, tvProductSupplier, tvProductDesc,
                 tvRpPurchase, tvRpSelling;
     EditText etPurchase, etSelling, etQty;
-    CardView cvBtnSave;
+    CardView cvBtnSave,cvBtnDelete;
 
     ProductModel productModel;
 
@@ -89,6 +85,7 @@ public class InventoryDetailActivity extends AppCompatActivity implements View.O
         etQty = findViewById(R.id.et_qty);
         cvBtnSave = findViewById(R.id.cv_btn_save_product);
         webView = findViewById(R.id.tv_product_desc);
+        cvBtnDelete = findViewById(R.id.cv_btn_delete_product);
 
         Picasso.with(InventoryDetailActivity.this).load(API.Host+productModel.getPicture())
                 .into(imgProduct);
@@ -131,6 +128,7 @@ public class InventoryDetailActivity extends AppCompatActivity implements View.O
         imgDecrease.setOnClickListener(this);
         imgIncrease.setOnClickListener(this);
         cvBtnSave.setOnClickListener(this);
+//        cvBtnDelete.setOnClickListener(this::onClick);
         etQty.setOnClickListener(this);
         etPurchase.setOnClickListener(this);
         etSelling.setOnClickListener(this);
@@ -199,6 +197,8 @@ public class InventoryDetailActivity extends AppCompatActivity implements View.O
                 }
                 UpdateProductDialog.showDialog(this, productModel.getProductId(), qty, purchase, selling, progressDialog);
                 break;
+//            case R.id.cv_btn_delete_product:
+//                DeleteProductDialog.showDialog(this,progressDialog);
         }
     }
 

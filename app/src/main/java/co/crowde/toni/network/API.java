@@ -5,10 +5,10 @@ public class API{
     public static final String Slash = "/";
     public static final String Count = "?count=9999";
 
-//    public static final String Host = "https://apitoni-staging.crowde.co/";
+    public static final String Host = "https://apitoni-staging.crowde.co/";
     public static final String Host2 = "https://user-service-staging.crowde.co/";
 
-    public static final String Host = "https://toni-api.crowde.co/";
+//    public static final String Host = "https://toni-api.crowde.co/";
     public static final String API = Host+"api/";
     public static final String API2 = Host2+"api/v1/";
 

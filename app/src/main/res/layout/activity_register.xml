@@ -80,7 +80,7 @@
                     android:hint="@string/nama_toko_tani"
                     android:imeOptions="actionNext"
                     android:inputType="textPersonName"
-                    
+                    android:maxLength="20"
                     android:textColor="@color/TextColorDefault"
                     android:textColorHint="@color/colorThemeGrey"
                     android:textSize="16sp"
@@ -103,7 +103,7 @@
                     android:hint="@string/alamat_toko_tani"
                     android:imeOptions="actionNext"
                     android:inputType="text"
-                    
+                    android:maxLength="20"
                     android:textColor="@color/TextColorDefault"
                     android:textColorHint="@color/colorThemeGrey"
                     android:textSize="16sp"
@@ -343,6 +343,7 @@
                     android:hint="@string/jenis_bisnis"
                     android:imeOptions="actionNext"
                     android:inputType="text"
+                    android:maxLength="20"
                     android:textColor="@color/TextColorDefault"
                     android:textColorHint="@color/colorThemeGrey"
                     android:textSize="16sp"
@@ -382,7 +383,7 @@
                     android:hint="@string/data_nama_pemilik_toko"
                     android:imeOptions="actionNext"
                     android:inputType="textPersonName"
-                    
+                    android:maxLength="20"
                     android:textColor="@color/TextColorDefault"
                     android:textColorHint="@color/colorThemeGrey"
                     android:textSize="16sp"
@@ -428,7 +429,7 @@
                     android:hint="User Name"
                     android:imeOptions="actionNext"
                     android:inputType="text"
-                    
+                    android:maxLength="20"
                     android:textColor="@color/TextColorDefault"
                     android:textColorHint="@color/colorThemeGrey"
                     android:textSize="14sp"
@@ -479,7 +480,7 @@
                     android:hint="@string/atur_kata_sandi"
                     android:imeOptions="actionNext"
                     android:inputType="textPassword"
-                    
+                    android:maxLength="20"
                     android:textColor="@color/TextColorDefault"
                     android:textColorHint="@color/colorThemeGrey"
                     android:textSize="16sp"
@@ -504,7 +505,7 @@
                     android:hint="@string/ulang_kata_sandi"
                     android:imeOptions="actionDone"
                     android:inputType="textPassword"
-                    
+                    android:maxLength="20"
                     android:textColor="@color/TextColorDefault"
                     android:textColorHint="@color/colorThemeGrey"
                     android:textSize="16sp"

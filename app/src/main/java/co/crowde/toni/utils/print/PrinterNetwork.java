@@ -1,6 +1,7 @@
 package co.crowde.toni.utils.print;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -35,6 +36,9 @@ public class PrinterNetwork {
     public static BluetoothDevice mBluetoothDevice;
     public static OutputStream os = null;
     public static String bluetoothAddress;
+
+    //popup
+    Dialog dialogPaperSize;
 
     public static void pairingBluetooth(final Activity activity) {
         ArrayList bluetoothList = new ArrayList();
@@ -74,7 +78,10 @@ public class PrinterNetwork {
                     Toast.makeText(activity, "Berhasil terhubung dengan Bluetooth Printer", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
 
+
                     SavePref.saveDeviceAddress(activity, deviceAddress);
+                    PopUpPaperSize.showDialog(activity);
+
 
                 } catch (IOException e) {
                     try {
@@ -136,8 +143,9 @@ public class PrinterNetwork {
     }
     public static void printCustom(String msg, int size, int align) {
         //Print config "mode"
+        byte[] format = { 27, 50, 0 };
         byte[] cc = new byte[]{0x1D,0x21,0x00};  // 0- normal size text
-        byte[] cc1 = new byte[]{0x1D,0x21,0x02};  // 0- normal size text
+        byte[] cc1 = new byte[]{0x1D,0x21,0x01};  // 0- normal size text
         byte[] bb = new byte[]{0x1D,0x21,0x03};  // 1- only bold text
         byte[] bb2 = new byte[]{0x1D,0x21,0x04}; // 2- bold with medium text
         byte[] bb3 = new byte[]{0x1D,0x21,0x05}; // 3- bold with large text
@@ -158,6 +166,8 @@ public class PrinterNetwork {
                 case 4:
                     os.write(bb3);
                     break;
+                case 5:
+                    os.write(format);
             }
 
             switch (align){

@@ -24,7 +24,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
@@ -41,6 +40,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import co.crowde.toni.R;
+import co.crowde.toni.base.BaseActivity;
 import co.crowde.toni.constant.Const;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.AdminModel;
@@ -57,7 +57,7 @@ import co.crowde.toni.view.activity.otp.SendOtpRegisterActivity;
 
 import static co.crowde.toni.network.LocationRequest.generateToken;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+public class RegisterActivity extends BaseActivity implements View.OnClickListener {
 
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -222,6 +222,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
         etEmail.addTextChangedListener(emailWatcher);
+        etEmail.requestFocus();
+        etEmail.setError(null);
 
 //        etEmail.setError(null);
 //        etEmail.clearFocus();
@@ -684,79 +686,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     LocationRequest.postShopData(RegisterActivity.this,newShopModel,newAccountModel);
                 }
             },1000);
-//            NewShopModel newShopModel = new NewShopModel();
-//            NewAccountModel newAccountModel = new NewAccountModel();
-//
-//            LocationRequest.postShopData(RegisterActivity.this,newShopModel,newAccountModel);
 
-//            if(LocationRequest.otpCode!=null){
-//
-//                Toast.makeText(RegisterActivity.this,"Berhasil Disimpan",Toast.LENGTH_SHORT).show();
-//
-//                Intent register = new Intent(RegisterActivity.this, SendOtpRegisterActivity.class);
-//                startActivity(register);
-//                finish();
-//
-//
-//            }else {
-//
-//                Toast.makeText(RegisterActivity.this,"Nomor Telpon atau Data Tidak Valid",Toast.LENGTH_SHORT).show();
-//
-//            }
 
         }
-
-
-//    private void register() {
-//
-//        isEmpty = false;
-//
-//        if (etShopName.getText().toString().length() == 0) {
-//            isEmpty = true;
-//        } else if (etShopAddress.getText().toString().isEmpty()) {
-//            isEmpty = true;
-//        } else if (etShopType.getSelectedItem().toString().isEmpty()) {
-//            isEmpty = true;
-//        } else if (etShopOwner.getText().toString().isEmpty()) {
-//            isEmpty = true;
-//        } else if (etShopPhone.getText().toString().isEmpty()) {
-//            isEmpty = true;
-//        } else if (etShopPass.getText().toString().isEmpty()) {
-//            isEmpty = true;
-//        } else if (etShopRetypePass.getText().toString().isEmpty()) {
-//            isEmpty = true;
-//        } else if (idProvince.isEmpty()) {
-//            isEmpty = true;
-//        } else if (idVillage.isEmpty()) {
-//            isEmpty = true;
-//        } else if (idCity.isEmpty()) {
-//            isEmpty = true;
-//        } else if (idDistrict.isEmpty()) {
-//            isEmpty = true;
-//        }
-////        } else {
-////
-////            NewShopModel newShopModel = new NewShopModel();
-////            LocationRequest.postShopData(RegisterActivity.this, newShopModel);
-////        }
-//
-//        new Handler().postDelayed(() -> {
-//            if (!isEmpty) {
-////                progressDialog.setMessage("Harap tunggu...");
-////                progressDialog.setCanceledOnTouchOutside(false);
-////                progressDialog.show();
-//
-//                NewShopModel newShopModel = new NewShopModel();
-//                NewAccountModel newAccountModel = new NewAccountModel();
-//
-//                LocationRequest.postShopData(RegisterActivity.this,newShopModel,newAccountModel);
-//
-//                AnalyticsToniUtils.getEvent(Const.CATEGORY_AUTHENTIFICATION, Const.MODUL_LOGIN, Const.LABEL_LOGIN_FAILED_NETWORK);
-//
-//
-//            }
-//        }, 1000);
-//    }
 
 
     public static void alertInvalid (final Context activity ){

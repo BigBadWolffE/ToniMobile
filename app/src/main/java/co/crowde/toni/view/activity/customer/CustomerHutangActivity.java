@@ -9,15 +9,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -30,35 +26,29 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 import com.google.android.material.appbar.AppBarLayout;
-import com.google.gson.Gson;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.text.BreakIterator;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
+
 import co.crowde.toni.R;
 import co.crowde.toni.constant.Const;
 import co.crowde.toni.controller.print.PrintController;
 import co.crowde.toni.helper.DecimalFormatRupiah;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CustomerModel;
-import co.crowde.toni.model.ShopModel;
 import co.crowde.toni.network.CustomerRequest;
 import co.crowde.toni.utils.SetHeader;
 import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
+import co.crowde.toni.utils.print.PopUpPaperSize;
 import co.crowde.toni.utils.print.PrinterNetwork;
 import co.crowde.toni.view.activity.print.WaitingCreditPayActivity;
-import co.crowde.toni.view.activity.transaction.DetailTransactionActivity;
 import co.crowde.toni.view.dialog.message.customer.CreditPayDialog;
 import co.crowde.toni.view.dialog.message.printer.PrinterConnectivityDialog;
 import co.crowde.toni.view.fragment.modul.CustomerFragment;
@@ -351,10 +341,17 @@ public class CustomerHutangActivity extends AppCompatActivity {
                                 PrinterNetwork.mBluetoothSocket = PrinterNetwork.createBluetoothSocket(PrinterNetwork.mBluetoothDevice);
                                 PrinterNetwork.mBluetoothSocket.connect();
                                 if (PrinterNetwork.mBluetoothSocket.isConnected()){
-                                    PrintController.printCustomerCredit(activity, customerModel, formattedDate);
-
+                                    if(SavePref.readPaperSize(activity).equals("small")){
+                                        PrintController.printCustomerCredit(activity, customerModel, formattedDate);
+                                    }else if (SavePref.readPaperSize(activity).equals("medium")){
+                                        PrintController.printCustomerCreditM(activity, customerModel, formattedDate);
+                                    }else if (SavePref.readPaperSize(activity).equals("large")){
+                                        PrintController.printCustomerCreditL(activity, customerModel, formattedDate);
+                                    }else if (SavePref.readPaperSize(activity)==null){
+                                        Toast.makeText(activity,"Ukuran Kertas Belum Dipilih",Toast.LENGTH_LONG).show();
+                                        PopUpPaperSize.showDialog(activity);
+                                    }
                                     AnalyticsToniUtils.getEvent(Const.CATEGORY_CUSTOMER,Const.MODUL_CUSTOMER,Const.LABEL_CUSTOMER_PRINT);
-
                                     Intent print = new Intent(activity, WaitingCreditPayActivity.class);
                                     activity.startActivity(print);
                                     progressDialog.dismiss();

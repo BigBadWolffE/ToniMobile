@@ -3,14 +3,14 @@ package co.crowde.toni.controller.customer;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.IOException;
 
 import co.crowde.toni.controller.print.PrintController;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.response.object.CreditPayModel;
-import co.crowde.toni.network.CustomerRequest;
-import co.crowde.toni.network.TransactionRequest;
+import co.crowde.toni.utils.print.PopUpPaperSize;
 import co.crowde.toni.utils.print.PrinterNetwork;
 import co.crowde.toni.view.dialog.message.customer.CreditPayDialog;
 import co.crowde.toni.view.dialog.message.printer.PrinterConnectivityDialog;
@@ -29,7 +29,15 @@ public class CustomerController {
                 PrinterNetwork.mBluetoothSocket = PrinterNetwork.createBluetoothSocket(PrinterNetwork.mBluetoothDevice);
                 PrinterNetwork.mBluetoothSocket.connect();
                 if (PrinterNetwork.mBluetoothSocket.isConnected()){
-                    PrintController.printCustomerCreditPay(activity, model, credit);
+                    if(SavePref.readPaperSize(activity).equals("small")){
+                        PrintController.printCustomerCreditPay(activity, model, credit);
+                    }else if (SavePref.readPaperSize(activity).equals("large")){
+                        PrintController.printCustomerCreditPayL(activity,model,credit);
+                    }else if (SavePref.readPaperSize(activity)== null){
+                        Toast.makeText(activity,"Ukuran Kertas Belum Dipilih",Toast.LENGTH_LONG).show();
+                        PopUpPaperSize.showDialog(activity);
+                    }
+
                 }
             } catch (IOException e) {
                 PrinterConnectivityDialog.showDialog(activity);

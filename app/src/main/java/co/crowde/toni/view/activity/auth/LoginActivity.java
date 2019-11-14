@@ -1,7 +1,5 @@
 package co.crowde.toni.view.activity.auth;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,21 +7,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.google.android.material.textfield.TextInputLayout;
 
 import co.crowde.toni.R;
+import co.crowde.toni.base.BaseActivity;
 import co.crowde.toni.constant.Const;
 import co.crowde.toni.model.AdminModel;
 import co.crowde.toni.model.UserModel;
 import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.view.dialog.message.app.CloseAppsDialog;
 
+import static co.crowde.toni.network.LocationRequest.generateToken;
 import static co.crowde.toni.network.LoginRequest.postLogin;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
     TextView tvLoginHeader, tvClosedLabel, tvClosedTime,
             tvForgetPass, tvRegister;
@@ -37,15 +36,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     String username, password;
     String data, message;
 
-    ProgressDialog progressDialog;
-
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        progressDialog = new ProgressDialog(this);
 
         textInputLayout = findViewById(R.id.layout_set_password);
         et_username = findViewById(R.id.et_username);
@@ -105,16 +99,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             et_password.setText("");
         } else {
             if (validateLogin()) {
-
-                progressDialog.setMessage("Harap tunggu...");
-                progressDialog.setCanceledOnTouchOutside(false);
-                progressDialog.show();
+                showLoading();
 
                 UserModel user = new UserModel();
                 user.setUsername(username);
                 user.setPassword(password);
 
-                postLogin(LoginActivity.this, user, progressDialog);
+                postLogin(LoginActivity.this, user);
 
 //                postLoginRequest(this, user, new ResponseListener() {
 //                    @Override
@@ -140,7 +131,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         adminModel.setUsername(usernameAdmin);
         adminModel.setPassword(passwordAdmin);
 
-//        generateToken(LoginActivity.this,adminModel);
+        generateToken(LoginActivity.this,adminModel);
 //        gantitombol();
 
     }

@@ -32,6 +32,8 @@ public class Const {
     public final static String MODUL_TRANSACTION = "Transaction";
     public final static String MODUL_REPORT= "Report";
 
+
+
     //Analytics - Label
     //Register
     public final static String LABEL_REGISTER = "Try to Register";
