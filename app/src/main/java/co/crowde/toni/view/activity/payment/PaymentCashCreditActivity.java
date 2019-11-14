@@ -19,7 +19,6 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 import co.crowde.toni.R;
-import co.crowde.toni.base.BaseActivity;
 import co.crowde.toni.helper.DecimalFormatRupiah;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CustomerModel;
@@ -30,7 +29,7 @@ import co.crowde.toni.view.fragment.modul.DashboardFragment;
 
 import static co.crowde.toni.helper.DecimalFormatRupiah.formatNumber;
 
-public class PaymentCashCreditActivity extends BaseActivity implements View.OnClickListener {
+public class PaymentCashCreditActivity extends AppCompatActivity implements View.OnClickListener {
     AppBarLayout appBarLayout;
     Toolbar toolbar;
 

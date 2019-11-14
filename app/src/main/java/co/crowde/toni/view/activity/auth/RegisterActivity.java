@@ -24,6 +24,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
@@ -40,7 +41,6 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import co.crowde.toni.R;
-import co.crowde.toni.base.BaseActivity;
 import co.crowde.toni.constant.Const;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.AdminModel;
@@ -57,7 +57,7 @@ import co.crowde.toni.view.activity.otp.SendOtpRegisterActivity;
 
 import static co.crowde.toni.network.LocationRequest.generateToken;
 
-public class RegisterActivity extends BaseActivity implements View.OnClickListener {
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -222,8 +222,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
 
         etEmail.addTextChangedListener(emailWatcher);
-        etEmail.requestFocus();
-        etEmail.setError(null);
 
 //        etEmail.setError(null);
 //        etEmail.clearFocus();

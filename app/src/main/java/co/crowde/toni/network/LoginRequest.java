@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.gson.Gson;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.MediaType;
@@ -20,7 +22,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.List;
 
-import co.crowde.toni.base.BaseActivity;
 import co.crowde.toni.constant.Const;
 import co.crowde.toni.controller.auth.LoginController;
 import co.crowde.toni.helper.SavePref;
@@ -33,7 +34,7 @@ import co.crowde.toni.view.activity.auth.LoginActivity;
 import co.crowde.toni.view.activity.auth.LoginSuccessActivity;
 import co.crowde.toni.view.dialog.message.network.NetworkOfflineDialog;
 
-public class LoginRequest extends BaseActivity {
+public class LoginRequest {
 
     public static ResponseListener listener;
 
@@ -44,7 +45,7 @@ public class LoginRequest extends BaseActivity {
         LoginRequest.listener = listener;
     }
 
-    public static void postLogin(final Activity activity, UserModel model){
+    public static void postLogin(final Activity activity, UserModel model, ProgressDialog progressDialog){
 
         String postBody = new Gson().toJson(model);
         Log.e("POST BODY", postBody);
@@ -68,7 +69,7 @@ public class LoginRequest extends BaseActivity {
                     public void run() {
                         AnalyticsToniUtils.getEvent(Const.CATEGORY_AUTHENTIFICATION, Const.MODUL_LOGIN, Const.LABEL_LOGIN_FAILED_NETWORK);
                         NetworkOfflineDialog.showDialog(activity);
-                        dismissLoading();
+                        progressDialog.dismiss();
                         Log.e("Error",e.toString());
                     }
                 });
@@ -87,7 +88,7 @@ public class LoginRequest extends BaseActivity {
                             boolean status = json.getBoolean("status");
                             message = json.getString("message");
                             String data = json.getString("data");
-                            dismissLoading();
+                            progressDialog.dismiss();
 
                             if(status){
                                 JSONObject objDataLogin = new JSONObject(data);
@@ -149,7 +150,7 @@ public class LoginRequest extends BaseActivity {
                     public void run() {
                         AnalyticsToniUtils.getEvent(Const.CATEGORY_AUTHENTIFICATION, Const.MODUL_LOGIN, Const.LABEL_LOGIN_FAILED_NETWORK);
                         NetworkOfflineDialog.showDialog(activity);
-                        dismissLoading();
+//                        dismissLoading();
                         Log.e("Error",e.toString());
                     }
                 });
@@ -167,7 +168,7 @@ public class LoginRequest extends BaseActivity {
                             JSONObject json = new JSONObject(responseData);
                             boolean status = json.getBoolean("status");
                             message = json.getString("message");
-                            dismissLoading();
+//                            dismissLoading();
 
                             if(status){
                                 listener.onSuccess();

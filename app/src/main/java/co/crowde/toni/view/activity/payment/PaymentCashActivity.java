@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.Group;
 
@@ -18,7 +19,6 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 import co.crowde.toni.R;
-import co.crowde.toni.base.BaseActivity;
 import co.crowde.toni.helper.DecimalFormatRupiah;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.CustomerModel;
@@ -29,7 +29,7 @@ import co.crowde.toni.view.fragment.modul.DashboardFragment;
 
 import static co.crowde.toni.helper.DecimalFormatRupiah.formatNumber;
 
-public class PaymentCashActivity extends BaseActivity implements View.OnClickListener {
+public class PaymentCashActivity extends AppCompatActivity implements View.OnClickListener {
 
     AppBarLayout appBarLayout;
     Toolbar toolbar;

@@ -11,16 +11,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 import co.crowde.toni.R;
-import co.crowde.toni.base.BaseActivity;
 import co.crowde.toni.model.OtpModel;
 import co.crowde.toni.network.LocationRequest;
 
-public class SendOtpRegisterActivity extends BaseActivity implements View.OnClickListener{
+public class SendOtpRegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -125,7 +125,7 @@ public class SendOtpRegisterActivity extends BaseActivity implements View.OnClic
                         progressDialog.show();
 
                         OtpModel otpModel = new OtpModel();
-                        LocationRequest.verifyOtp(SendOtpRegisterActivity.this,otpModel);
+                        LocationRequest.verifyOtp(SendOtpRegisterActivity.this,otpModel, progressDialog);
                     }
 
                 } ,1000);

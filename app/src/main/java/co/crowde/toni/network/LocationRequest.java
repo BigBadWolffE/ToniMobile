@@ -2,12 +2,14 @@ package co.crowde.toni.network;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.android.volley.toolbox.HttpResponse;
@@ -30,7 +32,6 @@ import java.net.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 
-import co.crowde.toni.base.BaseActivity;
 import co.crowde.toni.constant.Const;
 import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.listener.ResponseListener;
@@ -50,7 +51,7 @@ import co.crowde.toni.view.dialog.message.network.NetworkOfflineDialog;
 
 import static co.crowde.toni.view.activity.auth.RegisterActivity.alertInvalidOtp;
 
-public class LocationRequest extends BaseActivity {
+public class LocationRequest {
     public static String username = "SPA%>WTv;6u;96^&XX@\"[/q_gZT('fSrU(+ynwS?";
     public static String password = "+\"-zVc+M9E*fRhj;+~svdMZd!3P!S[<v28L_3pyt";
 
@@ -493,7 +494,7 @@ public class LocationRequest extends BaseActivity {
 
 
     }
-    public static void verifyOtp (final Activity activity, OtpModel otpModel){
+    public static void verifyOtp (final Activity activity, OtpModel otpModel, ProgressDialog progressDialog){
 
         String otpCode = SendOtpRegisterActivity.otp1.getText().toString();
         otpModel.setOtp(otpCode);
@@ -520,7 +521,7 @@ public class LocationRequest extends BaseActivity {
                     public void run() {
                         AnalyticsToniUtils.getEvent(Const.CATEGORY_AUTHENTIFICATION, Const.MODUL_LOGIN, Const.LABEL_LOGIN_FAILED_NETWORK);
                         NetworkOfflineDialog.showDialog(activity);
-                        dismissLoading();
+                        progressDialog.dismiss();
                         Log.e("Error",e.toString());
                     }
                 });
@@ -614,7 +615,6 @@ public class LocationRequest extends BaseActivity {
                     public void run() {
                         AnalyticsToniUtils.getEvent(Const.CATEGORY_AUTHENTIFICATION, Const.MODUL_LOGIN, Const.LABEL_LOGIN_FAILED_NETWORK);
                         NetworkOfflineDialog.showDialog(activity);
-                        dismissLoading();
                         Log.e("Error",e.toString());
                     }
                 });
@@ -728,7 +728,7 @@ public class LocationRequest extends BaseActivity {
                     public void run() {
                         AnalyticsToniUtils.getEvent(Const.CATEGORY_AUTHENTIFICATION, Const.MODUL_LOGIN, Const.LABEL_LOGIN_FAILED_NETWORK);
                         NetworkOfflineDialog.showDialog(activity);
-                        dismissLoading();
+//                        dismissLoading();
                         Log.e("Error",e.toString());
                     }
                 });
@@ -749,7 +749,7 @@ public class LocationRequest extends BaseActivity {
                             boolean status = json.getBoolean("status");
                             message = json.getString("message");
                             String data = json.getString("data");
-                            dismissLoading();
+//                            dismissLoading();
 
                             if (status){
                                 JSONObject objDataLogin = new JSONObject(data);
