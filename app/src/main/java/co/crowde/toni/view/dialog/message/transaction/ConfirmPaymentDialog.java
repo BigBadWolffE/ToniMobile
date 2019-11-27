@@ -13,7 +13,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 
 import co.crowde.toni.R;
-import co.crowde.toni.constant.Const;
 import co.crowde.toni.database.Cart;
 import co.crowde.toni.helper.DecimalFormatRupiah;
 import co.crowde.toni.model.CartModel;
@@ -22,7 +21,6 @@ import co.crowde.toni.model.response.list.TransactionModel;
 import co.crowde.toni.model.response.object.AddNewTransactionModel;
 import co.crowde.toni.network.ProductRequest;
 import co.crowde.toni.network.TransactionRequest;
-import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.view.activity.cart.CartListActivity;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
 
@@ -63,7 +61,6 @@ public class ConfirmPaymentDialog {
         tv_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 progressDialog = new ProgressDialog(activity);
                 progressDialog.setMessage("Harap tunggu...");
                 progressDialog.setCanceledOnTouchOutside(false);

@@ -322,13 +322,11 @@ public class InventoryFragment extends Fragment {
         productModels.clear();
 
         if(etSearch.getText().toString().length()>0){
-            AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_PRODUCT,Const.LABEL_PRODUCT_SEARCH_INVENTORY);
+            AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_PRODUCT,Const.LABEL_PRODUCT_SEARCH_DASHBOARD);
         }
 
-        if(ProductRequest.categoryId.length()>1){
-            AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_PRODUCT,Const.LABEL_PRODUCT_FILTER_CATEGORY_INVENTORY);
-        } else if(ProductRequest.status.length()>1){
-            AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_PRODUCT,Const.LABEL_PRODUCT_FILTER_STATUS_INVENTORY);
+        if(ProductRequest.categoryId.length()>1 || ProductRequest.status.length()>1){
+            AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_PRODUCT,Const.LABEL_PRODUCT_FILTER_DASHBOARD);
         }
 
         ProductRequest.getInventoryList(activity);

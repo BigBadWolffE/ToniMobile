@@ -28,6 +28,7 @@ import co.crowde.toni.helper.DecimalFormatRupiah;
 import co.crowde.toni.model.ProductModel;
 import co.crowde.toni.network.API;
 import co.crowde.toni.utils.SetHeader;
+import co.crowde.toni.view.dialog.message.product.DeleteProductDialog;
 import co.crowde.toni.view.dialog.message.product.UpdateProductDialog;
 
 public class InventoryDetailActivity extends AppCompatActivity implements View.OnClickListener {
@@ -40,7 +41,7 @@ public class InventoryDetailActivity extends AppCompatActivity implements View.O
     EditText etPurchase, etSelling, etQty;
     CardView cvBtnSave,cvBtnDelete;
 
-    ProductModel productModel;
+    public static ProductModel productModel;
 
     ProgressDialog progressDialog;
 
@@ -128,7 +129,7 @@ public class InventoryDetailActivity extends AppCompatActivity implements View.O
         imgDecrease.setOnClickListener(this);
         imgIncrease.setOnClickListener(this);
         cvBtnSave.setOnClickListener(this);
-//        cvBtnDelete.setOnClickListener(this::onClick);
+        cvBtnDelete.setOnClickListener(this::onClick);
         etQty.setOnClickListener(this);
         etPurchase.setOnClickListener(this);
         etSelling.setOnClickListener(this);
@@ -197,8 +198,8 @@ public class InventoryDetailActivity extends AppCompatActivity implements View.O
                 }
                 UpdateProductDialog.showDialog(this, productModel.getProductId(), qty, purchase, selling, progressDialog);
                 break;
-//            case R.id.cv_btn_delete_product:
-//                DeleteProductDialog.showDialog(this,progressDialog);
+            case R.id.cv_btn_delete_product:
+                DeleteProductDialog.showDialog(this,progressDialog);
         }
     }
 

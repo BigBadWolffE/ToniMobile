@@ -115,6 +115,8 @@ public class LocationRequest extends BaseActivity {
                 // Parsing Response ke bentuk String
                 final String responseData = response.body().string();
                 System.out.println("Response Province List: "+responseData);
+                Log.e("Tag Provinsi",responseData);
+
 
                 activity.runOnUiThread(new Runnable() {
                     @Override
@@ -184,6 +186,7 @@ public class LocationRequest extends BaseActivity {
             @Override
             public void onResponse(Response response) throws IOException {
                 final String responseData = response.body().string();
+                Log.e("Tag City",responseData);
 
                 activity.runOnUiThread(new Runnable() {
                     @Override
@@ -249,6 +252,7 @@ public class LocationRequest extends BaseActivity {
             @Override
             public void onResponse(Response response) throws IOException {
                 final String responseData = response.body().string();
+                Log.e("Tag District",responseData);
 
                 activity.runOnUiThread(new Runnable() {
                     @Override
@@ -314,6 +318,7 @@ public class LocationRequest extends BaseActivity {
             @Override
             public void onResponse(Response response) throws IOException {
                 final String responseData = response.body().string();
+                Log.e("Tag Village",responseData);
 
                 activity.runOnUiThread(new Runnable() {
                     @Override

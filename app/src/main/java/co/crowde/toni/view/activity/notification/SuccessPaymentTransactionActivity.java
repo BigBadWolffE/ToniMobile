@@ -11,10 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import co.crowde.toni.R;
-import co.crowde.toni.constant.Const;
 import co.crowde.toni.controller.transaction.TransactionController;
-import co.crowde.toni.network.CustomerRequest;
-import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.view.activity.home.MainActivity;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
 
@@ -68,8 +65,6 @@ public class SuccessPaymentTransactionActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_TRANSACTION, Const.LABEL_TRANSACTION_NOT_PRINTED);
-
         DashboardFragment.dbCart.deleteAllItem();
         DashboardFragment.ifCartEmpty(this);
         Intent home = new Intent(SuccessPaymentTransactionActivity.this, MainActivity.class);

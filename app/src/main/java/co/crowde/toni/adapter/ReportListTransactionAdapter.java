@@ -2,7 +2,6 @@ package co.crowde.toni.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +13,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,13 +23,7 @@ import java.util.Locale;
 
 import co.crowde.toni.R;
 import co.crowde.toni.helper.DecimalFormatRupiah;
-import co.crowde.toni.model.CustomerModel;
-import co.crowde.toni.model.ProductModel;
-import co.crowde.toni.model.TransactionProductModel;
 import co.crowde.toni.model.response.list.TransactionModel;
-import co.crowde.toni.utils.print.Utils;
-import co.crowde.toni.view.activity.customer.CustomerHutangActivity;
-import co.crowde.toni.view.activity.transaction.DetailTransactionActivity;
 
 public class ReportListTransactionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -121,9 +112,9 @@ public class ReportListTransactionAdapter extends RecyclerView.Adapter<RecyclerV
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent detail = new Intent(activity, DetailTransactionActivity.class);
-                        detail.putExtra(TransactionModel.class.getSimpleName(), model);
-                        activity.startActivityForResult(detail, 123);
+//                        Intent detail = new Intent(activity, DetailTransactionActivity.class);
+//                        detail.putExtra(TransactionModel.class.getSimpleName(), model);
+//                        activity.startActivityForResult(detail, 123);
                     }
                 });
 

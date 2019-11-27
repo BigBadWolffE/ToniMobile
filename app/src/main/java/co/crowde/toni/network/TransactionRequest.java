@@ -20,34 +20,22 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.List;
 
-import co.crowde.toni.adapter.ReportListTransactionAdapter;
 import co.crowde.toni.constant.Const;
-import co.crowde.toni.controller.print.PrintController;
-import co.crowde.toni.controller.transaction.TransactionController;
 import co.crowde.toni.controller.user.UserController;
-import co.crowde.toni.helper.DecimalFormatRupiah;
 import co.crowde.toni.helper.SavePref;
-import co.crowde.toni.model.CustomerModel;
-import co.crowde.toni.model.ProductModel;
 import co.crowde.toni.model.TransactionProductModel;
 import co.crowde.toni.model.body.post.AddTransactionModel;
-import co.crowde.toni.model.response.list.CustomerFavoriteModel;
-import co.crowde.toni.model.response.list.ProductFavoriteModel;
 import co.crowde.toni.model.response.list.TransactionModel;
-import co.crowde.toni.model.response.object.AddNewTransactionModel;
-import co.crowde.toni.model.response.object.RecapTransactionModel;
 import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
-import co.crowde.toni.view.activity.customer.SelectCustomerActivity;
 import co.crowde.toni.view.activity.notification.SuccessPaymentTransactionActivity;
-import co.crowde.toni.view.activity.print.WaitingPrintActivity;
 import co.crowde.toni.view.activity.transaction.DetailTransactionActivity;
 import co.crowde.toni.view.dialog.message.network.NetworkOfflineDialog;
 import co.crowde.toni.view.dialog.message.transaction.ConfirmPaymentDialog;
 import co.crowde.toni.view.fragment.transaction.ListTransactionReportFragment;
 
 import static co.crowde.toni.view.fragment.modul.ReportFragment.progressDialog;
-import static co.crowde.toni.view.fragment.transaction.ListTransactionReportFragment.transactionModels;
 import static co.crowde.toni.view.fragment.transaction.ListTransactionReportFragment.reportListTransactionAdapter;
+import static co.crowde.toni.view.fragment.transaction.ListTransactionReportFragment.transactionModels;
 import static co.crowde.toni.view.fragment.transaction.ListTransactionReportFragment.updateDataTransaction;
 
 public class TransactionRequest {
@@ -101,9 +89,8 @@ public class TransactionRequest {
                             String data = json.getString("data");
                             Log.e("DATA RESPONSE", data);
 
-                            ConfirmPaymentDialog.dialogConfirm.dismiss();
-
                             if(status){
+                                ConfirmPaymentDialog.dialogConfirm.dismiss();
                                 progressDialog.dismiss();
 
                                 Intent print = new Intent(activity, SuccessPaymentTransactionActivity.class);
@@ -121,7 +108,7 @@ public class TransactionRequest {
                                         }
                                         break;
                                     case "Credit":
-                                        AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_TRANSACTION, Const.LABEL_TRANSACTION_CREDIT_SUCCESS);
+                                        AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_TRANSACTION, Const.LABEL_TRANSACTION_CASH_CREDIT_SUCCESS);
                                         print.putExtra("payment_type", add.getPaymentType());
                                         break;
                                 }
@@ -132,24 +119,10 @@ public class TransactionRequest {
                                 activity.finish();
 
                             } else{
-
-                                switch (add.getPaymentType()) {
-                                    case "Cash":
-                                        if(credit>0){
-                                            CustomerRequest.payCredit(activity, credit, data);
-                                            AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_TRANSACTION, Const.LABEL_TRANSACTION_CASH_CREDIT_FAILED);
-                                        } else {
-                                            AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_TRANSACTION, Const.LABEL_TRANSACTION_CASH_FAILED);
-                                        }
-                                        break;
-                                    case "Credit":
-                                        AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_TRANSACTION, Const.LABEL_TRANSACTION_CREDIT_FAILED);
-                                        break;
-                                }
-
                                 if(message.equals("Token tidak valid")){
                                     UserController.tokenExpired(activity, message);
                                 } else {
+                                    ConfirmPaymentDialog.dialogConfirm.dismiss();
                                     progressDialog.dismiss();
                                 }
                             }

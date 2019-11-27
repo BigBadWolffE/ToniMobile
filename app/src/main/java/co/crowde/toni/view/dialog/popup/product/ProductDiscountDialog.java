@@ -18,12 +18,10 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 import co.crowde.toni.R;
-import co.crowde.toni.constant.Const;
 import co.crowde.toni.database.Cart;
 import co.crowde.toni.helper.DecimalFormatRupiah;
 import co.crowde.toni.model.CartModel;
 import co.crowde.toni.network.ProductRequest;
-import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.view.activity.cart.CartListActivity;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
 
@@ -65,13 +63,10 @@ public class ProductDiscountDialog {
         DecimalFormatRupiah.changeFormat(activity);
 
         if (model.getAmount() != model.getSellingPrice() * model.getQuantity()) {
-            AnalyticsToniUtils.getEvent(Const.CATEGORY_PRODUCT, Const.MODUL_DISCOUNT, Const.LABEL_DISCOUNT_CART_UPDATE);
-
             tv_remove_discount.setVisibility(View.VISIBLE);
             et_discount.setText(DecimalFormatRupiah.formatNumber.format(model.getDiscount()));
             tv_edit_discount.setText("UBAH");
         } else {
-            AnalyticsToniUtils.getEvent(Const.CATEGORY_PRODUCT, Const.MODUL_DISCOUNT, Const.LABEL_DISCOUNT_CART_ADD);
             tv_cancel.setVisibility(View.VISIBLE);
             et_discount.setText("");
             tv_edit_discount.setText("TAMBAH");
@@ -108,7 +103,6 @@ public class ProductDiscountDialog {
         tv_remove_discount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AnalyticsToniUtils.getEvent(Const.CATEGORY_PRODUCT, Const.MODUL_DISCOUNT, Const.LABEL_DISCOUNT_CART_REMOVE);
                 model.setDiscount(0);
                 model.setAmount(model.getQuantity() * model.getSellingPrice());
                 dbCart.updateItem(model);

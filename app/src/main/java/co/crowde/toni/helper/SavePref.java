@@ -185,4 +185,14 @@ public class SavePref {
         SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
         return sharedPref.getString("message", null);
     }
+    public static void savePasswordUser(Activity activity, String passwordUser) {
+        SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("message", passwordUser);
+        editor.commit();
+    }
+    public static String readPasswordUser(Activity activity) {
+        SharedPreferences sharedPref = activity.getSharedPreferences(API.TAG, Context.MODE_PRIVATE);
+        return sharedPref.getString("message", null);
+    }
 }

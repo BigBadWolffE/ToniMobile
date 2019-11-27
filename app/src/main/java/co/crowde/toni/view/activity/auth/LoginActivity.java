@@ -14,6 +14,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import co.crowde.toni.R;
 import co.crowde.toni.base.BaseActivity;
 import co.crowde.toni.constant.Const;
+import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.AdminModel;
 import co.crowde.toni.model.UserModel;
 import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
@@ -104,6 +105,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 UserModel user = new UserModel();
                 user.setUsername(username);
                 user.setPassword(password);
+                SavePref.savePasswordUser(LoginActivity.this,et_password.getText().toString());
 
                 postLogin(LoginActivity.this, user);
 

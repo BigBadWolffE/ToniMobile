@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -25,20 +26,26 @@ import co.crowde.toni.helper.SavePref;
 import co.crowde.toni.model.ProductDiscountModel;
 import co.crowde.toni.model.ProductModel;
 import co.crowde.toni.model.body.post.UpdateProductModel;
-import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.view.activity.notification.SuccessUpdateProductActivity;
+import co.crowde.toni.view.activity.product.InventoryDetailActivity;
 import co.crowde.toni.view.dialog.message.network.NetworkOfflineDialog;
+import co.crowde.toni.view.dialog.message.product.PasswordConfirmationDeleteDialog;
 import co.crowde.toni.view.dialog.message.product.UpdateProductDialog;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
 import co.crowde.toni.view.fragment.modul.InventoryFragment;
 
-import static co.crowde.toni.utils.print.PrinterNetwork.printText;
+import static co.crowde.toni.base.BaseActivity.dismissLoading;
+import static co.crowde.toni.view.dialog.message.product.PasswordConfirmationDeleteDialog.progressDialog;
 
 public class ProductRequest {
 
     public static String message;
     public static int page;
     public static String productName, categoryId, status, supplierId;
+    public static String responseData;
+
+    public static ProductModel productModel;
+
 
     public static void getProductList(final Activity activity){
 
@@ -221,6 +228,68 @@ public class ProductRequest {
         });
     }
 
+    public static void deleteProduct(final Activity activity){
+
+        OkHttpClient client = new OkHttpClient();
+
+        Request requestHttp = new Request.Builder()
+                .header("Authorization", SavePref.readToken(activity))
+                .delete()
+                .url(API.DeleteProduct+"/"+SavePref.readShopId(activity)+"/"+ InventoryDetailActivity.productModel.getProductId())
+                .build();
+
+        Log.e("URL",API.DeleteProduct+"/"+SavePref.readShopId(activity)+"/"+InventoryDetailActivity.productModel.getProductId());
+
+
+        client.newCall(requestHttp).enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+                NetworkOfflineDialog.showDialog(activity);
+                dismissLoading();
+                Log.e("Error",e.toString());
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+
+                responseData = response.body().string();
+                Log.e("RESPONSE BODY RESEND", responseData);
+
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            JSONObject json = new JSONObject(responseData);
+                            boolean status = json.getBoolean("status");
+                            message = json.getString("message");
+                            String data = json.getString("data");
+                            Log.e("Tag Delete",responseData);
+
+                            if(status){
+                                InventoryFragment.productModels.clear();
+                                getInventoryList(activity);
+                                PasswordConfirmationDeleteDialog.dialogDelete.dismiss();
+                                progressDialog.dismiss();
+                                Intent success = new Intent(activity, SuccessUpdateProductActivity.class);
+                                activity.startActivity(success);
+                                activity.finish();
+                            }else {
+                                Toast.makeText(activity,"DATA PRODUK TIDAK DITEMUKAN",Toast.LENGTH_LONG).show();
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+
+            }
+        });
+
+
+    }
+
     public static void postUpdateProduct(final Activity activity, String productId, int qty, int purchase, int selling, ProgressDialog progressDialog){
 //        int qty = 0;
 //        if(InventoryDetailPopup.etQty.getText().length()>0){
@@ -295,8 +364,6 @@ public class ProductRequest {
                             Log.e("DATA RESPONSE", data);
 
                             if(status){
-                                AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION,Const.MODUL_PRODUCT,Const.LABEL_PRODUCT_UPDATE);
-
                                 InventoryFragment.productModels.clear();
                                 page=1;
                                 getInventoryList(activity);
@@ -325,6 +392,8 @@ public class ProductRequest {
             }
         });
     }
+
+
 
     public static void putProductDiscount(final Activity activity, String productId, int discount){
 

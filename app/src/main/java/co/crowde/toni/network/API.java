@@ -26,6 +26,7 @@ public class API{
     public static final String Category = API+"category";
     public static final String Supplier = API+"supplier";
     public static final String Warehouse = API+"warehouse";
+    public static final String DeleteProduct = API+"product";
     public static final String Transaction = API+"transaction";
     public static final String Report = API+"report";
     public static final String Credit = API+"credit";

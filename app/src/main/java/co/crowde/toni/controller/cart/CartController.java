@@ -3,10 +3,7 @@ package co.crowde.toni.controller.cart;
 import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 import android.widget.Toast;
-
-import com.google.gson.Gson;
 
 import co.crowde.toni.adapter.ProductDashboardAdapter;
 import co.crowde.toni.constant.Const;
@@ -16,7 +13,6 @@ import co.crowde.toni.model.CartModel;
 import co.crowde.toni.model.ProductModel;
 import co.crowde.toni.utils.analytics.AnalyticsToniUtils;
 import co.crowde.toni.view.activity.cart.CartListActivity;
-import co.crowde.toni.view.activity.product.ProductDashboardDetailActivity;
 import co.crowde.toni.view.dialog.message.product.StockInsufficientDialog;
 import co.crowde.toni.view.fragment.modul.DashboardFragment;
 
@@ -87,7 +83,7 @@ public class CartController {
                         Toast.makeText(activity, "Error", Toast.LENGTH_SHORT).show();
                     }
 
-                    AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_CART, Const.LABEL_CART_ADD_PRODUCT_DETAIL);
+                    AnalyticsToniUtils.getEvent(Const.CATEGORY_TRANSACTION, Const.MODUL_CART, Const.LABEL_CART_ADD_PRODUCT_POPUP);
                 } else {
                     StockInsufficientDialog.showDialog(activity);
                 }
