@@ -113,7 +113,7 @@ public class DetailTransactionActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        DateFormat formatter = new SimpleDateFormat("dd EEEE yyyy", lokal);
+        DateFormat formatter = new SimpleDateFormat("EEEE, dd mmm yyyy", lokal);
         String dateStr = formatter.format(date);
 
         tvCustomerName.setText(model.getCustomerName());
